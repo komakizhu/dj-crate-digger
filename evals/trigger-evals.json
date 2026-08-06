@@ -8,7 +8,7 @@
     "should_trigger": true
   },
   {
-    "query": "/DJ 周五小酒吧暖场，大家要有反应，但不要全是抖音神曲，House 为主。",
+    "query": "周五小酒吧暖场，大家要有反应，但不要全是抖音神曲，House 为主，给我做一套打碟歌单。",
     "should_trigger": true
   },
   {
@@ -41,6 +41,34 @@
   },
   {
     "query": "/迪歌 周五午夜左场小酒吧，先用大家熟的土味采样暖场，再推到怪一点的中国地下俱乐部声响。",
+    "should_trigger": true
+  },
+  {
+    "query": "I’m digging for deep house tracks for a warm-up set, with a few less obvious choices.",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我做一个暖场 playlist，House 为主，适合周五小酒吧开场。",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我找 Deep House，适合凌晨两点后的地下 DJ set。",
+    "should_trigger": true
+  },
+  {
+    "query": "排set：周六地下俱乐部，从熟悉素材慢慢推到 left-field techno。",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我排一个 set，从 Warm Up 到 Peak，Deep House 为主。",
+    "should_trigger": true
+  },
+  {
+    "query": "给我做一个凌晨两点后的 closing setlist，想要紧张但不俗。",
+    "should_trigger": true
+  },
+  {
+    "query": "Arrange a DJ set from warm-up to peak, with deep house and a few left-field turns.",
     "should_trigger": true
   },
   {
@@ -81,6 +109,26 @@
   },
   {
     "query": "Deep House 和 Organic House 有什么区别？给我一个简短定义。",
+    "should_trigger": false
+  },
+  {
+    "query": "做个 playlist",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我做一张歌单",
+    "should_trigger": false
+  },
+  {
+    "query": "/DJ",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我找一首歌的歌名，这段旋律是什么？",
+    "should_trigger": false
+  },
+  {
+    "query": "I’m digging into this API and need help with pagination.",
     "should_trigger": false
   }
 ]

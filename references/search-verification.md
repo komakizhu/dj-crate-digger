@@ -10,19 +10,21 @@
 4. 相邻子流派或同厂牌线索
 5. 用户明确的热门、冷门或熟悉度要求
 
-用户未指定平台时，按 SoundCloud → Apple Music → Spotify 的顺序查找，并用 Bandcamp、Beatport、Discogs、MusicBrainz、艺人官网和厂牌官网补充验证。用户指定平台时，目标平台中的可用性优先于跨平台覆盖。
+用户未指定平台时，默认链接展示顺序为 SoundCloud → Apple Music → Spotify，但发现阶段采用均衡轮询或并行抽样，并用 Bandcamp、Beatport、Discogs、MusicBrainz、艺人官网和厂牌官网补充验证。用户指定平台时，目标平台中的可用性优先于跨平台覆盖。
 
 推荐类信息可能变化，使用联网工具获取当前结果。优先并行搜索不同查询，但最终逐条核验候选。
 
-默认平台顺序要落实到实际检索，不只是写在报告里：先做 SoundCloud 的发现与逐曲核验，再做 Apple Music，再做 Spotify，最后才用 Bandcamp、Beatport、Discogs、MusicBrainz、艺人官网或厂牌官网补元数据。用户给出平台顺序时替换这三个平台阶段。候选在前一阶段已有可访问、版本吻合的直接页时，不要无理由把后面平台或权威发行页设为主链接。
+平台策略要落实到实际检索，不只是写在报告里：`cross-platform` 和 `preferred` 模式下，对每个允许平台至少完成一轮发现，再按轮次继续补充候选；`exclusive` 模式只建立目标平台的可交付候选。用户给出的平台顺序用于主链接和回退链接，不能让首选平台提前满足停止条件后跳过其他允许平台。候选在任一平台已有可访问、版本吻合的直接页时，可以将该页设为主链接；其他来源作为补充证据，不得复制同一录音占用多个位置。
 
 ### 平台约束的执行顺序
 
 在发出查询前，把平台分成三类：
 
-1. `priority`：用户给出的首选顺序；没有时才使用默认顺序。
-2. `allowed`：可以作为最终链接或补充来源的平台。
+1. `priority` / `link_priority`：用户给出的主链接和回退顺序；没有时才使用默认顺序。
+2. `allowed`：可以作为最终链接的平台；其他权威来源可以进入内部核验记录。
 3. `forbidden`：不要搜索、不要引用、不要放进“来源”段落的平台。
+
+`discovery_strategy` 默认设为 `balanced_round_robin`。`discovery_order` 只用于记录实际覆盖顺序，不等同于内容排序权重；平台优先级永远不进入 style、scene 或 popularity 的评分。
 
 “优先/最好有”只改变链接顺序和回退顺序；“只要/仅接受”则要求最终曲目必须有该平台直接页面。不要因为某平台更容易找到结果，就把它偷偷升级为用户的唯一目标。候选记录的 `primary_source` 应是第一顺序中已验证的允许平台页；Bandcamp、Beatport 等权威页放入补充证据，只有没有任何允许平台直接页时才可作为非 exclusive 报告的主证据。
 
@@ -37,6 +39,7 @@
 ### A：可直接用于曲目验证
 
 - SoundCloud、Apple Music、Spotify 的官方曲目页面
+- 网易云音乐的官方曲目页面
 - Bandcamp、Beatport 的具体发行或曲目页面
 - 艺人或唱片公司的官方发行页面
 
@@ -64,24 +67,58 @@ C 级来源不能单独证明曲目存在、版本正确或元数据准确。不
 title: official title
 artist: official artist name
 version: original | remix | edit | live | unknown
+version_label: exact official version text | unknown
+version_kind: original | remix | dub | edit | instrumental | live | radio_edit | extended | other | unknown
 platforms:
   soundcloud: url | null
   apple_music: url | null
   spotify: url | null
+  netease_cloud_music: url | null
+  other: []
+playback_urls:
+  - platform: soundcloud
+    url: https://...
+    availability: available | region_limited | login_required | unavailable | unknown
+verification_sources:
+  - type: platform_track | official_release | metadata
+    url: https://...
+    checked_at: YYYY-MM-DD
 primary_source: url
-source_platform: soundcloud | apple_music | spotify | other
+source_platform: soundcloud | apple_music | spotify | netease_cloud_music | bandcamp | other
 platform_match: preferred | allowed_fallback | exclusive | unavailable
 isrc: value | unknown
+dedupe_key: isrc-or-normalized-recording-key
 genres: []
 bpm: number | unknown
 energy: low | medium | high | unknown
 moods: []
 release_date: value | unknown
-popularity_evidence: description | unknown
+availability: available | region_limited | login_required | unavailable | unknown
+popularity_evidence:
+  description: unknown
+  source: unknown
+  observed_at: unknown
+  region: unknown
 verification: verified | partial | unknown
 ```
 
-在内部候选表中保留每首的直接页面 URL、实际查看过的页面字段、`platform_match`、`verification` 和去重键。最终四个版本只从这张表生成；如果一首歌没有可追溯的记录，就不要凭记忆把它补进报告。
+在内部候选表中保留每首的播放链接、实际查看过的页面字段、核验来源、`platform_match`、`availability`、`verification` 和去重键。`platforms` 是兼容字段，最终交付优先使用 `playback_urls`；`verification_sources` 只说明证据，不自动成为用户可用的播放链接。最终四个版本只从这张表生成；如果一首歌没有可追溯的记录，就不要凭记忆把它补进报告。
+
+## 自适应候选池与验证预算
+
+以综合版目标数 `final_target` 作为共享候选池基准：
+
+```text
+pool_goal = min(max(2 × final_target, final_target + 8), 120)
+```
+
+候选池阶段可以先记录搜索摘要、平台页面或权威来源，状态为 `partial` 或 `unknown`；只有进入任一最终版本的唯一录音键才进入深度核验队列。为链接失效、exclusive 平台缺失或版本冲突保留少量已核验备选。满足以下任一条件即可停止扩展：
+
+- 已达到 `pool_goal`，并且每个允许平台至少完成一轮发现；
+- 连续两轮查询主要产生重复、低相关或无法验证的结果；
+- 平台限制、地区限制或工具不可访问使继续搜索无法提升质量。
+
+同一录音进入多个视角时只深度核验一次。预算上限内仍不足时报告实际候选数，不用未验证曲目补足。
 
 ## 验证门槛
 
@@ -89,10 +126,10 @@ verification: verified | partial | unknown
 
 - 曲目页面或权威发行页面可访问
 - 页面中的艺人和曲名与候选一致
-- 版本信息没有把 Remix、Edit、Live 与 Original 混淆
-- 至少一个直接来源链接可提供给用户
+- `version_label` 与页面版本一致，没有把 Remix、Edit、Live、Dub 或 Extended Mix 与 Original 混淆
+- 至少一个符合平台策略的 `playback_urls` 或具体发行页链接可提供给用户
 
-验证动作要逐曲完成：打开最终要给用户的直接页面，核对页面中的艺人、完整曲名和 mix/version；仅看到搜索摘要、URL slug 或聚合站条目不算通过。链接失效或页面信息冲突时剔除候选，或在证据足够但非 exclusive 平台缺失时标记 `partial`。如果平台为 exclusive，缺少该平台直接页的候选不能进入最终曲目表，只能进入缺失清单。最终报告中的每一行都要有自己可追溯的曲目/发行证据，不能只靠一条泛化媒体页面背书。
+验证动作要逐曲完成：打开最终要给用户的 `playback_urls` 或具体发行页，核对页面中的艺人、完整曲名、版本和可用性；仅看到搜索摘要、URL slug 或聚合站条目不算通过。播放页面失效、地区受限或页面信息冲突时，记录 `availability` 和 `verification`，必要时剔除候选；`partial` 不能替代直接链接。如果平台为 exclusive，缺少该平台直接页的候选不能进入最终曲目表，只能进入缺失清单。最终报告中的每一行都要有自己可追溯的曲目/发行证据，不能只靠一条泛化媒体页面背书。
 
 ## 去重规则
 
@@ -103,13 +140,5 @@ verification: verified | partial | unknown
 5. 同一艺人连续占据过多位置时，在排序阶段处理，不要在去重阶段误删有效曲目。
 
 去重发生在四种排序和播放编排之前。综合版在分配 Warm Up、Groove、Peak、Closing 后再做一次全局录音键检查，确保同一录音不会跨段重复；多个平台链接仍合并在同一条记录中。
-
-## 搜索结束条件
-
-达到以下任一条件即可停止扩展候选池：
-
-- 已有足够多的高相关、已验证候选支持四个版本
-- 新查询连续只产生重复或低相关结果
-- 平台限制使继续搜索无法提高验证质量
 
 候选不足时透明报告，不降低验证门槛。

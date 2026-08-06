@@ -9,6 +9,7 @@
 - SoundCloud：官方 OAuth 后可创建或更新 playlist。
 - Apple Music：MusicKit 用户授权后可创建用户资料库 playlist。
 - Spotify：OAuth 授权并获得 playlist modify scope 后可创建 playlist 并添加曲目。
+- 网易云音乐：不预设官方导出连接器或授权能力；如果用户选择其作为导出目标，仍需先检查当前环境，工具不可用时只能提供已验证的链接清单，不得声称已导出。
 
 不要仅凭这份说明假定当前运行环境已经拥有连接器、Client ID 或有效授权。每次先检查实际可用工具。
 

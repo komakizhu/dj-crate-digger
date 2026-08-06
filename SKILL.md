@@ -50,8 +50,8 @@ description: 当用户明确要求为 DJ 演出、打碟歌单、暖场/开场/�
 - “选歌副主题 1（与选歌主题同步，最多 2 个）”和“选歌副主题 2（与选歌主题同步，最多 2 个）”必须使用与主主题完全相同的选项集，不得变成空白输入框或另一套隐含分类。
 - 用户可以选择“不限”“AI 判断”或“自定义填写”；选择自定义时可在同一条回复中追加文字，不得为了自定义再发第三轮普通问题。
 - BPM、情绪、能量级和能量走势是四个独立问题，不能合并成“BPM/情绪/能量”。
-- 结构化工具可用时，优先使用可点击单选题；每道题的 `options` 必须非空。若工具不能显示本规则要求的完整选项集（尤其是 5 个以上经典风格/场景/情绪选项），改用下面的 Markdown fallback，不得用隐藏选项或空问题伪装成 checkbox。
-- 当前工具不支持真正的多选 checkbox，因此副主题、主平台和回退平台使用独立单选题；两次工具调用可以分别对应两轮，但不能把主题细化拆成第三轮。
+- 两轮提问的唯一权威展示形式固定为 fenced Markdown 代码块，代码块语言标记使用 `markdown`；第一轮一个代码块，第二轮一个代码块。无论结构化工具是否可用，都不得把代码块改成普通文本、散落项目符号或只显示在 UI 控件里。
+- 不要调用 `request_user_input` 作为这两轮的唯一提问界面；如果宿主环境额外渲染了可点击控件，控件只能作为代码块之外的辅助入口，不能替代或省略可复制的 Markdown。副主题、主平台和回退平台仍使用独立选择项，不能把主题细化拆成第三轮。
 - 第二轮包含全部字段。没有选中的主题也必须保留对应问题，并提供“不限 / AI 判断”，这样用户可以一次答完；选中的主题则必须回答对应的细化题。
 
 第一轮固定只问以下三题；三个问题都必须显示完整选项：
@@ -84,20 +84,20 @@ description: 当用户明确要求为 DJ 演出、打碟歌单、暖场/开场/�
 
 选项中的“自定义填写”允许用户在同一轮代码块的选项后补充文字；“参考艺人 / 参考曲目”不能被遗漏。第二轮答复后立即把信息写入需求卡，设置 `intake_status: ready`，展示摘要但不再发起第三轮确认。
 
-如果结构化用户输入工具不可用，设置 `intake_mode: markdown_fallback`，严格按下面两轮代码块提问；不要声称显示了可点击 checkbox，也不要把字段留空。第一轮只复制回答三个主题问题；第二轮复制回答所有细化问题。两轮之外不再要求用户重新填写需求。
+两轮提问固定设置 `intake_mode: markdown_fallback`，严格按下面两个代码块提问；不要声称显示了可点击 checkbox，也不要把字段留空。第一轮只复制回答三个主题问题；第二轮复制回答所有细化问题。两轮之外不再要求用户重新填写需求。
 
-Markdown fallback 第一轮：
+第一轮固定 Markdown 提问（所有环境）：
 
-```text
+```markdown
 【第一轮：选歌主题】请每行选择一个；副主题可选“不需要副主题”。
 选歌主题：风格 / 场景 / BPM / 情绪 / 能量 / 熟悉度与流行度 / 冷门新鲜感 / AI 判断
 选歌副主题 1（与选歌主题同步，最多 2 个）：风格 / 场景 / BPM / 情绪 / 能量 / 熟悉度与流行度 / 冷门新鲜感 / AI 判断 / 不需要副主题
 选歌副主题 2（与选歌主题同步，最多 2 个）：风格 / 场景 / BPM / 情绪 / 能量 / 熟悉度与流行度 / 冷门新鲜感 / AI 判断 / 不需要副主题
 ```
 
-Markdown fallback 第二轮：
+第二轮固定 Markdown 提问（所有环境）：
 
-```text
+```markdown
 【第二轮：主题细化与全部需求】请每行选择选项；可在“自定义填写：”后补充文字；不需要时选择“不限”或“AI 判断”。
 风格细化：House / Deep House / Organic House / Disco House / Tech House / Progressive House / Garage / Techno / Left-field / 不限 / AI 判断 / 自定义填写：
 场景细化：酒吧 / 俱乐部 / 婚礼 / 咖啡馆 / 家庭聆听 / 公路 / Rooftop 日落 / 地下室凌晨 / Afterparty / 不限 / AI 判断 / 自定义填写：
@@ -174,7 +174,7 @@ export_intent: none  # none | explain | prepare | execute
 export_platform: none
 track_count: 30
 priority_order: []       # 仅指 style | scene | popularity，不含平台顺序
-intake_mode: interactive  # interactive | markdown_fallback
+intake_mode: markdown_fallback  # 两轮提问固定使用可复制 Markdown；保留 interactive 仅作兼容标记
 intake_status: collecting # collecting | ready | blocked
 selection_priority:
   primary: ai             # style | scene | bpm | mood | energy | popularity | familiarity | freshness | ai

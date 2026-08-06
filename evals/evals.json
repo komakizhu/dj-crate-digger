@@ -167,13 +167,14 @@
       "id": 14,
       "name": "interactive-intake-before-search",
       "prompt": "/迪歌 我想为周五午夜的小酒吧找一套温暖但逐渐变深的 House。",
-      "expected_output": "触发后先展示严格两轮的分批需求收集，不立即联网搜索或输出曲目；第二轮答复完成后才进入搜索，不追加第三轮普通确认。",
+      "expected_output": "触发后先展示严格两轮的分批需求收集；两轮都使用可复制的 fenced Markdown 代码块，不立即联网搜索或输出曲目；第二轮答复完成后才进入搜索，不追加第三轮普通确认。",
       "expectations": [
         "intake_status 初始为 collecting",
         "第一轮询问选歌主题、同步的选歌副主题 1 和选歌副主题 2，三个问题都有完整选项",
         "第二轮一次性询问主题细化、数量、版本、平台和限制，所有问题都有选项",
         "需求收集完成前没有候选曲目、搜索结果或推荐链接",
-        "第二轮答复后 intake_status 才变为 ready，摘要不构成第三轮普通问题"
+        "两轮提问各自使用一个可复制的 markdown 代码块，摘要不构成第三轮普通问题",
+        "第二轮答复后 intake_status 才变为 ready"
       ]
     },
     {
@@ -202,13 +203,13 @@
     },
     {
       "id": 17,
-      "name": "markdown-intake-fallback",
+      "name": "markdown-intake-format",
       "prompt": "/dj-crate-digger 当前环境没有结构化用户输入工具，请帮我找 10 首适合公路夜听的电子乐。",
-      "expected_output": "交互工具不可用时输出 Markdown 需求问卷作为 fallback；不声称显示了可点击 checkbox，也不在需求收集完成前搜索。",
+      "expected_output": "无论交互工具是否可用，都输出两轮 Markdown 需求问卷；不声称显示了可点击 checkbox，也不在需求收集完成前搜索。",
       "expectations": [
-        "intake_mode 为 markdown_fallback",
+        "intake_mode 为 markdown_fallback，且两轮都是 fenced Markdown 代码块",
         "问卷包含导向、数量、版本、平台、场景和限制字段",
-        "问卷使用可直接复制的 fenced code block，而不是散乱项目符号",
+        "第一轮和第二轮各自使用可直接复制的 markdown fenced code block，而不是散乱项目符号或普通文本",
         "BPM、情绪、能量级和能量走势分别出现，并包含参考提示",
         "平台问题列出 Apple Music、网易云音乐、Spotify、Bandcamp、SoundCloud 和 AI 自动选择",
         "用户完成问卷前不建立候选池",
@@ -239,6 +240,19 @@
         "BPM、情绪、能量级和能量走势分别出现，BPM 含 128 四四抖腿、140 操栏杆必备等参考",
         "第二轮同时列出数量、综合版/四个版本的解释、演出时长、主平台、回退平台和链接策略的完整选项",
         "所有自定义内容都能在第二轮同一条回复中填写，不追加第三轮普通问题"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "markdown-blocks-are-mandatory",
+      "prompt": "/迪歌 我想为周五午夜小酒吧排一套 House set。",
+      "expected_output": "第一轮和第二轮提问都以可复制的 markdown fenced code block 展示；代码块是权威提问内容，结构化控件不得替代它。",
+      "expectations": [
+        "第一轮只出现一个 markdown 代码块，包含选歌主题、选歌副主题 1 和选歌副主题 2 的完整选项",
+        "第二轮只出现一个 markdown 代码块，包含主题细化、数量、版本、平台和限制的完整选项",
+        "不会把第一轮或第二轮渲染成截图所示的无代码块普通文本",
+        "不会以 request_user_input 的 UI 控件替代可复制 Markdown",
+        "两轮代码块之外不追加第三轮普通需求问题"
       ]
     }
   ]

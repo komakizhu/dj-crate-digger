@@ -167,11 +167,11 @@
       "id": 14,
       "name": "interactive-intake-before-search",
       "prompt": "/迪歌 我想为周五午夜的小酒吧找一套温暖但逐渐变深的 House。",
-      "expected_output": "触发后先展示严格两轮的分批需求收集；两轮都使用可复制的 fenced Markdown 代码块，不立即联网搜索或输出曲目；第二轮答复完成后才进入搜索，不追加第三轮普通确认。",
+      "expected_output": "触发后先展示严格两轮的 Markdown 需求收集；第一轮确认必要信息，第二轮完成需求细化，不立即联网搜索或输出曲目；第二轮答复完成后才进入搜索，不追加第三轮普通确认。",
       "expectations": [
         "intake_status 初始为 collecting",
-        "第一轮询问选歌主题、同步的选歌副主题 1 和选歌副主题 2，三个问题都有完整选项",
-        "第二轮一次性询问主题细化、地区、数量、版本、平台和其他限制；需要选择的字段有选项，自由填写字段不附加冗余提示",
+        "第一轮只询问场景、核心声音方向、歌曲数量或 Set 时长、其他限制",
+        "第二轮一次性询问具体风格、速度/BPM、流行度、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
         "需求收集完成前没有候选曲目、搜索结果或推荐链接",
         "两轮提问各自使用一个可复制的 markdown 代码块，摘要不构成第三轮普通问题",
         "第二轮答复后 intake_status 才变为 ready"
@@ -181,10 +181,10 @@
       "id": 15,
       "name": "interactive-output-mode",
       "prompt": "/dj-crate-digger 我想找 20 首适合婚礼 afterparty 的电子歌，先从熟悉的歌开始。",
-      "expected_output": "互动需求收集默认提供综合版，并允许用户点击切换到四个版本；综合版只输出一张 11 列曲目表，四版本选择后才输出四张表。",
+      "expected_output": "互动需求收集默认提供简要版，并允许用户在第二轮选择丰富版；简要版只输出一张 11 列曲目表，丰富版才输出四个视角并最终给出综合结果。",
       "expectations": [
         "output_mode 默认是 composite",
-        "用户选择 four_views 后才出现风格、场景、流行度和动态综合四个版本",
+        "用户填写丰富版后才出现风格、场景、流行度和动态综合四个视角",
         "综合版表头严格为歌名、艺术家、专辑/EP、风格、BPM、歌曲时长、能量级、发行时间、简介、选择原因、链接",
         "报告不增加序号、Mix、段落或验证状态列"
       ]
@@ -193,9 +193,9 @@
       "id": 16,
       "name": "interactive-platform-selection",
       "prompt": "/迪歌 Apple Music 主平台，SoundCloud 备用；给我一套凌晨左场 House，主导向场景，次导向风格。",
-      "expected_output": "互动流程分别收集主平台和备用平台，并将选择写入需求卡；主平台链接优先，备用平台只在必要时使用。",
+      "expected_output": "互动流程在第二轮通过一个平台与链接要求字段收集 Apple Music 主选、SoundCloud 备用等自然语言约束，并将其写入需求卡；主链接优先，备用链接只在必要时使用。",
       "expectations": [
-        "platform_policy.primary 为 Apple Music，备用平台为 SoundCloud",
+        "平台自然语言被解析为 platform_policy 优先顺序 Apple Music → SoundCloud",
         "平台选择不进入内容排序权重",
         "同一录音的多个平台链接合并在同一表格行",
         "exclusive 选择时不出现其他平台链接"
@@ -220,36 +220,35 @@
       "id": 18,
       "name": "two-round-intake-no-empty-prompts",
       "prompt": "/迪歌 我想为周五午夜小酒吧排一套逐渐升高的 House set。",
-      "expected_output": "严格两轮需求收集：第一轮确认选歌主题、选歌副主题 1、选歌副主题 2；第二轮完成全部细化和交付设置；每个问题都有选项，不能出现空白字段或第三轮普通追问。",
+      "expected_output": "严格两轮需求收集：第一轮确认必要信息，第二轮完成需求细化和交付设置；每轮各有一个可复制 Markdown 代码块，不能增加第三轮普通追问。",
       "expectations": [
-        "第一轮三个问题的选项都只包含风格、场景、BPM、情绪、能量五项",
-        "两个副主题的选项集与主主题完全同步，不重复显示 AI 判断或不需要副主题",
+        "第一轮只出现场景、核心声音方向、歌曲数量或 Set 时长、其他限制四个字段",
+        "第一轮开头只解释一次 AI判断和空白语义",
         "需求收集只分为两轮，第二轮答复后 intake_status 才变为 ready",
-        "用户可见问题没有选歌主题：、BPM：或主平台：这类空白字段",
+        "第二轮包含具体风格、速度/BPM、流行度、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
         "需求收集完成前没有搜索结果、候选曲目或推荐链接"
       ]
     },
     {
       "id": 19,
       "name": "theme-refinement-options-and-separate-dimensions",
-      "prompt": "/dj-crate-digger 主题选风格，副主题选场景和能量；我想要一套 20 首歌。",
-      "expected_output": "第二轮根据三个主题完成低负担细化，同时一次性收集地区、数量、版本、平台和其他限制；只有风格与 BPM 保留较多选项，场景、情绪、熟悉度、Set 用途各保留三个选项，能量级与走势合并。",
+      "prompt": "/dj-crate-digger 我想为周五午夜小酒吧排一套逐渐升高的 House set；20 首，Spotify 或 SoundCloud 均可。",
+      "expected_output": "第二轮根据第一轮必要信息完成需求细化，同时一次性收集风格、BPM、流行度、版本、平台和其他限制；不再询问主题、副主题、时间、听众或链接策略。",
       "expectations": [
-        "风格细化至少提供 House、Deep House、Organic House、Disco House、Tech House 等经典选项",
-        "场景细化只提供酒吧、俱乐部、婚礼三个选项",
-        "BPM 保留 128 四四抖腿、140 操栏杆必备等参考，能量级与走势合并为平稳、逐渐升高、先熟后怪三个选项加省略号",
-        "情绪为温暖、迷幻、紧张；熟悉度为热门、平衡、冷门发现；Set 用途为暖场、推峰、收场",
-        "第二轮移除时间、听众、演出时长和链接策略，主平台之外使用备用平台，数量选项带 2–4 分钟/首的时长估算"
+        "第二轮字段与用户提供的需求细化模板一致：具体风格、速度/BPM、流行度、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
+        "第二轮的示例能覆盖 House、Bass、Garage、Techno、Breakbeat 等风格，105/128/140/150/170 等 BPM 和经典老歌/抖音流行/小众冷门等流行度表达",
+        "简要版映射为 composite，丰富版映射为 four_views，并说明最终提供综合结果",
+        "平台与链接要求允许 Spotify、Apple Music、网易云音乐、Bandcamp、SoundCloud、Beatport 等自然语言输入"
       ]
     },
     {
       "id": 20,
       "name": "markdown-blocks-are-mandatory",
       "prompt": "/迪歌 我想为周五午夜小酒吧排一套 House set。",
-      "expected_output": "第一轮和第二轮提问都以可复制的 markdown fenced code block 展示；代码块是权威提问内容，结构化控件不得替代它。",
+      "expected_output": "第一轮和第二轮提问都以可复制的 markdown fenced code block 展示；第一轮是必要信息模板，第二轮是需求细化模板，代码块是权威提问内容，结构化控件不得替代它。",
       "expectations": [
-        "第一轮只出现一个 markdown 代码块，包含选歌主题、选歌副主题 1 和选歌副主题 2 的完整选项",
-        "第二轮只出现一个 markdown 代码块，包含低负担主题细化、数量、版本、平台和其他限制",
+        "第一轮只出现一个 markdown 代码块，包含场景、核心声音方向、歌曲数量或 Set 时长、其他限制",
+        "第二轮只出现一个 markdown 代码块，包含风格、速度/BPM、流行度、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
         "不会把第一轮或第二轮渲染成截图所示的无代码块普通文本",
         "不会以 request_user_input 的 UI 控件替代可复制 Markdown",
         "两轮代码块之外不追加第三轮普通需求问题"
@@ -259,13 +258,65 @@
       "id": 21,
       "name": "low-cognitive-load-intake",
       "prompt": "/dj-crate-digger 我想做一套周五酒吧 House set。",
-      "expected_output": "两轮问卷保持可复制 Markdown，但选项精简；第一轮只选五类主题，第二轮按 DJ 通用组合收集少量细化项，并用歌曲数量估算 set 时长。",
+      "expected_output": "两轮问卷保持可复制 Markdown；第一轮只收集必要信息，第二轮完成全部需求细化，并通过歌曲数量或 Set 时长建立目标。",
       "expectations": [
-        "第一轮开头只解释一次 AI判断和空白语义",
-        "第一轮不出现熟悉度与流行度、冷门新鲜感、AI判断或不需要副主题选项",
-        "第二轮不出现不限、AI判断、自定义填写等重复提示词",
-        "第二轮不出现时间、听众、演出时长、链接策略或单独的 Explicit/版本限制/其他限制选项",
-        "第二轮使用备用平台字段，数量选项显示 10 首约 20–40 分钟、20 首约 40–80 分钟、30 首约 60–120 分钟"
+        "第一轮字段固定为场景、核心声音方向、歌曲数量或 Set 时长、其他限制，且 AI判断/空白语义只解释一次",
+        "第二轮字段固定为风格、速度/BPM、流行度、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
+        "不新增主题、副主题、时间、听众、演出时长、主平台/备用平台或链接策略等单独问题",
+        "歌曲数量和 Set 时长都可以直接填写；没有填写时默认 30 首并披露假设",
+        "两轮都各自只有一个可复制的 Markdown 代码块"
+      ]
+    },
+    {
+      "id": 22,
+      "name": "user-provided-intake-template",
+      "prompt": "/dj-crate-digger 我想做一套艺术展的电子音乐 set。",
+      "expected_output": "严格采用用户确认的两轮 Markdown 模板：第一轮必要信息，第二轮需求细化；每轮只出现一个可复制代码块，字段顺序和名称稳定。",
+      "expectations": [
+        "第一轮代码块字段顺序严格为场景、核心声音方向、歌曲数量或 Set 时长、其他限制",
+        "第二轮代码块字段顺序严格为风格、速度 / BPM、流行度、输出版本、情绪、SET能量级或能量走势、平台与链接要求、其他",
+        "第一轮开头一次性说明可自由填写、AI判断或留空、双击复制和只需两轮；第二轮不重复这些说明",
+        "输出版本解释简要版为一张综合 playlist，丰富版为多个视角建议并最终输出综合结果",
+        "平台与链接要求是一个自然语言字段，示例覆盖 Spotify、Apple Music、网易云音乐、Bandcamp、SoundCloud 和 Beatport"
+      ]
+    },
+    {
+      "id": 23,
+      "name": "post-report-local-export-offer",
+      "prompt": "/dj-crate-digger 为周五酒吧 House set 找 10 首歌；只要简要版。",
+      "expected_output": "先完成并输出选歌建议，再单独询问是否导出 TXT、M3U8、TXT + M3U8 或不导出；需求收集期间不提前询问，也不在用户确认前生成文件。",
+      "expectations": [
+        "TXT/M3U8 导出询问出现在完整推荐报告之后",
+        "导出选项包含 TXT、M3U8、TXT + M3U8 和不导出",
+        "导出询问不被当成第三轮需求收集",
+        "用户确认前 local_export.status 不超过 offered，且没有创建文件",
+        "默认导出最终综合版，不把平台歌单写入误当成本地文件导出"
+      ]
+    },
+    {
+      "id": 24,
+      "name": "txt-export-order-and-metadata",
+      "prompt": "/dj-crate-digger 找 3 首有 SoundCloud 直接曲目页的 Deep House，报告完成后导出 TXT。",
+      "expected_output": "用户确认后生成 UTF-8 TXT 文件；每行一首，保持报告推荐顺序、官方完整曲名和版本名，并附艺人与首选可用直链。",
+      "expectations": [
+        "TXT 只包含最终报告中的已验证、可追溯曲目",
+        "同一录音跨平台只写一次，顺序与报告一致",
+        "每行包含 Artist、官方完整 Track Title/Version 和直接曲目或发行链接",
+        "没有直接链接的曲目不写入，并在导出结果中列出跳过原因",
+        "文件使用 UTF-8 并返回可点击的本地文件链接"
+      ]
+    },
+    {
+      "id": 25,
+      "name": "m3u8-link-playlist-safety",
+      "prompt": "/dj-crate-digger 找一套 5 首 Spotify 或 SoundCloud 均可的凌晨 House set，报告完成后导出 M3U8。",
+      "expected_output": "用户确认后生成 UTF-8 Extended M3U/M3U8 链接播放列表，保留推荐顺序并使用可用时长；明确平台网页链接不等于原始音频流，不抓取受保护流。",
+      "expectations": [
+        "M3U8 以 #EXTM3U 开头，并使用 #PLAYLIST、#EXTINF 和 URL 行",
+        "已知时长以秒写入 #EXTINF，未知时使用 -1",
+        "M3U8 只写符合平台策略的已验证链接，不出现禁用平台",
+        "Spotify/SoundCloud 等平台曲目页被标注为链接播放列表，不冒充可直接播放的原始 .m3u8 流",
+        "无链接曲目被跳过并透明报告，用户确认前不生成文件"
       ]
     }
   ]

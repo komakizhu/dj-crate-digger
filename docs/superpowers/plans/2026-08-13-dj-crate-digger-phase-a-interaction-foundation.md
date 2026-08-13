@@ -2,9 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (- [ ]) syntax for tracking.
 
-**Goal:** 在不引入长期私人画像、五视图排序或外部证据适配器的前提下，实现语言与目标市场分离、第一轮地区字段、第二轮熟悉度/经典字段，以及每次完整 SOP 后的记忆状态和可选反馈邀请。
+**Goal:** 在不引入长期私人画像、五视图排序或外部证据适配器的前提下，实现语言与目标市场分离、第一轮地区字段、第二轮熟悉度/经典字段，以及每次完整 SOP 后的“下一步”反馈和导出指令。
 
-**Architecture:** 继续使用现有 Markdown 指令型 Skill。第一轮和第二轮生成只服务当前会话的 Session Brief；目标市场带来源标记且明确不持久化。新字段通过兼容映射接入现有搜索与四视图排序，报告末尾把本地导出、记忆状态和反馈邀请合并为同一个“可选后续”区域。Phase A 不创建私人数据文件，也不声称已经具备 Phase B/C/D 能力。
+**Architecture:** 继续使用现有 Markdown 指令型 Skill。第一轮和第二轮生成只服务当前会话的 Session Brief；目标市场带来源标记且明确不持久化。新字段通过兼容映射接入现有搜索与四视图排序，报告末尾进入“下一步”区域；记忆状态、反馈状态、缺失信息和来源只后台记录，不作为默认栏目展示。Phase A 不创建私人数据文件，也不声称已经具备 Phase B/C/D 能力。
+
+**后续已确认增量：** `fast` 极速版作为独立输出模式补充实施，不改变本计划的 Phase A 边界。它仍保留两轮问卷、逐曲验证、平台策略、版本去重、导出与安全边界；实现细节由主 `SKILL.md` 和 references 中的极速版合同定义。
 
 **Tech Stack:** Markdown Skill 合同、JSON 行为评测、jq JSON 校验、rg 静态一致性检查、Git diff 人工复核。
 
@@ -136,7 +138,7 @@ era_classic_intent: ai        # contemporary | light_classic_anchors | new_old_b
 
 - [ ] 更新字段映射、解析清单、priority_order 和 selection_priority。familiarity_intent 投影到现有 popularity_fit；era_classic_intent 投影到现有 freshness_fit 或搜索约束。“少量经典锚点”只表示候选覆盖意图，不固定最终名额。
 - [ ] 在内部需求卡中加入上述六个字段；保留 scene_context.region 作为当前会话兼容字段，并说明其值来自 target_market、不会被写入长期数据。
-- [ ] 将 output_mode 保持为 composite | four_views。把现有第三专项视图及 ranking.md 的标签统一改为“熟悉度与发现感优先”，仍然只输出风格、场景、熟悉度与发现感、动态综合四个视图。
+- [ ] 将 output_mode 设为 fast | composite | four_views；fast 使用独立三列路径，不复用简要版或丰富版。把现有第三专项视图及 ranking.md 的标签统一改为“熟悉度与发现感优先”，丰富版仍然只输出风格、场景、熟悉度与发现感、动态综合四个视图。
 - [ ] 保留旧式自然语言中的“流行度/热门/冷门”解析兼容性，但第二轮模板和需求摘要不再把经典与熟悉度混成一个字段。
 - [ ] 运行合同检查：
 
@@ -206,7 +208,7 @@ Expected: 地区来源可见、语言和市场独立、11 列表头原样保留�
 
 ---
 
-## Task 4: 合并“可选后续”区域并诚实显示 Phase A 记忆状态
+## Task 4: 固定“下一步”区域并后台记录 Phase A 状态
 
 **Files:**
 
@@ -220,38 +222,26 @@ Expected: 地区来源可见、语言和市场独立、11 列表头原样保留�
 完整报告后固定显示：
 
 ~~~markdown
-## 可选后续
+## 下一步
 
-### 私人记忆状态
-- 长期记忆：未启用（本轮不会跨会话保存）
-- 本轮反馈：无
-- 长期画像：本轮未更新
+第一，如果愿意，您可以用自然语言回复我选歌情况，这会丰富您的私人选歌偏好，让推荐更准。回复包括但不限于「`skream的歌不错，但我这次因为客群的关系没放`/`我不喜欢跳楼机，以后别再推了`/`我这次打了这些歌（配图/表）`」
 
-如果愿意，可以直接告诉我哪些曲目你喜欢、这场会用，或哪些不合适、版本不对；我可以在当前会话中按你的说明继续调整，但不会跨会话保存。回复序号、曲名、链接或粘贴表格行都可以。不回复不会影响本次歌单和导出。
-
-### 本地 TXT / M3U8 导出
-
-是否导出本次最终综合歌单？
-- TXT
-- M3U8
-- TXT + M3U8
-- 不导出
+第二，您可以导出歌单，直接回复`导出txt`或者`导出m3u8`即可
 ~~~
 
-反馈邀请与本地导出都属于报告后的可选动作，不是第三轮需求收集。用户可以只反馈、只导出、两者都做或不回复。
+反馈邀请与本地导出都属于报告后的可选动作，不是第三轮需求收集。私人记忆状态、本轮反馈、长期画像、缺失信息和来源只后台记录，不在默认输出中展示。
 
 ### Steps
 
-- [ ] 在 SKILL.md 报告与条件导出之间定义统一“可选后续”收尾。保证它只出现在完整推荐报告后，不在两轮问卷中提前出现。
-- [ ] 使用上面的 Phase A 固定状态，不出现“已启用”“等待确认 N 项”“已确认更新”等只有 Phase B 才能产生的状态。
-- [ ] 保留自然语言反馈的低认知负载入口，但只承诺当前会话继续调整，不创建事件日志、不写长期画像、不生成长期保存摘要。
-- [ ] 在 report-template.md 把现有独立“本地 TXT/M3U8 导出”段改为统一“可选后续”区域；保留导出选项和用户确认后才生成文件的规则。
-- [ ] 在 export.md 明确导出问题可以与记忆状态/反馈邀请并列展示，但导出状态机、UTF-8、顺序、去重、直接链接、M3U8 安全和不覆盖旧文件规则完全不变。
+- [ ] 在 SKILL.md 报告与条件导出之间定义统一“下一步”收尾。保证它只出现在完整推荐报告后，不在两轮问卷中提前出现。
+- [ ] 将 Phase A 的记忆状态、反馈状态、缺失信息和来源改为后台记录，不在默认报告中展示或提示。
+- [ ] 保留自然语言反馈的低认知负载入口，但只在当前会话自动生效；长期档案必须经过摘要确认。
+- [ ] 在 report-template.md 固定“选歌碎碎念”和“下一步”，移除独立“缺失与不确定信息”“来源”“导出”栏目。
+- [ ] 在 export.md 固定 `导出txt` / `导出m3u8` 指令，同时保持导出状态机、UTF-8、顺序、去重、直接链接、M3U8 安全和不覆盖旧文件规则不变。
 - [ ] 运行检查：
 
 ~~~bash
-rg -n '可选后续|私人记忆状态|长期记忆：未启用|本轮反馈：无|长期画像：本轮未更新|不会跨会话保存' SKILL.md references/report-template.md references/export.md
-rg -n 'TXT \+ M3U8|不导出|不是第三轮需求收集|不算第三轮需求收集' SKILL.md references/report-template.md references/export.md
+rg -n '下一步|选歌碎碎念|导出txt|导出m3u8|不是第三轮需求收集|不算第三轮需求收集' SKILL.md references/report-template.md references/export.md
 ~~~
 
 Expected: 三份文档的阶段状态、可选性和导出顺序一致。
@@ -277,14 +267,14 @@ Expected: Phase A 实现文件不出现长期存储或画像已更新的运行�
 
 ### Steps
 
-- [ ] 更新 README “本版重点”：第一轮加入目标国家/地区；沟通语言与市场分离；第二轮拆成熟悉度和时代/经典；丰富版仍为四视图；完整报告后显示 Phase A 记忆状态和可选反馈。
-- [ ] 把 README 行为评测数量从 25 更新为 33，并概括新增地区/语言/收尾回归场景。trigger eval 数量不变。
+- [ ] 更新 README “本版重点”：第一轮加入目标国家/地区；沟通语言与市场分离；第二轮拆成熟悉度和时代/经典；丰富版仍为四视图；完整报告后只显示可选反馈和导出，记忆状态只后台记录。
+- [ ] 把 README 行为评测数量同步为当前 48，并概括地区/语言/收尾与极速版回归场景。trigger eval 数量不变。
 - [ ] 不修改 agents/openai.yaml；默认提示仍然准确，不需要把 Phase B/C/D 写进 starter prompt。
 - [ ] JSON 与结构校验：
 
 ~~~bash
 jq empty evals/evals.json evals/trigger-evals.json
-jq -e '.skill_name == "dj-crate-digger" and (.evals | length) == 33 and (([.evals[].id] | unique | length) == 33)' evals/evals.json
+jq -e '.skill_name == "dj-crate-digger" and (.evals | length) == 48 and (([.evals[].id] | unique | length) == 48)' evals/evals.json
 jq -e 'length == 33' evals/trigger-evals.json
 git diff --check
 ~~~
@@ -340,7 +330,7 @@ Phase A 只有在以下条件全部成立时才算完成：
 - communication_language 与 target_market 可以不同；明确市场覆盖推断，推断市场只在本轮生效。
 - 报告摘要披露市场值和来源，搜索使用该上下文但不改变平台许可。
 - 熟悉度与时代/经典分开；“少量经典锚点”没有固定最终配额。
-- 丰富版仍是四视图，11 列、验证、去重、导出与安全边界没有回归。
-- 收尾状态诚实显示长期记忆未启用，反馈只承诺当前会话调整。
-- 33 个行为 eval 和 33 个 trigger eval 均为合法 JSON 且 ID 唯一。
+- 丰富版仍是四视图并执行整份报告级去重：默认零重复，最多一首高质量核心曲出现两次，参考艺人不豁免；11 列、验证、导出与安全边界没有回归。
+- 长期记忆、本轮反馈、长期画像、缺失信息与来源只后台记录，不在默认收尾显示；反馈只承诺当前会话调整。
+- 48 个行为 eval 和 33 个 trigger eval 均为合法 JSON 且 ID 唯一。
 - 用户尚未说“定稿”时，仓库没有新增 commit，也没有 push。

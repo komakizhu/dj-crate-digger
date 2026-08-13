@@ -86,7 +86,7 @@
       "expectations": [
         "四个视角都存在且标题清晰；prompt 中的“流行度优先版”按 compatibility / legacy input 解析，第三视角的规范命名为熟悉度与发现感优先版",
         "专项版默认 10 首，综合版目标 30 首，数量不足时不复制曲目",
-        "报告说明四版来自同一候选池，版本间可重复但各版本内部不重复",
+        "报告说明四版来自同一候选池，并按整份报告级录音键去重；默认零重复，只有一首满足严格质量条件的曲目可跨两个视角出现",
         "动态综合版包含 Warm Up、Groove、Peak、Closing"
       ]
     },
@@ -181,10 +181,10 @@
       "id": 15,
       "name": "interactive-output-mode",
       "prompt": "/dj-crate-digger 我想找 20 首适合婚礼 afterparty 的电子歌，先从熟悉的歌开始。",
-      "expected_output": "互动需求收集默认提供简要版，并允许用户在第二轮选择丰富版；简要版只输出一张 11 列曲目表，丰富版才输出四个视角并最终给出综合结果。",
+      "expected_output": "互动需求收集在第二轮提供极速版、简要版和丰富版；极速版映射为独立 fast 三列路径，简要版只输出一张 11 列曲目表，丰富版才输出四个视角并最终给出综合结果。",
       "expectations": [
         "output_mode 默认是 composite",
-        "用户填写丰富版后才出现风格、场景、熟悉度与发现感和动态综合四个视角",
+        "用户填写丰富版后才出现风格、场景、熟悉度与发现感和动态综合四个视角；极速版不自动套用 composite 或 four_views",
         "综合版表头严格为歌名、艺术家、专辑/EP、风格、BPM、歌曲时长、能量级、发行时间、简介、选择原因、链接",
         "报告不增加序号、Mix、段落或验证状态列"
       ]
@@ -223,7 +223,7 @@
       "expected_output": "严格两轮需求收集：第一轮确认必要信息，第二轮完成需求细化和交付设置；每轮各有一个可复制 Markdown 代码块，不能增加第三轮普通追问。",
       "expectations": [
         "第一轮只出现场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、其他限制五个字段",
-        "第一轮开头只解释一次 AI判断和空白语义",
+        "第一轮开头固定为“填写规则为：”；规则只包含“可以从例子中复制，也可以自由填写或不填”和“不填意味着ai智能判断答案”两条",
         "需求收集只分为两轮，第二轮答复后 intake_status 才变为 ready",
         "第二轮包含具体风格、速度/BPM、熟悉度与发现感、时代与经典、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
         "需求收集完成前没有搜索结果、候选曲目或推荐链接"
@@ -237,7 +237,7 @@
       "expectations": [
         "第二轮字段与用户提供的需求细化模板一致：具体风格、速度/BPM、熟悉度与发现感、时代与经典、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
         "第二轮的示例能覆盖 House、Bass、Garage、Techno、Breakbeat 等风格，105/128/140/150/170 等 BPM，以及热门熟悉/平衡/小众发现和当代为主/少量经典锚点/新旧桥接/经典优先等表达",
-        "简要版映射为 composite，丰富版映射为 four_views，并说明最终提供综合结果",
+        "极速版映射为 fast 独立三列路径；简要版映射为 composite，丰富版映射为 four_views，并说明最终提供综合结果",
         "平台与链接要求允许 Spotify、Apple Music、网易云音乐、Bandcamp、SoundCloud、Beatport 等自然语言输入"
       ]
     },
@@ -260,10 +260,10 @@
       "prompt": "/dj-crate-digger 我想做一套周五酒吧 House set。",
       "expected_output": "两轮问卷保持可复制 Markdown；第一轮只收集必要信息，第二轮完成全部需求细化，并通过歌曲数量或 Set 时长建立目标。",
       "expectations": [
-        "第一轮字段固定为场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、其他限制，且 AI判断/空白语义只解释一次",
+        "第一轮字段固定为场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、其他限制；固定说明只包含复制、自由填写或不填，以及不填意味着ai智能判断答案",
         "第二轮字段固定为具体风格、速度/BPM、熟悉度与发现感、时代与经典、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
         "不新增主题、副主题、时间、听众、演出时长、主平台/备用平台或链接策略等单独问题",
-        "歌曲数量和 Set 时长都可以直接填写；没有填写时默认 30 首并披露假设",
+        "歌曲数量和 Set 时长都可以直接填写；没有填写时默认 composite 目标 30 首并披露假设，若第二轮改选 fast 则使用 fast 的 15 首默认目标",
         "两轮都各自只有一个可复制的 Markdown 代码块"
       ]
     },
@@ -275,8 +275,8 @@
       "expectations": [
         "第一轮代码块字段顺序严格为场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、其他限制",
         "第二轮代码块字段顺序严格为具体风格、速度 / BPM、熟悉度与发现感、时代与经典、输出版本、情绪、SET能量级或能量走势、平台与链接要求、其他",
-        "第一轮开头一次性说明可自由填写、AI判断或留空、双击复制和只需两轮；第二轮不重复这些说明",
-        "输出版本解释简要版为一张综合 playlist，丰富版为多个视角建议并最终输出综合结果",
+        "第一轮开头固定为“填写规则为：”，只说明可以从例子中复制、自由填写或不填，以及不填意味着ai智能判断答案；不再出现旧的双击复制、只需两轮或留空说明",
+        "输出版本解释极速版为独立 fast 三列 playlist 路径，简要版为一张综合 playlist，丰富版为多个视角建议并最终输出综合结果",
         "平台与链接要求是一个自然语言字段，示例覆盖 Spotify、Apple Music、网易云音乐、Bandcamp、SoundCloud 和 Beatport"
       ]
     },
@@ -284,10 +284,10 @@
       "id": 23,
       "name": "post-report-local-export-offer",
       "prompt": "/dj-crate-digger 为周五酒吧 House set 找 10 首歌；只要简要版。",
-      "expected_output": "先完成并输出选歌建议，再单独询问是否导出 TXT、M3U8、TXT + M3U8 或不导出；需求收集期间不提前询问，也不在用户确认前生成文件。",
+      "expected_output": "先完成并输出选歌建议，再在下一步提示用户直接回复 `导出txt` 或 `导出m3u8`；需求收集期间不提前询问，也不在用户确认前生成文件。",
       "expectations": [
         "TXT/M3U8 导出询问出现在完整推荐报告之后",
-        "导出选项包含 TXT、M3U8、TXT + M3U8 和不导出",
+        "下一步只提供 `导出txt` 和 `导出m3u8` 指令，不展示合并或拒绝导出的选项列表",
         "导出询问不被当成第三轮需求收集",
         "用户确认前 local_export.status 不超过 offered，且没有创建文件",
         "默认导出最终综合版，不把平台歌单写入误当成本地文件导出"
@@ -395,11 +395,11 @@
       "id": 32,
       "name": "phase-a-closeout-memory-and-feedback",
       "prompt": "/dj-crate-digger 完成这次歌单报告后，请展示 Phase A 的收尾状态。",
-      "expected_output": "完整报告后显示可选后续区域：长期记忆未启用、本轮反馈无、长期画像未更新，并以自然语言邀请用户自愿提供当前会话反馈；不显示长期摘要确认流程。",
+      "expected_output": "完整报告后显示“下一步”区域，只包含可选自然语言反馈邀请和导出指令；长期记忆、本轮反馈、长期画像、缺失信息与来源状态保留在后台，不直接展示。",
       "expectations": [
-        "收尾明确显示长期记忆未启用，且说明本轮不会跨会话保存",
-        "收尾显示本轮反馈为无、长期画像为本轮未更新或等价的未更新状态",
+        "收尾标题使用下一步，不使用可选后续",
         "提供自然语言的可选反馈邀请，而不是强制填写或新增一轮普通需求问卷",
+        "不直接显示长期记忆、本轮反馈、长期画像、缺失信息或来源栏目",
         "不出现长期摘要确认、已启用记忆、等待确认项目或反馈已跨会话保存等 Phase B 能力"
       ]
     },
@@ -407,13 +407,186 @@
       "id": 33,
       "name": "phase-a-regression-output-and-closeout",
       "prompt": "/dj-crate-digger 做一套丰富版 House set；完成两轮问卷和报告后，再选择导出并提供可选反馈。",
-      "expected_output": "Phase A 回归行为保持成立：丰富版仍输出四个视角，主表仍为 11 列；导出选项和自然语言反馈邀请只出现在报告后的可选后续区域，不构成第三轮需求收集。",
+      "expected_output": "Phase A 回归行为保持成立：丰富版仍输出四个视角，主表仍为 11 列；报告后的“下一步”只提供自然语言反馈邀请以及 `导出txt` / `导出m3u8` 指令，不构成第三轮需求收集。",
       "expectations": [
         "丰富版恰好输出风格、场景、熟悉度与发现感、动态综合四个视角，共享同一已验证去重候选池",
         "综合主表仍严格保持歌名、艺术家、专辑/EP、风格、BPM、歌曲时长、能量级、发行时间、简介、选择原因、链接 11 列",
-        "TXT/M3U8 导出选项在完整报告之后出现，不能插入第一轮或第二轮问卷",
-        "自然语言反馈邀请在完整报告后的可选后续区域出现，导出与反馈均不被计为第三轮需求收集",
+        "TXT/M3U8 导出指令在完整报告之后出现，不能插入第一轮或第二轮问卷",
+        "自然语言反馈邀请在完整报告后的下一步区域出现，导出与反馈均不被计为第三轮需求收集",
+        "默认报告不出现独立的缺失与不确定信息、来源或导出栏目",
         "不输出 Phase C 的 DJ 品味优先视图、不启用长期记忆，也不要求外部平台适配器"
+      ]
+    },
+    {
+      "id": 34,
+      "name": "rich-view-global-recording-dedup",
+      "prompt": "/dj-crate-digger 以 Nikita, the Wicked 为参考艺人做一套丰富版 UK Bass 歌单。LIKE ME 在多个视角得分都很高。",
+      "expected_output": "丰富版默认在整份报告范围内按录音键去重；只有一首证据充分的高质量核心曲可以跨两个视角出现，整份报告最多只有这一首重复曲，且任何曲目最多出现两次。参考艺人和参考曲目不获得额外重复名额。",
+      "expectations": [
+        "先按 ISRC 或规范化艺人、曲名和版本生成 dedupe_key，再按整份丰富版而非单个视角统计出现次数",
+        "默认优先选择未出现过的录音；整份丰富版最多允许一个 dedupe_key 重复",
+        "获准重复的曲目必须已验证且版本明确，在至少两个视角进入前 3 名且距最高分不超过 10 分，拥有独立质量信号，并在第二个视角比最佳未使用替代曲至少高 10 分",
+        "Nikita, the Wicked 或用户提供的其他参考艺人、参考曲目不享受重复豁免，同一录音仍最多出现两次",
+        "候选不足时减少实际曲目数并披露，不得用重复曲目补足每个视角"
+      ]
+    },
+    {
+      "id": 35,
+      "name": "fast-mode-default-count",
+      "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，不填写歌曲数量。",
+      "expected_output": "极速版将未填写数量解析为内部目标 15 首，允许最终交付 10–20 首，首批即最终。",
+      "expectations": [
+        "解析输出模式前保留 track_count 为 null 或 unset，而不是预设 30",
+        "第二轮确认 fast 后才应用默认 15 首",
+        "最终标题和表格为极速版最终三列结构，并显示固定下一步",
+        "不将未填数量沿用为 composite 的默认 30 首",
+        "单次最终上限为 50 首；超过上限时按 50 首执行并在标题标明"
+      ]
+    },
+    {
+      "id": 36,
+      "name": "fast-mode-short-request",
+      "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，请给我 12 首 UK Bass。",
+      "expected_output": "12 首请求的首批目标等于 12，直接以最终极速版交付。",
+      "expectations": [
+        "第二轮的极速版映射为 output_mode: fast，不复用 composite 或 four_views",
+        "first_batch_target 等于 12，首批即最终",
+        "不发送首批续跑状态，也不声明后台继续",
+        "每行只含官方歌名、官方艺人和一条已验证直接页"
+      ]
+    },
+    {
+      "id": 37,
+      "name": "fast-mode-segmented-supported-host",
+      "prompt": "/dj-crate-digger 在支持中间消息的 Codex 宿主中，完成两轮问卷后选择极速版，请给我 35 首 Dubstep。",
+      "expected_output": "先交付目标为 15 首的极速版首批，再继续补齐至最终目标。",
+      "expectations": [
+        "首批目标为 15 首，因时限可在 10–20 首之间截断",
+        "首批标题为 # 极速版首批（X/N），表后固定写 已完成第一批，正在继续补齐。",
+        "续跑使用同一精确/回退查询的后续结果，不新增第三查询或切换主导向",
+        "最终保留首批全部曲目但允许重新排序，且只有最终显示下一步"
+      ]
+    },
+    {
+      "id": 38,
+      "name": "fast-mode-fifty-cap",
+      "prompt": "/dj-crate-digger 在支持中间消息的宿主中，完成两轮问卷后选择极速版，请给我 70 首 Techno。",
+      "expected_output": "请求按 final_target 50 执行，首批后继续，中文最终标题明确单次上限 50 首。",
+      "expectations": [
+        "final_target 等于 min(user_target, 50)",
+        "中文最终标题为 # 极速版（X/50；单次上限 50 首）",
+        "不通过未验证曲目或重复曲目补足 50 首"
+      ]
+    },
+    {
+      "id": 39,
+      "name": "fast-mode-no-intermediate-host",
+      "prompt": "/dj-crate-digger 在不支持中间消息的宿主中，完成两轮问卷后选择极速版，请给我 30 首 House。",
+      "expected_output": "只交付首批，仍使用极速版首批标题，并明确当前宿主无法自动续跑。",
+      "expectations": [
+        "表后固定写 当前宿主无法自动续跑；如需补齐，请继续此任务。",
+        "不声称正在后台继续或已经补齐最终数量",
+        "用户明确当前首批后才可导出当前结果"
+      ]
+    },
+    {
+      "id": 40,
+      "name": "fast-mode-single-channel-budget",
+      "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，以 Burial 的 Archangel 为参考曲目，风格 UK Garage，140 BPM。",
+      "expected_output": "极速版只走 anchor_style，BPM 作为风格限定，最多一个精确查询和一个放宽一级回退查询，并遵循首批主动计算预算。",
+      "expectations": [
+        "不切换到 scene_context 或 familiarity_era",
+        "fast_pool_goal 为 min(max(2 × first_batch_target, first_batch_target + 5), 40)，每批并行核验 5 首",
+        "轻量评分只定义一次并使用 60% 主导向、25% 其它约束、15% 多样性",
+        "50 秒后停止扩池；网络等待不计入 5+20+20+10+5 秒主动计算预算"
+      ]
+    },
+    {
+      "id": 41,
+      "name": "fast-mode-preferred-platform-fallback",
+      "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，请给我 15 首 Deep House，Apple Music 优先，SoundCloud 回退。",
+      "expected_output": "每首优先交付 Apple Music 直接页，仅首选不可用时回退到 SoundCloud。",
+      "expectations": [
+        "最终链接不是搜索结果页、平台首页或模型记忆",
+        "每个链接格只含一条直接曲目或发行页",
+        "版本、官方曲名和官方艺人均逐曲核验"
+      ]
+    },
+    {
+      "id": 42,
+      "name": "fast-mode-exclusive-platform",
+      "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，请给我 15 首 Techno，只接受 Apple Music。",
+      "expected_output": "exclusive 模式只交付 Apple Music 已验证直接页，不能跨到任何回退平台。",
+      "expectations": [
+        "Apple Music 缺失的候选不进入最终表",
+        "平台限制、版本要求和禁用平台是评分前硬过滤",
+        "候选不足时少给，不自动找相似替代"
+      ]
+    },
+    {
+      "id": 43,
+      "name": "fast-mode-candidate-shortage",
+      "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，请给我 20 首只在 Bandcamp 可验证的极小众子流派曲目。",
+      "expected_output": "候选不足时只交付已核验录音，不用重复、错误版本或未核验曲目补数。",
+      "expectations": [
+        "极速版单表按 dedupe_key 零重复",
+        "fast 艺人上限按 actual_target 计算，artist_cap=max(1,floor(0.15×actual_target))，艺人专题才豁免",
+        "内部记录停止原因和平台限制"
+      ]
+    },
+    {
+      "id": 44,
+      "name": "fast-mode-zero-results",
+      "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，请找 10 首只接受 Apple Music、由虚构艺人 No Such Artist 404 发布的曲目；如果没有逐曲页面就交付零条，不要澄清、换艺人或换平台。",
+      "expected_output": "零有效结果时交付零条或明确无法交付，不用模型记忆补歌。",
+      "expectations": [
+        "不使用搜索结果页、平台首页或猜测链接",
+        "不输出 composite 或 four_views 的 11 列报告",
+        "内部保留查询、验证、去重、平台降级、计时和停止原因"
+      ]
+    },
+    {
+      "id": 45,
+      "name": "fast-mode-continuation-incremental-merge",
+      "prompt": "/dj-crate-digger 在支持中间消息的宿主中，完成两轮问卷后选择极速版，请给我 40 首 Garage。",
+      "expected_output": "续跑只读取首批同一精确/回退查询的后续结果或更多返回项，按同一评分函数增量合并。",
+      "expectations": [
+        "final_target 为 40，continuation_pool_goal 为 min(max(2 × final_target, final_target + 10), 100)",
+        "续跑不得新增第三查询、切换主导向、重新解释需求或切换权重",
+        "每 5 首批次继续，直到目标、候选池、同一两查询耗尽、连续两批无新增可交付录音或平台不可继续"
+      ]
+    },
+    {
+      "id": 46,
+      "name": "fast-mode-output-template-and-reorder",
+      "prompt": "/dj-crate-digger 在支持中间消息的 Codex 宿主中，完成两轮问卷后选择极速版，请给我 30 首 Breakbeat。",
+      "expected_output": "首批和最终都严格三列；最终保留首批曲目但可重排，极速版不展示摘要、11 列表或选歌碎碎念。",
+      "expectations": [
+        "中文首批使用 # 极速版首批（X/N）及固定续跑句",
+        "中文最终使用 # 极速版（X/N），并且只有最终显示下一步",
+        "简要版、丰富版、两轮 Markdown 问卷、TXT/M3U8 导出和安全边界保持不变"
+      ]
+    },
+    {
+      "id": 47,
+      "name": "fast-mode-english-fifty-cap",
+      "prompt": "/dj-crate-digger After completing both rounds, choose Fast Mode and find 70 Techno tracks in English on a host that supports intermediate messages.",
+      "expected_output": "The request is capped at 50 tracks and the final English title states the single-request limit.",
+      "expectations": [
+        "final_target equals min(user_target, 50)",
+        "The final title is # Fast Mode (X/50; single-request limit: 50 tracks)",
+        "The output does not use unverified or duplicate tracks to fill the cap"
+      ]
+    },
+    {
+      "id": 48,
+      "name": "fast-mode-english-output-template-and-reorder",
+      "prompt": "/dj-crate-digger In English, after completing both rounds choose Fast Mode on a host that supports intermediate messages and find 30 Breakbeat tracks.",
+      "expected_output": "The first batch and final output use exactly three columns; the final output retains all first-batch tracks and may reorder them.",
+      "expectations": [
+        "The first batch uses # Fast Mode First Batch (X/N) and First batch complete. Continuing to fill the playlist.",
+        "The final output uses # Fast Mode (X/N) and shows Next steps only in the final output",
+        "The output omits the requirements summary, 11-column table, and Digging notes while preserving export and safety rules"
       ]
     }
   ]

@@ -82,9 +82,9 @@
       "id": 7,
       "name": "four-views-shared-pool",
       "prompt": "/迪歌 为一个 30 首的 rooftop sunset set 挖歌：从温暖有机开始，进入有 groove 的 House，最后到更深的夜色。请明确从同一个去重候选池输出风格优先版、场景优先版、流行度优先版和动态综合版；三个专项版各 10 首，综合版 30 首，候选不足就诚实少给，不要复制凑数。",
-      "expected_output": "四个视角均明确呈现；专项版各 10 首、综合版 30 首（或透明标注实际数量）；四版共享同一去重且已验证候选池。",
+      "expected_output": "四个视角均明确呈现；用户 prompt 中保留的“流行度优先版”只作为 compatibility / legacy input，实际规范视图名称为“熟悉度与发现感优先版”；专项版各 10 首、综合版 30 首（或透明标注实际数量）；四版共享同一去重且已验证候选池。",
       "expectations": [
-        "四种版本都存在且标题清晰",
+        "四个视角都存在且标题清晰；prompt 中的“流行度优先版”按 compatibility / legacy input 解析，第三视角的规范命名为熟悉度与发现感优先版",
         "专项版默认 10 首，综合版目标 30 首，数量不足时不复制曲目",
         "报告说明四版来自同一候选池，版本间可重复但各版本内部不重复",
         "动态综合版包含 Warm Up、Groove、Peak、Closing"
@@ -170,8 +170,8 @@
       "expected_output": "触发后先展示严格两轮的 Markdown 需求收集；第一轮确认必要信息，第二轮完成需求细化，不立即联网搜索或输出曲目；第二轮答复完成后才进入搜索，不追加第三轮普通确认。",
       "expectations": [
         "intake_status 初始为 collecting",
-        "第一轮只询问场景、核心声音方向、歌曲数量或 Set 时长、其他限制",
-        "第二轮一次性询问具体风格、速度/BPM、流行度、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
+        "第一轮只询问场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、其他限制",
+        "第二轮一次性询问具体风格、速度/BPM、熟悉度与发现感、时代与经典、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
         "需求收集完成前没有候选曲目、搜索结果或推荐链接",
         "两轮提问各自使用一个可复制的 markdown 代码块，摘要不构成第三轮普通问题",
         "第二轮答复后 intake_status 才变为 ready"
@@ -184,7 +184,7 @@
       "expected_output": "互动需求收集默认提供简要版，并允许用户在第二轮选择丰富版；简要版只输出一张 11 列曲目表，丰富版才输出四个视角并最终给出综合结果。",
       "expectations": [
         "output_mode 默认是 composite",
-        "用户填写丰富版后才出现风格、场景、流行度和动态综合四个视角",
+        "用户填写丰富版后才出现风格、场景、熟悉度与发现感和动态综合四个视角",
         "综合版表头严格为歌名、艺术家、专辑/EP、风格、BPM、歌曲时长、能量级、发行时间、简介、选择原因、链接",
         "报告不增加序号、Mix、段落或验证状态列"
       ]
@@ -222,10 +222,10 @@
       "prompt": "/迪歌 我想为周五午夜小酒吧排一套逐渐升高的 House set。",
       "expected_output": "严格两轮需求收集：第一轮确认必要信息，第二轮完成需求细化和交付设置；每轮各有一个可复制 Markdown 代码块，不能增加第三轮普通追问。",
       "expectations": [
-        "第一轮只出现场景、核心声音方向、歌曲数量或 Set 时长、其他限制四个字段",
+        "第一轮只出现场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、其他限制五个字段",
         "第一轮开头只解释一次 AI判断和空白语义",
         "需求收集只分为两轮，第二轮答复后 intake_status 才变为 ready",
-        "第二轮包含具体风格、速度/BPM、流行度、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
+        "第二轮包含具体风格、速度/BPM、熟悉度与发现感、时代与经典、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
         "需求收集完成前没有搜索结果、候选曲目或推荐链接"
       ]
     },
@@ -233,10 +233,10 @@
       "id": 19,
       "name": "theme-refinement-options-and-separate-dimensions",
       "prompt": "/dj-crate-digger 我想为周五午夜小酒吧排一套逐渐升高的 House set；20 首，Spotify 或 SoundCloud 均可。",
-      "expected_output": "第二轮根据第一轮必要信息完成需求细化，同时一次性收集风格、BPM、流行度、版本、平台和其他限制；不再询问主题、副主题、时间、听众或链接策略。",
+      "expected_output": "第二轮根据第一轮必要信息完成需求细化，同时一次性收集具体风格、BPM、熟悉度与发现感、时代与经典、版本、平台和其他限制；不再询问主题、副主题、时间、听众或链接策略。",
       "expectations": [
-        "第二轮字段与用户提供的需求细化模板一致：具体风格、速度/BPM、流行度、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
-        "第二轮的示例能覆盖 House、Bass、Garage、Techno、Breakbeat 等风格，105/128/140/150/170 等 BPM 和经典老歌/抖音流行/小众冷门等流行度表达",
+        "第二轮字段与用户提供的需求细化模板一致：具体风格、速度/BPM、熟悉度与发现感、时代与经典、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
+        "第二轮的示例能覆盖 House、Bass、Garage、Techno、Breakbeat 等风格，105/128/140/150/170 等 BPM，以及热门熟悉/平衡/小众发现和当代为主/少量经典锚点/新旧桥接/经典优先等表达",
         "简要版映射为 composite，丰富版映射为 four_views，并说明最终提供综合结果",
         "平台与链接要求允许 Spotify、Apple Music、网易云音乐、Bandcamp、SoundCloud、Beatport 等自然语言输入"
       ]
@@ -247,8 +247,8 @@
       "prompt": "/迪歌 我想为周五午夜小酒吧排一套 House set。",
       "expected_output": "第一轮和第二轮提问都以可复制的 markdown fenced code block 展示；第一轮是必要信息模板，第二轮是需求细化模板，代码块是权威提问内容，结构化控件不得替代它。",
       "expectations": [
-        "第一轮只出现一个 markdown 代码块，包含场景、核心声音方向、歌曲数量或 Set 时长、其他限制",
-        "第二轮只出现一个 markdown 代码块，包含风格、速度/BPM、流行度、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
+        "第一轮只出现一个 markdown 代码块，包含场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、其他限制",
+        "第二轮只出现一个 markdown 代码块，包含具体风格、速度/BPM、熟悉度与发现感、时代与经典、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
         "不会把第一轮或第二轮渲染成截图所示的无代码块普通文本",
         "不会以 request_user_input 的 UI 控件替代可复制 Markdown",
         "两轮代码块之外不追加第三轮普通需求问题"
@@ -260,8 +260,8 @@
       "prompt": "/dj-crate-digger 我想做一套周五酒吧 House set。",
       "expected_output": "两轮问卷保持可复制 Markdown；第一轮只收集必要信息，第二轮完成全部需求细化，并通过歌曲数量或 Set 时长建立目标。",
       "expectations": [
-        "第一轮字段固定为场景、核心声音方向、歌曲数量或 Set 时长、其他限制，且 AI判断/空白语义只解释一次",
-        "第二轮字段固定为风格、速度/BPM、流行度、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
+        "第一轮字段固定为场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、其他限制，且 AI判断/空白语义只解释一次",
+        "第二轮字段固定为具体风格、速度/BPM、熟悉度与发现感、时代与经典、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他",
         "不新增主题、副主题、时间、听众、演出时长、主平台/备用平台或链接策略等单独问题",
         "歌曲数量和 Set 时长都可以直接填写；没有填写时默认 30 首并披露假设",
         "两轮都各自只有一个可复制的 Markdown 代码块"
@@ -273,8 +273,8 @@
       "prompt": "/dj-crate-digger 我想做一套艺术展的电子音乐 set。",
       "expected_output": "严格采用用户确认的两轮 Markdown 模板：第一轮必要信息，第二轮需求细化；每轮只出现一个可复制代码块，字段顺序和名称稳定。",
       "expectations": [
-        "第一轮代码块字段顺序严格为场景、核心声音方向、歌曲数量或 Set 时长、其他限制",
-        "第二轮代码块字段顺序严格为风格、速度 / BPM、流行度、输出版本、情绪、SET能量级或能量走势、平台与链接要求、其他",
+        "第一轮代码块字段顺序严格为场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、其他限制",
+        "第二轮代码块字段顺序严格为具体风格、速度 / BPM、熟悉度与发现感、时代与经典、输出版本、情绪、SET能量级或能量走势、平台与链接要求、其他",
         "第一轮开头一次性说明可自由填写、AI判断或留空、双击复制和只需两轮；第二轮不重复这些说明",
         "输出版本解释简要版为一张综合 playlist，丰富版为多个视角建议并最终输出综合结果",
         "平台与链接要求是一个自然语言字段，示例覆盖 Spotify、Apple Music、网易云音乐、Bandcamp、SoundCloud 和 Beatport"
@@ -317,6 +317,103 @@
         "M3U8 只写符合平台策略的已验证链接，不出现禁用平台",
         "Spotify/SoundCloud 等平台曲目页被标注为链接播放列表，不冒充可直接播放的原始 .m3u8 流",
         "无链接曲目被跳过并透明报告，用户确认前不生成文件"
+      ]
+    },
+    {
+      "id": 26,
+      "name": "language-independent-explicit-uk-market",
+      "prompt": "/迪歌 我用中文沟通，这次要为英国市场准备一套 12 首 UK garage / House set。地区请按英国处理，报告也请用中文。",
+      "expected_output": "报告标题、需求摘要、状态和解释保持中文；目标市场明确采用英国，市场来源标记为 user_provided；沟通语言与目标市场彼此独立。",
+      "expectations": [
+        "communication_language 解析为中文，报告的自然语言部分保持中文",
+        "target_market 采用英国，且 target_market_source 为 user_provided",
+        "明确填写的英国市场覆盖语言推断，但不把英国改写成沟通语言或长期偏好",
+        "需求卡和报告披露本轮市场，未声明创建跨会话市场记忆"
+      ]
+    },
+    {
+      "id": 27,
+      "name": "language-independent-explicit-japan-market",
+      "prompt": "/dj-crate-digger I communicate in English and need a 12-track House set for the Japanese market. Keep the report in English.",
+      "expected_output": "报告标题、需求摘要、状态和解释保持英文；目标市场明确采用日本，市场来源标记为 user_provided；沟通语言与目标市场彼此独立。",
+      "expectations": [
+        "communication_language 解析为英文，报告的自然语言部分保持英文",
+        "target_market 采用日本，且 target_market_source 为 user_provided",
+        "明确填写的日本市场覆盖语言推断，但不把日本改写成沟通语言或长期偏好",
+        "需求卡和报告披露本轮市场，未声明创建跨会话市场记忆"
+      ]
+    },
+    {
+      "id": 28,
+      "name": "simplified-chinese-language-market-inference",
+      "prompt": "/dj-crate-digger 请用简体中文帮我找一套适合深夜酒吧的 House set；目标国家 / 地区留空。",
+      "expected_output": "报告保持简体中文；地区留空时本轮临时采用中国大陆，target_market_source 为 language_inferred；该推断不持久化。",
+      "expectations": [
+        "communication_language 解析为简体中文，报告自然语言保持中文",
+        "target_market 临时推断为中国大陆，且来源明确为 language_inferred",
+        "推断只服务本轮语境、来源选择和平台判断，不被呈现为用户明确填写",
+        "persist_target_market 为 false，且不创建跨会话市场偏好"
+      ]
+    },
+    {
+      "id": 29,
+      "name": "traditional-chinese-market-uncertainty",
+      "prompt": "/dj-crate-digger 請用繁體中文幫我找一套適合深夜酒吧的 House set；地區留白，沒有其他地區用詞。",
+      "expected_output": "报告保持繁体中文；没有足够地区词时保留宽泛的繁体中文市场或未知市场，不武断指定香港或台湾，也不把不确定性写入长期记忆。",
+      "expectations": [
+        "communication_language 解析为繁体中文，报告自然语言保持繁体中文",
+        "target_market 不武断填写香港或台湾；市场可保持宽泛繁体中文市场或 unknown",
+        "target_market_source 如为 language_inferred，必须说明这是低置信度的本轮假设而非确定地区",
+        "不因繁体字自动创建香港或台湾的持久化市场偏好"
+      ]
+    },
+    {
+      "id": 30,
+      "name": "generic-english-market-uncertainty",
+      "prompt": "/dj-crate-digger Please find a late-night House set in English; leave the target country / region blank.",
+      "expected_output": "报告保持英文；一般英文且地区留空时使用宽泛的“英语国际市场”，不武断指定美国或英国，也不持久化该市场。",
+      "expectations": [
+        "communication_language 解析为英文，报告自然语言保持英文",
+        "target_market 使用英语国际市场这一宽泛市场，而不是美国或英国",
+        "市场来源或摘要明确表达地区不确定性，不把普通英文当作单一国家证据",
+        "persist_target_market 为 false，且不创建美国或英国的跨会话偏好"
+      ]
+    },
+    {
+      "id": 31,
+      "name": "separate-familiarity-and-era-intent",
+      "prompt": "/迪歌 第一轮完成后，第二轮请分别设置：熟悉度与发现感选平衡；时代与经典选少量经典锚点。",
+      "expected_output": "第二轮同时收集两个独立字段；熟悉度与发现感写入 familiarity_intent，时代与经典写入 era_classic_intent；少量经典锚点只影响本轮候选覆盖和搜索约束，不生成固定最终比例或配额。",
+      "expectations": [
+        "第二轮分别出现熟悉度与发现感、时代与经典，不能合并为单一流行度字段",
+        "平衡映射为 familiarity_intent，少量经典锚点映射为 era_classic_intent",
+        "少量经典锚点可影响查询拆分或候选覆盖，但最终仍使用现有验证、去重和排序规则",
+        "报告不承诺固定经典曲目数量、比例、独立经典视图或经典关系图"
+      ]
+    },
+    {
+      "id": 32,
+      "name": "phase-a-closeout-memory-and-feedback",
+      "prompt": "/dj-crate-digger 完成这次歌单报告后，请展示 Phase A 的收尾状态。",
+      "expected_output": "完整报告后显示可选后续区域：长期记忆未启用、本轮反馈无、长期画像未更新，并以自然语言邀请用户自愿提供当前会话反馈；不显示长期摘要确认流程。",
+      "expectations": [
+        "收尾明确显示长期记忆未启用，且说明本轮不会跨会话保存",
+        "收尾显示本轮反馈为无、长期画像为本轮未更新或等价的未更新状态",
+        "提供自然语言的可选反馈邀请，而不是强制填写或新增一轮普通需求问卷",
+        "不出现长期摘要确认、已启用记忆、等待确认项目或反馈已跨会话保存等 Phase B 能力"
+      ]
+    },
+    {
+      "id": 33,
+      "name": "phase-a-regression-output-and-closeout",
+      "prompt": "/dj-crate-digger 做一套丰富版 House set；完成两轮问卷和报告后，再选择导出并提供可选反馈。",
+      "expected_output": "Phase A 回归行为保持成立：丰富版仍输出四个视角，主表仍为 11 列；导出选项和自然语言反馈邀请只出现在报告后的可选后续区域，不构成第三轮需求收集。",
+      "expectations": [
+        "丰富版恰好输出风格、场景、熟悉度与发现感、动态综合四个视角，共享同一已验证去重候选池",
+        "综合主表仍严格保持歌名、艺术家、专辑/EP、风格、BPM、歌曲时长、能量级、发行时间、简介、选择原因、链接 11 列",
+        "TXT/M3U8 导出选项在完整报告之后出现，不能插入第一轮或第二轮问卷",
+        "自然语言反馈邀请在完整报告后的可选后续区域出现，导出与反馈均不被计为第三轮需求收集",
+        "不输出 Phase C 的 DJ 品味优先视图、不启用长期记忆，也不要求外部平台适配器"
       ]
     }
   ]

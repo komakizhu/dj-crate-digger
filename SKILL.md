@@ -15,10 +15,10 @@ description: 当用户明确要求为 DJ 演出、打碟歌单、暖场/开场/�
 
 - 先理解用户要完成的场景，再找歌。曲目数量不是质量。
 - 联网验证每首曲目。模型记忆只能提供搜索线索，不能作为存在性证据。
-- 曲名和艺人名保留官方原文。报告语言跟随用户输入语言。
+- 曲名和艺人名保留官方原文。沟通语言、标题、问卷、状态标签与解释文字跟随 `communication_language`；曲名、艺人、版本和平台名保留官方原文。
 - 不确定的 BPM、流派、发行时间或流行度标为“未知”，不要补造。
 - 让用户看见关键推断和选择理由，但默认不用虚假的精确分数包装主观判断。
-- 没有平台约束时，最终链接展示顺序默认为 SoundCloud → Apple Music → Spotify；跨平台发现采用均衡轮询或并行抽样，而不是按默认平台顺序偏置候选池。用户给出的平台顺序、允许列表或禁用列表覆盖默认值，但平台优先级只决定发现覆盖与链接呈现，不改变风格、场景和流行度的内容排序。
+- 没有平台约束时，最终链接展示顺序默认为 SoundCloud → Apple Music → Spotify；跨平台发现采用均衡轮询或并行抽样，而不是按默认平台顺序偏置候选池。用户给出的平台顺序、允许列表或禁用列表覆盖默认值，但平台优先级只决定发现覆盖与链接呈现，不改变风格、场景和熟悉度与发现感的内容排序。
 
 ## 资源路由
 
@@ -56,6 +56,8 @@ description: 当用户明确要求为 DJ 演出、打碟歌单、暖场/开场/�
 【第一轮：必要信息】
 场景：
 「表演场景。如：`酒吧` / `俱乐部` / `婚礼` / `艺术展`」
+目标国家 / 地区：
+「如：`中国大陆` / `台湾` / `香港` / `日本` / `英语国际市场`；留空则按语言线索临时推断」
 核心声音方向：
 「参考艺人、参考曲目以及参考流派。如：`Skrillex` 的 `Tears`，`现代UK_Bass`流派」
 歌曲数量或 Set 时长：
@@ -65,6 +67,7 @@ description: 当用户明确要求为 DJ 演出、打碟歌单、暖场/开场/�
 
 ```markdown
 场景：
+目标国家 / 地区：
 核心声音方向：
 歌曲数量或 Set 时长：
 其他限制：
@@ -77,26 +80,29 @@ description: 当用户明确要求为 DJ 演出、打碟歌单、暖场/开场/�
 「如：`House` / `Bass` / `Garage` / `Techno` / `Breakbeat`」
 速度 / BPM：
 「如：`105` / `128` / `140` / `150` / `170`」
-流行度：
-「如：`经典老歌` / `抖音流行` / `小众冷门` / ……」
+熟悉度与发现感：
+「热门熟悉 / 平衡 / 小众发现 / AI判断」
+时代与经典：
+「当代为主 / 少量经典锚点 / 新旧桥接 / 经典优先 / AI判断」
 输出版本：
 「`简要版`：只给一个综合的playlist」
-「`丰富版`：根据您选择的风格、场景、流行度分别提供建议，并最终输出成简要版」
+「`丰富版`：根据您选择的风格、场景、熟悉度与发现感分别提供建议，并最终输出成简要版」
 情绪：
 「如：`怀旧` / `阴冷` / `浪漫`」
-SET能量级或能量走势：
+SET 能量级或能量走势：
 「如：`高` / `平稳` / `过山车` / ……」
 平台与链接要求：
 「如：`Spotify` / `Apple_Music` / `网易云音乐` / `Bandcamp` / `SoundCloud` / `Beatport` / ……」
 其他：
 
 ```markdown
-风格：
+具体风格：
 速度 / BPM：
-流行度：
+熟悉度与发现感：
+时代与经典：
 输出版本：
 情绪：
-SET能量级或能量走势：
+SET 能量级或能量走势：
 平台与链接要求：
 其他：
 ```
@@ -104,21 +110,41 @@ SET能量级或能量走势：
 第一轮字段映射到需求卡：
 
 - 场景 → `scene`、`scene_context.venue`
+- 目标国家 / 地区 → `target_market`；若用户明确填写则 `target_market_source: user_provided`、`persist_target_market: false`
 - 核心声音方向 → `genre`、`artist_references`、`track_references`
 - 歌曲数量或 Set 时长 → `track_count` 或 `set_duration_minutes`；如果同时填写，以明确的歌曲数量为数量目标，并用时长作为编排约束
 - 其他限制 → `explicit_policy`、版本限制、商业度和 `assumptions`
+
+`communication_language` 独立于地区推断。标题、问卷、状态与解释跟随用户当前输入语言；曲名、艺人、版本和平台名保留官方原文。地区推断只影响当前轮次的 `target_market`，不反向改写沟通语言。
+
+目标市场推断规则：
+
+- 用户明确填写国家或地区时永远优先；它覆盖语言推断，但不改变 `communication_language`
+- 用户明确填写国家或地区时，设置 `target_market_source: user_provided`，并保持 `persist_target_market: false`
+- 留空时只生成本轮临时 `target_market`，设置 `target_market_source: language_inferred`，并保持 `persist_target_market: false`
+- 简体中文默认 `中国大陆`
+- 繁体中文只有在词汇和用字证据足够时才区分 `香港` 或 `台湾`；证据不足时保留宽泛的繁体中文市场
+- 一般英文默认 `英语国际市场`，不默认美国或英国
 
 第二轮字段映射到需求卡：
 
 - 具体风格 → `genre` 与风格优先级
 - 速度 / BPM → `bpm`
-- 流行度 → `popularity_intent`；“经典老歌”“抖音流行”“小众冷门”等按熟悉度和流行度意图解析
+- 熟悉度与发现感 → `familiarity_intent`；映射到兼容字段 `popularity_intent` 与排序维度 `popularity_fit`
+- 时代与经典 → `era_classic_intent`；映射到兼容字段 `freshness_intent` 与排序维度 `freshness_fit` 或搜索约束
 - 简要版 → `output_mode: composite`，只输出一张综合表
-- 丰富版 → `output_mode: four_views`，输出风格、场景、流行度三个视角和动态综合视角；动态综合视角最终仍按简要版结构输出
+- 丰富版 → `output_mode: four_views`，输出风格、场景、熟悉度与发现感三个视角和动态综合视角；动态综合视角最终仍按简要版结构输出
 - 情绪 → `mood`
 - SET 能量级或能量走势 → 分别解析为 `energy_level`、`energy_curve`
 - 平台与链接要求 → `platform_policy`、`discovery_order`、`link_priority`、`allowed` 和 `forbidden`；支持 Spotify、Apple Music、网易云音乐、Bandcamp、SoundCloud、Beatport 等平台
 - 其他 → `explicit_policy`、版本限制、商业度和其他限制
+
+兼容投影规则：
+
+- `popularity_intent` 和 `freshness_intent` 仅作为兼容字段保留，不能被视为第二份用户证据
+- 同一条信号只能计分一次；例如“经典优先”只进入 `era_classic_intent` 的投影，不再额外给 `popularity_fit` 加分
+- 旧式自然语言中的“流行度 / 热门 / 冷门 / 经典老歌”表达继续兼容解析，但需求摘要与第二轮模板不再把经典与熟悉度混成一个字段
+- “少量经典锚点”只表示候选覆盖意图，不固定最终名额
 
 “平台与链接要求”是一个自然语言字段，不再拆成主平台、备用平台或链接策略问题。只有用户明确写出“只要 / 仅接受”时才设为 `exclusive`；只写一个平台名称时默认该平台优先，但仍允许在报告中说明实际可用的备用来源。用户写“不要某平台”时，该平台必须从搜索、引用和输出中排除。
 
@@ -130,6 +156,7 @@ SET能量级或能量走势：
 
 - 风格、子流派、参考艺人、参考歌曲
 - 场景、地点、时间、活动、听众
+- 目标国家 / 地区与沟通语言
 - 情绪、能量、BPM、年代、新鲜度
 - 对热门、冷门、熟悉度或发现感的要求
 - 搜索平台偏好、导出目标平台、曲目数量、歌单用途
@@ -152,6 +179,10 @@ SET能量级或能量走势：
 将理解结果保留为内部需求卡：
 
 ```yaml
+communication_language: auto
+target_market: unknown
+target_market_source: unknown  # user_provided | language_inferred
+persist_target_market: false
 genre: []
 artist_references: []
 track_references: []
@@ -161,6 +192,8 @@ energy: unknown
 energy_level: unknown
 energy_curve: unknown
 bpm: unknown
+familiarity_intent: balanced  # familiar | balanced | discovery | ai
+era_classic_intent: ai        # contemporary | light_classic_anchors | new_old_bridge | classic_first | ai
 popularity_intent: balanced
 freshness_intent: balanced
 search_platform: cross-platform
@@ -178,17 +211,17 @@ local_export:
   formats: []          # txt | m3u8
   status: not_offered  # not_offered | offered | confirmed | generated | partial | declined
 track_count: 30
-priority_order: []       # style | scene | bpm | mood | energy | popularity | familiarity；不含平台顺序
+priority_order: []       # style | scene | bpm | mood | energy | familiarity | era_classic | popularity | freshness；不含平台顺序
 intake_mode: markdown_fallback  # 固定使用可复制 Markdown；保留 interactive 仅作兼容标记
 intake_status: collecting # collecting | ready | blocked
 selection_priority:
-  primary: ai             # style | scene | bpm | mood | energy | popularity | familiarity | freshness | ai
+  primary: ai             # style | scene | bpm | mood | energy | familiarity | era_classic | popularity | freshness | ai
   secondary: []
 output_mode: composite    # composite | four_views
 set_duration_minutes: derived_from_track_count  # 按每首 2–4 分钟从歌曲数量估算
 scene_context:
   venue: []
-  region: unknown
+  region: unknown         # 当前会话兼容字段，值来自 target_market，不写入长期数据
   set_role: unknown
 explicit_policy: unknown
 assumptions: []
@@ -198,7 +231,7 @@ assumptions: []
 
 ### 2. 决定是否澄清
 
-默认不再根据“信息是否足够”直接行动，而是先完成两轮 Markdown 需求收集。第二轮答复后，根据用户在“核心声音方向”“具体风格”“场景”“流行度”“速度 / BPM”“情绪”和“SET 能量级或能量走势”中的明确表述生成 `priority_order`；若用户写出“以 X 为主 / X 优先”，该显式优先级覆盖原始提示词中的首次出现顺序。
+默认不再根据“信息是否足够”直接行动，而是先完成两轮 Markdown 需求收集。第二轮答复后，根据用户在“核心声音方向”“具体风格”“场景”“熟悉度与发现感”“时代与经典”“速度 / BPM”“情绪”和“SET 能量级或能量走势”中的明确表述生成 `priority_order`；若用户写出“以 X 为主 / X 优先”，该显式优先级覆盖原始提示词中的首次出现顺序。
 
 用户填写“AI判断”、留空或未提供低影响字段时，可以合理假设并在报告中披露。例如未填写 BPM 时，仍可依据可验证的风格、氛围和场景信息编排，但 BPM 写为未知。
 
@@ -230,11 +263,11 @@ assumptions: []
 
 ### 5. 生成输出视角
 
-`output_mode: composite` 是默认交付，输出一张简要版综合表；只有用户在第二轮填写“丰富版”时，才输出风格、场景、流行度和动态综合四个视角。报告过长时压缩每首理由，不要静默改变用户选择。选择丰富版时，所有版本共享同一个已验证、已去重候选池，分别排序：
+`output_mode: composite` 是默认交付，输出一张简要版综合表；只有用户在第二轮填写“丰富版”时，才输出风格、场景、熟悉度与发现感和动态综合四个视角。报告过长时压缩每首理由，不要静默改变用户选择。选择丰富版时，所有版本共享同一个已验证、已去重候选池，分别排序：
 
 1. 风格优先版：默认 10 首
 2. 场景优先版：默认 10 首
-3. 流行度优先版：默认 10 首
+3. 熟悉度与发现感优先版：默认 10 首
 4. 动态综合版：默认 30 首
 
 版本内部不得重复。综合版四个段落合计也不得重复同一录音；跨平台链接只合并为一条曲目记录。版本之间可以重复；重复入选时，在综合说明中指出它跨视角成立的原因。
@@ -256,7 +289,9 @@ V1 只做逻辑编排，不声称完成 BPM beatmatching、调性匹配或谐波
 
 严格使用 [report-template.md](references/report-template.md) 的结构。默认用“高 / 中高 / 中 / 中低 / 低”等解释性标签。只有用户要求详细分析时，才展示数值权重与分项分数。`composite` 模式核对简要版综合表格；`four_views` 模式再逐项核对丰富版的四个视角标题和表格。候选不足只减少曲目数量，不静默改变用户选择。
 
-报告的标题、段落标题、表头、状态标签和解释文字跟随用户输入语言；不要因为模板示例是中文，就在英文请求中保留“需求理解”“来源”等中文固定标题。曲名、艺人名、mix/version、平台名以及 `Warm Up / Groove / Peak / Closing` 等约定段落名保留官方或约定写法。
+报告的标题、段落标题、表头、状态标签和解释文字跟随 `communication_language`；不要因为模板示例是中文，就在英文请求中保留“需求理解”“来源”等中文固定标题。曲名、艺人名、mix/version、平台名以及 `Warm Up / Groove / Peak / Closing` 等约定段落名保留官方或约定写法。
+
+需求确认摘要必须明确披露 `target_market` 与 `target_market_source`。当 `target_market_source: language_inferred` 时，写明这只是根据当前输入语言得到的本轮临时假设，只用于当前搜索语境、来源选择和地区可用性解释，不能写成用户长期偏好或确定事实；当来源为 `user_provided` 时，也只表述为本轮目标市场，不反向改写 `communication_language`。
 
 主表严格使用以下栏目，不增加序号、Mix、段落或验证状态列：`歌名 | 艺术家 | 专辑/EP | 风格 | BPM | 歌曲时长 | 能量级 | 发行时间 | 简介 | 选择原因 | 链接`。歌名保留官方版本名；同一录音的主平台和备用平台链接合并在“链接”单元格中。综合版的行顺序就是推荐播放顺序，必要时用 `Warm Up / Groove / Peak / Closing` 作为表格前的小标题。无法验证的 BPM、时长、专辑、能量级或发行时间写“未知”。不要用搜索结果页代替曲目链接；禁用平台也不要出现在来源汇总中。
 
@@ -273,9 +308,30 @@ V1 只做逻辑编排，不声称完成 BPM beatmatching、调性匹配或谐波
 
 当意图为 `prepare` 时，按 [export.md](references/export.md) 检查当前环境、选择版本、展示目标平台与曲目数量，并在执行外部写入前取得确认。只有精确确认后才进入 `execute`。默认选择综合版，一次只创建一个平台歌单。
 
-完整推荐报告输出后，无论用户是否请求平台歌单，都要把 `local_export.status` 设为 `offered`，并询问一次是否导出最终综合歌单：`TXT`、`M3U8`、`TXT + M3U8` 或“不导出”。这个询问属于报告后的导出动作，不算第三轮需求收集；不得在两轮需求收集期间提前询问。用户确认格式后设置 `local_export.status: confirmed`，读取 [export.md](references/export.md) 并按其中的 UTF-8、去重、直接链接和文件命名规则生成文件；成功后设为 `generated`，部分曲目因缺链接被跳过时设为 `partial`，用户拒绝时设为 `declined`。
+完整推荐报告输出后，无论用户是否请求平台歌单，都要进入统一的“可选后续”收尾，并先把 `local_export.status` 设为 `offered`。这个收尾只允许出现在完整推荐报告之后，不得在两轮需求收集期间提前出现，也不是第三轮需求收集。报告后固定展示以下 Phase A 状态与说明，且只能承诺当前会话内继续调整：
 
-默认只导出最终综合版：简要版使用综合结果，丰富版使用最后的动态综合结果，不把风格、场景、流行度三个视角重复拼接。TXT 每行一首，包含完整曲名、艺人和首选可用链接；M3U8 使用 Extended M3U 的 `#EXTM3U`、`#PLAYLIST`、`#EXTINF` 和 URL 行。平台网页链接只能作为链接播放列表条目，不能冒充原始音频流或可直接播放的 `.m3u8` 流。没有直接链接的曲目不写入文件，并在导出结果中报告缺口。
+```markdown
+## 可选后续
+
+### 私人记忆状态
+- 长期记忆：未启用（本轮不会跨会话保存）
+- 本轮反馈：无
+- 长期画像：本轮未更新
+
+如果愿意，可以直接告诉我哪些曲目你喜欢、这场会用，或哪些不合适、版本不对；我可以在当前会话中按你的说明继续调整，但不会跨会话保存。回复序号、曲名、链接或粘贴表格行都可以。不回复不会影响本次歌单和导出。
+
+### 本地 TXT / M3U8 导出
+
+是否导出本次最终综合歌单？
+- TXT
+- M3U8
+- TXT + M3U8
+- 不导出
+```
+
+这里的自然语言反馈入口与本地导出都是报告后的可选动作。用户可以只反馈、只导出、两者都做，或不回复；不要把反馈解释成事件日志、长期摘要确认或 Beta 画像更新，也不要暗示存在跨会话持久化。用户确认导出格式后设置 `local_export.status: confirmed`，读取 [export.md](references/export.md) 并按其中的 UTF-8、去重、直接链接、M3U8 安全、外部写入确认和文件命名规则生成文件；成功后设为 `generated`，部分曲目因缺链接被跳过时设为 `partial`，用户拒绝时设为 `declined`。
+
+默认只导出最终综合版：简要版使用综合结果，丰富版使用最后的动态综合结果，不把风格、场景、熟悉度与发现感三个视角重复拼接。TXT 每行一首，包含完整曲名、艺人和首选可用链接；M3U8 使用 Extended M3U 的 `#EXTM3U`、`#PLAYLIST`、`#EXTINF` 和 URL 行。平台网页链接只能作为链接播放列表条目，不能冒充原始音频流或可直接播放的 `.m3u8` 流。没有直接链接的曲目不写入文件，并在导出结果中报告缺口。
 
 ## 降级行为
 
@@ -302,8 +358,8 @@ V1 只做逻辑编排，不声称完成 BPM beatmatching、调性匹配或谐波
 提交答案前确认：
 
 - [ ] 需求收集严格完成两轮，`intake_status` 为 `ready`；没有第三轮普通追问
-- [ ] 第一轮只使用场景、核心声音方向、歌曲数量或 Set 时长、其他限制四个字段
-- [ ] 第二轮只使用风格、BPM、流行度、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他八个字段
+- [ ] 第一轮只使用场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、其他限制五个字段
+- [ ] 第二轮只使用具体风格、BPM、熟悉度与发现感、时代与经典、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他九个字段
 - [ ] 两轮各有且只有一个可复制的 Markdown 代码块；代码块字段与外部说明一致
 - [ ] 空白或“AI判断”的语义只在第一轮解释一次，没有重复堆叠选项
 - [ ] 核心声音方向、数量/时长、版本和平台约束正确写入需求卡

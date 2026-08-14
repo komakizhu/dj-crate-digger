@@ -1,0 +1,46 @@
+{
+  "description": "Canonical major/minor to Camelot mappings and tempo-equivalence fixtures used by the DJ Crate Digger harmonic-ordering contract.",
+  "key_mappings": [
+    {"source_value": "Ab Minor", "normalized_key": "Ab minor", "camelot": "1A"},
+    {"source_value": "B Major", "normalized_key": "B major", "camelot": "1B"},
+    {"source_value": "Eb Minor", "normalized_key": "Eb minor", "camelot": "2A"},
+    {"source_value": "F# Major", "normalized_key": "F# major", "camelot": "2B"},
+    {"source_value": "Bb Minor", "normalized_key": "Bb minor", "camelot": "3A"},
+    {"source_value": "Db Major", "normalized_key": "Db major", "camelot": "3B"},
+    {"source_value": "F Minor", "normalized_key": "F minor", "camelot": "4A"},
+    {"source_value": "Ab Major", "normalized_key": "Ab major", "camelot": "4B"},
+    {"source_value": "C Minor", "normalized_key": "C minor", "camelot": "5A"},
+    {"source_value": "Eb Major", "normalized_key": "Eb major", "camelot": "5B"},
+    {"source_value": "G Minor", "normalized_key": "G minor", "camelot": "6A"},
+    {"source_value": "Bb Major", "normalized_key": "Bb major", "camelot": "6B"},
+    {"source_value": "D Minor", "normalized_key": "D minor", "camelot": "7A"},
+    {"source_value": "F Major", "normalized_key": "F major", "camelot": "7B"},
+    {"source_value": "A Minor", "normalized_key": "A minor", "camelot": "8A"},
+    {"source_value": "C Major", "normalized_key": "C major", "camelot": "8B"},
+    {"source_value": "E Minor", "normalized_key": "E minor", "camelot": "9A"},
+    {"source_value": "G Major", "normalized_key": "G major", "camelot": "9B"},
+    {"source_value": "B Minor", "normalized_key": "B minor", "camelot": "10A"},
+    {"source_value": "D Major", "normalized_key": "D major", "camelot": "10B"},
+    {"source_value": "F# Minor", "normalized_key": "F# minor", "camelot": "11A"},
+    {"source_value": "A Major", "normalized_key": "A major", "camelot": "11B"},
+    {"source_value": "C# Minor", "normalized_key": "C# minor", "camelot": "12A"},
+    {"source_value": "E Major", "normalized_key": "E major", "camelot": "12B"}
+  ],
+  "camelot_adjacency": [
+    {"left": "8A", "right": "8A", "tier": "base"},
+    {"left": "8A", "right": "7A", "tier": "base"},
+    {"left": "8A", "right": "9A", "tier": "base"},
+    {"left": "8A", "right": "8B", "tier": "base"},
+    {"left": "8A", "right": "10A", "tier": "experimental"},
+    {"left": "12A", "right": "1A", "tier": "base"},
+    {"left": "12B", "right": "1B", "tier": "base"},
+    {"left": "8A", "right": "11A", "tier": "break"}
+  ],
+  "tempo_equivalence": [
+    {"left_bpm": 70, "right_bpm": 140, "compatible": true, "normalized_delta": 0.0},
+    {"left_bpm": 87, "right_bpm": 174, "compatible": true, "normalized_delta": 0.0},
+    {"left_bpm": 128, "right_bpm": 131, "compatible": true, "normalized_delta": 0.022900763358778626},
+    {"left_bpm": 128, "right_bpm": 132, "compatible": false, "normalized_delta": 0.030303030303030304},
+    {"left_bpm": 128, "right_bpm": 140, "compatible": false, "normalized_delta": 0.08571428571428572}
+  ]
+}

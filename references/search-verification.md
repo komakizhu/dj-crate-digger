@@ -11,9 +11,9 @@
 5. 用户明确的热门、冷门或熟悉度要求
 6. 目标国家 / 地区 + 平台、编辑、厂牌或本地场景线索
 
-用户未指定平台时，默认链接展示顺序为 SoundCloud → Apple Music → Spotify，但发现阶段采用均衡轮询或并行抽样，并用 Bandcamp、Beatport、Discogs、MusicBrainz、艺人官网和厂牌官网补充验证。用户指定平台时，目标平台中的可用性优先于跨平台覆盖。
+用户未指定平台时，默认链接展示顺序为 SoundCloud → Apple Music → Spotify，但发现阶段采用均衡轮询或并行抽样，并用 Bandcamp、Beatport、Beatsource、Discogs、MusicBrainz、艺人官网和厂牌官网补充验证。用户指定平台时，目标平台中的可用性优先于跨平台覆盖。
 
-推荐类信息可能变化，使用联网工具获取当前结果。优先并行搜索不同查询，但最终逐条核验候选。
+推荐类信息可能变化，使用映射到 `web_search` 的联网能力获取当前结果，并使用映射到 `open_page` 的页面能力逐条核验候选。优先并行搜索不同查询，但最终逐条核验候选。
 
 平台策略要落实到实际检索，不只是写在报告里：`cross-platform` 和 `preferred` 模式下，对每个允许平台至少完成一轮发现，再按轮次继续补充候选；`exclusive` 模式只建立目标平台的可交付候选。用户给出的平台顺序用于主链接和回退链接，不能让首选平台提前满足停止条件后跳过其他允许平台。候选在任一平台已有可访问、版本吻合的直接页时，可以将该页设为主链接；其他来源作为补充证据，不得复制同一录音占用多个位置。
 
@@ -55,7 +55,7 @@
 
 - SoundCloud、Apple Music、Spotify 的官方曲目页面
 - 网易云音乐的官方曲目页面
-- Bandcamp、Beatport 的具体发行或曲目页面
+- Bandcamp、Beatport、Beatsource 的具体发行或曲目页面
 - 艺人或唱片公司的官方发行页面
 
 媒体评测、采访、Wikipedia 或普通专辑介绍可以补充背景，但不能单独充当最终曲目的直接播放/发行链接；如果它只列出整张专辑而没有把该曲与发行准确对应，也不能替代逐曲核验。一个通用评测 URL 不能被复制到多首曲目上冒充逐曲证据。
@@ -65,6 +65,8 @@
 - MusicBrainz
 - Discogs
 - 权威音乐媒体或厂牌目录
+
+调性是额外的事实字段，只有 A 级来源中明确展示、且与同一录音版本对应的 Key 才能作为最终调性证据。Beatport、Beatsource 等 DJ 商店页面可直接提供标准调名；艺人、厂牌或发行商的明确版本元数据也可使用。A 级来源没有调性时，不得用 B/C 级来源、模型记忆或单一第三方音频分析站补齐。
 
 ### C：仅作为发现线索
 
@@ -77,6 +79,8 @@ C 级来源不能单独证明曲目存在、版本正确或元数据准确。不
 ## 候选记录
 
 为每首候选维护以下字段；无法验证的字段保留 `unknown`：
+
+`musical_key` 只在 `composite` / `four_views` 的最终深度核验中追查；`fast` 候选不查、不展示，也不因调性缺失降低首批速度合同。
 
 ```yaml
 title: official title
@@ -115,9 +119,20 @@ popularity_evidence:
   observed_at: unknown
   region: unknown
 verification: verified | partial | unknown
+musical_key:
+  source_value: A Minor | unknown
+  normalized_key: A minor | unknown
+  camelot: 8A | null
+  evidence_url: https://... | null
+  evidence_type: authorized_dj_store | official_metadata | null
+  version_match: exact | mismatch | unknown
+  status: verified | conflict | unknown
+  checked_at: YYYY-MM-DD | unknown
 ```
 
 在内部候选表中保留每首的播放链接、实际查看过的页面字段、核验来源、`platform_match`、`availability`、`verification` 和去重键。`platforms` 是兼容字段，最终交付优先使用 `playback_urls`；`verification_sources` 只说明证据，不自动成为用户可用的播放链接。最终四个版本只从这张表生成；如果一首歌没有可追溯的记录，就不要凭记忆把它补进报告。
+
+调性核验必须先确认 `version_label` 与证据页面相同，再记录 `musical_key`。保留来源原值，并规范化为小写调名；只对 major / minor 生成 Camelot。升降号等音异名可以转换为同一规范调名，其他来源冲突统一设为 `status: conflict`、`camelot: null`，报告显示“未知”。非 major / minor 调式保留 `source_value`，但不生成 Camelot，也不参与自动五度圈排序。调性未知不能阻止曲目入选，也不能因为某首调性已知而提高它的推荐分数。
 
 ## 自适应候选池与验证预算
 
@@ -133,7 +148,7 @@ four_views: pool_goal = min(max(2 × final_target, final_target + 8, required_un
 
 当 `final_target` 大于首批目标时，续跑使用 `continuation_pool_goal = min(max(2 × final_target, final_target + 10), 100)`。续跑只能读取首批同一精确查询与放宽一级回退查询的后续结果页或更多返回项，不得新增第三查询、切换主导向或重新解释需求。新增候选继续按同一已定义的 60/25/15 函数独立评分并增量合并；不得重置或更换评分函数。支持中间消息的宿主在首批后按 5 首批次继续，不受首批 60 秒预算约束，直到达到 `final_target`、达到 `continuation_pool_goal`、同一两查询结果耗尽、连续两批没有新增可交付录音，或平台不可继续。最终可以重排合并结果，但必须保留首批全部曲目。
 
-后续人工/真实模型验收以 GPT-5.6 medium 进行 12 次冷启动：4 次短请求、4 次 30–50 首分段请求、2 次 exclusive 请求、2 次未填写数量请求。对每次运行的首批分别记录总耗时和网络等待并计算首批主动计算时间；验收目标是首批主动计算每次不超过 70 秒、中位数不超过 60 秒。30–50 首请求的后台续跑另行记录主动计算耗时，不纳入首批 50–70 秒 SLA，因为续跑本身允许跨批次继续读取同一查询结果。此仓库当前只固化协议和行为评测，未声称已经完成该 12 次运行。
+后续人工/真实模型验收以目标客户端可用的中等推理模型进行 12 次冷启动：4 次短请求、4 次 30–50 首分段请求、2 次 exclusive 请求、2 次未填写数量请求。对每次运行的首批分别记录总耗时和网络等待并计算首批主动计算时间；验收目标是首批主动计算每次不超过 70 秒、中位数不超过 60 秒。30–50 首请求的后台续跑另行记录主动计算耗时，不纳入首批 50–70 秒 SLA，因为续跑本身允许跨批次继续读取同一查询结果。此仓库当前只固化协议和行为评测，未声称已经完成该 12 次运行。
 
 候选池阶段可以先记录搜索摘要、平台页面或权威来源，状态为 `partial` 或 `unknown`；只有进入任一最终版本的唯一录音键才进入深度核验队列。为链接失效、exclusive 平台缺失或版本冲突保留少量已核验备选。以下停止条件仅适用于 `composite` / `four_views`：
 

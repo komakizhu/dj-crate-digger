@@ -1,6 +1,6 @@
 ---
 name: dj-crate-digger
-description: 当用户明确要求为 DJ 演出、打碟歌单、暖场/开场/压场/收场 set，或特定场景、流派、艺人、曲目参考进行挖歌、digging、发现、策划、排序、编排或导出时使用；响应 /dj-crate-digger、旧版 /crate-digger、/迪歌、迪歌、挖歌、找歌、排set、排 set、排歌、排歌单、setlist、编排 set、安排 DJ set、crate digger、crate digging，以及带 DJ、演出、set、场景、流派、艺人或参考曲目的 playlist/歌单请求。不要仅因“做歌单”“找一套”“playlist”或“/DJ”触发，也不要把识别歌曲请求当成挖歌。 Use when a user asks to dig, discover, curate, rank, sequence, arrange, or export music for a DJ set or playlist with clear music-curation context, including /dj-crate-digger, the legacy /crate-digger alias, /迪歌, “迪歌”, “挖歌”, “找歌”, “排set”, “排 set”, “排歌”, “排歌单”, “setlist”, “编排 set”, “安排 DJ set”, “crate digger”, “crate digging”, and equivalent Chinese or English requests.
+description: "Use when a user asks to discover, curate, rank, sequence, arrange, or export music for a DJ set or playlist with clear music-curation context: a performance, venue, set, genre, artist, reference track, BPM, mood, or energy request. Activate for equivalent Chinese or English requests such as 挖歌, 找歌, 排set, setlist, crate digging, or DJ playlist. Do not activate for generic playlist requests or song identification alone."
 ---
 
 # DJ挖歌助手（DJ Crate Digger）
@@ -30,9 +30,20 @@ description: 当用户明确要求为 DJ 演出、打碟歌单、暖场/开场/�
 
 仅当用户要求创建、导入或导出平台歌单，或在推荐报告完成后确认 TXT/M3U8 本地导出时，读取 [export.md](references/export.md)。
 
+## Agent 能力适配
+
+本 Skill 使用能力标签描述外部工具，不要求客户端提供同名工具。执行前将当前 Agent 的工具映射为：
+
+- `web_search`：搜索当前曲目、发行、平台、媒体和场景资料。
+- `open_page`：打开具体曲目或发行页面，核对官方曲名、艺人、版本和可用性。
+- `file_write`：在用户确认后生成本地 TXT / M3U8 文件。
+- `streaming_background`：在宿主支持中间消息和当前任务继续运行时，发送极速版首批后继续读取同一查询结果并补齐歌单；这是逻辑能力，不要求客户端使用同名工具。
+
+如果客户端工具名称不同，按实际能力映射，不要要求用户安装某个固定工具。若能力不存在，遵循“降级行为”：缺少 `web_search` 或 `open_page` 时不声称完成当前验证；缺少 `file_write` 时不声称已生成文件；若宿主既不能发送中间消息也不能继续当前任务，才按缺少 `streaming_background` 处理，只交付已验证首批，不声称后台续跑。能力标签只是内部适配语义，不应出现在默认推荐报告中。
+
 ## 触发边界
 
-以下表达可以直接触发：`/dj-crate-digger`、`/crate-digger`、`/迪歌`、`迪歌`、`挖歌`、`crate digger`、`crate digging`。明确的 DJ 编排表达也可以直接触发：`排set`、`排 set`、`排一套 set`、`setlist`、`编排 set`、`安排 DJ set`、`sequence a DJ set`。`digger`、`digging` 需要同时有音乐语境，例如 track、music、house、techno、DJ 或 set。
+以下自然语言表达可以直接触发：`/dj-crate-digger`、旧别名 `/crate-digger`、`/迪歌`、`迪歌`、`挖歌`、`crate digger`、`crate digging`。明确的 DJ 编排表达也可以直接触发：`排set`、`排 set`、`排一套 set`、`setlist`、`编排 set`、`安排 DJ set`、`sequence a DJ set`。客户端可以提供自己的命令别名，但核心 Skill 不依赖任何特定命令。`digger`、`digging` 需要同时有音乐语境，例如 track、music、house、techno、DJ 或 set。
 
 `找歌`、`找歌单`、`排歌`、`排歌单`、`歌单`、`playlist`、`做个 playlist`、`找一套`、`find tracks` 和 `build a set` 需要同时出现 DJ、打碟、演出、set、club、暖场、开场、压场、推峰、收场、舞池、场地、流派、艺人、参考曲目、BPM、情绪或明确音乐场景等策划语境。`打碟歌单`、`暖场歌单`、`DJ playlist`、`DJ setlist` 等自身已经包含足够语境。
 
@@ -42,14 +53,17 @@ description: 当用户明确要求为 DJ 演出、打碟歌单、暖场/开场/�
 
 ### 0. 互动需求收集（严格两轮）
 
-触发 skill 后先进入 `collect_requirements`。不能在第二轮答复完成前搜索、建立候选池或推荐曲目。两轮提问都必须使用一个可复制的 Markdown 代码块；代码块是权威填写模板，不得用结构化控件、散落项目符号或额外问题替代。第二轮答复后直接生成只读需求摘要并进入搜索，不追加普通澄清问题。
+触发 skill 后先进入 `collect_requirements`。不能在第二轮答复完成前搜索、建立候选池或推荐曲目。两轮提问都必须使用一个可复制的 Markdown 代码块，不得用结构化控件、散落项目符号或额外问题替代。第二轮答复后直接生成只读需求摘要并进入搜索，不追加普通澄清问题。
 
+把问卷渲染视为低自由度的字面输出任务，而不是可改写的文案任务。简体中文会话必须逐字输出下面对应 `START` 与 `END` HTML 注释之间的全部内容；边界注释不得输出给用户。不得总结、润色、合并、删减或改写模板；必须保留标题、空行、编号、大小写、中文标点、每一对行内反引号，以及唯一一个三反引号 `markdown` 填写代码块。模板前后不得添加说明，也不得给整段模板再包一层代码围栏。
+
+繁体中文或其他语言可以等义本地化自然语言，但必须保持相同字段、顺序、示例数量、行内代码标记和单个填写代码块。无论语言为何，问卷结构都不得压缩。
+
+<!-- INTAKE_TEMPLATE_ROUND_1_ZH_CN_START -->
 欢迎来到 DJ 选歌助手。这是一个利用 Agent 帮您排 set 的 skill。您将在两轮对话中确认需求，并获得 AI 选歌建议。填写规则为：
 
 1. 可以从例子中复制，也可以自由填写或不填
 2. 不填意味着ai智能判断答案
-
-第一轮固定使用以下 Markdown 模板：
 
 【第一轮：必要信息】
 场景：
@@ -70,9 +84,9 @@ description: 当用户明确要求为 DJ 演出、打碟歌单、暖场/开场/�
 歌曲数量或 Set 时长：
 其他限制：
 ```
+<!-- INTAKE_TEMPLATE_ROUND_1_ZH_CN_END -->
 
-第二轮固定使用以下 Markdown 模板；不填写代表自动判断：
-
+<!-- INTAKE_TEMPLATE_ROUND_2_ZH_CN_START -->
 【第二轮：需求细化】
 具体风格：
 「如：`House` / `Bass` / `Garage` / `Techno` / `Breakbeat`」
@@ -105,6 +119,9 @@ SET 能量级或能量走势：
 平台与链接要求：
 其他：
 ```
+<!-- INTAKE_TEMPLATE_ROUND_2_ZH_CN_END -->
+
+发送问卷前在内部执行一次完整性检查，不向用户展示检查过程。简体中文第一轮必须精确匹配第一轮模板，并包含 17 个行内代码片段；第二轮必须精确匹配第二轮模板，并包含 33 个行内代码片段。第二轮的能量字段必须保留完整文字 `「如：`低`/`高`；`平稳` / `过山车`」`，不能删掉 `如：` 或压缩为只有选项。每轮都必须恰好有一个 `markdown` 填写代码块。若任一固定文本、反引号、字段、顺序或代码块不匹配，丢弃草稿并从对应模板重新生成整段回复，不能只补缺失部分。
 
 第一轮字段映射到需求卡：
 
@@ -136,7 +153,7 @@ SET 能量级或能量走势：
 - 丰富版 → `output_mode: four_views`，输出风格、场景、熟悉度与发现感三个视角和动态综合视角；动态综合视角最终仍按简要版结构输出
 - 情绪 → `mood`
 - SET 能量级或能量走势 → 分别解析为 `energy_level`、`energy_curve`
-- 平台与链接要求 → `platform_policy`、`discovery_order`、`link_priority`、`allowed` 和 `forbidden`；支持 Spotify、Apple Music、网易云音乐、Bandcamp、SoundCloud、Beatport 等平台
+- 平台与链接要求 → `platform_policy`、`discovery_order`、`link_priority`、`allowed` 和 `forbidden`；支持 Spotify、Apple Music、网易云音乐、Bandcamp、SoundCloud、Beatport、Beatsource 等平台
 - 其他 → `explicit_policy`、版本限制、商业度和其他限制
 
 兼容投影规则：
@@ -210,6 +227,24 @@ export_platform: none
 local_export:
   formats: []          # txt | m3u8
   status: not_offered  # not_offered | offered | confirmed | generated | partial | declined
+harmonic_order:
+  offered: false
+  requested: false
+  status: not_offered  # not_offered | offered | confirmed | reordered | declined | needs_clarification
+  source_mode: none    # none | composite | dynamic_composite
+  unknown_key_count: 0
+  double_drop_candidates: []
+transition_advice:
+  status: not_generated  # not_generated | generated | fallback
+  source_mode: none       # none | composite | dynamic_composite
+  source_view: none       # none | composite | dynamic_composite
+  advice_scope: none      # none | track_pair | set_level
+  techniques: []          # 最多两项：long_blend | eq_swap | loop_relay | fx_transition | layering | double_drop | hard_cut | contrast
+  track_keys: []
+  evidence_used: []
+  fallback_reason: none   # none | no_usable_pair | metadata_missing | candidate_shortage
+  text: ""
+  preserve_after_harmonic_reorder: true
 track_count: null  # 在第二轮确认 output_mode 前保留 null / unset，不能预设为 30
 priority_order: []       # style | scene | bpm | mood | energy | familiarity | era_classic | popularity | freshness；不含平台顺序
 intake_mode: markdown_fallback  # 固定使用可复制 Markdown；保留 interactive 仅作兼容标记
@@ -235,7 +270,7 @@ assumptions: []
 
 用户填写“AI判断”、留空或未提供低影响字段时，可以合理假设并在报告中披露。例如未填写 BPM 时，仍可依据可验证的风格、氛围和场景信息编排，但 BPM 写为未知。
 
-不得因为普通风格、BPM、情绪、场景、平台或自定义字段缺失而追加第三轮问题；这些情况统一按空白或“AI判断”处理，并在需求摘要中标明假设。只有平台策略出现实际冲突、exclusive 目标无法解释，或用户明确要求导出且外部写入需要安全确认时，才允许在两轮之后单独请求修正或确认。
+不得因为普通风格、BPM、情绪、场景、平台或自定义字段缺失而追加第三轮问题；这些情况统一按空白或“AI判断”处理，并在需求摘要中标明假设。只有平台策略出现实际冲突、exclusive 目标无法解释、用户明确要求导出且外部写入需要安全确认，或用户对报告后的五度圈邀请作出模糊答复时，才允许在两轮之后单独请求修正或确认；后者是后置动作确认，不是第三轮需求收集。
 
 ### 3. 建立候选池
 
@@ -245,7 +280,7 @@ assumptions: []
 
 对于 `final_target` 大于首批目标的极速版续跑，令 `continuation_pool_goal = min(max(2 × final_target, final_target + 10), 100)`。不得新增第三查询、切换主导向、重新解释需求或切换权重；只能读取首批同一精确/放宽一级查询的后续结果页或更多返回项。新增候选按同一已定义的 60/25/15 轻量评分函数逐条评分并增量合并；最终可据合并结果重排，但必须保留首批全部曲目。支持中间消息的宿主在首批后按 5 首批次继续，不受首批 60 秒预算约束，直到达到 `final_target`、达到 `continuation_pool_goal`、同一两查询结果耗尽、连续两批没有新增可交付录音，或平台不可继续。无中间消息宿主不得自动续跑。
 
-简要版使用 `pool_goal = min(max(2 × final_target, final_target + 8), 120)`；丰富版先将四个视角的目标数相加为 `rich_total_slots`，按默认零重复令 `required_unique = rich_total_slots`，再使用 `pool_goal = min(max(2 × final_target, final_target + 8, required_unique + 8), 120)`。候选池阶段允许保留 `partial` 或 `unknown` 记录；只有进入任一最终版本的曲目才必须深度核验。普通模式达到候选池目标、每个允许平台至少完成一轮发现、连续两轮查询只产生重复或低相关结果，或平台限制无法继续时停止。达到预算上限仍不足时透明报告各视角实际数量，不降低验证门槛，也不用额外重复曲目补足；获准跨两个视角的同一录音只做一次深度核验。
+简要版使用 `pool_goal = min(max(2 × final_target, final_target + 8), 120)`；丰富版先将四个视角的目标数相加为 `rich_total_slots`，按默认零重复令 `required_unique = rich_total_slots`，再使用 `pool_goal = min(max(2 × final_target, final_target + 8, required_unique + 8), 120)`。候选池阶段允许保留 `partial` 或 `unknown` 记录；只有进入任一最终版本的曲目才必须深度核验，`musical_key` 也只在此阶段追查。普通模式达到候选池目标、每个允许平台至少完成一轮发现、连续两轮查询只产生重复或低相关结果，或平台限制无法继续时停止。达到预算上限仍不足时透明报告各视角实际数量，不降低验证门槛，也不用额外重复曲目补足；获准跨两个视角的同一录音只做一次深度核验。
 
 ### 4. 验证与标准化
 
@@ -260,8 +295,9 @@ assumptions: []
 - `verification_sources`：实际查看过的曲目、发行或元数据来源
 - `availability`：可用、地区受限、需登录、失效或未知
 - `dedupe_key`：ISRC 或规范化录音键
+- `musical_key`：仅用于 `composite` / `four_views` 的可选元数据；包含来源调名、规范调名、Camelot、调性证据、版本匹配和冲突状态。`fast` 不追查、不展示。
 
-能验证时再记录 mix/version、发行时间、BPM、genre、mood、popularity proxy。保留证据强度：`verified`、`partial` 或 `unknown`。`partial` 只能表示元数据或证据字段不完整，不能替代直接可访问的曲目/发行链接；在 exclusive 目标平台下没有该平台页面的候选放入“目标平台缺失”，不进入可交付曲目表。播放链接和核验来源分开记录，最终每行曲目必须有自己的可追溯来源。
+能验证时再记录 mix/version、发行时间、BPM、genre、mood、popularity proxy；仅在 `composite` / `four_views` 最终曲目深度核验阶段追查调性。调性必须来自与同一 `version_label` 对应的 Beatport、Beatsource 等授权 DJ 商店具体页，或艺人、厂牌、发行商的明确版本元数据；保留 `source_value`、`normalized_key`、`camelot`、`evidence_url`、`evidence_type`、`version_match`、`status` 和核验日期。只对 major / minor 生成 Camelot，非该调式保留原值但不参与五度圈排序。可靠来源冲突时设为 `conflict`、Camelot 为空并显示“未知”；不得用模型记忆、搜索摘要或单一第三方分析站补齐。保留证据强度：`verified`、`partial` 或 `unknown`。`partial` 只能表示元数据或证据字段不完整，不能替代直接可访问的曲目/发行链接；在 exclusive 目标平台下没有该平台页面的候选放入“目标平台缺失”，不进入可交付曲目表。播放链接和核验来源分开记录，最终每行曲目必须有自己的可追溯来源。
 
 按 ISRC 去重；没有 ISRC 时按标准化后的艺人 + 曲名 + mix/version 去重。Original、Remix、Edit、Live 等不同版本不要误合并。
 
@@ -289,19 +325,29 @@ assumptions: []
 - Peak
 - Closing
 
-V1 只做逻辑编排，不声称完成 BPM beatmatching、调性匹配或谐波混音。缺少可靠 BPM 时，根据可验证的风格、氛围、密度与场景信息排序。
+普通推荐仍只做逻辑编排，不自动执行 harmonic mixing。报告结束后，简要版或丰富版用户明确肯定五度圈邀请时，才根据可靠调性执行一次后置重排；缺少可靠 BPM 或调性时保留未知并按安全规则处理。即使调性和 BPM 都可靠，也不得声称完成 beatmatching、无缝混音或已试听 double drop。
+
+### 6.5 创意接歌建议
+
+完整的 `composite` 或 `four_views` 报告必须在“选歌碎碎念”中增加且只增加一条 `接歌建议`；`fast` 永不输出该模块。简要版只从综合表选择素材，丰富版只从动态综合版选择素材；建议可以引用非相邻曲目，也可以针对整套 set 的某个位置。用户之后确认五度圈重排时，保留原 `transition_advice.text`，不因曲目顺序变化而重新生成或删除。
+
+接歌建议采用半结构化创意卡：在长混、EQ 交换、loop 接力、效果器过渡、叠歌、double drop、直接飞歌、跨年代或跨风格反差中自由选择最有启发性的一种，至少包含一个可执行动作，并可给出 4/8/16/32 小节、EQ、filter、echo、reverb 或 loop 参数。一条建议最多组合两种核心操作，并在内部 `transition_advice.techniques` 中逐项记录。文案使用“可尝试”表达创意假设，不要求波形、音频预览或结构分析作为前置条件。
+
+没有可靠 BPM 或调性时，仍必须依据风格、能量、年代、情绪和场景输出一条降级建议；不得猜测调性、精确结构或时间点。若没有可用曲目对或所有相关元数据缺失，仍输出一条 set-level 创意建议，并在内部设置 `status: fallback` 与具体 `fallback_reason`；不得因此省略建议。不得声称已试听、看过波形、确认乐句、完成 beatmatch 或验证可直接双押。只有双方具有与自身 `version_label` 对应的可靠调性、基础 Camelot 兼容且半拍 / 双拍归一化 BPM 差不超过 3% 时，才可使用 `double drop`；否则使用“叠歌尝试”等更宽泛的说法。
 
 ### 7. 输出报告
 
-严格使用 [report-template.md](references/report-template.md) 的结构。默认用“高 / 中高 / 中 / 中低 / 低”等解释性标签。只有用户要求详细分析时，才展示数值权重与分项分数。`fast` 只核对指定三列、首批/最终标题和收尾规则；`composite` 模式核对简要版综合表格；`four_views` 模式再逐项核对丰富版的四个视角标题和表格。候选不足只减少曲目数量，不静默改变用户选择。
+严格使用 [report-template.md](references/report-template.md) 的结构。默认用“高 / 中高 / 中 / 中低 / 低”等解释性标签。只有用户要求详细分析时，才展示数值权重与分项分数。`fast` 只核对指定三列、首批/最终标题和收尾规则；`composite` 模式核对简要版 12 列综合表格；`four_views` 模式再逐项核对丰富版四个视角的 12 列表格。候选不足只减少曲目数量，不静默改变用户选择。
 
 报告的标题、段落标题、表头、状态标签和解释文字跟随 `communication_language`；不要因为模板示例是中文，就在英文请求中保留“需求理解”“来源”等中文固定标题。曲名、艺人名、mix/version、平台名以及 `Warm Up / Groove / Peak / Closing` 等约定段落名保留官方或约定写法。
 
 需求确认摘要必须明确披露 `target_market` 与 `target_market_source`。当 `target_market_source: language_inferred` 时，写明这只是根据当前输入语言得到的本轮临时假设，只用于当前搜索语境、来源选择和地区可用性解释，不能写成用户长期偏好或确定事实；当来源为 `user_provided` 时，也只表述为本轮目标市场，不反向改写 `communication_language`。
 
-极速版每首只输出已逐曲核验的官方歌名、官方艺人和一条符合平台策略的直接曲目或发行页；按用户平台优先级寻找首选，首选不可用时才按允许顺序回退，exclusive 不跨平台。搜索结果页、平台首页和模型记忆均不得作为最终链接。内部记录仍保存查询、验证、版本、去重、平台降级、计时和停止原因，但极速版不展示需求确认摘要、Digging 摘要、11 列主表、丰富版视图或“选歌碎碎念”。
+极速版每首只输出已逐曲核验的官方歌名、官方艺人和一条符合平台策略的直接曲目或发行页；按用户平台优先级寻找首选，首选不可用时才按允许顺序回退，exclusive 不跨平台。搜索结果页、平台首页和模型记忆均不得作为最终链接。内部记录仍保存查询、验证、版本、去重、平台降级、计时和停止原因，但极速版不展示需求确认摘要、Digging 摘要、12 列主表、丰富版视图、调性或“选歌碎碎念”。
 
-主表严格使用以下栏目，不增加序号、Mix、段落或验证状态列：`歌名 | 艺术家 | 专辑/EP | 风格 | BPM | 歌曲时长 | 能量级 | 发行时间 | 简介 | 选择原因 | 链接`。歌名保留官方版本名；同一录音的主平台和备用平台链接合并在“链接”单元格中。综合版的行顺序就是推荐播放顺序，必要时用 `Warm Up / Groove / Peak / Closing` 作为表格前的小标题。无法验证的 BPM、时长、专辑、能量级或发行时间写“未知”。不要用搜索结果页代替曲目链接；禁用平台也不要出现在默认报告中。缺失与不确定信息、核验来源和来源等级继续保留在内部记录中，用户明确追问时再回答，不在默认输出中显示或提示。
+简要版和丰富版主表严格使用以下 12 个栏目，不增加序号、Mix、段落或验证状态列：`歌名 | 艺术家 | 专辑/EP | 风格 | BPM | 调性 | 歌曲时长 | 能量级 | 发行时间 | 简介 | 选择原因 | 链接`。歌名保留官方版本名；同一录音的主平台和备用平台链接合并在“链接”单元格中。调性显示 `标准调名 / Camelot`，例如 `A minor / 8A`；无法可靠验证、来源冲突或非 major/minor Camelot 调式时显示“未知”。正常推荐的行顺序仍为 Warm Up / Groove / Peak / Closing；用户明确肯定五度圈重排后，简要版综合表或丰富版动态综合表改为一张连续 12 列表，未知或冲突调性的曲目全部放在末尾“待试听定位”组。不要用搜索结果页代替曲目链接；禁用平台也不要出现在默认报告中。缺失与不确定信息、核验来源和来源等级继续保留在内部记录中，用户明确追问时再回答，不在默认输出中显示或提示。
+
+完整 `composite` / `four_views` 报告必须按 [report-template.md](references/report-template.md) 输出“选歌碎碎念”，并在其中恰好包含一条接歌建议。`composite` 只引用综合表，`four_views` 只引用动态综合版；英文等其他语言本地化模块标签。`fast` 不输出该模块。
 
 ### 8. 条件导出
 
@@ -316,7 +362,7 @@ V1 只做逻辑编排，不声称完成 BPM beatmatching、调性匹配或谐波
 
 当意图为 `prepare` 时，按 [export.md](references/export.md) 检查当前环境、选择版本、展示目标平台与曲目数量，并在执行外部写入前取得确认。只有精确确认后才进入 `execute`。默认选择综合版，一次只创建一个平台歌单。
 
-完整推荐报告输出后，无论用户是否请求平台歌单，都要进入统一的“下一步”收尾，并先把 `local_export.status` 设为 `offered`。这个收尾只允许出现在完整推荐报告之后，不得在两轮需求收集期间提前出现，也不是第三轮需求收集。默认只展示自然语言反馈邀请和导出指令，不展示私人记忆状态、本轮反馈状态、长期画像状态、缺失信息或来源栏目；这些状态仍在后台记录。
+完整推荐报告输出后，无论用户是否请求平台歌单，都要进入统一的“下一步”收尾，并先把 `local_export.status` 设为 `offered`。这个收尾只允许出现在完整推荐报告之后，不得在两轮需求收集期间提前出现，也不是第三轮需求收集。简要版和丰富版显示自然语言反馈邀请、导出指令和五度圈排序邀请；极速版只显示前两项，不显示五度圈邀请。默认不展示私人记忆状态、本轮反馈状态、长期画像状态、缺失信息或来源栏目；这些状态仍在后台记录。
 
 ```markdown
 ## 下一步
@@ -324,22 +370,27 @@ V1 只做逻辑编排，不声称完成 BPM beatmatching、调性匹配或谐波
 第一，如果愿意，您可以用自然语言回复我选歌情况，这会丰富您的私人选歌偏好，让推荐更准。回复包括但不限于「`skream的歌不错，但我这次因为客群的关系没放`/`我不喜欢跳楼机，以后别再推了`/`我这次打了这些歌（配图/表）`」
 
 第二，您可以导出歌单，直接回复`导出txt`或者`导出m3u8`即可
+
+第三，需要我根据五度圈原则帮您排列set顺序吗？
 ```
 
-这里的自然语言反馈入口与本地导出都是报告后的可选动作。用户可以只反馈、只导出、两者都做，或不回复；不要把反馈解释成事件日志、长期摘要确认或 Beta 画像更新，也不要暗示存在跨会话持久化。收到 `导出txt` 或 `导出m3u8` 后设置 `local_export.status: confirmed`，读取 [export.md](references/export.md) 并按其中的 UTF-8、去重、直接链接、M3U8 安全、外部写入确认和文件命名规则生成文件；成功后设为 `generated`，部分曲目因缺链接被跳过时设为 `partial`。自然语言反馈只在当前会话自动生效；长期档案仍必须先形成摘要并获得明确确认。
+这里的自然语言反馈、本地导出和五度圈排序都是报告后的可选动作。用户可以只反馈、只导出、只请求重排、组合使用，或不回复；不要把它们解释成第三轮需求收集。报告显示后将 `harmonic_order.offered` 设为 `true`（仅 `composite` / `four_views`），用户明确肯定时设为 `requested: true`、`status: confirmed`，重排成功后设为 `reordered`；否定设为 `declined`，模糊答复设为 `needs_clarification`。五度圈邀请的明确肯定意图包括“是”“需要”“可以”“帮我排”“按五度圈排”等；否定不执行，模糊表达只请求确认。简要版肯定后重排综合版，丰富版肯定后只重排动态综合版，三个专项视角保持原样。执行后保留全部曲目、版本、录音去重、艺人比例和平台链接；以 Camelot 基础兼容相邻数优先，实验性同字母 ±2 仅作兜底，未知或冲突调性放到末尾“待试听定位”组。最多输出 5 组满足基础兼容且半拍 / 双拍归一化后 BPM 差不超过 3% 的 double drop 候选，并明确仍需 DJ 试听。重排后的最终顺序成为后续 TXT/M3U8 导出顺序。不要把反馈解释成事件日志、长期摘要确认或 Beta 画像更新，也不要暗示存在跨会话持久化。收到 `导出txt` 或 `导出m3u8` 后设置 `local_export.status: confirmed`，读取 [export.md](references/export.md) 并按其中的 UTF-8、去重、直接链接、M3U8 安全、外部写入确认和文件命名规则生成文件；成功后设为 `generated`，部分曲目因缺链接被跳过时设为 `partial`。自然语言反馈只在当前会话自动生效；长期档案仍必须先形成摘要并获得明确确认。
 
 默认只导出最终交付表：极速版使用最终极速表，简要版使用综合结果，丰富版使用最后的动态综合结果，不把风格、场景、熟悉度与发现感三个视角重复拼接。若宿主只交付极速版首批，用户必须明确确认“导出当前首批”后才可导出当前结果，不能把它表述为完整歌单。TXT 每行一首，包含完整曲名、艺人和首选可用链接；M3U8 使用 Extended M3U 的 `#EXTM3U`、`#PLAYLIST`、`#EXTINF` 和 URL 行。平台网页链接只能作为链接播放列表条目，不能冒充原始音频流或可直接播放的 `.m3u8` 流。没有直接链接的曲目不写入文件，并在导出结果中报告缺口。
 
 ## 降级行为
 
-- 无联网工具：明确说明无法完成实时验证；可以先输出需求卡和搜索计划，但不要把记忆中的歌单冒充已验证结果。
+- 缺少 `web_search` 或 `open_page`：明确说明无法完成实时验证；可以先输出需求卡和搜索计划，但不要把记忆中的歌单冒充已验证结果。
 - 候选不足：返回所有通过验证的曲目，说明少于目标数量的原因。
 - 元数据不足：使用中性评分或忽略该项，并标记未知。
+- 调性缺失、来源冲突、版本不匹配或非 major/minor：曲目仍可交付，调性显示“未知”，不参与五度圈排序；不得借用其他版本的 Key。
 - 首选平台缺曲：只有在用户没有设为 exclusive 且存在允许的次级平台时备用；在曲目旁标明实际平台，不把备用伪装成首选平台命中。
 - exclusive 目标平台缺曲：跳过该曲并列入“目标平台缺失”，不放其他平台链接，不自动找相似替代。
 - 平台不可访问：不声称“平台没有这首歌”；保留其他允许平台的已验证 Markdown 结果，或在 exclusive 情况下只报告可交付数量与缺口。
 - 极速版宿主不支持中间消息：只交付已验证首批，并明确“当前宿主无法自动续跑；如需补齐，请继续此任务。”；不得假装已在后台继续。请求超过 50 首时，首批标题使用 `# 极速版首批（X/50；单次上限 50 首）`，仍不得误称为最终歌单。
 - 导出目标平台缺曲：导出时默认跳过并列出缺失曲目；只有用户明确允许相似替代时才另行搜索，并逐项标注“原曲 → 替代曲 + 原因”。
+- 缺少 `file_write`：可以返回安全的 TXT / M3U8 内容或说明生成步骤，但不得声称已经创建本地文件、下载链接或文件路径。
+- 宿主既不能发送中间消息也不能继续当前任务：极速版只交付已验证首批，并明确当前 Agent 无法自动续跑；不得声称剩余曲目正在后台生成。
 
 ## 不要做
 
@@ -368,12 +419,19 @@ V1 只做逻辑编排，不声称完成 BPM beatmatching、调性匹配或谐波
 - [ ] 第二轮“极速版”映射为 `fast`，不复用 `composite` 或 `four_views`；`composite` 只输出综合版；`four_views` 才输出四种版本并来自同一候选池
 - [ ] 极速版只使用一个主导向和最多两个同向查询，遵循 60/25/15 轻量排序、候选池、50 秒停止扩池和首批 50–70 秒主动计算预算；续跑另行计时，不纳入首批 SLA
 - [ ] 极速版首批与最终严格三列；首批只在支持中间消息时声明继续补齐，最终保留首批曲目且只有最终显示“下一步”
-- [ ] 主表严格使用 11 个指定栏目，不增加额外列
+- [ ] 简要版和丰富版主表严格使用 12 个指定栏目，其中 BPM 后为调性；极速版仍严格三列
 - [ ] 每个最终曲目都逐条真实可验证并有符合约束的直接链接
+- [ ] 调性只来自同版本可靠来源；来源冲突、非 major/minor 或未知时不生成 Camelot
 - [ ] 版本内部无重复，综合版跨四段无重复，mix/version 未误合并
 - [ ] 综合版优先使用 `selection_priority`；只有 Markdown fallback 且没有显式优先级时才按用户原话词序排序
 - [ ] 数量不足时显示实际数量，不复制凑数
 - [ ] 播放顺序不冒充专业混音分析
+- [ ] 简要版和丰富版“选歌碎碎念”恰好各有一条接歌建议；丰富版只引用动态综合版，极速版不显示
+- [ ] 接歌建议使用“可尝试”和可执行动作；数据不足时按风格/能量降级，不伪造试听、波形、精确时间点或曲式事实
+- [ ] 只有满足可靠调性、基础 Camelot 兼容和归一化 BPM 差不超过 3% 时才使用 double drop 术语
+- [ ] 只有简要版/丰富版明确肯定五度圈邀请后才重排；丰富版只重排动态综合版
+- [ ] 五度圈基础兼容优先，实验性 ±2 仅兜底；未知调性保留并置于末尾
+- [ ] double drop 候选最多 5 组、基础兼容、归一化 BPM 差不超过 3%，并注明需试听
 - [ ] 不确定字段明确标记
 - [ ] 导出操作满足授权、确认和凭证安全要求
 - [ ] 推荐报告结束后才询问 TXT/M3U8 导出；确认前不创建本地文件

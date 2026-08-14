@@ -14,8 +14,10 @@
 
 - 书面规格以 docs/superpowers/specs/2026-08-13-dj-crate-digger-personalization-design.md 为唯一设计依据。
 - 本计划只实施第 18 节“阶段 A：交互基础”。事件日志、Beta 画像、正式反馈解析器、五视图、经典脉络召回、1001Tracklists 和媒体适配器分别留给 Phase B/C/D。
-- 严格保留两轮 Markdown 问卷、逐曲平台验证、版本识别、录音级去重、11 列主表、TXT/M3U8 导出和现有授权安全边界。
+- 严格保留两轮 Markdown 问卷、逐曲平台验证、版本识别、录音级去重、简要/丰富版 12 列主表、极速版三列、TXT/M3U8 导出和现有授权安全边界。
 - 丰富版在 Phase A 仍为四视图；只把现有“流行度优先”语义改名为“熟悉度与发现感优先”，不增加“DJ 品味优先”视图。
+
+**后续已确认增量：** 简要版和丰富版在最终深度核验阶段记录可靠来源的调性，并在报告后的明确肯定下提供五度圈重排。显示标准调名 / Camelot；丰富版只重排动态综合版，未知或冲突调性保留在末尾；最多给出 5 组需试听确认的 double drop 候选。极速版保持三列和既有时间合同。完整简要版和丰富版的“选歌碎碎念”各增加一条半结构化创意接歌建议；丰富版只从动态综合版取材，五度圈重排后保留原文，不伪造波形或精确结构。
 - “少量经典锚点”在 Phase A 只进入需求卡和现有搜索约束，不设置最终曲目固定比例，也不宣称已完成独立经典脉络召回。
 - 长期记忆在 Phase A 始终显示为未启用；不得创建长期存储、显示待确认长期摘要，或暗示反馈会跨会话保存。
 - 不新增 hash、冻结 contract、baseline 或发布 gate；不删除现有安全措施。
@@ -33,7 +35,7 @@
 
 ### Interface contract
 
-保留现有 25 个行为评测及其 ID；只更新受新问卷影响的断言，并追加 ID 26–33。触发边界没有变化，因此 33 个 trigger eval 不修改。
+保留现有行为评测及其 ID；只更新受新问卷影响的断言，并追加调性/五度圈与接歌建议评测至 ID 70。触发边界没有变化，因此 33 个 trigger eval 不修改。
 
 新增场景必须分别覆盖：
 
@@ -44,22 +46,22 @@
 - ID 30：一般英文且地区留空；使用“英语国际市场”，不得武断指定美国或英国。
 - ID 31：第二轮把熟悉度与时代/经典分开；“少量经典锚点”不产生固定最终配额。
 - ID 32：Phase A 收尾显示未启用的长期记忆、无反馈/未更新状态和自然语言可选反馈邀请。
-- ID 33：Phase A 回归；丰富版仍为四视图、主表仍为 11 列，导出与反馈邀请都不算第三轮需求收集。
+- ID 33：Phase A 回归；丰富版仍为四视图、简要/丰富版主表为 12 列，极速版为三列，导出、反馈和五度圈邀请都不算第三轮需求收集。
 
 ### Steps
 
 - [ ] 更新 ID 14–15、17–23 中仍写着旧第一轮四字段、旧“流行度”字段或旧收尾流程的 expectations。ID 7、10 等既有四视图测试只更新视图名称，不改变数量和共享候选池要求。
-- [ ] 追加 ID 26–33；每条 expected_output 描述可观察行为，每条 expectations 分开断言语言、市场来源、非持久化、两轮边界或回归能力。
+- [ ] 追加 ID 26–70；每条 expected_output 描述可观察行为，每条 expectations 分开断言语言、市场来源、非持久化、两轮边界、调性/五度圈或接歌建议回归能力。
 - [ ] 不把 Phase B 的“长期摘要确认”、Phase C 的“DJ 品味优先版”或 Phase D 的外部适配器写成 Phase A 已实现能力。
 - [ ] 校验 JSON 语法和 ID 唯一性：
 
 ~~~bash
 jq empty evals/evals.json evals/trigger-evals.json
-jq -e '(.evals | length) == 33 and (([.evals[].id] | unique | length) == 33)' evals/evals.json
+jq -e '(.evals | length) == 70 and (([.evals[].id] | unique | length) == 70)' evals/evals.json
 jq -e 'length == 33' evals/trigger-evals.json
 ~~~
 
-Expected: 三条命令退出码均为 0。行为 eval 数量从 25 变为 33；trigger eval 仍为 33。
+Expected: 三条命令退出码均为 0。行为 eval 数量为 70；trigger eval 仍为 33。
 
 - [ ] 在实现文件尚未修改时运行以下合同探针，记录它们缺失或仍命中旧字段，作为 red 阶段证据：
 
@@ -201,10 +203,10 @@ target_market 只影响本轮：
 ~~~bash
 rg -n 'target_market|language_inferred|英语国际市场|中国大陆|香港|台湾' SKILL.md references/search-verification.md
 rg -n '沟通语言|目标国家 / 地区|地区来源|熟悉度与发现感|时代与经典' references/report-template.md
-rg -n '歌名 \| 艺术家 \| 专辑/EP \| 风格 \| BPM \| 歌曲时长 \| 能量级 \| 发行时间 \| 简介 \| 选择原因 \| 链接' SKILL.md references/report-template.md
+rg -n '歌名 \| 艺术家 \| 专辑/EP \| 风格 \| BPM \| 调性 \| 歌曲时长 \| 能量级 \| 发行时间 \| 简介 \| 选择原因 \| 链接' SKILL.md references/report-template.md
 ~~~
 
-Expected: 地区来源可见、语言和市场独立、11 列表头原样保留。
+Expected: 地区来源可见、语言和市场独立、简要/丰富版 12 列表头含调性，极速版仍为三列。
 
 ---
 
@@ -244,7 +246,7 @@ Expected: 地区来源可见、语言和市场独立、11 列表头原样保留�
 rg -n '下一步|选歌碎碎念|导出txt|导出m3u8|不是第三轮需求收集|不算第三轮需求收集' SKILL.md references/report-template.md references/export.md
 ~~~
 
-Expected: 三份文档的阶段状态、可选性和导出顺序一致。
+Expected: 三份文档的阶段状态、可选性、接歌建议边界和导出顺序一致。
 
 - [ ] 复核没有提前实现 Phase B：
 
@@ -268,13 +270,13 @@ Expected: Phase A 实现文件不出现长期存储或画像已更新的运行�
 ### Steps
 
 - [ ] 更新 README “本版重点”：第一轮加入目标国家/地区；沟通语言与市场分离；第二轮拆成熟悉度和时代/经典；丰富版仍为四视图；完整报告后只显示可选反馈和导出，记忆状态只后台记录。
-- [ ] 把 README 行为评测数量同步为当前 48，并概括地区/语言/收尾与极速版回归场景。trigger eval 数量不变。
+- [ ] 把 README 行为评测数量同步为当前 70，并概括地区/语言/收尾、极速版、调性/五度圈、创意接歌建议和 Agent Skills 能力降级回归场景。trigger eval 数量不变。
 - [ ] 不修改 agents/openai.yaml；默认提示仍然准确，不需要把 Phase B/C/D 写进 starter prompt。
 - [ ] JSON 与结构校验：
 
 ~~~bash
 jq empty evals/evals.json evals/trigger-evals.json
-jq -e '.skill_name == "dj-crate-digger" and (.evals | length) == 48 and (([.evals[].id] | unique | length) == 48)' evals/evals.json
+jq -e '.skill_name == "dj-crate-digger" and (.evals | length) == 70 and (([.evals[].id] | unique | length) == 70)' evals/evals.json
 jq -e 'length == 33' evals/trigger-evals.json
 git diff --check
 ~~~
@@ -285,7 +287,7 @@ Expected: 全部退出码为 0，无 JSON 错误、重复 ID 或 whitespace erro
 
 ~~~bash
 rg -n '严格两轮|目标国家 / 地区|熟悉度与发现感|时代与经典|four_views' SKILL.md README.md references/report-template.md
-rg -n '逐曲|version_label|dedupe_key|11 列|TXT|M3U8|exclusive|forbidden' SKILL.md references README.md
+rg -n '逐曲|version_label|dedupe_key|12 列|调性|五度圈|TXT|M3U8|exclusive|forbidden' SKILL.md references README.md
 rg -n 'DJ 品味优先版' SKILL.md README.md references
 ~~~
 
@@ -308,7 +310,7 @@ Expected: 退出码为 0。
   5. 一般英文地区留空。
   6. 熟悉度与经典取向不同组合。
   7. 简要版完成后的状态、反馈邀请和导出。
-  8. 丰富版仍为四视图且 11 列不变。
+  8. 丰富版仍为四视图且 12 列含调性；肯定五度圈后只重排动态综合版。
 
 Expected: 沟通语言不被市场改变；明确市场不被语言推断覆盖；推断市场可见且不持久化；没有第三轮强制问卷；没有 Phase B/C/D 能力冒充。
 
@@ -330,7 +332,7 @@ Phase A 只有在以下条件全部成立时才算完成：
 - communication_language 与 target_market 可以不同；明确市场覆盖推断，推断市场只在本轮生效。
 - 报告摘要披露市场值和来源，搜索使用该上下文但不改变平台许可。
 - 熟悉度与时代/经典分开；“少量经典锚点”没有固定最终配额。
-- 丰富版仍是四视图并执行整份报告级去重：默认零重复，最多一首高质量核心曲出现两次，参考艺人不豁免；11 列、验证、导出与安全边界没有回归。
+- 丰富版仍是四视图并执行整份报告级去重：默认零重复，最多一首高质量核心曲出现两次，参考艺人不豁免；12 列调性、验证、导出、五度圈后置动作与安全边界没有回归。
 - 长期记忆、本轮反馈、长期画像、缺失信息与来源只后台记录，不在默认收尾显示；反馈只承诺当前会话调整。
-- 48 个行为 eval 和 33 个 trigger eval 均为合法 JSON 且 ID 唯一。
+- 70 个行为 eval 和 33 个 trigger eval 均为合法 JSON 且 ID 唯一；24 个 Camelot 映射与 BPM 夹具可读取；简要版和丰富版各有一条创意接歌建议，极速版不显示。
 - 用户尚未说“定稿”时，仓库没有新增 commit，也没有 push。

@@ -1,0 +1,28 @@
+{
+  "negative_outputs": [
+    {
+      "name": "luna-xhigh-compressed-first-round",
+      "round": 1,
+      "source": "user-provided screenshot IMG_3213.png",
+      "output": "欢迎来到 DJ 选歌助手。您将在两轮对话中确认需求，并获得 AI 选歌建议。\n第一轮可以复制填写，也可以自由填写；留空代表 AI 智能判断。\n\n```markdown\n场景：\n目标国家 / 地区：\n核心声音方向：\n歌曲数量或 Set 时长：\n其他限制：\n```"
+    },
+    {
+      "name": "sol-medium-paraphrased-without-inline-code",
+      "round": 1,
+      "source": "user-provided screenshot IMG_2760.png",
+      "output": "欢迎来到 DJ 选歌助手。这是一个利用 Agent 帮您排 set 的 skill。您将在两轮对话中确认需求，并获得 AI 选歌建议。\n\n填写规则：\n\n1. 可以从例子中复制，也可以自由填写或不填\n2. 不填意味着 AI 智能判断答案\n\n【第一轮：必要信息】\n\n场景：「酒吧 / 俱乐部 / 婚礼 / 艺术展」\n目标国家 / 地区：「中国大陆 / 台湾 / 香港 / 日本 / 英语国际市场」\n核心声音方向：参考艺人、曲目或流派，如 Skrillex 的 Tears、现代 UK Bass\n歌曲数量或 Set 时长：「20 首 / 60 分钟」\n其他限制：「不要口水歌 / 不要人声 / 只要 Remix」，可以不填\n\n```markdown\n场景：\n目标国家 / 地区：\n核心声音方向：\n歌曲数量或 Set 时长：\n其他限制：\n```"
+    },
+    {
+      "name": "luna-xhigh-leaked-authoring-fence-second-round",
+      "round": 2,
+      "source": "cold-start forward test after initial literal-contract implementation",
+      "output": "````text\n【第二轮：需求细化】\n具体风格：\n「如：`House` / `Bass` / `Garage` / `Techno` / `Breakbeat`」\n速度 / BPM：\n「如：`105` / `128` / `140` / `150` / `170`」\n熟悉度与发现感：\n「`热门熟悉`/`平衡`/`小众发现`」\n时代与经典：\n「`当代为主`/`少量经典锚点`/`新旧桥接`/`经典优先`」\n输出版本：\n「`极速版`：快速输出playlist，但是质量会下降」\n「`简要版`：只给一个综合的playlist」\n「`丰富版`：根据您选择的风格、场景、熟悉度与发现感分别提供建议，并最终输出成简要版」\n情绪：\n「如：`怀旧` / `阴冷` / `浪漫`」\nSET 能量级或能量走势：\n「如：`低`/`高`；`平稳` / `过山车`」\n平台与链接要求：\n「如：`网易云`/`Apple Music`/`SoundCloud`/`Bandcamp`/`Beatport`/`Spotify`；注：可以填多个，越前面的优先级越高」\n其他：\n\n```markdown\n具体风格：\n速度 / BPM：\n熟悉度与发现感：\n时代与经典：\n输出版本：\n情绪：\nSET 能量级或能量走势：\n平台与链接要求：\n其他：\n```\n````"
+    },
+    {
+      "name": "luna-xhigh-dropped-energy-example-prefix",
+      "round": 2,
+      "source": "cold-start forward test after authoring-fence removal",
+      "output": "【第二轮：需求细化】\n具体风格：\n「如：`House` / `Bass` / `Garage` / `Techno` / `Breakbeat`」\n速度 / BPM：\n「如：`105` / `128` / `140` / `150` / `170`」\n熟悉度与发现感：\n「`热门熟悉`/`平衡`/`小众发现`」\n时代与经典：\n「`当代为主`/`少量经典锚点`/`新旧桥接`/`经典优先`」\n输出版本：\n「`极速版`：快速输出playlist，但是质量会下降」\n「`简要版`：只给一个综合的playlist」\n「`丰富版`：根据您选择的风格、场景、熟悉度与发现感分别提供建议，并最终输出成简要版」\n情绪：\n「如：`怀旧` / `阴冷` / `浪漫`」\nSET 能量级或能量走势：\n「`低`/`高`；`平稳` / `过山车`」\n平台与链接要求：\n「如：`网易云`/`Apple Music`/`SoundCloud`/`Bandcamp`/`Beatport`/`Spotify`；注：可以填多个，越前面的优先级越高」\n其他：\n\n```markdown\n具体风格：\n速度 / BPM：\n熟悉度与发现感：\n时代与经典：\n输出版本：\n情绪：\nSET 能量级或能量走势：\n平台与链接要求：\n其他：\n```"
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "valid_documents": [
+    {
+      "id": "composite-complete",
+      "document": {
+        "format": "w4dj",
+        "format_version": 1,
+        "export_id": "demo-001",
+        "created_at": "2026-08-17T12:00:00Z",
+        "playlist": {
+          "name": "Night Bass Test",
+          "output_mode": "composite",
+          "scenario": "underground club",
+          "target_region": "中国大陆",
+          "platform_priority": ["netease_cloud_music", "spotify"]
+        },
+        "tracks": [
+          {
+            "position": 1,
+            "record_id": "rec-001",
+            "title": "LIKE ME",
+            "artist_display": "Nikita, the Wicked",
+            "artists": ["Nikita, the Wicked"],
+            "album_or_ep": "LIKE ME - Single",
+            "version": "Original",
+            "duration": 207,
+            "bpm": 140,
+            "musical_key": {
+              "source_value": "A Minor",
+              "normalized_key": "A minor",
+              "camelot": "8A",
+              "evidence_url": "https://example.test/beatport/like-me",
+              "evidence_type": "authorized_dj_store",
+              "checked_at": "2026-08-17",
+              "status": "verified"
+            },
+            "platform_refs": [
+              {
+                "platform": "netease_cloud_music",
+                "track_id": "123",
+                "url": "https://music.163.com/#/song?id=123",
+                "status": "verified"
+              }
+            ],
+            "dedupe_key": "rec-001",
+            "expected_filename_hint": "001 - Nikita, the Wicked - LIKE ME.mp3"
+          },
+          {
+            "position": 2,
+            "record_id": "rec-002",
+            "title": "Qawwali",
+            "artist_display": "Pinch",
+            "artists": ["Pinch"],
+            "album_or_ep": "Qawwali",
+            "version": "Original",
+            "duration": 321,
+            "bpm": "unknown",
+            "musical_key": "unknown",
+            "platform_refs": [
+              {
+                "platform": "netease_cloud_music",
+                "track_id": null,
+                "url": null,
+                "status": "unavailable"
+              }
+            ],
+            "dedupe_key": "rec-002",
+            "expected_filename_hint": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "fast-unknown-metadata",
+      "document": {
+        "format": "w4dj",
+        "format_version": 1,
+        "export_id": "fast-001",
+        "created_at": "2026-08-17T12:01:00Z",
+        "playlist": {
+          "name": "Fast Test",
+          "output_mode": "fast",
+          "scenario": null,
+          "target_region": "unknown",
+          "platform_priority": ["soundcloud"]
+        },
+        "tracks": [
+          {
+            "position": 1,
+            "record_id": "rec-fast-001",
+            "title": "Unknown Title",
+            "artist_display": "Unknown Artist",
+            "artists": ["Unknown Artist"],
+            "album_or_ep": null,
+            "version": null,
+            "duration": null,
+            "bpm": "unknown",
+            "musical_key": "unknown",
+            "platform_refs": [
+              {
+                "platform": "soundcloud",
+                "track_id": null,
+                "url": null,
+                "status": "unknown"
+              }
+            ],
+            "dedupe_key": "rec-fast-001",
+            "expected_filename_hint": null
+          }
+        ]
+      }
+    }
+  ],
+  "invalid_documents": [
+    {
+      "id": "missing-required-format",
+      "document": {
+        "format_version": 1,
+        "export_id": "invalid-001",
+        "created_at": "2026-08-17T12:00:00Z",
+        "playlist": {
+          "name": "Invalid",
+          "output_mode": "fast",
+          "scenario": null,
+          "target_region": null,
+          "platform_priority": []
+        },
+        "tracks": []
+      }
+    },
+    {
+      "id": "local-file-fields-not-allowed",
+      "document": {
+        "format": "w4dj",
+        "format_version": 1,
+        "export_id": "invalid-002",
+        "created_at": "2026-08-17T12:00:00Z",
+        "playlist": {
+          "name": "Invalid",
+          "output_mode": "fast",
+          "scenario": null,
+          "target_region": null,
+          "platform_priority": []
+        },
+        "tracks": [
+          {
+            "position": 1,
+            "record_id": "rec-invalid",
+            "title": "Track",
+            "artist_display": "Artist",
+            "artists": ["Artist"],
+            "album_or_ep": null,
+            "version": null,
+            "duration": null,
+            "bpm": "unknown",
+            "musical_key": "unknown",
+            "platform_refs": [],
+            "dedupe_key": "rec-invalid",
+            "expected_filename_hint": null,
+            "local_audio_path": "/Users/example/Music/track.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "unsupported-output-mode",
+      "document": {
+        "format": "w4dj",
+        "format_version": 1,
+        "export_id": "invalid-003",
+        "created_at": "2026-08-17T12:00:00Z",
+        "playlist": {
+          "name": "Invalid",
+          "output_mode": "rich",
+          "scenario": null,
+          "target_region": null,
+          "platform_priority": []
+        },
+        "tracks": []
+      }
+    }
+  ],
+  "compatibility_cases": [
+    {
+      "document_id": "composite-complete",
+      "expected_output_mode": "composite",
+      "expected_positions": [1, 2],
+      "expected_versions": ["Original", "Original"],
+      "expected_dedupe_keys": ["rec-001", "rec-002"]
+    },
+    {
+      "document_id": "fast-unknown-metadata",
+      "expected_output_mode": "fast",
+      "expected_positions": [1],
+      "expected_unknown_values": ["musical_key", "bpm", "duration"]
+    }
+  ]
+}

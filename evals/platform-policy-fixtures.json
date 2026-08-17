@@ -1,0 +1,55 @@
+{
+  "description": "Platform-language regression fixtures for the DJ Crate Digger natural-language platform policy.",
+  "exclusive_cases": [
+    {
+      "name": "single-platform-default",
+      "input": "网易云",
+      "mode": "exclusive",
+      "allowed": ["netease_cloud_music"]
+    },
+    {
+      "name": "unique-platform-phrase",
+      "input": "网易云作为唯一平台",
+      "mode": "exclusive",
+      "allowed": ["netease_cloud_music"]
+    },
+    {
+      "name": "only-platform-synonyms",
+      "input": "仅限网易云；只使用网易云；只在网易云",
+      "mode": "exclusive",
+      "allowed": ["netease_cloud_music"]
+    },
+    {
+      "name": "only-accept-synonyms",
+      "input": "只要 Spotify，其他平台不要",
+      "mode": "exclusive",
+      "allowed": ["spotify"]
+    }
+  ],
+  "preferred_cases": [
+    {
+      "name": "explicit-priority-and-fallback",
+      "input": "网易云优先，Spotify备用",
+      "mode": "preferred",
+      "allowed": ["netease_cloud_music", "spotify"]
+    },
+    {
+      "name": "ordered-platform-list",
+      "input": "网易云 / Apple Music / SoundCloud",
+      "mode": "preferred",
+      "allowed": ["netease_cloud_music", "apple_music", "soundcloud"]
+    }
+  ],
+  "hard_filter_cases": [
+    {
+      "name": "forbidden-platform",
+      "input": "网易云优先，Spotify备用，但不要 Apple Music",
+      "forbidden": ["apple_music"]
+    },
+    {
+      "name": "exclusive-platform-missing",
+      "input": "只接受网易云",
+      "missing_behavior": "target-platform-missing-no-fallback"
+    }
+  ]
+}

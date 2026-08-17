@@ -28,7 +28,7 @@ description: "Use when a user asks to discover, curate, rank, sequence, arrange,
 
 组织最终答案前读取 [report-template.md](references/report-template.md)。
 
-仅当用户要求创建、导入或导出平台歌单，或在推荐报告完成后确认 TXT/M3U8 本地导出时，读取 [export.md](references/export.md)。
+仅当用户要求创建、导入或导出平台歌单，或在推荐报告完成后确认 TXT 或 W4DJ 导出时，读取 [export.md](references/export.md)。
 
 ## Agent 能力适配
 
@@ -36,7 +36,7 @@ description: "Use when a user asks to discover, curate, rank, sequence, arrange,
 
 - `web_search`：搜索当前曲目、发行、平台、媒体和场景资料。
 - `open_page`：打开具体曲目或发行页面，核对官方曲名、艺人、版本和可用性。
-- `file_write`：在用户确认后生成本地 TXT / M3U8 文件。
+- `file_write`：在用户确认后生成本地 TXT 或 UTF-8 `.w4dj` 交接 JSON。
 - `streaming_background`：在宿主支持中间消息和当前任务继续运行时，发送极速版首批后继续读取同一查询结果并补齐歌单；这是逻辑能力，不要求客户端使用同名工具。
 
 如果客户端工具名称不同，按实际能力映射，不要要求用户安装某个固定工具。若能力不存在，遵循“降级行为”：缺少 `web_search` 或 `open_page` 时不声称完成当前验证；缺少 `file_write` 时不声称已生成文件；若宿主既不能发送中间消息也不能继续当前任务，才按缺少 `streaming_background` 处理，只交付已验证首批，不声称后台续跑。能力标签只是内部适配语义，不应出现在默认推荐报告中。
@@ -105,7 +105,7 @@ description: "Use when a user asks to discover, curate, rank, sequence, arrange,
 SET 能量级或能量走势：
 「如：`低`/`高`；`平稳` / `过山车`」
 平台与链接要求：
-「如：`网易云`/`Apple Music`/`SoundCloud`/`Bandcamp`/`Beatport`/`Spotify`；注：可以填多个，越前面的优先级越高」
+「如：`网易云`/`Apple Music`/`SoundCloud`/`Bandcamp`/`Beatport`/`Spotify`；填写一个平台时只使用该平台，填写多个平台按先后顺序优先」
 其他：
 
 ```markdown
@@ -163,7 +163,13 @@ SET 能量级或能量走势：
 - 旧式自然语言中的“流行度 / 热门 / 冷门 / 经典老歌”表达继续兼容解析，但需求摘要与第二轮模板不再把经典与熟悉度混成一个字段
 - “少量经典锚点”只表示候选覆盖意图，不固定最终名额
 
-“平台与链接要求”是一个自然语言字段，不再拆成主平台、备用平台或链接策略问题。只有用户明确写出“只要 / 仅接受”时才设为 `exclusive`；只写一个平台名称时默认该平台优先，但仍允许在报告中说明实际可用的备用来源。用户写“不要某平台”时，该平台必须从搜索、引用和输出中排除。
+“平台与链接要求”是一个自然语言字段，不再拆成主平台、备用平台或链接策略问题。解析时严格执行以下规则：
+
+- 写出“唯一平台 / 仅限 / 只使用 / 只在 / 只要 / 仅接受”等表达时，设置为 `exclusive`；`allowed` 只能包含用户明确指定的平台。
+- 如果用户在该字段只填写一个平台，且没有写“优先 / 最好有 / 备用 / 可回退”等回退词，默认设置为 `exclusive`。单独填写 `网易云` 就表示只搜索、验证和输出网易云，不得把 Spotify、Apple Music 或默认平台加入回退列表。
+- 填写多个平台但没有独占词时，设置为 `preferred`，`allowed` 只能包含用户列出的平台，并按填写顺序设置 `priority` / `link_priority`；这些列出的平台可以按顺序回退，不把其他平台自动加入 allowed。
+- 如果明确写出“优先 / 最好有 / 备用 / 可回退”等表达，则将首选与回退关系按用户原话记录，并标明实际来源；没有这些词时，多平台仍按填写顺序处理，不扩大平台范围。
+- 用户写“不要某平台 / 不提供某平台”时，该平台必须从搜索、引用和输出中排除；“导出到 X”仍只设置 `export_platform`，不改变搜索平台策略。
 
 两轮答复都必须保留对应的 Markdown 模板；第二轮答复后设置 `intake_status: ready`。两轮之外不追加普通需求问题。歌曲数量和 Set 时长都没有填写时，先保留 `track_count: null`；第二轮确认输出模式后再套用该模式的默认数量：`fast` 为 15 首，`composite` 为 30 首，`four_views` 按既有专项视图和动态综合规则执行。若只填写 Set 时长，也要在输出模式确定后按该模式规则用时长估算目标数量。
 
@@ -213,11 +219,11 @@ familiarity_intent: balanced  # familiar | balanced | discovery | ai
 era_classic_intent: ai        # contemporary | light_classic_anchors | new_old_bridge | classic_first | ai
 popularity_intent: balanced
 freshness_intent: balanced
-search_platform: cross-platform
+search_platform: cross-platform  # 未填写平台时的默认值；单平台自然语言输入会覆盖为 exclusive
 platform_policy:
   mode: cross-platform  # cross-platform | preferred | exclusive
-  priority: []           # 兼容字段；主平台与备用平台的链接展示顺序
-  allowed: []            # 允许的链接/来源平台；空表示按 mode 处理
+  priority: []           # 兼容字段；主平台与允许回退平台的链接展示顺序
+  allowed: []            # 允许的链接/来源平台；单平台默认只含该平台
   forbidden: []          # 禁止搜索、引用和链接的平台
 discovery_strategy: balanced_round_robin  # balanced_round_robin | ordered | exclusive
 discovery_order: []      # 发现覆盖顺序；空表示按允许平台均衡轮询
@@ -225,8 +231,12 @@ link_priority: []        # 主链接和备用链接顺序；空表示默认顺�
 export_intent: none  # none | explain | prepare | execute
 export_platform: none
 local_export:
-  formats: []          # txt | m3u8
+  formats: []          # txt
   status: not_offered  # not_offered | offered | confirmed | generated | partial | declined
+w4dj_export:
+  status: not_offered  # not_offered | offered | confirmed | generated | manifest_only | declined
+  format: w4dj
+  format_version: 1
 harmonic_order:
   offered: false
   requested: false
@@ -274,7 +284,7 @@ assumptions: []
 
 ### 3. 建立候选池
 
-按 [search-verification.md](references/search-verification.md) 生成搜索查询。`fast` 使用其中定义的单一主导向、最多两个同向查询和时间预算；`composite` / `four_views` 保持多组查询。先解析 `platform_policy`：`cross-platform` 和 `preferred` 模式默认采用 `balanced_round_robin`，让每个允许平台至少完成一轮发现；`exclusive` 模式只为目标平台建立可交付候选；`forbidden` 平台不得搜索、引用或输出。用户给出的平台顺序优先用于 `link_priority` 和备用链接，不自动成为候选发现的唯一顺序。Digging 摘要应如实说明实际覆盖的平台和停止原因。用户只指定导出平台时，仍可跨平台发现，但候选必须优先验证能否映射到导出平台。不要把“导出到 SoundCloud”误读成“只在 SoundCloud 搜索”。
+按 [search-verification.md](references/search-verification.md) 生成搜索查询。`fast` 使用其中定义的单一主导向、最多两个同向查询和时间预算；`composite` / `four_views` 保持多组查询。先解析 `platform_policy`：没有平台约束时才使用 `cross-platform`；`preferred` 模式只在用户列出的允许平台中采用 `balanced_round_robin`，让每个允许平台至少完成一轮发现；`exclusive` 模式只为目标平台建立可交付候选；`forbidden` 平台不得搜索、引用或输出。用户给出的平台顺序用于 `priority`、`link_priority` 和允许的备用链接；单平台独占时不得把其他平台加入候选发现。Digging 摘要应如实说明实际覆盖的平台和停止原因。用户只指定导出平台时，仍可跨平台发现，但候选必须优先验证能否映射到导出平台。不要把“导出到 SoundCloud”误读成“只在 SoundCloud 搜索”。
 
 候选池目标按输出模式动态计算。极速版令 `fast_pool_goal = min(max(2 × first_batch_target, first_batch_target + 5), 40)`，每批并行核验 5 首；首批主动计算预算为需求解析与查询规划 5 秒、归一化和轻量评分 20 秒、去重与播放顺序 20 秒、输出及检查 10 秒、缓冲 5 秒。网络等待不计入该 60 秒预算；主动计算达到 50 秒后停止扩池，只完成当前结果，允许总主动计算为 50–70 秒。极速版首批在达到 `fast_pool_goal`、达到首批目标或到达 50 秒停止扩池点时停止，不要求每个允许平台完成一轮发现。
 
@@ -351,7 +361,7 @@ assumptions: []
 
 ### 8. 条件导出
 
-`export_intent` 用四态区分平台歌单写入意图；TXT/M3U8 使用独立的 `local_export` 状态：
+`export_intent` 用四态区分平台歌单写入意图；TXT 使用独立的 `local_export` 状态，W4DJ 使用独立的 `w4dj_export` 状态：
 
 - `none`：没有谈及导出，停在 Markdown 报告
 - `explain`：只询问能力或安全步骤，只解释，不检查登录、不写入
@@ -362,21 +372,21 @@ assumptions: []
 
 当意图为 `prepare` 时，按 [export.md](references/export.md) 检查当前环境、选择版本、展示目标平台与曲目数量，并在执行外部写入前取得确认。只有精确确认后才进入 `execute`。默认选择综合版，一次只创建一个平台歌单。
 
-完整推荐报告输出后，无论用户是否请求平台歌单，都要进入统一的“下一步”收尾，并先把 `local_export.status` 设为 `offered`。这个收尾只允许出现在完整推荐报告之后，不得在两轮需求收集期间提前出现，也不是第三轮需求收集。简要版和丰富版显示自然语言反馈邀请、导出指令和五度圈排序邀请；极速版只显示前两项，不显示五度圈邀请。默认不展示私人记忆状态、本轮反馈状态、长期画像状态、缺失信息或来源栏目；这些状态仍在后台记录。
+完整推荐报告输出后，无论用户是否请求平台歌单，都要进入统一的“下一步”收尾，并先把 `local_export.status` 与 `w4dj_export.status` 设为 `offered`。这个收尾只允许出现在完整推荐报告之后，不得在两轮需求收集期间提前出现，也不是第三轮需求收集。简要版、丰富版和极速版都显示自然语言反馈邀请以及合并后的 TXT/W4DJ 导出句；简要版和丰富版另外显示五度圈排序邀请，极速版不显示五度圈邀请。默认不展示私人记忆状态、本轮反馈状态、长期画像状态、缺失信息或来源栏目；这些状态仍在后台记录。
 
 ```markdown
 ## 下一步
 
 第一，如果愿意，您可以用自然语言回复我选歌情况，这会丰富您的私人选歌偏好，让推荐更准。回复包括但不限于「`skream的歌不错，但我这次因为客群的关系没放`/`我不喜欢跳楼机，以后别再推了`/`我这次打了这些歌（配图/表）`」
 
-第二，您可以导出歌单，直接回复`导出txt`或者`导出m3u8`即可
+第二，您可以导出歌单或交接给 W4DJ，直接回复`导出txt`或者`导出w4dj`即可
 
 第三，需要我根据五度圈原则帮您排列set顺序吗？
 ```
 
-这里的自然语言反馈、本地导出和五度圈排序都是报告后的可选动作。用户可以只反馈、只导出、只请求重排、组合使用，或不回复；不要把它们解释成第三轮需求收集。报告显示后将 `harmonic_order.offered` 设为 `true`（仅 `composite` / `four_views`），用户明确肯定时设为 `requested: true`、`status: confirmed`，重排成功后设为 `reordered`；否定设为 `declined`，模糊答复设为 `needs_clarification`。五度圈邀请的明确肯定意图包括“是”“需要”“可以”“帮我排”“按五度圈排”等；否定不执行，模糊表达只请求确认。简要版肯定后重排综合版，丰富版肯定后只重排动态综合版，三个专项视角保持原样。执行后保留全部曲目、版本、录音去重、艺人比例和平台链接；以 Camelot 基础兼容相邻数优先，实验性同字母 ±2 仅作兜底，未知或冲突调性放到末尾“待试听定位”组。最多输出 5 组满足基础兼容且半拍 / 双拍归一化后 BPM 差不超过 3% 的 double drop 候选，并明确仍需 DJ 试听。重排后的最终顺序成为后续 TXT/M3U8 导出顺序。不要把反馈解释成事件日志、长期摘要确认或 Beta 画像更新，也不要暗示存在跨会话持久化。收到 `导出txt` 或 `导出m3u8` 后设置 `local_export.status: confirmed`，读取 [export.md](references/export.md) 并按其中的 UTF-8、去重、直接链接、M3U8 安全、外部写入确认和文件命名规则生成文件；成功后设为 `generated`，部分曲目因缺链接被跳过时设为 `partial`。自然语言反馈只在当前会话自动生效；长期档案仍必须先形成摘要并获得明确确认。
+这里的自然语言反馈、本地导出、W4DJ 交接和五度圈排序都是报告后的可选动作。用户可以只反馈、只导出、只交接、只请求重排、组合使用，或不回复；不要把它们解释成第三轮需求收集。报告显示后将 `harmonic_order.offered` 设为 `true`（仅 `composite` / `four_views`），将 `w4dj_export.status` 设为 `offered`。用户明确肯定五度圈邀请时设为 `requested: true`、`status: confirmed`，重排成功后设为 `reordered`；否定设为 `declined`，模糊答复设为 `needs_clarification`。五度圈邀请的明确肯定意图包括“是”“需要”“可以”“帮我排”“按五度圈排”等；否定不执行，模糊表达只请求确认。简要版肯定后重排综合版，丰富版肯定后只重排动态综合版，三个专项视角保持原样。执行后保留全部曲目、版本、录音去重、艺人比例和平台链接；以 Camelot 基础兼容相邻数优先，实验性同字母 ±2 仅作兜底，未知或冲突调性放到末尾“待试听定位”组。最多输出 5 组满足基础兼容且半拍 / 双拍归一化后 BPM 差不超过 3% 的 double drop 候选，并明确仍需 DJ 试听。重排后的最终顺序成为后续 TXT/W4DJ 导出顺序。不要把反馈解释成事件日志、长期摘要确认或 Beta 画像更新，也不要暗示存在跨会话持久化。收到 `导出txt` 后设置 `local_export.status: confirmed`，读取 [export.md](references/export.md) 并按其中的 UTF-8、去重、直接链接、外部写入确认和文件命名规则生成文件；TXT 可使用已验证的直接网页链接。收到 `导出w4dj` 后设置 `w4dj_export.status: confirmed`，读取 [export.md](references/export.md) 和 [w4dj.schema.json](references/w4dj.schema.json)，只导出当前最终结果的推荐意图、顺序、版本、已核验元数据、平台引用和去重键；生成成功后设为 `generated`，宿主不能写入时设为 `manifest_only`。W4DJ 不处理本地音频、不生成占位文件、本地最终文件名、二维码或网易云下载；未知值写 `null` 或 `unknown`，不得臆造。自然语言反馈只在当前会话自动生效；长期档案仍必须先形成摘要并获得明确确认。
 
-默认只导出最终交付表：极速版使用最终极速表，简要版使用综合结果，丰富版使用最后的动态综合结果，不把风格、场景、熟悉度与发现感三个视角重复拼接。若宿主只交付极速版首批，用户必须明确确认“导出当前首批”后才可导出当前结果，不能把它表述为完整歌单。TXT 每行一首，包含完整曲名、艺人和首选可用链接；M3U8 使用 Extended M3U 的 `#EXTM3U`、`#PLAYLIST`、`#EXTINF` 和 URL 行。平台网页链接只能作为链接播放列表条目，不能冒充原始音频流或可直接播放的 `.m3u8` 流。没有直接链接的曲目不写入文件，并在导出结果中报告缺口。
+默认只导出最终交付表：极速版使用最终极速表，简要版使用综合结果，丰富版使用最后的动态综合结果，不把风格、场景、熟悉度与发现感三个视角重复拼接。若宿主只交付极速版首批，用户必须明确确认“导出当前首批”后才可导出当前结果，不能把它表述为完整歌单。TXT 每行一首，包含完整曲名、艺人和首选可用链接；W4DJ 使用 UTF-8 JSON `.w4dj` 文件，按 [w4dj.schema.json](references/w4dj.schema.json) 写入当前最终结果，保留最终顺序、版本、已核验元数据、平台引用和 `dedupe_key`，不包含本地音频或绝对路径。极速版允许元数据为 `null` / `unknown`，不能为了补齐字段而猜测。
 
 ## 降级行为
 
@@ -389,13 +399,14 @@ assumptions: []
 - 平台不可访问：不声称“平台没有这首歌”；保留其他允许平台的已验证 Markdown 结果，或在 exclusive 情况下只报告可交付数量与缺口。
 - 极速版宿主不支持中间消息：只交付已验证首批，并明确“当前宿主无法自动续跑；如需补齐，请继续此任务。”；不得假装已在后台继续。请求超过 50 首时，首批标题使用 `# 极速版首批（X/50；单次上限 50 首）`，仍不得误称为最终歌单。
 - 导出目标平台缺曲：导出时默认跳过并列出缺失曲目；只有用户明确允许相似替代时才另行搜索，并逐项标注“原曲 → 替代曲 + 原因”。
-- 缺少 `file_write`：可以返回安全的 TXT / M3U8 内容或说明生成步骤，但不得声称已经创建本地文件、下载链接或文件路径。
+- 缺少 `file_write`：可以返回安全的 TXT 内容和 W4DJ JSON manifest，但不得声称已经创建本地文件或 `.w4dj` 文件。W4DJ manifest-only 必须明确当前未生成文件。
 - 宿主既不能发送中间消息也不能继续当前任务：极速版只交付已验证首批，并明确当前 Agent 无法自动续跑；不得声称剩余曲目正在后台生成。
 
 ## 不要做
 
 - 不开发独立应用、前端、数据库、用户系统或后台任务。
 - 不下载音乐文件，不提供盗版来源，不绕过登录墙、付费墙或机器人验证。
+- W4DJ 只交接推荐数据，不处理本地音频、不生成占位文件、本地最终文件名、二维码或网易云下载任务。
 - 不代填账号密码，不索取密码，不把长期 token 写入 Skill、报告、普通配置或 Git。
 - 不声称自己听过未实际分析的音频。
 - 不把流行度直接等同于质量，也不因冷门而自动加分。
@@ -434,6 +445,8 @@ assumptions: []
 - [ ] double drop 候选最多 5 组、基础兼容、归一化 BPM 差不超过 3%，并注明需试听
 - [ ] 不确定字段明确标记
 - [ ] 导出操作满足授权、确认和凭证安全要求
-- [ ] 推荐报告结束后才询问 TXT/M3U8 导出；确认前不创建本地文件
-- [ ] TXT 为 UTF-8 单曲单行清单，M3U8 为 UTF-8 Extended M3U；两者都保持推荐顺序、去重和平台限制
-- [ ] M3U8 中的平台网页链接没有被描述成原始音频流；跳过曲目和原因已透明列出
+- [ ] 推荐报告结束后才询问 TXT/W4DJ 导出；确认前不创建本地文件
+- [ ] TXT 为 UTF-8 单曲单行清单，W4DJ 为 UTF-8 JSON `.w4dj`、schema v1
+- [ ] TXT 保持推荐顺序、去重、平台限制和已验证直接链接；W4DJ 保持最终顺序、版本、平台引用、去重键和已核验元数据
+- [ ] W4DJ 使用 UTF-8 JSON `.w4dj`、schema v1；三种输出模式保留顺序、版本、平台引用、去重键和已核验元数据，未知值为 `null` / `unknown`
+- [ ] W4DJ 不包含本地音频、绝对路径、二维码或下载动作；宿主无写入能力时只返回 manifest，不声称已生成文件

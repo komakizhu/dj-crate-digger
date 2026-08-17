@@ -14,7 +14,7 @@
 
 - 书面规格以 docs/superpowers/specs/2026-08-13-dj-crate-digger-personalization-design.md 为唯一设计依据。
 - 本计划只实施第 18 节“阶段 A：交互基础”。事件日志、Beta 画像、正式反馈解析器、五视图、经典脉络召回、1001Tracklists 和媒体适配器分别留给 Phase B/C/D。
-- 严格保留两轮 Markdown 问卷、逐曲平台验证、版本识别、录音级去重、简要/丰富版 12 列主表、极速版三列、TXT/M3U8 导出和现有授权安全边界。
+- 严格保留两轮 Markdown 问卷、逐曲平台验证、版本识别、录音级去重、简要/丰富版 12 列主表、极速版三列、TXT/W4DJ 导出和现有授权安全边界。
 - 丰富版在 Phase A 仍为四视图；只把现有“流行度优先”语义改名为“熟悉度与发现感优先”，不增加“DJ 品味优先”视图。
 
 **后续已确认增量：** 简要版和丰富版在最终深度核验阶段记录可靠来源的调性，并在报告后的明确肯定下提供五度圈重排。显示标准调名 / Camelot；丰富版只重排动态综合版，未知或冲突调性保留在末尾；最多给出 5 组需试听确认的 double drop 候选。极速版保持三列和既有时间合同。完整简要版和丰富版的“选歌碎碎念”各增加一条半结构化创意接歌建议；丰富版只从动态综合版取材，五度圈重排后保留原文，不伪造波形或精确结构。
@@ -228,7 +228,7 @@ Expected: 地区来源可见、语言和市场独立、简要/丰富版 12 列�
 
 第一，如果愿意，您可以用自然语言回复我选歌情况，这会丰富您的私人选歌偏好，让推荐更准。回复包括但不限于「`skream的歌不错，但我这次因为客群的关系没放`/`我不喜欢跳楼机，以后别再推了`/`我这次打了这些歌（配图/表）`」
 
-第二，您可以导出歌单，直接回复`导出txt`或者`导出m3u8`即可
+第二，您可以导出歌单或交接给 W4DJ，直接回复`导出txt`或者`导出w4dj`即可
 ~~~
 
 反馈邀请与本地导出都属于报告后的可选动作，不是第三轮需求收集。私人记忆状态、本轮反馈、长期画像、缺失信息和来源只后台记录，不在默认输出中展示。
@@ -239,11 +239,11 @@ Expected: 地区来源可见、语言和市场独立、简要/丰富版 12 列�
 - [ ] 将 Phase A 的记忆状态、反馈状态、缺失信息和来源改为后台记录，不在默认报告中展示或提示。
 - [ ] 保留自然语言反馈的低认知负载入口，但只在当前会话自动生效；长期档案必须经过摘要确认。
 - [ ] 在 report-template.md 固定“选歌碎碎念”和“下一步”，移除独立“缺失与不确定信息”“来源”“导出”栏目。
-- [ ] 在 export.md 固定 `导出txt` / `导出m3u8` 指令，同时保持导出状态机、UTF-8、顺序、去重、直接链接、M3U8 安全和不覆盖旧文件规则不变。
+- [ ] 在 export.md 固定 `导出txt` / `导出w4dj` 指令，同时保持导出状态机、UTF-8、顺序、去重、直接链接和不覆盖旧文件规则不变。
 - [ ] 运行检查：
 
 ~~~bash
-rg -n '下一步|选歌碎碎念|导出txt|导出m3u8|不是第三轮需求收集|不算第三轮需求收集' SKILL.md references/report-template.md references/export.md
+rg -n '下一步|选歌碎碎念|导出txt|导出w4dj|不是第三轮需求收集|不算第三轮需求收集' SKILL.md references/report-template.md references/export.md
 ~~~
 
 Expected: 三份文档的阶段状态、可选性、接歌建议边界和导出顺序一致。
@@ -287,7 +287,7 @@ Expected: 全部退出码为 0，无 JSON 错误、重复 ID 或 whitespace erro
 
 ~~~bash
 rg -n '严格两轮|目标国家 / 地区|熟悉度与发现感|时代与经典|four_views' SKILL.md README.md references/report-template.md
-rg -n '逐曲|version_label|dedupe_key|12 列|调性|五度圈|TXT|M3U8|exclusive|forbidden' SKILL.md references README.md
+rg -n '逐曲|version_label|dedupe_key|12 列|调性|五度圈|TXT|W4DJ|exclusive|forbidden' SKILL.md references README.md
 rg -n 'DJ 品味优先版' SKILL.md README.md references
 ~~~
 

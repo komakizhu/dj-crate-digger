@@ -45,7 +45,7 @@ First batch complete. Continuing to fill the playlist.
 
 第一，如果愿意，您可以用自然语言回复我选歌情况，这会丰富您的私人选歌偏好，让推荐更准。回复包括但不限于「`skream的歌不错，但我这次因为客群的关系没放`/`我不喜欢跳楼机，以后别再推了`/`我这次打了这些歌（配图/表）`」
 
-第二，您可以导出歌单，直接回复`导出txt`或者`导出m3u8`即可
+第二，您可以导出歌单或交接给 W4DJ，直接回复`导出txt`或者`导出w4dj`即可
 
 ```
 
@@ -62,7 +62,7 @@ First batch complete. Continuing to fill the playlist.
 
 First, if you want, reply in natural language with how the selections worked for you. This helps refine your private selection preferences. For example: “I like Skream, but I did not play it for this crowd” / “I do not like Jumping Machine; do not recommend it again” / “These are the tracks I played (image/list).”
 
-Second, reply `export txt` or `export m3u8` to export the playlist.
+Second, reply `export txt` or `export w4dj` to export or hand off this recommendation.
 ```
 
 超过 50 首时，中文最终标题固定为 `# 极速版（X/50；单次上限 50 首）`；英文最终标题固定为 `# Fast Mode (X/50; single-request limit: 50 tracks)`。如果宿主不支持中间消息，中文首批标题固定为 `# 极速版首批（X/50；单次上限 50 首）`，英文首批标题固定为 `# Fast Mode First Batch (X/50; single-request limit: 50 tracks)`；这两者仍是首批，不得写成最终交付。
@@ -88,7 +88,7 @@ Second, reply `export txt` or `export m3u8` to export the playlist.
 - 情绪：...
 - SET 能量级或能量走势：...
 - 平台与链接要求：...
-- 平台策略：允许 ...；禁用 ...；exclusive / preferred / cross-platform
+- 平台策略：允许 ...；禁用 ...；exclusive / preferred / cross-platform；单平台未写回退词时为 exclusive
 - 导出意图：未请求 / 仅解释 / 准备 / 已确认执行
 - 导出目标：未指定 / [用户指定平台]
 - 数量口径：目标 ... 首；候选不足时实际 ... 首
@@ -160,7 +160,7 @@ Second, reply `export txt` or `export m3u8` to export the playlist.
 
 第一，如果愿意，您可以用自然语言回复我选歌情况，这会丰富您的私人选歌偏好，让推荐更准。回复包括但不限于「`skream的歌不错，但我这次因为客群的关系没放`/`我不喜欢跳楼机，以后别再推了`/`我这次打了这些歌（配图/表）`」
 
-第二，您可以导出歌单，直接回复`导出txt`或者`导出m3u8`即可
+第二，您可以导出歌单或交接给 W4DJ，直接回复`导出txt`或者`导出w4dj`即可
 
 第三，需要我根据五度圈原则帮您排列set顺序吗？
 
@@ -174,7 +174,7 @@ Second, reply `export txt` or `export m3u8` to export the playlist.
 - 极速版的“链接 / Link”单元格只能包含一条符合平台策略、逐曲核验的直接页；不得并列备用链接。
 - 链接文字使用允许的平台名，指向具体曲目页；preferred 模式按用户平台顺序排列。
 - 同一曲目有多个允许的平台链接时，`composite` / `four_views` 可以并列显示，但只占一个曲目位置；这条多链接规则不适用于极速版。
-- exclusive 模式只显示目标平台直接链接；其他平台只能在内部验证，不放进用户报告。
+- exclusive 模式只显示目标平台直接链接；其他平台只能在内部验证，不放进用户报告，也不能作为回退或补位。
 - 不使用搜索结果页、首页或无法确认内容的短链接。
 - 核验来源保存在内部来源记录中，默认不展示独立来源栏目；用户明确追问时，再从该记录回答对应事实。
 

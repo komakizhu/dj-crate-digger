@@ -284,12 +284,12 @@
       "id": 23,
       "name": "post-report-local-export-offer",
       "prompt": "/dj-crate-digger 为周五酒吧 House set 找 10 首歌；只要简要版。",
-      "expected_output": "先完成并输出选歌建议，再在下一步提示用户反馈、直接回复 `导出txt` 或 `导出m3u8`，并提供可选五度圈排序邀请；需求收集期间不提前询问，也不在用户确认前生成文件。",
+      "expected_output": "先完成并输出选歌建议，再在下一步提示用户反馈、直接回复 `导出txt` 或 `导出w4dj`，并提供可选五度圈排序邀请；需求收集期间不提前询问，也不在用户确认前生成文件。",
       "expectations": [
-        "TXT/M3U8 导出询问出现在完整推荐报告之后",
-        "下一步直接提供 `导出txt` 和 `导出m3u8` 指令，不展示合并或拒绝导出的选项列表；五度圈邀请保持单句可选动作",
+        "TXT/W4DJ 导出询问出现在完整推荐报告之后",
+        "下一步直接提供 `导出txt` 和 `导出w4dj` 指令，不展示合并或拒绝导出的选项列表；五度圈邀请保持单句可选动作",
         "导出询问不被当成第三轮需求收集",
-        "用户确认前 local_export.status 不超过 offered，且没有创建文件",
+        "用户确认前 local_export.status 和 w4dj_export.status 不超过 offered，且没有创建文件",
         "默认导出最终综合版，不把平台歌单写入误当成本地文件导出"
       ]
     },
@@ -304,19 +304,6 @@
         "每行包含 Artist、官方完整 Track Title/Version 和直接曲目或发行链接",
         "没有直接链接的曲目不写入，并在导出结果中列出跳过原因",
         "文件使用 UTF-8 并返回可点击的本地文件链接"
-      ]
-    },
-    {
-      "id": 25,
-      "name": "m3u8-link-playlist-safety",
-      "prompt": "/dj-crate-digger 找一套 5 首 Spotify 或 SoundCloud 均可的凌晨 House set，报告完成后导出 M3U8。",
-      "expected_output": "用户确认后生成 UTF-8 Extended M3U/M3U8 链接播放列表，保留推荐顺序并使用可用时长；明确平台网页链接不等于原始音频流，不抓取受保护流。",
-      "expectations": [
-        "M3U8 以 #EXTM3U 开头，并使用 #PLAYLIST、#EXTINF 和 URL 行",
-        "已知时长以秒写入 #EXTINF，未知时使用 -1",
-        "M3U8 只写符合平台策略的已验证链接，不出现禁用平台",
-        "Spotify/SoundCloud 等平台曲目页被标注为链接播放列表，不冒充可直接播放的原始 .m3u8 流",
-        "无链接曲目被跳过并透明报告，用户确认前不生成文件"
       ]
     },
     {
@@ -411,7 +398,7 @@
       "expectations": [
         "丰富版恰好输出风格、场景、熟悉度与发现感、动态综合四个视角，共享同一已验证去重候选池",
         "综合主表仍严格保持歌名、艺术家、专辑/EP、风格、BPM、调性、歌曲时长、能量级、发行时间、简介、选择原因、链接 12 列",
-        "TXT/M3U8 导出指令在完整报告之后出现，不能插入第一轮或第二轮问卷",
+        "TXT/W4DJ 导出指令在完整报告之后出现，不能插入第一轮或第二轮问卷",
         "自然语言反馈邀请在完整报告后的下一步区域出现，导出与反馈均不被计为第三轮需求收集",
         "默认报告不出现独立的缺失与不确定信息、来源或导出栏目",
         "不输出 Phase C 的 DJ 品味优先视图、不启用长期记忆，也不要求外部平台适配器"
@@ -564,7 +551,7 @@
       "expectations": [
         "中文首批使用 # 极速版首批（X/N）及固定续跑句",
         "中文最终使用 # 极速版（X/N），并且只有最终显示下一步",
-        "简要版、丰富版、两轮 Markdown 问卷、TXT/M3U8 导出和安全边界保持不变"
+        "简要版、丰富版、两轮 Markdown 问卷、TXT/W4DJ 导出和安全边界保持不变"
       ]
     },
     {
@@ -678,7 +665,7 @@
         "五度圈全局优先于原 Warm Up、Groove、Peak、Closing 段落",
         "基础兼容优先：同码、同字母 ±1、同编号 A/B；同字母 ±2 只作实验性兜底",
         "重排不改变曲目集合、版本、dedupe_key、艺人比例或平台链接",
-        "TXT/M3U8 后续使用重排后的最终顺序"
+        "TXT/W4DJ 后续使用重排后的最终顺序"
       ]
     },
     {
@@ -725,7 +712,7 @@
       "expected_output": "极速版仍为严格三列，不追查或展示调性，也不显示五度圈邀请。",
       "expectations": [
         "极速版保留原三列表格、单通道召回、验证门槛和时间预算",
-        "极速版最终下一步只包含自然语言反馈和导出指令",
+        "极速版最终下一步包含自然语言反馈、TXT/W4DJ 导出指令，但不包含五度圈邀请",
         "不自动进入调性补查或后置 harmonic reorder"
       ]
     },
@@ -886,6 +873,120 @@
         "必须是 `填写规则为：`，不能改成 `填写规则：`",
         "必须保持模板规定的 AI 大小写、标点、分行和示例原文",
         "17 个示例值必须继续使用行内反引号"
+      ]
+    },
+    {
+      "id": 75,
+      "name": "single-platform-is-exclusive",
+      "prompt": "/dj-crate-digger 完成两轮问卷。第二轮的平台与链接要求只填写：网易云。",
+      "expected_output": "平台策略解析为 exclusive，最终只搜索、验证和输出网易云直接链接；Spotify、Apple Music 和默认平台不得作为回退。",
+      "expectations": [
+        "单独填写一个平台且没有优先/备用/回退词时，platform_policy.mode 为 exclusive",
+        "allowed、priority 和 link_priority 不隐式加入其他平台",
+        "没有网易云直接页的曲目列入目标平台缺失，不用其他平台补位"
+      ]
+    },
+    {
+      "id": 76,
+      "name": "single-platform-exclusive-synonyms",
+      "prompt": "/dj-crate-digger 用户分别使用“网易云作为唯一平台”“仅限网易云”“只使用网易云”“只在网易云”“只要网易云”“仅接受网易云”表达平台要求。",
+      "expected_output": "上述表达全部解析为 exclusive，最终报告不出现其他平台链接或回退来源。",
+      "expectations": [
+        "唯一平台、仅限、只使用、只在、只要、仅接受均是独占语义",
+        "exclusive 的目标平台缺失时透明报告缺口而不是换平台",
+        "禁止将这些词误读成 preferred 或普通平台偏好"
+      ]
+    },
+    {
+      "id": 77,
+      "name": "explicit-platform-priority-allows-fallback",
+      "prompt": "/dj-crate-digger 第二轮平台与链接要求：网易云优先，Spotify 备用。",
+      "expected_output": "平台策略解析为 preferred，只在网易云和 Spotify 中按声明顺序搜索、验证和回退。",
+      "expectations": [
+        "网易云是 priority/link_priority 第一项，Spotify 是允许的次级平台",
+        "不把 Apple Music、SoundCloud 或默认顺序加入 allowed",
+        "仅当网易云不可用或缺曲时才使用 Spotify，并标明实际平台"
+      ]
+    },
+    {
+      "id": 78,
+      "name": "exclusive-platform-output-guard",
+      "prompt": "/dj-crate-digger 用户要求只接受网易云；若某首歌只有 Spotify 或 Apple Music 页面，请继续完成验证并生成报告。",
+      "expected_output": "只有存在网易云直接页的曲目进入最终表；仅有其他平台页面的曲目进入目标平台缺失，不输出其链接。",
+      "expectations": [
+        "其他平台可以作为内部核验线索，但不能成为 exclusive 的用户可见播放链接",
+        "不使用搜索结果页、平台首页或未核验链接补足数量",
+        "报告准确说明实际可交付数量与目标平台缺口"
+      ]
+    },
+    {
+      "id": 79,
+      "name": "fast-single-platform-hard-filter",
+      "prompt": "/dj-crate-digger 选择极速版，平台与链接要求只填写网易云。",
+      "expected_output": "极速版仍使用独立三列表和既定时间预算，但网易云 exclusive 是硬过滤条件，不因速度要求改用 Spotify。",
+      "expectations": [
+        "fast 的候选召回和最终链接只面向网易云",
+        "候选不足时减少数量，不降低平台验证门槛",
+        "三列输出中的每条链接都是网易云逐曲核验直接页"
+      ]
+    },
+    {
+      "id": 83,
+      "name": "w4dj-entry-all-output-modes",
+      "prompt": "/dj-crate-digger 分别用极速版、简要版和丰富版完成推荐；报告结束后回复导出w4dj。",
+      "expected_output": "三种模式都在报告后的下一步提供 W4DJ 交接入口，并按最终结果生成 UTF-8 `.w4dj` JSON，不增加第三轮需求收集。",
+      "expectations": [
+        "极速版、简要版、丰富版的 output_mode 分别为 fast、composite、four_views",
+        "简要版使用综合表，丰富版使用动态综合版，极速版使用最终 fast 表，不拼接重复视角",
+        "导出w4dj 只在完整报告后的下一步出现，不插入第一轮或第二轮问卷",
+        "w4dj_export.status 在确认后为 confirmed，成功写入后为 generated"
+      ]
+    },
+    {
+      "id": 84,
+      "name": "w4dj-schema-preserves-unknowns",
+      "prompt": "/dj-crate-digger 选择极速版，部分曲目的 BPM、调性和专辑没有可靠数据；报告结束后导出w4dj。",
+      "expected_output": "生成 schema v1 的 `.w4dj` JSON，未知元数据写为 null 或 unknown，不因交接格式要求而猜测。",
+      "expectations": [
+        "根字段包含 format=w4dj、format_version=1、export_id、created_at、playlist 和 tracks",
+        "tracks 保留 title、artist_display、artists、album_or_ep、version、duration、bpm、musical_key、platform_refs、dedupe_key 和 expected_filename_hint",
+        "未知 BPM、调性、专辑、平台 ID 或链接保持 null/unknown",
+        "JSON 结构通过 references/w4dj.schema.json 校验"
+      ]
+    },
+    {
+      "id": 85,
+      "name": "w4dj-preserves-final-order-version-and-dedupe",
+      "prompt": "/dj-crate-digger 简要版完成后用户确认按五度圈重排，再回复导出w4dj。",
+      "expected_output": "W4DJ 使用重排后的最终顺序，同时保留每首歌的版本、platform_refs 和 dedupe_key，不重新搜索或拼接丰富版专项视角。",
+      "expectations": [
+        "position 按重排后的最终顺序重新编号",
+        "官方版本名和 version 不被替换为其他版本，dedupe_key 不丢失",
+        "W4DJ 的曲目集合与最终报告一致，不因为交接导出新增重复录音",
+        "导出后的平台引用仍符合 platform_policy 和 link_priority"
+      ]
+    },
+    {
+      "id": 86,
+      "name": "w4dj-does-not-create-local-assets",
+      "prompt": "/dj-crate-digger 报告完成后回复导出w4dj；当前没有本地 MP3，也没有 Rekordbox 包。",
+      "expected_output": "只生成推荐数据交接，不创建音频、占位 MP3、本地最终文件名、二维码或网易云下载任务。",
+      "expectations": [
+        "W4DJ 不包含 local_audio_path 或绝对路径",
+        "expected_filename_hint 只是提示字段，不被当作本地文件名权威",
+        "Skill 不下载音频、不生成占位文件、不执行二维码或网易云下载动作",
+        "W4DJ 不生成本地文件或下载任务"
+      ]
+    },
+    {
+      "id": 87,
+      "name": "w4dj-no-file-write-manifest-only",
+      "prompt": "/dj-crate-digger 已完成丰富版报告，但宿主没有文件写入能力；用户回复导出w4dj。",
+      "expected_output": "返回等价的 W4DJ JSON manifest 和保存步骤，明确没有生成 `.w4dj` 文件。",
+      "expectations": [
+        "w4dj_export.status 为 manifest_only",
+        "不得声称已经创建本地文件、文件路径或下载链接",
+        "manifest 仍通过 schema v1，且保留最终动态综合版的顺序、版本、平台引用和 dedupe_key"
       ]
     }
   ]

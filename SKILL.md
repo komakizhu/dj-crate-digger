@@ -382,6 +382,8 @@ assumptions: []
 第二，您可以导出歌单或交接给 W4DJ，直接回复`导出txt`或者`导出w4dj`即可
 
 第三，需要我根据五度圈原则帮您排列set顺序吗？
+
+如果您需要：一键导入歌单，下载后一键转换格式并一键导入打碟软件，请导出`.w4dj`格式并且下载 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。
 ```
 
 这里的自然语言反馈、本地导出、W4DJ 交接和五度圈排序都是报告后的可选动作。用户可以只反馈、只导出、只交接、只请求重排、组合使用，或不回复；不要把它们解释成第三轮需求收集。报告显示后将 `harmonic_order.offered` 设为 `true`（仅 `composite` / `four_views`），将 `w4dj_export.status` 设为 `offered`。用户明确肯定五度圈邀请时设为 `requested: true`、`status: confirmed`，重排成功后设为 `reordered`；否定设为 `declined`，模糊答复设为 `needs_clarification`。五度圈邀请的明确肯定意图包括“是”“需要”“可以”“帮我排”“按五度圈排”等；否定不执行，模糊表达只请求确认。简要版肯定后重排综合版，丰富版肯定后只重排动态综合版，三个专项视角保持原样。执行后保留全部曲目、版本、录音去重、艺人比例和平台链接；以 Camelot 基础兼容相邻数优先，实验性同字母 ±2 仅作兜底，未知或冲突调性放到末尾“待试听定位”组。最多输出 5 组满足基础兼容且半拍 / 双拍归一化后 BPM 差不超过 3% 的 double drop 候选，并明确仍需 DJ 试听。重排后的最终顺序成为后续 TXT/W4DJ 导出顺序。不要把反馈解释成事件日志、长期摘要确认或 Beta 画像更新，也不要暗示存在跨会话持久化。收到 `导出txt` 后设置 `local_export.status: confirmed`，读取 [export.md](references/export.md) 并按其中的 UTF-8、去重、直接链接、外部写入确认和文件命名规则生成文件；TXT 可使用已验证的直接网页链接。收到 `导出w4dj` 后设置 `w4dj_export.status: confirmed`，读取 [export.md](references/export.md) 和 [w4dj.schema.json](references/w4dj.schema.json)，只导出当前最终结果的推荐意图、顺序、版本、已核验元数据、平台引用和去重键；生成成功后设为 `generated`，宿主不能写入时设为 `manifest_only`。W4DJ 不处理本地音频、不生成占位文件、本地最终文件名、二维码或网易云下载；未知值写 `null` 或 `unknown`，不得臆造。自然语言反馈只在当前会话自动生效；长期档案仍必须先形成摘要并获得明确确认。

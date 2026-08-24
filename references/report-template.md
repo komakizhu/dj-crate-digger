@@ -47,6 +47,8 @@ First batch complete. Continuing to fill the playlist.
 
 第二，您可以导出歌单或交接给 W4DJ，直接回复`导出txt`或者`导出w4dj`即可
 
+如果您需要：一键导入歌单，下载后一键转换格式并一键导入打碟软件，请导出`.w4dj`格式并且下载 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。
+
 ```
 
 英文最终：
@@ -63,6 +65,8 @@ First batch complete. Continuing to fill the playlist.
 First, if you want, reply in natural language with how the selections worked for you. This helps refine your private selection preferences. For example: “I like Skream, but I did not play it for this crowd” / “I do not like Jumping Machine; do not recommend it again” / “These are the tracks I played (image/list).”
 
 Second, reply `export txt` or `export w4dj` to export or hand off this recommendation.
+
+If you need one-click playlist import, format conversion after download, and one-click import into DJ software, export the `.w4dj` format and download [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB).
 ```
 
 超过 50 首时，中文最终标题固定为 `# 极速版（X/50；单次上限 50 首）`；英文最终标题固定为 `# Fast Mode (X/50; single-request limit: 50 tracks)`。如果宿主不支持中间消息，中文首批标题固定为 `# 极速版首批（X/50；单次上限 50 首）`，英文首批标题固定为 `# Fast Mode First Batch (X/50; single-request limit: 50 tracks)`；这两者仍是首批，不得写成最终交付。
@@ -163,6 +167,8 @@ Second, reply `export txt` or `export w4dj` to export or hand off this recommend
 第二，您可以导出歌单或交接给 W4DJ，直接回复`导出txt`或者`导出w4dj`即可
 
 第三，需要我根据五度圈原则帮您排列set顺序吗？
+
+如果您需要：一键导入歌单，下载后一键转换格式并一键导入打碟软件，请导出`.w4dj`格式并且下载 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。
 
 用户明确肯定后，简要版重排综合版；丰富版只重排动态综合版，三个专项视角保持原样。重排保留全部曲目、版本、录音去重和平台链接；未知或冲突调性的曲目放入末尾“待试听定位”组。最多列出 5 组满足基础 Camelot 兼容、每首均匹配自身版本调性证据且半拍 / 双拍归一化后 BPM 差不超过 3% 的 double drop 候选，并说明仍需 DJ 试听确认，不代表已完成双押验证。
 ```

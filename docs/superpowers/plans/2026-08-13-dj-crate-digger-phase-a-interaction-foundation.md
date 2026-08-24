@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (- [ ]) syntax for tracking.
 
-**Goal:** 在不引入长期私人画像、五视图排序或外部证据适配器的前提下，实现语言与目标市场分离、第一轮地区字段、第二轮熟悉度/经典字段，以及每次完整 SOP 后的“下一步”反馈和导出指令。
+**Goal:** 在不引入长期私人画像、五视图排序或外部证据适配器的前提下，实现语言与目标市场分离、第一轮地区与输出版本字段、第二轮熟悉度/经典字段，以及每次完整 SOP 后的“下一步”反馈和导出指令。
 
 **Architecture:** 继续使用现有 Markdown 指令型 Skill。第一轮和第二轮生成只服务当前会话的 Session Brief；目标市场带来源标记且明确不持久化。新字段通过兼容映射接入现有搜索与四视图排序，报告末尾进入“下一步”区域；记忆状态、反馈状态、缺失信息和来源只后台记录，不作为默认栏目展示。Phase A 不创建私人数据文件，也不声称已经具备 Phase B/C/D 能力。
 
@@ -92,6 +92,7 @@ Expected before implementation: 第一、三条没有完整命中；第二条仍
 目标国家 / 地区：
 核心声音方向：
 歌曲数量或 Set 时长：
+输出版本：
 其他限制：
 ~~~
 
@@ -102,7 +103,6 @@ Expected before implementation: 第一、三条没有完整命中；第二条仍
 速度 / BPM：
 熟悉度与发现感：
 时代与经典：
-输出版本：
 情绪：
 SET 能量级或能量走势：
 平台与链接要求：
@@ -124,7 +124,7 @@ era_classic_intent: ai        # contemporary | light_classic_anchors | new_old_b
 
 ### Steps
 
-- [ ] 在 SKILL.md 第一轮说明与 fenced Markdown 模板中加入“目标国家 / 地区”，位置固定在“场景”之后。
+- [ ] 在 SKILL.md 第一轮说明与 fenced Markdown 模板中加入“目标国家 / 地区”，位置固定在“场景”之后；输出版本放在歌曲数量或 Set 时长之后，并在第二轮移除。
 - [ ] 明确用户填写值优先；留空时只生成本轮临时市场。规则为：
 
   - 简体中文默认中国大陆。
@@ -140,7 +140,7 @@ era_classic_intent: ai        # contemporary | light_classic_anchors | new_old_b
 
 - [ ] 更新字段映射、解析清单、priority_order 和 selection_priority。familiarity_intent 投影到现有 popularity_fit；era_classic_intent 投影到现有 freshness_fit 或搜索约束。“少量经典锚点”只表示候选覆盖意图，不固定最终名额。
 - [ ] 在内部需求卡中加入上述六个字段；保留 scene_context.region 作为当前会话兼容字段，并说明其值来自 target_market、不会被写入长期数据。
-- [ ] 将 output_mode 设为 fast | composite | four_views；fast 使用独立三列路径，不复用简要版或丰富版。把现有第三专项视图及 ranking.md 的标签统一改为“熟悉度与发现感优先”，丰富版仍然只输出风格、场景、熟悉度与发现感、动态综合四个视图。
+- [ ] 将第一轮的 output_mode 设为 fast | composite | four_views；fast 使用独立三列路径，不复用简要版或丰富版。把现有第三专项视图及 ranking.md 的标签统一改为“熟悉度与发现感优先”，丰富版仍然只输出风格、场景、熟悉度与发现感、动态综合四个视图。
 - [ ] 保留旧式自然语言中的“流行度/热门/冷门”解析兼容性，但第二轮模板和需求摘要不再把经典与熟悉度混成一个字段。
 - [ ] 运行合同检查：
 

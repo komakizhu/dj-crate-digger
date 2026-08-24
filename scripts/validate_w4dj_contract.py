@@ -128,6 +128,29 @@ def source_contract_errors() -> list[str]:
     )
     errors = [f"source contract missing {fragment!r}" for fragment in required if fragment not in source]
 
+    concise_track_list_notice = (
+        "导出歌单名的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。"
+    )
+    old_track_list_notice = (
+        "导出歌单名的功能：输出标题“## 网易云歌单目录”，并在标题下方用 Markdown 代码围栏包住"
+    )
+    user_template_paths = (
+        ROOT / "SKILL.md",
+        ROOT / "README.md",
+        ROOT / "references" / "report-template.md",
+    )
+    for path in user_template_paths:
+        text = path.read_text(encoding="utf-8")
+        if concise_track_list_notice not in text:
+            errors.append(f"{path.name}: missing concise track-list export notice")
+        if old_track_list_notice in text:
+            errors.append(f"{path.name}: contains the old verbose track-list export notice")
+
+    short_skill_link = "[dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)"
+    for path in (ROOT / "SKILL.md", ROOT / "references" / "report-template.md"):
+        if short_skill_link not in path.read_text(encoding="utf-8"):
+            errors.append(f"{path.name}: repository tutorial link must use the short label")
+
     chinese_template_paths = (
         ROOT / "SKILL.md",
         ROOT / "references" / "report-template.md",

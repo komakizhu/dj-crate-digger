@@ -27,7 +27,7 @@ def extract_template(skill_text: str, round_number: int) -> str:
 
 
 def audit_shape(text: str, round_number: int) -> list[str]:
-    expected_inline_count = {1: 17, 2: 33}[round_number]
+    expected_inline_count = {1: 20, 2: 30}[round_number]
     errors: list[str] = []
     inline_count = len(INLINE_CODE_RE.findall(text))
     if inline_count != expected_inline_count:
@@ -43,6 +43,20 @@ def audit_shape(text: str, round_number: int) -> list[str]:
         errors.append(f"round {round_number}: authoring delimiters leaked into user output")
     if round_number == 1 and "填写规则为：" not in text:
         errors.append("round 1: missing exact literal '填写规则为：'")
+    if round_number == 1:
+        if text.count("输出版本：") != 2:
+            errors.append("round 1: output version must appear in the prompt and fill-in block")
+        if "「`极速版`：快速输出playlist，但是质量会下降」" not in text:
+            errors.append("round 1: missing fast output-version definition")
+        if "「`简要版`：只给一个综合的playlist」" not in text:
+            errors.append("round 1: missing composite output-version definition")
+        if "「`丰富版`：根据您选择的风格、场景、熟悉度与发现感分别提供建议，并最终输出成简要版」" not in text:
+            errors.append("round 1: missing four-views output-version definition")
+        if text.find("输出版本：") > text.find("其他限制："):
+            errors.append("round 1: output version must precede other restrictions")
+    else:
+        if "输出版本" in text:
+            errors.append("round 2: output version must be collected in round 1")
     return errors
 
 

@@ -74,6 +74,10 @@ description: "Use when a user asks to discover, curate, rank, sequence, arrange,
 「参考艺人、参考曲目以及参考流派。如：`Skrillex` 的 `Tears`，`现代UK_Bass`流派」
 歌曲数量或 Set 时长：
 「如：`20 首` / `60 分钟`」
+输出版本：
+「`极速版`：快速输出playlist，但是质量会下降」
+「`简要版`：只给一个综合的playlist」
+「`丰富版`：根据您选择的风格、场景、熟悉度与发现感分别提供建议，并最终输出成简要版」
 其他限制：
 「如：`不要口水歌`、`不要人声`、`只要Remix`；可以不填」
 
@@ -82,6 +86,7 @@ description: "Use when a user asks to discover, curate, rank, sequence, arrange,
 目标国家 / 地区：
 核心声音方向：
 歌曲数量或 Set 时长：
+输出版本：
 其他限制：
 ```
 <!-- INTAKE_TEMPLATE_ROUND_1_ZH_CN_END -->
@@ -96,10 +101,6 @@ description: "Use when a user asks to discover, curate, rank, sequence, arrange,
 「`热门熟悉`/`平衡`/`小众发现`」
 时代与经典：
 「`当代为主`/`少量经典锚点`/`新旧桥接`/`经典优先`」
-输出版本：
-「`极速版`：快速输出playlist，但是质量会下降」
-「`简要版`：只给一个综合的playlist」
-「`丰富版`：根据您选择的风格、场景、熟悉度与发现感分别提供建议，并最终输出成简要版」
 情绪：
 「如：`怀旧` / `阴冷` / `浪漫`」
 SET 能量级或能量走势：
@@ -113,7 +114,6 @@ SET 能量级或能量走势：
 速度 / BPM：
 熟悉度与发现感：
 时代与经典：
-输出版本：
 情绪：
 SET 能量级或能量走势：
 平台与链接要求：
@@ -121,7 +121,7 @@ SET 能量级或能量走势：
 ```
 <!-- INTAKE_TEMPLATE_ROUND_2_ZH_CN_END -->
 
-发送问卷前在内部执行一次完整性检查，不向用户展示检查过程。简体中文第一轮必须精确匹配第一轮模板，并包含 17 个行内代码片段；第二轮必须精确匹配第二轮模板，并包含 33 个行内代码片段。第二轮的能量字段必须保留完整文字 `「如：`低`/`高`；`平稳` / `过山车`」`，不能删掉 `如：` 或压缩为只有选项。每轮都必须恰好有一个 `markdown` 填写代码块。若任一固定文本、反引号、字段、顺序或代码块不匹配，丢弃草稿并从对应模板重新生成整段回复，不能只补缺失部分。
+发送问卷前在内部执行一次完整性检查，不向用户展示检查过程。简体中文第一轮必须精确匹配第一轮模板，并包含 20 个行内代码片段；第二轮必须精确匹配第二轮模板，并包含 30 个行内代码片段。第二轮的能量字段必须保留完整文字 `「如：`低`/`高`；`平稳` / `过山车`」`，不能删掉 `如：` 或压缩为只有选项。每轮都必须恰好有一个 `markdown` 填写代码块。若任一固定文本、反引号、字段、顺序或代码块不匹配，丢弃草稿并从对应模板重新生成整段回复，不能只补缺失部分。
 
 第一轮字段映射到需求卡：
 
@@ -129,6 +129,7 @@ SET 能量级或能量走势：
 - 目标国家 / 地区 → `target_market`；若用户明确填写则 `target_market_source: user_provided`、`persist_target_market: false`
 - 核心声音方向 → `genre`、`artist_references`、`track_references`
 - 歌曲数量或 Set 时长 → `track_count` 或 `set_duration_minutes`；如果同时填写，以明确的歌曲数量为数量目标，并用时长作为编排约束
+- 输出版本 → `output_mode`：极速版 `fast`、简要版 `composite`、丰富版 `four_views`
 - 其他限制 → `explicit_policy`、完整官方曲名限定、商业度和 `assumptions`
 
 `communication_language` 独立于地区推断。标题、问卷、状态与解释跟随用户当前输入语言；曲名、艺人、平台名以及官方曲名中的版本限定保留原文。地区推断只影响当前轮次的 `target_market`，不反向改写沟通语言。
@@ -171,7 +172,7 @@ SET 能量级或能量走势：
 - 如果明确写出“优先 / 最好有 / 备用 / 可回退”等表达，则将首选与回退关系按用户原话记录，并标明实际来源；没有这些词时，多平台仍按填写顺序处理，不扩大平台范围。
 - 用户写“不要某平台 / 不提供某平台”时，该平台必须从搜索、引用和输出中排除；“导出到 X”仍只设置 `export_platform`，不改变搜索平台策略。
 
-两轮答复都必须保留对应的 Markdown 模板；第二轮答复后设置 `intake_status: ready`。两轮之外不追加普通需求问题。歌曲数量和 Set 时长都没有填写时，先保留 `track_count: null`；第二轮确认输出模式后再套用该模式的默认数量：`fast` 为 15 首，`composite` 为 30 首，`four_views` 按既有专项视图和动态综合规则执行。若只填写 Set 时长，也要在输出模式确定后按该模式规则用时长估算目标数量。
+两轮答复都必须保留对应的 Markdown 模板；第二轮答复后设置 `intake_status: ready`。两轮之外不追加普通需求问题。歌曲数量和 Set 时长都没有填写时，先保留 `track_count: null`；第一轮确认输出模式后再套用该模式的默认数量：`fast` 为 15 首，`composite` 为 30 首，`four_views` 按既有专项视图和动态综合规则执行。若只填写 Set 时长，也要在输出模式确定后按该模式规则用时长估算目标数量。
 
 ### 1. 解析需求
 
@@ -255,7 +256,7 @@ transition_advice:
   fallback_reason: none   # none | no_usable_pair | metadata_missing | candidate_shortage
   text: ""
   preserve_after_harmonic_reorder: true
-track_count: null  # 在第二轮确认 output_mode 前保留 null / unset，不能预设为 30
+track_count: null  # 在第一轮确认 output_mode 前保留 null / unset，不能预设为 30
 priority_order: []       # style | scene | bpm | mood | energy | familiarity | era_classic | popularity | freshness；不含平台顺序
 intake_mode: markdown_fallback  # 固定使用可复制 Markdown；保留 interactive 仅作兼容标记
 intake_status: collecting # collecting | ready | blocked
@@ -272,7 +273,7 @@ explicit_policy: unknown
 assumptions: []
 ```
 
-第二轮确认 `output_mode` 后才解析数量：`fast` 在 `track_count: null` / unset 时采用内部目标 15 首，最终允许 10–20 首且首批即最终；`composite` 未填写时默认 30 首；`four_views` 维持既有专项版各 10 首、动态综合版默认 30 首。用户明确指定数量时，简要版把它解释为综合版目标数；丰富版的动态综合版使用用户指定数量。极速版使用独立数量规则：明确请求不超过 20 首时，首批目标等于请求数量并直接完成；明确请求 21–50 首时，首批目标为 15 首（因时限可在 10–20 首之间截断）并继续补齐；`final_target = min(user_target, 50)`，超过时按 50 首执行并在标题中标明上限。任何版本候选不足都显示实际数量，不复制凑数。
+第一轮确认 `output_mode` 后才解析数量：`fast` 在 `track_count: null` / unset 时采用内部目标 15 首，最终允许 10–20 首且首批即最终；`composite` 未填写时默认 30 首；`four_views` 维持既有专项版各 10 首、动态综合版默认 30 首。用户明确指定数量时，简要版把它解释为综合版目标数；丰富版的动态综合版使用用户指定数量。极速版使用独立数量规则：明确请求不超过 20 首时，首批目标等于请求数量并直接完成；明确请求 21–50 首时，首批目标为 15 首（因时限可在 10–20 首之间截断）并继续补齐；`final_target = min(user_target, 50)`，超过时按 50 首执行并在标题中标明上限。任何版本候选不足都显示实际数量，不复制凑数。
 
 ### 2. 决定是否澄清
 
@@ -315,7 +316,7 @@ assumptions: []
 
 `output_mode: fast` 是独立极速交付：只定义一次轻量排序函数，主导向匹配 60%、其他本轮约束 25%、艺人、完整歌名变体和声音多样性 15%；首批和续跑候选均调用同一函数，不能重新解释需求或切换权重。明确限制、禁用平台、exclusive 平台和完整官方歌名要求始终是硬过滤条件。极速版单表按录音键零重复；`artist_cap = max(1, floor(0.15 × actual_target))`，其中 `actual_target` 是当前交付表的有效目标：首批取 `min(first_batch_target, 首批已验证可交付行数)`，最终取 `min(final_target, 最终已验证可交付行数)`。参考艺人不豁免，用户明确请求艺人专题时才可豁免。候选不足或零有效结果时减少实际数量或交付零条，绝不用未核验曲目、错误歌名或重复曲目凑数。
 
-`output_mode: composite` 是默认交付，输出一张简要版综合表；只有用户在第二轮填写“丰富版”时，才输出风格、场景、熟悉度与发现感和动态综合四个视角。报告过长时压缩每首理由，不要静默改变用户选择。选择丰富版时，所有版本共享同一个已验证、已去重候选池，分别排序：
+`output_mode: composite` 是默认交付，输出一张简要版综合表；只有用户在第一轮填写“丰富版”时，才输出风格、场景、熟悉度与发现感和动态综合四个视角。报告过长时压缩每首理由，不要静默改变用户选择。选择丰富版时，所有版本共享同一个已验证、已去重候选池，分别排序：
 
 1. 风格优先版：默认 10 首
 2. 场景优先版：默认 10 首
@@ -385,9 +386,9 @@ assumptions: []
 
 具体操作教程可以查看
 
-[https://github.com/komakizhu/dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)
+[dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)
 
-导出歌单名的功能：输出标题“## 网易云歌单目录”，并在标题下方用 Markdown 代码围栏包住每行一条“歌名 - 歌手”（歌名与歌手之间使用短横线分隔）的可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
+导出歌单名的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
 
 第三，需要我根据五度圈原则帮您排列set顺序吗？
 ```
@@ -436,8 +437,8 @@ Official Title - Official Artist
 提交答案前确认：
 
 - [ ] 需求收集严格完成两轮，`intake_status` 为 `ready`；没有第三轮普通追问
-- [ ] 第一轮只使用场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、其他限制五个字段
-- [ ] 第二轮只使用具体风格、BPM、熟悉度与发现感、时代与经典、输出版本、情绪、SET 能量级或能量走势、平台与链接要求、其他九个字段
+- [ ] 第一轮只使用场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、输出版本、其他限制六个字段
+- [ ] 第二轮只使用具体风格、BPM、熟悉度与发现感、时代与经典、情绪、SET 能量级或能量走势、平台与链接要求、其他八个字段
 - [ ] 两轮各有且只有一个可复制的 Markdown 代码块；代码块字段与外部说明一致
 - [ ] 第一轮固定说明只保留复制、自由填写或不填；第二轮选项不加入“AI判断”
 - [ ] 核心声音方向、数量/时长、完整官方歌名限定和平台约束正确写入需求卡
@@ -445,7 +446,7 @@ Official Title - Official Artist
 - [ ] 平台允许/首选/禁用规则与内容排序分开，禁用平台没有出现在链接或来源中
 - [ ] 普通模式每个允许平台至少完成一轮发现；极速版按首批目标、`fast_pool_goal` 或 50 秒停止扩池，不要求平台轮询
 - [ ] 候选池按目标数使用自适应预算，最终曲目与候选记录均有可追溯证据
-- [ ] 第二轮“极速版”映射为 `fast`，不复用 `composite` 或 `four_views`；`composite` 只输出综合版；`four_views` 才输出四种版本并来自同一候选池
+- [ ] 第一轮“极速版”映射为 `fast`，不复用 `composite` 或 `four_views`；`composite` 只输出综合版；`four_views` 才输出四种版本并来自同一候选池
 - [ ] 极速版只使用一个主导向和最多两个同向查询，遵循 60/25/15 轻量排序、候选池、50 秒停止扩池和首批 50–70 秒主动计算预算；续跑另行计时，不纳入首批 SLA
 - [ ] 极速版首批与最终严格三列；首批只在支持中间消息时声明继续补齐，最终保留首批曲目且只有最终显示“下一步”
 - [ ] 简要版和丰富版主表严格使用 12 个指定栏目，其中 BPM 后为调性；极速版仍严格三列

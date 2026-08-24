@@ -2,7 +2,7 @@
 
 报告语言跟随 `communication_language` / 当前沟通语言；曲名（包括官方歌名中的 Remix、Edit、Live、Dub、Extended Mix 等限定）、艺人和平台名保留官方原文，不另设 Mix/Version 列。极速版的中文与英文标题、表头和状态句使用下列精确合同；其它语言按这些槽位本地化。
 
-使用以下结构。简要版是默认交付；用户在第二轮填写“丰富版”时才输出风格、场景、熟悉度与发现感和动态综合四个视角，并最终提供一份综合结果。用户填写“简要版”时只输出一张综合表，但仍保留验证链接和假设。
+使用以下结构。简要版是默认交付；用户在第一轮填写“丰富版”时才输出风格、场景、熟悉度与发现感和动态综合四个视角，并最终提供一份综合结果。用户填写“简要版”时只输出一张综合表，但仍保留验证链接和假设。
 
 用户填写“极速版”时，改用以下独立结构，不输出本文件其余报告部分：
 
@@ -51,9 +51,9 @@ First batch complete. Continuing to fill the playlist.
 
 具体操作教程可以查看
 
-[https://github.com/komakizhu/dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)
+[dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)
 
-导出歌单名的功能：输出标题“## 网易云歌单目录”，并在标题下方用 Markdown 代码围栏包住每行一条“歌名 - 歌手”（歌名与歌手之间使用短横线分隔）的可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
+导出歌单名的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
 
 ```
 
@@ -180,9 +180,9 @@ The track-list output is for manual import into NetEase Cloud Music; it cannot i
 
 具体操作教程可以查看
 
-[https://github.com/komakizhu/dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)
+[dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)
 
-导出歌单名的功能：输出标题“## 网易云歌单目录”，并在标题下方用 Markdown 代码围栏包住每行一条“歌名 - 歌手”（歌名与歌手之间使用短横线分隔）的可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
+导出歌单名的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
 
 第三，需要我根据五度圈原则帮您排列set顺序吗？
 

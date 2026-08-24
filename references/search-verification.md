@@ -15,7 +15,7 @@
 
 推荐类信息可能变化，使用映射到 `web_search` 的联网能力获取当前结果，并使用映射到 `open_page` 的页面能力逐条核验候选。优先并行搜索不同查询，但最终逐条核验候选。
 
-平台策略要落实到实际检索，不只是写在报告里：`cross-platform` 和 `preferred` 模式下，对每个允许平台至少完成一轮发现，再按轮次继续补充候选；`exclusive` 模式只建立目标平台的可交付候选。用户给出的平台顺序用于主链接和回退链接，不能让首选平台提前满足停止条件后跳过其他允许平台。候选在任一平台已有可访问、版本吻合的直接页时，可以将该页设为主链接；其他来源作为补充证据，不得复制同一录音占用多个位置。
+平台策略要落实到实际检索，不只是写在报告里：`cross-platform` 和 `preferred` 模式下，对每个允许平台至少完成一轮发现，再按轮次继续补充候选；`exclusive` 模式只建立目标平台的可交付候选。用户给出的平台顺序用于主链接和回退链接，不能让首选平台提前满足停止条件后跳过其他允许平台。候选在任一平台已有可访问、完整歌名吻合的直接页时，可以将该页设为主链接；其他来源作为补充证据，不得复制同一录音占用多个位置。
 
 `target_market` 只影响当前轮次的搜索上下文、编辑/平台来源选择、熟悉度解释和地区可用性判断，不改变 `communication_language`，也不写成长期偏好。用户明确填写的国家或地区永远优先；`target_market_source: language_inferred` 只能作为宽泛检索线索，用来扩展平台、厂牌、媒体或本地场景关键词，不能在报告里写成用户已确认事实。
 
@@ -73,7 +73,7 @@
 - Discogs
 - 权威音乐媒体或厂牌目录
 
-调性是额外的事实字段，只有 A 级来源中明确展示、且与同一录音版本对应的 Key 才能作为最终调性证据。Beatport、Beatsource 等 DJ 商店页面可直接提供标准调名；艺人、厂牌或发行商的明确版本元数据也可使用。A 级来源没有调性时，不得用 B/C 级来源、模型记忆或单一第三方音频分析站补齐。
+调性是额外的事实字段，只有 A 级来源中明确展示、且与同一录音及其完整官方歌名对应的 Key 才能作为最终调性证据。Beatport、Beatsource 等 DJ 商店页面可直接提供标准调名；艺人、厂牌或发行商的明确完整歌名元数据也可使用。A 级来源没有调性时，不得用 B/C 级来源、模型记忆或单一第三方音频分析站补齐。
 
 ### C：仅作为发现线索
 
@@ -81,7 +81,7 @@
 - 用户生成列表、论坛、社交帖子
 - 聚合站结果
 
-C 级来源不能单独证明曲目存在、版本正确或元数据准确。不要引用搜索结果页作为最终播放链接。
+C 级来源不能单独证明曲目存在、完整官方歌名正确或元数据准确。不要引用搜索结果页作为最终播放链接。
 
 ## 候选记录
 
@@ -90,11 +90,8 @@ C 级来源不能单独证明曲目存在、版本正确或元数据准确。不
 `musical_key` 只在 `composite` / `four_views` 的最终深度核验中追查；`fast` 候选不查、不展示，也不因调性缺失降低首批速度合同。
 
 ```yaml
-title: official title
+title: complete official title, including any official Remix/Edit/Live/Dub/Extended qualifier
 artist: official artist name
-version: original | remix | edit | live | unknown
-version_label: exact official version text | unknown
-version_kind: original | remix | dub | edit | instrumental | live | radio_edit | extended | other | unknown
 platforms:
   soundcloud: url | null
   apple_music: url | null
@@ -132,14 +129,13 @@ musical_key:
   camelot: 8A | null
   evidence_url: https://... | null
   evidence_type: authorized_dj_store | official_metadata | null
-  version_match: exact | mismatch | unknown
   status: verified | conflict | unknown
   checked_at: YYYY-MM-DD | unknown
 ```
 
-在内部候选表中保留每首的播放链接、实际查看过的页面字段、核验来源、`platform_match`、`availability`、`verification` 和去重键。`platforms` 是兼容字段，最终交付优先使用 `playback_urls`；`verification_sources` 只说明证据，不自动成为用户可用的播放链接。最终四个版本只从这张表生成；如果一首歌没有可追溯的记录，就不要凭记忆把它补进报告。
+在内部候选表中保留每首的播放链接、实际查看过的页面字段、核验来源、`platform_match`、`availability`、`verification` 和去重键。`platforms` 是兼容字段，最终交付优先使用 `playback_urls`；`verification_sources` 只说明证据，不自动成为用户可用的播放链接。最终四个视角只从这张表生成；如果一首歌没有可追溯的记录，就不要凭记忆把它补进报告。
 
-调性核验必须先确认 `version_label` 与证据页面相同，再记录 `musical_key`。保留来源原值，并规范化为小写调名；只对 major / minor 生成 Camelot。升降号等音异名可以转换为同一规范调名，其他来源冲突统一设为 `status: conflict`、`camelot: null`，报告显示“未知”。非 major / minor 调式保留 `source_value`，但不生成 Camelot，也不参与自动五度圈排序。调性未知不能阻止曲目入选，也不能因为某首调性已知而提高它的推荐分数。
+调性核验必须先确认证据页面展示的完整 `title` 与候选相同，再记录 `musical_key`。保留来源原值，并规范化为小写调名；只对 major / minor 生成 Camelot。升降号等音异名可以转换为同一规范调名，其他来源冲突统一设为 `status: conflict`、`camelot: null`，报告显示“未知”。非 major / minor 调式保留 `source_value`，但不生成 Camelot，也不参与自动五度圈排序。不同完整官方歌名不得互借调性证据；调性未知不能阻止曲目入选，也不能因为某首调性已知而提高它的推荐分数。
 
 ## 自适应候选池与验证预算
 
@@ -157,13 +153,13 @@ four_views: pool_goal = min(max(2 × final_target, final_target + 8, required_un
 
 后续人工/真实模型验收以目标客户端可用的中等推理模型进行 12 次冷启动：4 次短请求、4 次 30–50 首分段请求、2 次 exclusive 请求、2 次未填写数量请求。对每次运行的首批分别记录总耗时和网络等待并计算首批主动计算时间；验收目标是首批主动计算每次不超过 70 秒、中位数不超过 60 秒。30–50 首请求的后台续跑另行记录主动计算耗时，不纳入首批 50–70 秒 SLA，因为续跑本身允许跨批次继续读取同一查询结果。此仓库当前只固化协议和行为评测，未声称已经完成该 12 次运行。
 
-候选池阶段可以先记录搜索摘要、平台页面或权威来源，状态为 `partial` 或 `unknown`；只有进入任一最终版本的唯一录音键才进入深度核验队列。为链接失效、exclusive 平台缺失或版本冲突保留少量已核验备选。以下停止条件仅适用于 `composite` / `four_views`：
+候选池阶段可以先记录搜索摘要、平台页面或权威来源，状态为 `partial` 或 `unknown`；只有进入任一最终视角的唯一录音键才进入深度核验队列。为链接失效、exclusive 平台缺失或完整歌名冲突保留少量已核验备选。以下停止条件仅适用于 `composite` / `four_views`：
 
 - 已达到 `pool_goal`，并且每个允许平台至少完成一轮发现；
 - 连续两轮查询主要产生重复、低相关或无法验证的结果；
 - 平台限制、地区限制或工具不可访问使继续搜索无法提升质量。
 
-同一录音获准进入两个视角时只深度核验一次。极速版在预算内仍不足时报告实际数量或零条，不用未验证曲目、错误版本或重复曲目补足；普通模式仍报告各视角实际数量。
+同一录音获准进入两个视角时只深度核验一次。极速版在预算内仍不足时报告实际数量或零条，不用未验证曲目、错误完整歌名或重复曲目补足；普通模式仍报告各视角实际数量。
 
 ## 验证门槛
 
@@ -171,17 +167,17 @@ four_views: pool_goal = min(max(2 × final_target, final_target + 8, required_un
 
 - 曲目页面或权威发行页面可访问
 - 页面中的艺人和曲名与候选一致
-- `version_label` 与页面版本一致，没有把 Remix、Edit、Live、Dub 或 Extended Mix 与 Original 混淆
+- 页面中的完整 `title` 与候选一致；标题中已有的 Remix、Edit、Live、Dub、Instrumental、Radio Edit 或 Extended Mix 等限定不得被删除、改写或借用
 - 至少一个符合平台策略的 `playback_urls` 或具体发行页链接可提供给用户
 
-验证动作要逐曲完成：打开最终要给用户的 `playback_urls` 或具体发行页，核对页面中的艺人、完整曲名、版本和可用性；仅看到搜索摘要、URL slug 或聚合站条目不算通过。播放页面失效、地区受限或页面信息冲突时，记录 `availability` 和 `verification`，必要时剔除候选；`partial` 不能替代直接链接。如果平台为 exclusive，缺少该平台直接页的候选不能进入最终曲目表，只能进入缺失清单。最终报告中的每一行都要有自己可追溯的曲目/发行证据，不能只靠一条泛化媒体页面背书。
+验证动作要逐曲完成：打开最终要给用户的 `playback_urls` 或具体发行页，核对页面中的艺人、完整 `title` 和可用性；仅看到搜索摘要、URL slug 或聚合站条目不算通过。播放页面失效、地区受限或页面信息冲突时，记录 `availability` 和 `verification`，必要时剔除候选；`partial` 不能替代直接链接。如果平台为 exclusive，缺少该平台直接页的候选不能进入最终曲目表，只能进入缺失清单。最终报告中的每一行都要有自己可追溯的曲目/发行证据，不能只靠一条泛化媒体页面背书。
 
 ## 去重规则
 
 1. 相同 ISRC 视为同一录音。
-2. 无 ISRC 时，规范化大小写、Unicode 标点、feat./featuring、大小写混写和空格后比较艺人 + 曲名 + 版本；不要删除 Remix、Dub、Edit、Live 等版本词再去重。
+2. 无 ISRC 时，规范化大小写、Unicode 标点、feat./featuring、大小写混写和空格后比较艺人 + 完整官方曲名；不要删除括号、Remix、Dub、Edit、Live、Instrumental 或 Extended Mix 等标题限定词再去重。
 3. 同一录音在多个平台出现时合并平台链接，不重复占位。
-4. Remix、Edit、Dub、Instrumental、Live、Radio Edit 与 Extended Mix 保留为独立版本，但避免同一版本的拼写差异造成重复。
+4. Remix、Edit、Dub、Instrumental、Live、Radio Edit 与 Extended Mix 等限定保留在完整官方歌名中；同一完整歌名的跨平台记录合并，不同完整歌名不得误合并。
 5. 同一艺人连续占据过多位置时，在排序阶段处理，不要在去重阶段误删有效曲目。
 
 去重发生在四种排序和播放编排之前。极速版交付前按单表检查 `dedupe_key`，必须全部唯一；其艺人上限为 `artist_cap = max(1, floor(0.15 × actual_target))`，其中 `actual_target` 是当前表的有效目标：首批取 `min(first_batch_target, 首批已验证可交付行数)`，最终取 `min(final_target, 最终已验证可交付行数)`。参考艺人不豁免，只有用户明确请求艺人专题时才可豁免。综合版在分配 Warm Up、Groove、Peak、Closing 后再做一次全局录音键检查，确保同一录音不会跨段重复；丰富版完成四个视角后再按整份报告检查 `dedupe_key`，只允许至多一个高质量录音出现两次，其余录音只出现一次。参考艺人和参考曲目不豁免。多个平台链接仍合并在同一条记录中。

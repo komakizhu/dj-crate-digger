@@ -92,12 +92,12 @@
     },
     {
       "id": 8,
-      "name": "dedupe-versions-and-sequence",
-      "prompt": "/迪歌 做一套 16 首的中国地下俱乐部歌单。跨 SoundCloud、Apple Music、Spotify 搜索，但同一录音在多个平台出现时只占一个位置并合并链接；Original、Remix、Dub、Live 要保留为不同版本。综合版必须按 Warm Up → Groove → Peak → Closing 排序，四段之间不得重复同一录音，也不要连续塞同一个艺人。",
-      "expected_output": "展示去重与版本识别规则；综合版按四段组成一条不重复的播放顺序，并在平台间合并同录音链接。",
+      "name": "dedupe-title-qualifiers-and-sequence",
+      "prompt": "/迪歌 做一套 16 首的中国地下俱乐部歌单。跨 SoundCloud、Apple Music、Spotify 搜索，但同一录音在多个平台出现时只占一个位置并合并链接；官方曲名中的 Original、Remix、Dub、Live 标题限定要保留在歌名中。综合版必须按 Warm Up → Groove → Peak → Closing 排序，四段之间不得重复同一录音，也不要连续塞同一个艺人。",
+      "expected_output": "展示完整官方歌名与去重规则；综合版按四段组成一条不重复的播放顺序，并在平台间合并同录音链接。",
       "expectations": [
         "同一录音的跨平台链接合并而不是重复占位",
-        "Original/Remix/Dub/Live 等确实不同的版本不被误合并",
+        "完整官方歌名中的 Original/Remix/Dub/Live 限定不被删除或误合并",
         "综合版四段顺序清楚且四段之间无重复录音",
         "相邻曲目避免同艺人，必要时说明例外"
       ]
@@ -153,11 +153,11 @@
     },
     {
       "id": 13,
-      "name": "evidence-record-and-version-schema",
-      "prompt": "/dj-crate-digger 跨 SoundCloud、Bandcamp 和 Beatport 找一套 12 首地下 House；Original、Dub、Radio Edit、Extended Mix 必须分开，最终每首都要有播放/发行链接和独立核验来源。",
-      "expected_output": "候选记录保留旧字段并扩展 version_label、version_kind、playback_urls、verification_sources、availability、metadata_evidence 和 dedupe_key；播放链接不被元数据来源替代。",
+      "name": "evidence-record-and-title-schema",
+      "prompt": "/dj-crate-digger 跨 SoundCloud、Bandcamp 和 Beatport 找一套 12 首地下 House；完整官方歌名带 Original、Dub、Radio Edit、Extended Mix 等限定时必须分别核验，最终每首都要有播放/发行链接和独立核验来源。",
+      "expected_output": "候选记录保留完整官方 title、playback_urls、verification_sources、availability、metadata_evidence 和 dedupe_key；不设置独立 version 字段，播放链接不被元数据来源替代。",
       "expectations": [
-        "完整官方版本名保留，Dub/Radio Edit/Extended Mix 不被压成 Original",
+        "完整官方歌名保留，Dub/Radio Edit/Extended Mix 不被压成没有限定的标题",
         "playback_urls 与 verification_sources 分开记录",
         "每个最终曲目都有自己的可追溯来源和平台可用性状态",
         "ISRC 或规范化录音键用于跨平台去重"
@@ -297,11 +297,11 @@
       "id": 24,
       "name": "txt-export-order-and-metadata",
       "prompt": "/dj-crate-digger 找 3 首有 SoundCloud 直接曲目页的 Deep House，报告完成后导出 TXT。",
-      "expected_output": "用户确认后生成 UTF-8 TXT 文件；每行一首，保持报告推荐顺序、官方完整曲名和版本名，并附艺人与首选可用直链。",
+      "expected_output": "用户确认后生成 UTF-8 TXT 文件；每行一首，保持报告推荐顺序、包含官方限定的完整曲名，并附艺人与首选可用直链。",
       "expectations": [
         "TXT 只包含最终报告中的已验证、可追溯曲目",
         "同一录音跨平台只写一次，顺序与报告一致",
-        "每行包含 Artist、官方完整 Track Title/Version 和直接曲目或发行链接",
+        "每行包含 Artist、完整官方 Track Title（限定词已在标题内）和直接曲目或发行链接",
         "没有直接链接的曲目不写入，并在导出结果中列出跳过原因",
         "文件使用 UTF-8 并返回可点击的本地文件链接"
       ]
@@ -410,9 +410,9 @@
       "prompt": "/dj-crate-digger 以 Nikita, the Wicked 为参考艺人做一套丰富版 UK Bass 歌单。LIKE ME 在多个视角得分都很高。",
       "expected_output": "丰富版默认在整份报告范围内按录音键去重；只有一首证据充分的高质量核心曲可以跨两个视角出现，整份报告最多只有这一首重复曲，且任何曲目最多出现两次。参考艺人和参考曲目不获得额外重复名额。",
       "expectations": [
-        "先按 ISRC 或规范化艺人、曲名和版本生成 dedupe_key，再按整份丰富版而非单个视角统计出现次数",
+        "先按 ISRC 或规范化艺人、完整官方曲名生成 dedupe_key，再按整份丰富版而非单个视角统计出现次数",
         "默认优先选择未出现过的录音；整份丰富版最多允许一个 dedupe_key 重复",
-        "获准重复的曲目必须已验证且版本明确，在至少两个视角进入前 3 名且距最高分不超过 10 分，拥有独立质量信号，并在第二个视角比最佳未使用替代曲至少高 10 分",
+        "获准重复的曲目必须已验证且完整官方歌名明确，在至少两个视角进入前 3 名且距最高分不超过 10 分，拥有独立质量信号，并在第二个视角比最佳未使用替代曲至少高 10 分",
         "Nikita, the Wicked 或用户提供的其他参考艺人、参考曲目不享受重复豁免，同一录音仍最多出现两次",
         "候选不足时减少实际曲目数并披露，不得用重复曲目补足每个视角"
       ]
@@ -496,7 +496,7 @@
       "expectations": [
         "最终链接不是搜索结果页、平台首页或模型记忆",
         "每个链接格只含一条直接曲目或发行页",
-        "版本、官方曲名和官方艺人均逐曲核验"
+        "完整官方歌名（包括标题内的 Remix/Edit 等限定）和官方艺人均逐曲核验"
       ]
     },
     {
@@ -506,7 +506,7 @@
       "expected_output": "exclusive 模式只交付 Apple Music 已验证直接页，不能跨到任何回退平台。",
       "expectations": [
         "Apple Music 缺失的候选不进入最终表",
-        "平台限制、版本要求和禁用平台是评分前硬过滤",
+        "平台限制、完整官方歌名要求和禁用平台是评分前硬过滤",
         "候选不足时少给，不自动找相似替代"
       ]
     },
@@ -514,7 +514,7 @@
       "id": 43,
       "name": "fast-mode-candidate-shortage",
       "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，请给我 20 首只在 Bandcamp 可验证的极小众子流派曲目。",
-      "expected_output": "候选不足时只交付已核验录音，不用重复、错误版本或未核验曲目补数。",
+      "expected_output": "候选不足时只交付已核验录音，不用重复、错误完整官方歌名或未核验曲目补数。",
       "expectations": [
         "极速版单表按 dedupe_key 零重复",
         "fast 艺人上限按 actual_target 计算，artist_cap=max(1,floor(0.15×actual_target))，艺人专题才豁免",
@@ -646,12 +646,12 @@
       "id": 55,
       "name": "key-verification-and-twelve-column-contract",
       "prompt": "/dj-crate-digger 为 20 首 UK Bass 输出简要版，并要求每首附带调性。调性必须从可靠来源核验，找不到就写未知。",
-      "expected_output": "简要版使用 12 列表格，在 BPM 后显示标准调名 / Camelot；调性只来自同一版本的可靠 DJ 商店或官方元数据，无法核验时为未知。",
+      "expected_output": "简要版使用 12 列表格，在 BPM 后显示标准调名 / Camelot；调性只来自与完整官方歌名对应的可靠 DJ 商店或官方元数据，无法核验时为未知。",
       "expectations": [
         "表头严格为歌名、艺术家、专辑/EP、风格、BPM、调性、歌曲时长、能量级、发行时间、简介、选择原因、链接",
         "调性示例使用 A minor / 8A，不把 Camelot 当作来源原文",
-        "Beatport、Beatsource 或同等级官方版本元数据可作为调性证据",
-        "调性缺失、冲突、版本不匹配或非 major/minor 时显示未知，不用模型记忆或单一分析站补齐",
+        "Beatport、Beatsource 或同等级官方元数据可作为调性证据",
+        "调性缺失、冲突、完整歌名不匹配或非 major/minor 时显示未知，不用模型记忆或单一分析站补齐",
         "极速版三列表契约不因本请求改变"
       ]
     },
@@ -664,7 +664,7 @@
         "明确肯定意图触发重排，不增加第三轮问卷",
         "五度圈全局优先于原 Warm Up、Groove、Peak、Closing 段落",
         "基础兼容优先：同码、同字母 ±1、同编号 A/B；同字母 ±2 只作实验性兜底",
-        "重排不改变曲目集合、版本、dedupe_key、艺人比例或平台链接",
+        "重排不改变曲目集合、完整官方歌名、dedupe_key、艺人比例或平台链接",
         "TXT/W4DJ 后续使用重排后的最终顺序"
       ]
     },
@@ -686,10 +686,10 @@
       "prompt": "/dj-crate-digger 简要版中有些曲目调性未知或两个可靠来源冲突，用户随后要求按五度圈排列。",
       "expected_output": "已知调性曲目先按五度圈排序；未知、冲突或非 major/minor 曲目全部保留并置于末尾待试听定位组。",
       "expectations": [
-        "未知调性曲目不被删除、不猜测、不借用其他版本的调性",
+        "未知调性曲目不被删除、不猜测、不借用其他完整官方歌名的调性",
         "来源冲突记录为 conflict，Camelot 为空，表格显示未知",
         "待试听定位组不声称与前后曲目调性兼容",
-        "重排前后曲目数量、版本和链接完全一致"
+        "重排前后曲目数量、完整官方歌名和链接完全一致"
       ]
     },
     {
@@ -718,13 +718,13 @@
     },
     {
       "id": 61,
-      "name": "key-version-mismatch-and-enharmonic-normalization",
-      "prompt": "/dj-crate-digger 对同一作品的 Original 和 Remix 分别核验调性；一个来源写 G♭ Major，另一个来源写 F# Major。",
-      "expected_output": "等音异名可规范为同一调性；Original 与 Remix 分别核验，不能互借调性。",
+      "name": "key-title-mismatch-and-enharmonic-normalization",
+      "prompt": "/dj-crate-digger 对同一作品的完整官方歌名与带 Remix 限定的完整歌名分别核验调性；一个来源写 G♭ Major，另一个来源写 F# Major。",
+      "expected_output": "等音异名可规范为同一调性；两个完整官方歌名分别核验，不能互借调性。",
       "expectations": [
         "G♭ Major 与 F# Major 可规范到同一 Camelot 结果",
-        "Original、Remix、Dub、Edit 等版本必须逐版本匹配调性证据",
-        "版本错配时调性为未知，不用另一个版本的调性补齐",
+        "完整官方歌名中的 Original、Remix、Dub、Edit 限定必须分别匹配调性证据",
+        "完整歌名错配时调性为未知，不用另一个完整歌名的调性补齐",
         "非 major/minor 调式保留来源原值但不生成 Camelot"
       ]
     },
@@ -735,7 +735,7 @@
       "expected_output": "TXT 按五度圈重排后的综合顺序导出，不重新搜索、不恢复原顺序。",
       "expectations": [
         "导出使用已重排的最终综合表",
-        "曲目、版本、dedupe_key 和直接链接保持与重排结果一致",
+        "曲目、完整官方歌名、dedupe_key 和直接链接保持与重排结果一致",
         "导出安全边界、UTF-8、逐曲链接和无链接跳过规则保持不变"
       ]
     },
@@ -791,7 +791,7 @@
       "prompt": "/dj-crate-digger 用户要求在选歌碎碎念中给出 double drop 创意。两首候选一首调性未知，或归一化 BPM 差超过 3%。",
       "expected_output": "不把不满足条件的组合称为 double drop；可以改称叠歌尝试，并保留创意建议。",
       "expectations": [
-        "double drop 仅用于同版本可靠调性、基础 Camelot 兼容且归一化 BPM 差不超过 3% 的组合",
+        "double drop 仅用于与各自完整官方歌名对应的可靠调性、基础 Camelot 兼容且归一化 BPM 差不超过 3% 的组合",
         "数据不足时使用叠歌、切歌或飞歌等更宽泛的表达",
         "不声称已试听、已 beatmatch 或已经验证可直接双押"
       ]
@@ -815,7 +815,7 @@
       "expectations": [
         "重排前后 `transition_advice.text` 保持一致",
         "重排不要求建议引用的曲目继续相邻",
-        "曲目集合、版本、dedupe_key、链接和原有建议均保持不变"
+        "曲目集合、完整官方歌名、dedupe_key、链接和原有建议均保持不变"
       ]
     },
     {
@@ -949,19 +949,19 @@
       "expected_output": "生成 schema v1 的 `.w4dj` JSON，未知元数据写为 null 或 unknown，不因交接格式要求而猜测。",
       "expectations": [
         "根字段包含 format=w4dj、format_version=1、export_id、created_at、playlist 和 tracks",
-        "tracks 保留 title、artist_display、artists、album_or_ep、version、duration、bpm、musical_key、platform_refs、dedupe_key 和 expected_filename_hint",
+        "tracks 保留 title、artist_display、artists、album_or_ep、duration、bpm、musical_key、platform_refs、dedupe_key 和 expected_filename_hint；不包含独立 version 字段",
         "未知 BPM、调性、专辑、平台 ID 或链接保持 null/unknown",
         "JSON 结构通过 references/w4dj.schema.json 校验"
       ]
     },
     {
       "id": 85,
-      "name": "w4dj-preserves-final-order-version-and-dedupe",
+      "name": "w4dj-preserves-final-order-title-and-dedupe",
       "prompt": "/dj-crate-digger 简要版完成后用户确认按五度圈重排，再回复导出w4dj。",
-      "expected_output": "W4DJ 使用重排后的最终顺序，同时保留每首歌的版本、platform_refs 和 dedupe_key，不重新搜索或拼接丰富版专项视角。",
+      "expected_output": "W4DJ 使用重排后的最终顺序，同时保留每首歌的完整官方 title、platform_refs 和 dedupe_key，不重新搜索或拼接丰富版专项视角。",
       "expectations": [
         "position 按重排后的最终顺序重新编号",
-        "官方版本名和 version 不被替换为其他版本，dedupe_key 不丢失",
+        "完整官方 title（包括 Remix/Edit 等限定）不被替换或删减，且不产生独立 version 字段，dedupe_key 不丢失",
         "W4DJ 的曲目集合与最终报告一致，不因为交接导出新增重复录音",
         "导出后的平台引用仍符合 platform_policy 和 link_priority"
       ]
@@ -986,7 +986,7 @@
       "expectations": [
         "w4dj_export.status 为 manifest_only",
         "不得声称已经创建本地文件、文件路径或下载链接",
-        "manifest 仍通过 schema v1，且保留最终动态综合版的顺序、版本、平台引用和 dedupe_key"
+        "manifest 仍通过 schema v1，且保留最终动态综合版的顺序、完整官方 title、平台引用和 dedupe_key"
       ]
     }
   ]

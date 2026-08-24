@@ -6,7 +6,7 @@
 
 **Architecture:** 继续使用现有 Markdown 指令型 Skill。第一轮和第二轮生成只服务当前会话的 Session Brief；目标市场带来源标记且明确不持久化。新字段通过兼容映射接入现有搜索与四视图排序，报告末尾进入“下一步”区域；记忆状态、反馈状态、缺失信息和来源只后台记录，不作为默认栏目展示。Phase A 不创建私人数据文件，也不声称已经具备 Phase B/C/D 能力。
 
-**后续已确认增量：** `fast` 极速版作为独立输出模式补充实施，不改变本计划的 Phase A 边界。它仍保留两轮问卷、逐曲验证、平台策略、版本去重、导出与安全边界；实现细节由主 `SKILL.md` 和 references 中的极速版合同定义。
+**后续已确认增量：** `fast` 极速版作为独立输出模式补充实施，不改变本计划的 Phase A 边界。它仍保留两轮问卷、逐曲验证、平台策略、完整官方歌名去重、导出与安全边界；实现细节由主 `SKILL.md` 和 references 中的极速版合同定义。
 
 **Tech Stack:** Markdown Skill 合同、JSON 行为评测、jq JSON 校验、rg 静态一致性检查、Git diff 人工复核。
 
@@ -14,7 +14,7 @@
 
 - 书面规格以 docs/superpowers/specs/2026-08-13-dj-crate-digger-personalization-design.md 为唯一设计依据。
 - 本计划只实施第 18 节“阶段 A：交互基础”。事件日志、Beta 画像、正式反馈解析器、五视图、经典脉络召回、1001Tracklists 和媒体适配器分别留给 Phase B/C/D。
-- 严格保留两轮 Markdown 问卷、逐曲平台验证、版本识别、录音级去重、简要/丰富版 12 列主表、极速版三列、TXT/W4DJ 导出和现有授权安全边界。
+- 严格保留两轮 Markdown 问卷、逐曲平台验证、完整官方歌名识别、录音级去重、简要/丰富版 12 列主表、极速版三列、TXT/W4DJ 导出和现有授权安全边界。
 - 丰富版在 Phase A 仍为四视图；只把现有“流行度优先”语义改名为“熟悉度与发现感优先”，不增加“DJ 品味优先”视图。
 
 **后续已确认增量：** 简要版和丰富版在最终深度核验阶段记录可靠来源的调性，并在报告后的明确肯定下提供五度圈重排。显示标准调名 / Camelot；丰富版只重排动态综合版，未知或冲突调性保留在末尾；最多给出 5 组需试听确认的 double drop 候选。极速版保持三列和既有时间合同。完整简要版和丰富版的“选歌碎碎念”各增加一条半结构化创意接歌建议；丰富版只从动态综合版取材，五度圈重排后保留原文，不伪造波形或精确结构。
@@ -287,7 +287,7 @@ Expected: 全部退出码为 0，无 JSON 错误、重复 ID 或 whitespace erro
 
 ~~~bash
 rg -n '严格两轮|目标国家 / 地区|熟悉度与发现感|时代与经典|four_views' SKILL.md README.md references/report-template.md
-rg -n '逐曲|version_label|dedupe_key|12 列|调性|五度圈|TXT|W4DJ|exclusive|forbidden' SKILL.md references README.md
+rg -n '逐曲|完整官方歌名|dedupe_key|12 列|调性|五度圈|TXT|W4DJ|exclusive|forbidden' SKILL.md references README.md
 rg -n 'DJ 品味优先版' SKILL.md README.md references
 ~~~
 

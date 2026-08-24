@@ -22,7 +22,6 @@
             "artist_display": "Nikita, the Wicked",
             "artists": ["Nikita, the Wicked"],
             "album_or_ep": "LIKE ME - Single",
-            "version": "Original",
             "duration": 207,
             "bpm": 140,
             "musical_key": {
@@ -52,7 +51,6 @@
             "artist_display": "Pinch",
             "artists": ["Pinch"],
             "album_or_ep": "Qawwali",
-            "version": "Original",
             "duration": 321,
             "bpm": "unknown",
             "musical_key": "unknown",
@@ -88,11 +86,10 @@
           {
             "position": 1,
             "record_id": "rec-fast-001",
-            "title": "Unknown Title",
+            "title": "Unknown Title (Remix)",
             "artist_display": "Unknown Artist",
             "artists": ["Unknown Artist"],
             "album_or_ep": null,
-            "version": null,
             "duration": null,
             "bpm": "unknown",
             "musical_key": "unknown",
@@ -150,7 +147,6 @@
             "artist_display": "Artist",
             "artists": ["Artist"],
             "album_or_ep": null,
-            "version": null,
             "duration": null,
             "bpm": "unknown",
             "musical_key": "unknown",
@@ -158,6 +154,39 @@
             "dedupe_key": "rec-invalid",
             "expected_filename_hint": null,
             "local_audio_path": "/Users/example/Music/track.mp3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "legacy-track-version-field-not-allowed",
+      "document": {
+        "format": "w4dj",
+        "format_version": 1,
+        "export_id": "invalid-004",
+        "created_at": "2026-08-17T12:00:00Z",
+        "playlist": {
+          "name": "Invalid",
+          "output_mode": "fast",
+          "scenario": null,
+          "target_region": null,
+          "platform_priority": []
+        },
+        "tracks": [
+          {
+            "position": 1,
+            "record_id": "rec-invalid-version",
+            "title": "Track",
+            "artist_display": "Artist",
+            "artists": ["Artist"],
+            "album_or_ep": null,
+            "version": "Remix",
+            "duration": null,
+            "bpm": "unknown",
+            "musical_key": "unknown",
+            "platform_refs": [],
+            "dedupe_key": "rec-invalid-version",
+            "expected_filename_hint": null
           }
         ]
       }
@@ -185,7 +214,7 @@
       "document_id": "composite-complete",
       "expected_output_mode": "composite",
       "expected_positions": [1, 2],
-      "expected_versions": ["Original", "Original"],
+      "expected_titles": ["LIKE ME", "Qawwali"],
       "expected_dedupe_keys": ["rec-001", "rec-002"]
     },
     {

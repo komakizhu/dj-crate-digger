@@ -114,6 +114,7 @@ def source_contract_errors() -> list[str]:
     source = "\n".join(path.read_text(encoding="utf-8") for path in source_paths)
     required = (
         "导出w4dj",
+        "导出歌单名",
         ".w4dj",
         "UTF-8 JSON",
         "w4dj.schema.json",
@@ -133,18 +134,37 @@ def source_contract_errors() -> list[str]:
     )
     for path in chinese_template_paths:
         lines = path.read_text(encoding="utf-8").splitlines()
-        export_lines = [line for line in lines if "导出txt" in line]
+        export_lines = [line for line in lines if "导出歌单名" in line]
         if not any("导出w4dj" in line for line in export_lines):
-            errors.append(f"{path.name}: W4DJ must share the TXT export sentence")
+            errors.append(f"{path.name}: W4DJ must share the track-list export sentence")
         if any("您可以把本次推荐交接给 W4DJ" in line for line in lines):
             errors.append(f"{path.name}: W4DJ must not be a separate numbered line")
 
     english_lines = (ROOT / "references" / "report-template.md").read_text(encoding="utf-8").splitlines()
     if not any(
-        "export txt" in line and "export w4dj" in line
+        "export track list" in line and "export w4dj" in line
         for line in english_lines
     ):
-        errors.append("report-template.md: English W4DJ command must share the export sentence")
+        errors.append("report-template.md: English W4DJ command must share the track-list export sentence")
+    return errors
+
+
+def title_embedded_version_errors(schema: dict[str, Any], fixtures: dict[str, Any]) -> list[str]:
+    """Enforce that an official title carries its own Remix/Edit/Live qualifier."""
+    errors: list[str] = []
+    track_schema = schema.get("$defs", {}).get("track", {})
+    track_properties = track_schema.get("properties", {})
+    if "version" in track_properties:
+        errors.append("W4DJ track schema must not expose a separate 'version' field")
+    if "version" in track_schema.get("required", []):
+        errors.append("W4DJ track schema must not require a separate 'version' field")
+
+    for item in fixtures.get("valid_documents", []):
+        for index, track in enumerate(item.get("document", {}).get("tracks", [])):
+            if "version" in track:
+                errors.append(
+                    f"{item['id']}.tracks[{index}]: version qualifier must be part of title"
+                )
     return errors
 
 
@@ -164,8 +184,8 @@ def validate_compatibility(fixtures: dict[str, Any]) -> list[str]:
             errors.append(f"{case['document_id']}: output mode changed")
         if [track["position"] for track in tracks] != case["expected_positions"]:
             errors.append(f"{case['document_id']}: positions changed")
-        if "expected_versions" in case and [track["version"] for track in tracks] != case["expected_versions"]:
-            errors.append(f"{case['document_id']}: versions changed")
+        if "expected_titles" in case and [track["title"] for track in tracks] != case["expected_titles"]:
+            errors.append(f"{case['document_id']}: titles changed")
         if "expected_dedupe_keys" in case and [track["dedupe_key"] for track in tracks] != case["expected_dedupe_keys"]:
             errors.append(f"{case['document_id']}: dedupe keys changed")
         for field in case.get("expected_unknown_values", []):
@@ -191,6 +211,7 @@ def main() -> int:
                     errors.append(f"invalid fixture unexpectedly passed: {item['id']}")
             errors.extend(validate_compatibility(fixtures))
             errors.extend(source_contract_errors())
+            errors.extend(title_embedded_version_errors(schema, fixtures))
     except (OSError, json.JSONDecodeError, KeyError, TypeError) as exc:
         errors.append(str(exc))
 

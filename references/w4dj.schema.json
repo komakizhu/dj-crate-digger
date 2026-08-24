@@ -205,7 +205,6 @@
         "artist_display",
         "artists",
         "album_or_ep",
-        "version",
         "duration",
         "bpm",
         "musical_key",
@@ -224,7 +223,8 @@
         },
         "title": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "description": "Complete official track title; any official Remix, Edit, Live, Dub, Instrumental, Radio Edit, or Extended Mix qualifier is part of this value."
         },
         "artist_display": {
           "type": "string",
@@ -239,12 +239,6 @@
           }
         },
         "album_or_ep": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "version": {
           "type": [
             "string",
             "null"

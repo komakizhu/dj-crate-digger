@@ -24,7 +24,7 @@
 - 歌单名称
 - 曲目数量
 - 目标平台已匹配和未匹配数量
-- 匹配依据（ISRC 或艺人 + 完整曲名 + mix/version）
+  - 匹配依据（ISRC 或艺人 + 完整官方曲名）
 - public / private；用户未指定时默认 private
 
 ### 2. Capability Check
@@ -77,33 +77,48 @@
 平台内匹配依次使用：
 
 1. ISRC
-2. 艺人 + 完整曲名 + mix/version
-3. 艺人 + 规范化曲名，并人工检查版本
+2. 艺人 + 完整官方曲名
+3. 艺人 + 规范化曲名，并人工检查官方标题是否完整一致
 
-禁止仅根据标题相似度自动选择不同录音。无法确认版本时归入未匹配，不冒险写入。
+禁止仅根据标题相似度自动选择不同录音。不要删除或改写歌名中的 `(Remix)`、`(Edit)`、`(Live)`、`(Dub)`、`(Extended Mix)` 等官方限定；无法确认完整官方歌名时归入未匹配，不冒险写入。
 
 ## 无连接器时的降级交付
 
 提供可复制清单：
 
 ```markdown
-1. Artist — Track (Mix/Version) — target-platform search/direct URL
+1. Artist — Official Track Title — target-platform search/direct URL
 ```
 
 说明缺少的是 OAuth 客户端、平台连接器还是当前会话授权。不要把“需要用户手动导入”表述成“一键导出成功”。
 
-## 下一步中的 TXT / W4DJ 导出
+## 下一步中的歌单名 / TXT / W4DJ 导出
 
 本地文件导出与平台歌单写入相互独立，但只在完整推荐报告后的“下一步”中提供。这个区域不得在两轮需求收集期间提前出现，也不是第三轮需求收集。报告正文不展示私人记忆状态、本轮反馈状态、长期画像、缺失信息或来源栏目；相关状态和核验资料保留在后台记录中。
 
 用户直接回复以下任一指令即可触发对应导出：
 
 ```text
+导出歌单名
 导出txt
 导出w4dj
 ```
 
-不再展示导出选项列表，也不要求用户额外填写导出问卷。用户可以只反馈、只导出、只交接、组合使用，或不回复。所有导出和交接都发生在完整报告后的“下一步”，不增加第三轮需求收集。
+不再展示导出选项列表，也不要求用户额外填写导出问卷。用户可以只反馈、只输出歌单名、只导出、只交接、组合使用，或不回复。所有导出和交接都发生在完整报告后的“下一步”，不增加第三轮需求收集。
+
+### 歌单名目录
+
+`导出歌单名` 不创建本地文件，也不执行平台写入；它直接基于当前最终结果输出标题“## 网易云歌单目录”，并在标题下方用 Markdown 代码围栏包住每行一条“歌名 - 歌手”（歌名与歌手之间使用短横线分隔）的可复制文本，保持最终顺序，只包含官方歌名和官方艺人：
+
+````markdown
+## 网易云歌单目录
+
+```markdown
+Official Title - Official Artist
+```
+````
+
+该清单可以手动导入网易云，但不能一键把歌曲导入 RKB；不得加入未入选曲目、猜测的歌名限定、链接或额外问题。旧指令 `导出txt` 继续按下方 TXT 规则处理。
 
 默认导出报告中的最终结果：极速版导出最终 fast 表；简要版直接使用综合表；丰富版使用最后的动态综合结果，不把四个视角拼成一份重复歌单。若用户已经确认五度圈重排，简要版或丰富版导出必须使用重排后的最终顺序；不得重新搜索、恢复原顺序或把专项视角拼入导出。若不支持中间消息的宿主只交付极速版首批，必须由用户明确确认“导出当前首批”后才可导出该当前结果，并明确它不是完整歌单。只导出已进入最终报告或已确认当前首批、通过验证的记录；TXT 记录必须拥有符合平台策略的直接曲目/发行链接，W4DJ 记录必须来自当前最终结果。同一录音跨平台只写一条，TXT 链接按 `link_priority` 选择第一条可用链接；exclusive 模式只使用目标平台链接。无可用链接的 TXT 曲目按跳过规则处理，并在导出结果中列出。
 
@@ -113,16 +128,16 @@
 
 三种输出模式都支持交接，内部 `output_mode` 固定映射为：极速版 `fast`、简要版 `composite`、丰富版 `four_views`。导出使用当前最终结果：简要版使用综合表，丰富版使用动态综合版，极速版使用最终 fast 表；如果用户已经完成五度圈重排，使用重排后的最终顺序。不得把四个丰富版视角拼成重复曲目。
 
-每个 `tracks[]` 项目保留 `position`、`record_id`、官方 `title`、`artist_display`、`artists`、`album_or_ep`、`version`、`duration`、`bpm`、`musical_key`、`platform_refs`、`dedupe_key` 和 `expected_filename_hint`。`platform_refs` 只记录已经核验或明确不可用的具体平台曲目引用；不得写搜索结果页、平台首页或猜测链接。`expected_filename_hint` 只是给 W4DJ 的提示，不是本地文件名权威，也不能要求 Skill 生成或复制该文件。
+每个 `tracks[]` 项目保留 `position`、`record_id`、完整官方 `title`、`artist_display`、`artists`、`album_or_ep`、`duration`、`bpm`、`musical_key`、`platform_refs`、`dedupe_key` 和 `expected_filename_hint`。如果官方曲名包含 Remix、Edit、Live、Dub 或 Extended Mix 等限定，限定必须已经包含在 `title` 中，不另设 `version` 字段。`platform_refs` 只记录已经核验或明确不可用的具体平台曲目引用；不得写搜索结果页、平台首页或猜测链接。`expected_filename_hint` 只是给 W4DJ 的提示，不是本地文件名权威，也不能要求 Skill 生成或复制该文件。
 
-未知值保持 `null` 或 `"unknown"`，特别是极速版允许元数据未知；不得为了填满 schema 而臆造 BPM、调性、专辑、平台 ID 或链接。W4DJ 只交接推荐意图、顺序、版本、已核验元数据、平台引用和去重键，不包含音频文件、`local_audio_path`、绝对路径、二维码或网易云下载动作；Skill 也不生成占位音频或本地文件。
+未知值保持 `null` 或 `"unknown"`，特别是极速版允许元数据未知；不得为了填满 schema 而臆造 BPM、调性、专辑、平台 ID 或链接。W4DJ 只交接推荐意图、顺序、完整官方歌名、已核验元数据、平台引用和去重键，不包含音频文件、`local_audio_path`、绝对路径、二维码或网易云下载动作；Skill 也不生成占位音频或本地文件。
 
 宿主有文件写入能力时，用户明确回复 `导出w4dj` 后生成 `.w4dj` 文件并返回本地文件链接；设置 `w4dj_export.status: generated`。宿主不能写入时，返回等价 JSON manifest 和保存步骤，设置 `w4dj_export.status: manifest_only`，不得声称已创建文件。
 
-TXT 使用 UTF-8 纯文本，每行一首，保留官方完整曲名和版本名以及可用的直接曲目页链接：
+TXT 使用 UTF-8 纯文本，每行一首，保留包含官方限定的完整曲名以及可用的直接曲目页链接：
 
 ```text
-Artist — Official Track Title (Mix/Version) — https://direct-track-url
+Artist — Official Track Title — https://direct-track-url
 ```
 
 W4DJ 不处理本地音频、不生成占位文件或本地文件路径；Skill 不下载音乐，也不猜测本地文件。

@@ -1,6 +1,6 @@
 # Markdown 报告模板
 
-报告语言跟随 `communication_language` / 当前沟通语言；曲名、艺人、mix/version 和平台名保留官方原文。极速版的中文与英文标题、表头和状态句使用下列精确合同；其它语言按这些槽位本地化。
+报告语言跟随 `communication_language` / 当前沟通语言；曲名（包括官方歌名中的 Remix、Edit、Live、Dub、Extended Mix 等限定）、艺人和平台名保留官方原文，不另设 Mix/Version 列。极速版的中文与英文标题、表头和状态句使用下列精确合同；其它语言按这些槽位本地化。
 
 使用以下结构。简要版是默认交付；用户在第二轮填写“丰富版”时才输出风格、场景、熟悉度与发现感和动态综合四个视角，并最终提供一份综合结果。用户填写“简要版”时只输出一张综合表，但仍保留验证链接和假设。
 
@@ -45,9 +45,15 @@ First batch complete. Continuing to fill the playlist.
 
 第一，如果愿意，您可以用自然语言回复我选歌情况，这会丰富您的私人选歌偏好，让推荐更准。回复包括但不限于「`skream的歌不错，但我这次因为客群的关系没放`/`我不喜欢跳楼机，以后别再推了`/`我这次打了这些歌（配图/表）`」
 
-第二，您可以导出歌单或交接给 W4DJ，直接回复`导出txt`或者`导出w4dj`即可
+第二，您可以导出歌单或交接给 W4DJ，直接回复 `导出w4dj` 或者 `导出歌单名` 即可
 
-如果您需要：一键导入歌单，下载后一键转换格式并一键导入打碟软件，请导出`.w4dj`格式并且下载 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。
+`w4dj`的功能：一键导入歌单，下载后一键转换格式，并一键导入打碟软件，请导出`.w4dj`格式并且下载 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)
+
+具体操作教程可以查看
+
+[https://github.com/komakizhu/dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)
+
+导出歌单名的功能：输出标题“## 网易云歌单目录”，并在标题下方用 Markdown 代码围栏包住每行一条“歌名 - 歌手”（歌名与歌手之间使用短横线分隔）的可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
 
 ```
 
@@ -64,9 +70,13 @@ First batch complete. Continuing to fill the playlist.
 
 First, if you want, reply in natural language with how the selections worked for you. This helps refine your private selection preferences. For example: “I like Skream, but I did not play it for this crowd” / “I do not like Jumping Machine; do not recommend it again” / “These are the tracks I played (image/list).”
 
-Second, reply `export txt` or `export w4dj` to export or hand off this recommendation.
+Second, reply `export w4dj` to hand off this recommendation, or `export track list` to receive a copyable Markdown list of track titles and artists.
 
-If you need one-click playlist import, format conversion after download, and one-click import into DJ software, export the `.w4dj` format and download [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB).
+`w4dj` provides one-click playlist import, format conversion after download, and one-click import into DJ software. Export the `.w4dj` format and download [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB).
+
+For detailed instructions, see [the Skill repository](https://github.com/komakizhu/dj-crate-digger-skill).
+
+The track-list output is for manual import into NetEase Cloud Music; it cannot import tracks into RKB with one click.
 ```
 
 超过 50 首时，中文最终标题固定为 `# 极速版（X/50；单次上限 50 首）`；英文最终标题固定为 `# Fast Mode (X/50; single-request limit: 50 tracks)`。如果宿主不支持中间消息，中文首批标题固定为 `# 极速版首批（X/50；单次上限 50 首）`，英文首批标题固定为 `# Fast Mode First Batch (X/50; single-request limit: 50 tracks)`；这两者仍是首批，不得写成最终交付。
@@ -158,20 +168,36 @@ If you need one-click playlist import, format conversion after download, and one
 
 简要版只从综合表选择接歌建议素材；丰富版只从动态综合版选择。建议可以点名非相邻曲目，也可以针对整套 set 的某个位置；每份完整简要版或丰富版恰好一条，极速版完全省略。内容采用半结构化创意卡：自由选择长混、EQ 交换、loop 接力、效果器过渡、叠歌、double drop、直接飞歌或跨风格反差中的一种，至少包含一个可执行动作，并可给出 4/8/16/32 小节、EQ、filter、echo、reverb 或 loop 参数；最多组合两种核心操作。
 
-建议使用“可尝试”表达创意假设，不要求波形或音频预览作为前置条件。BPM 或调性未知时，按风格、能量、年代、情绪和场景降级，不能猜测精确结构或时间点；不得声称已试听、看过波形、完成 beatmatch 或验证可直接双押。只有每首曲目都具有与自身 `version_label` 对应的可靠调性、基础 Camelot 兼容且半拍 / 双拍归一化 BPM 差不超过 3% 时，才使用 `double drop`，否则改称“叠歌尝试”。没有可用曲目对或元数据全部缺失时，仍给出一条 set-level 创意建议，并在内部记录 fallback 原因。五度圈重排后保留原建议，不因顺序变化而重新生成。英文等其他沟通语言将模块标题和条目本地化，不直接照抄中文固定标签。
+建议使用“可尝试”表达创意假设，不要求波形或音频预览作为前置条件。BPM 或调性未知时，按风格、能量、年代、情绪和场景降级，不能猜测精确结构或时间点；不得声称已试听、看过波形、完成 beatmatch 或验证可直接双押。只有每首曲目都具有与自身完整 `title` 对应的可靠调性、基础 Camelot 兼容且半拍 / 双拍归一化 BPM 差不超过 3% 时，才使用 `double drop`，否则改称“叠歌尝试”。没有可用曲目对或元数据全部缺失时，仍给出一条 set-level 创意建议，并在内部记录 fallback 原因。五度圈重排后保留原建议，不因顺序变化而重新生成。英文等其他沟通语言将模块标题和条目本地化，不直接照抄中文固定标签。
 
 ## 下一步
 
 第一，如果愿意，您可以用自然语言回复我选歌情况，这会丰富您的私人选歌偏好，让推荐更准。回复包括但不限于「`skream的歌不错，但我这次因为客群的关系没放`/`我不喜欢跳楼机，以后别再推了`/`我这次打了这些歌（配图/表）`」
 
-第二，您可以导出歌单或交接给 W4DJ，直接回复`导出txt`或者`导出w4dj`即可
+第二，您可以导出歌单或交接给 W4DJ，直接回复 `导出w4dj` 或者 `导出歌单名` 即可
+
+`w4dj`的功能：一键导入歌单，下载后一键转换格式，并一键导入打碟软件，请导出`.w4dj`格式并且下载 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)
+
+具体操作教程可以查看
+
+[https://github.com/komakizhu/dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)
+
+导出歌单名的功能：输出标题“## 网易云歌单目录”，并在标题下方用 Markdown 代码围栏包住每行一条“歌名 - 歌手”（歌名与歌手之间使用短横线分隔）的可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
 
 第三，需要我根据五度圈原则帮您排列set顺序吗？
 
-如果您需要：一键导入歌单，下载后一键转换格式并一键导入打碟软件，请导出`.w4dj`格式并且下载 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。
-
-用户明确肯定后，简要版重排综合版；丰富版只重排动态综合版，三个专项视角保持原样。重排保留全部曲目、版本、录音去重和平台链接；未知或冲突调性的曲目放入末尾“待试听定位”组。最多列出 5 组满足基础 Camelot 兼容、每首均匹配自身版本调性证据且半拍 / 双拍归一化后 BPM 差不超过 3% 的 double drop 候选，并说明仍需 DJ 试听确认，不代表已完成双押验证。
+用户明确肯定后，简要版重排综合版；丰富版只重排动态综合版，三个专项视角保持原样。重排保留全部曲目、完整官方歌名、录音去重和平台链接；未知或冲突调性的曲目放入末尾“待试听定位”组。最多列出 5 组满足基础 Camelot 兼容、每首均匹配自身完整 `title` 调性证据且半拍 / 双拍归一化后 BPM 差不超过 3% 的 double drop 候选，并说明仍需 DJ 试听确认，不代表已完成双押验证。
 ```
+
+用户明确同意输出网易云目录后，使用以下模板，不再追加问题：
+
+````markdown
+## 网易云歌单目录
+
+```markdown
+Official Title - Official Artist
+```
+````
 
 “缺失与不确定信息”、核验来源、记忆状态和本轮反馈仍须写入内部记录，但默认不作为报告栏目展示；用户明确追问时，从对应内部记录回答，不主动提示这些记录。
 

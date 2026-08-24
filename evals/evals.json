@@ -284,10 +284,10 @@
       "id": 23,
       "name": "post-report-local-export-offer",
       "prompt": "/dj-crate-digger 为周五酒吧 House set 找 10 首歌；只要简要版。",
-      "expected_output": "先完成并输出选歌建议，再在下一步提示用户反馈、直接回复 `导出txt` 或 `导出w4dj`，并提供可选五度圈排序邀请；需求收集期间不提前询问，也不在用户确认前生成文件。",
+      "expected_output": "先完成并输出选歌建议，再在下一步提示用户反馈、直接回复 `导出txt` 或 `导出到w4dj`，并提供可选五度圈排序邀请；需求收集期间不提前询问，也不在用户确认前生成文件。",
       "expectations": [
         "TXT/W4DJ 导出询问出现在完整推荐报告之后",
-        "下一步直接提供 `导出txt` 和 `导出w4dj` 指令，不展示合并或拒绝导出的选项列表；五度圈邀请保持单句可选动作",
+        "下一步直接提供 `导出txt` 和 `导出到w4dj` 指令，不展示合并或拒绝导出的选项列表；五度圈邀请保持单句可选动作",
         "导出询问不被当成第三轮需求收集",
         "用户确认前 local_export.status 和 w4dj_export.status 不超过 offered，且没有创建文件",
         "默认导出最终综合版，不把平台歌单写入误当成本地文件导出"
@@ -933,19 +933,19 @@
     {
       "id": 83,
       "name": "w4dj-entry-all-output-modes",
-      "prompt": "/dj-crate-digger 分别用极速版、简要版和丰富版完成推荐；报告结束后回复导出w4dj。",
+      "prompt": "/dj-crate-digger 分别用极速版、简要版和丰富版完成推荐；报告结束后回复导出到w4dj。",
       "expected_output": "三种模式都在报告后的下一步提供 W4DJ 交接入口，并按最终结果生成 UTF-8 `.w4dj` JSON，不增加第三轮需求收集。",
       "expectations": [
         "极速版、简要版、丰富版的 output_mode 分别为 fast、composite、four_views",
         "简要版使用综合表，丰富版使用动态综合版，极速版使用最终 fast 表，不拼接重复视角",
-        "导出w4dj 只在完整报告后的下一步出现，不插入第一轮或第二轮问卷",
+        "导出到w4dj 只在完整报告后的下一步出现，不插入第一轮或第二轮问卷",
         "w4dj_export.status 在确认后为 confirmed，成功写入后为 generated"
       ]
     },
     {
       "id": 84,
       "name": "w4dj-schema-preserves-unknowns",
-      "prompt": "/dj-crate-digger 选择极速版，部分曲目的 BPM、调性和专辑没有可靠数据；报告结束后导出w4dj。",
+      "prompt": "/dj-crate-digger 选择极速版，部分曲目的 BPM、调性和专辑没有可靠数据；报告结束后导出到w4dj。",
       "expected_output": "生成 schema v1 的 `.w4dj` JSON，未知元数据写为 null 或 unknown，不因交接格式要求而猜测。",
       "expectations": [
         "根字段包含 format=w4dj、format_version=1、export_id、created_at、playlist 和 tracks",
@@ -957,7 +957,7 @@
     {
       "id": 85,
       "name": "w4dj-preserves-final-order-title-and-dedupe",
-      "prompt": "/dj-crate-digger 简要版完成后用户确认按五度圈重排，再回复导出w4dj。",
+      "prompt": "/dj-crate-digger 简要版完成后用户确认按五度圈重排，再回复导出到w4dj。",
       "expected_output": "W4DJ 使用重排后的最终顺序，同时保留每首歌的完整官方 title、platform_refs 和 dedupe_key，不重新搜索或拼接丰富版专项视角。",
       "expectations": [
         "position 按重排后的最终顺序重新编号",
@@ -969,7 +969,7 @@
     {
       "id": 86,
       "name": "w4dj-does-not-create-local-assets",
-      "prompt": "/dj-crate-digger 报告完成后回复导出w4dj；当前没有本地 MP3，也没有 Rekordbox 包。",
+      "prompt": "/dj-crate-digger 报告完成后回复导出到w4dj；当前没有本地 MP3，也没有 Rekordbox 包。",
       "expected_output": "只生成推荐数据交接，不创建音频、占位 MP3、本地最终文件名、二维码或网易云下载任务。",
       "expectations": [
         "W4DJ 不包含 local_audio_path 或绝对路径",
@@ -981,7 +981,7 @@
     {
       "id": 87,
       "name": "w4dj-no-file-write-manifest-only",
-      "prompt": "/dj-crate-digger 已完成丰富版报告，但宿主没有文件写入能力；用户回复导出w4dj。",
+      "prompt": "/dj-crate-digger 已完成丰富版报告，但宿主没有文件写入能力；用户回复导出到w4dj。",
       "expected_output": "返回等价的 W4DJ JSON manifest 和保存步骤，明确没有生成 `.w4dj` 文件。",
       "expectations": [
         "w4dj_export.status 为 manifest_only",

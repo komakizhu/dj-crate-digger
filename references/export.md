@@ -99,16 +99,16 @@
 用户直接回复以下任一指令即可触发对应导出：
 
 ```text
-导出歌单名
+输出文字版歌单
 导出txt
-导出w4dj
+导出到w4dj
 ```
 
 不再展示导出选项列表，也不要求用户额外填写导出问卷。用户可以只反馈、只输出歌单名、只导出、只交接、组合使用，或不回复。所有导出和交接都发生在完整报告后的“下一步”，不增加第三轮需求收集。
 
-### 歌单名目录
+### 文字版歌单目录
 
-导出歌单名的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。它不创建本地文件，也不执行平台写入；内容直接基于当前最终结果，保持最终顺序，只包含官方歌名和官方艺人：
+`输出文字版歌单`的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。它不创建本地文件，也不执行平台写入；内容直接基于当前最终结果，保持最终顺序，只包含官方歌名和官方艺人：
 
 ````markdown
 ## 网易云歌单目录
@@ -124,7 +124,7 @@ Official Title - Official Artist
 
 ### W4DJ 交接格式
 
-`导出w4dj` 生成 UTF-8 JSON 文件，扩展名固定为 `.w4dj`，格式版本固定为 `1`。根字段为 `format: "w4dj"`、`format_version`、`export_id`、`created_at`、`playlist` 和 `tracks`；完整 JSON Schema 见 [w4dj.schema.json](w4dj.schema.json)。
+`导出到w4dj` 生成 UTF-8 JSON 文件，扩展名固定为 `.w4dj`，格式版本固定为 `1`。根字段为 `format: "w4dj"`、`format_version`、`export_id`、`created_at`、`playlist` 和 `tracks`；完整 JSON Schema 见 [w4dj.schema.json](w4dj.schema.json)。
 
 三种输出模式都支持交接，内部 `output_mode` 固定映射为：极速版 `fast`、简要版 `composite`、丰富版 `four_views`。导出使用当前最终结果：简要版使用综合表，丰富版使用动态综合版，极速版使用最终 fast 表；如果用户已经完成五度圈重排，使用重排后的最终顺序。不得把四个丰富版视角拼成重复曲目。
 
@@ -132,7 +132,7 @@ Official Title - Official Artist
 
 未知值保持 `null` 或 `"unknown"`，特别是极速版允许元数据未知；不得为了填满 schema 而臆造 BPM、调性、专辑、平台 ID 或链接。W4DJ 只交接推荐意图、顺序、完整官方歌名、已核验元数据、平台引用和去重键，不包含音频文件、`local_audio_path`、绝对路径、二维码或网易云下载动作；Skill 也不生成占位音频或本地文件。
 
-宿主有文件写入能力时，用户明确回复 `导出w4dj` 后生成 `.w4dj` 文件并返回本地文件链接；设置 `w4dj_export.status: generated`。宿主不能写入时，返回等价 JSON manifest 和保存步骤，设置 `w4dj_export.status: manifest_only`，不得声称已创建文件。
+宿主有文件写入能力时，用户明确回复 `导出到w4dj` 后生成 `.w4dj` 文件并返回本地文件链接；设置 `w4dj_export.status: generated`。宿主不能写入时，返回等价 JSON manifest 和保存步骤，设置 `w4dj_export.status: manifest_only`，不得声称已创建文件。
 
 TXT 使用 UTF-8 纯文本，每行一首，保留包含官方限定的完整曲名以及可用的直接曲目页链接：
 

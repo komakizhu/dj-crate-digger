@@ -113,8 +113,8 @@ def source_contract_errors() -> list[str]:
     )
     source = "\n".join(path.read_text(encoding="utf-8") for path in source_paths)
     required = (
-        "导出w4dj",
-        "导出歌单名",
+        "导出到w4dj",
+        "输出文字版歌单",
         ".w4dj",
         "UTF-8 JSON",
         "w4dj.schema.json",
@@ -129,7 +129,7 @@ def source_contract_errors() -> list[str]:
     errors = [f"source contract missing {fragment!r}" for fragment in required if fragment not in source]
 
     concise_track_list_notice = (
-        "导出歌单名的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。"
+        "`输出文字版歌单`的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。"
     )
     old_track_list_notice = (
         "导出歌单名的功能：输出标题“## 网易云歌单目录”，并在标题下方用 Markdown 代码围栏包住"
@@ -137,6 +137,7 @@ def source_contract_errors() -> list[str]:
     user_template_paths = (
         ROOT / "SKILL.md",
         ROOT / "README.md",
+        ROOT / "references" / "export.md",
         ROOT / "references" / "report-template.md",
     )
     for path in user_template_paths:
@@ -145,6 +146,10 @@ def source_contract_errors() -> list[str]:
             errors.append(f"{path.name}: missing concise track-list export notice")
         if old_track_list_notice in text:
             errors.append(f"{path.name}: contains the old verbose track-list export notice")
+
+        for old_command in ("导出w4dj", "导出歌单名"):
+            if old_command in text:
+                errors.append(f"{path.name}: contains retired export command {old_command!r}")
 
     short_skill_link = "[dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)"
     for path in (ROOT / "SKILL.md", ROOT / "references" / "report-template.md"):
@@ -157,15 +162,15 @@ def source_contract_errors() -> list[str]:
     )
     for path in chinese_template_paths:
         lines = path.read_text(encoding="utf-8").splitlines()
-        export_lines = [line for line in lines if "导出歌单名" in line]
-        if not any("导出w4dj" in line for line in export_lines):
+        export_lines = [line for line in lines if "输出文字版歌单" in line]
+        if not any("导出到w4dj" in line for line in export_lines):
             errors.append(f"{path.name}: W4DJ must share the track-list export sentence")
         if any("您可以把本次推荐交接给 W4DJ" in line for line in lines):
             errors.append(f"{path.name}: W4DJ must not be a separate numbered line")
 
     english_lines = (ROOT / "references" / "report-template.md").read_text(encoding="utf-8").splitlines()
     if not any(
-        "export track list" in line and "export w4dj" in line
+        "output text playlist" in line and "export to w4dj" in line
         for line in english_lines
     ):
         errors.append("report-template.md: English W4DJ command must share the track-list export sentence")

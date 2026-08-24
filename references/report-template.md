@@ -45,7 +45,7 @@ First batch complete. Continuing to fill the playlist.
 
 第一，如果愿意，您可以用自然语言回复我选歌情况，这会丰富您的私人选歌偏好，让推荐更准。回复包括但不限于「`skream的歌不错，但我这次因为客群的关系没放`/`我不喜欢跳楼机，以后别再推了`/`我这次打了这些歌（配图/表）`」
 
-第二，您可以导出歌单或交接给 W4DJ，直接回复 `导出w4dj` 或者 `导出歌单名` 即可
+第二，您可以输出文字版歌单或交接给 W4DJ，直接回复 `导出到w4dj` 或者 `输出文字版歌单` 即可
 
 `w4dj`的功能：一键导入歌单，下载后一键转换格式，并一键导入打碟软件，请导出`.w4dj`格式并且下载 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)
 
@@ -53,7 +53,7 @@ First batch complete. Continuing to fill the playlist.
 
 [dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)
 
-导出歌单名的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
+`输出文字版歌单`的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
 
 ```
 
@@ -70,7 +70,7 @@ First batch complete. Continuing to fill the playlist.
 
 First, if you want, reply in natural language with how the selections worked for you. This helps refine your private selection preferences. For example: “I like Skream, but I did not play it for this crowd” / “I do not like Jumping Machine; do not recommend it again” / “These are the tracks I played (image/list).”
 
-Second, reply `export w4dj` to hand off this recommendation, or `export track list` to receive a copyable Markdown list of track titles and artists.
+Second, reply `export to w4dj` to hand off this recommendation, or `output text playlist` to receive a copyable Markdown list of track titles and artists.
 
 `w4dj` provides one-click playlist import, format conversion after download, and one-click import into DJ software. Export the `.w4dj` format and download [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB).
 
@@ -174,7 +174,7 @@ The track-list output is for manual import into NetEase Cloud Music; it cannot i
 
 第一，如果愿意，您可以用自然语言回复我选歌情况，这会丰富您的私人选歌偏好，让推荐更准。回复包括但不限于「`skream的歌不错，但我这次因为客群的关系没放`/`我不喜欢跳楼机，以后别再推了`/`我这次打了这些歌（配图/表）`」
 
-第二，您可以导出歌单或交接给 W4DJ，直接回复 `导出w4dj` 或者 `导出歌单名` 即可
+第二，您可以输出文字版歌单或交接给 W4DJ，直接回复 `导出到w4dj` 或者 `输出文字版歌单` 即可
 
 `w4dj`的功能：一键导入歌单，下载后一键转换格式，并一键导入打碟软件，请导出`.w4dj`格式并且下载 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)
 
@@ -182,7 +182,7 @@ The track-list output is for manual import into NetEase Cloud Music; it cannot i
 
 [dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)
 
-导出歌单名的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
+`输出文字版歌单`的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
 
 第三，需要我根据五度圈原则帮您排列set顺序吗？
 

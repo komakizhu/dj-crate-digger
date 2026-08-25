@@ -49,6 +49,8 @@ First batch complete. Continuing to fill the playlist.
 
 `w4dj`的功能：一键导入歌单，下载后一键转换格式，并一键导入打碟软件，请导出`.w4dj`格式并且下载 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)
 
+`.w4dj` 使用全新的 v2 最小格式：只包含歌单名、顺序、完整官方歌名、艺人和可选的字符串 `netease_track_id`；旧 v1 不兼容且不做迁移。
+
 具体操作教程可以查看
 
 [dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)
@@ -73,6 +75,8 @@ First, if you want, reply in natural language with how the selections worked for
 Second, reply `export to w4dj` to hand off this recommendation, or `output text playlist` to receive a copyable Markdown list of track titles and artists.
 
 `w4dj` provides one-click playlist import, format conversion after download, and one-click import into DJ software. Export the `.w4dj` format and download [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB).
+
+`.w4dj` uses a new minimal v2 format containing only the playlist name, positions, complete official titles, artists, and an optional string `netease_track_id`; v1 is rejected without migration.
 
 For detailed instructions, see [the Skill repository](https://github.com/komakizhu/dj-crate-digger-skill).
 
@@ -177,6 +181,8 @@ The track-list output is for manual import into NetEase Cloud Music; it cannot i
 第二，您可以输出文字版歌单或交接给 W4DJ，直接回复 `导出到w4dj` 或者 `输出文字版歌单` 即可
 
 `w4dj`的功能：一键导入歌单，下载后一键转换格式，并一键导入打碟软件，请导出`.w4dj`格式并且下载 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)
+
+`.w4dj` 使用全新的 v2 最小格式：只包含歌单名、顺序、完整官方歌名、艺人和可选的字符串 `netease_track_id`；旧 v1 不兼容且不做迁移。
 
 具体操作教程可以查看
 

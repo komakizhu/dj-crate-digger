@@ -112,9 +112,9 @@ Artist — Official Track Title — https://direct-track-url
 
 ### W4DJ
 
-`.w4dj` 是 UTF-8 JSON 交接文件，不是音频文件。它保存歌单顺序、完整官方曲名、艺人、BPM、调性证据、平台引用和 `dedupe_key`，供 W4DJ 应用继续处理。官方歌名中的 Remix、Edit、Live、Dub、Extended Mix 等限定直接保留在 `title` 中，不另设 `version` 字段。
+`.w4dj` 是 UTF-8 JSON v2 交接文件，不是音频文件。它只保存协议字段、歌单名、歌单顺序、完整官方曲名和艺人；如果有网易云身份，则以 JSON 字符串保存可选的 `netease_track_id`。官方歌名中的 Remix、Edit、Live、Dub、Extended Mix 等限定直接保留在 `title` 中，不另设 `version` 字段。
 
-W4DJ 文件不包含 MP3、本地绝对路径、占位音频、二维码或下载任务。未知字段保持 `null` 或 `unknown`。完整结构见 [references/w4dj.schema.json](references/w4dj.schema.json)。
+W4DJ 文件固定使用 `format_version: 2`，不包含 BPM、调性、专辑、URL、平台状态、内部 `dedupe_key`、本地文件名或路径。旧 v1 文件直接拒绝，必须重新导出 v2，不做迁移；完整结构见 [references/w4dj.schema.json](references/w4dj.schema.json)。
 
 如果当前 Agent 没有文件写入能力，它只能返回等价的 TXT 内容或 W4DJ JSON manifest，并明确说明没有实际创建文件。
 

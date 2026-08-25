@@ -237,7 +237,7 @@ local_export:
 w4dj_export:
   status: not_offered  # not_offered | offered | confirmed | generated | manifest_only | declined
   format: w4dj
-  format_version: 1
+  format_version: 2
 harmonic_order:
   offered: false
   requested: false
@@ -393,7 +393,7 @@ assumptions: []
 第三，需要我根据五度圈原则帮您排列set顺序吗？
 ```
 
-这里的自然语言反馈、W4DJ 交接、文字版歌单目录和五度圈排序都是报告后的可选动作。用户可以只反馈、只交接、只请求目录、只请求重排、组合使用，或不回复；不要把它们解释成第三轮需求收集。报告显示后将 `harmonic_order.offered` 设为 `true`（仅 `composite` / `four_views`），将 `w4dj_export.status` 设为 `offered`。用户明确肯定五度圈邀请时设为 `requested: true`、`status: confirmed`，重排成功后设为 `reordered`；否定设为 `declined`，模糊答复设为 `needs_clarification`。五度圈邀请的明确肯定意图包括“是”“需要”“可以”“帮我排”“按五度圈排”等；否定不执行，模糊表达只请求确认。简要版肯定后重排综合版，丰富版肯定后只重排动态综合版，三个专项视角保持原样。执行后保留全部曲目、完整官方歌名、录音去重、艺人比例和平台链接；以 Camelot 基础兼容相邻数优先，实验性同字母 ±2 仅作兜底，未知或冲突调性的曲目放到末尾“待试听定位”组。最多输出 5 组满足基础兼容且半拍 / 双拍归一化后 BPM 差不超过 3% 的 double drop 候选，并明确仍需 DJ 试听。重排后的最终顺序成为后续 W4DJ、文字版歌单和兼容 TXT 导出顺序。不要把反馈解释成事件日志、长期摘要确认或 Beta 画像更新，也不要暗示存在跨会话持久化。收到 `输出文字版歌单` 后，直接基于当前最终结果输出标题“## 网易云歌单目录”，并在标题下方用 Markdown 代码围栏包住每行一条“歌名 - 歌手”的可复制文本，不重新搜索、不改动曲目集合、不追加新需求，也不承诺一键导入 RKB。歌名与歌手之间使用短横线分隔；清单只保留官方歌名和官方艺人，维持当前最终顺序，不加入链接、专辑、版本猜测或未入选曲目；用户表达“需要”“可以”“要”“输出目录”等明确肯定意图时执行，模糊表达只确认一次。旧指令 `导出txt` 作为兼容入口保留，按既有 TXT 规则处理。收到 `导出到w4dj` 后设置 `w4dj_export.status: confirmed`，读取 [export.md](references/export.md) 和 [w4dj.schema.json](references/w4dj.schema.json)，只导出当前最终结果的推荐意图、顺序、完整官方歌名、已核验元数据、平台引用和去重键；生成成功后设为 `generated`，宿主不能写入时设为 `manifest_only`。W4DJ 不处理本地音频、不生成占位文件、本地最终文件名、二维码或网易云下载；未知值写 `null` 或 `unknown`，不得臆造。自然语言反馈只在当前会话自动生效；长期档案仍必须先形成摘要并获得明确确认。
+这里的自然语言反馈、W4DJ 交接、文字版歌单目录和五度圈排序都是报告后的可选动作。用户可以只反馈、只交接、只请求目录、只请求重排、组合使用，或不回复；不要把它们解释成第三轮需求收集。报告显示后将 `harmonic_order.offered` 设为 `true`（仅 `composite` / `four_views`），将 `w4dj_export.status` 设为 `offered`。用户明确肯定五度圈邀请时设为 `requested: true`、`status: confirmed`，重排成功后设为 `reordered`；否定设为 `declined`，模糊答复设为 `needs_clarification`。五度圈邀请的明确肯定意图包括“是”“需要”“可以”“帮我排”“按五度圈排”等；否定不执行，模糊表达只请求确认。简要版肯定后重排综合版，丰富版肯定后只重排动态综合版，三个专项视角保持原样。执行后保留全部曲目、完整官方歌名、录音去重、艺人比例和平台链接；以 Camelot 基础兼容相邻数优先，实验性同字母 ±2 仅作兜底，未知或冲突调性的曲目放到末尾“待试听定位”组。最多输出 5 组满足基础兼容且半拍 / 双拍归一化后 BPM 差不超过 3% 的 double drop 候选，并明确仍需 DJ 试听。重排后的最终顺序成为后续 W4DJ、文字版歌单和兼容 TXT 导出顺序。不要把反馈解释成事件日志、长期摘要确认或 Beta 画像更新，也不要暗示存在跨会话持久化。收到 `输出文字版歌单` 后，直接基于当前最终结果输出标题“## 网易云歌单目录”，并在标题下方用 Markdown 代码围栏包住每行一条“歌名 - 歌手”的可复制文本，不重新搜索、不改动曲目集合、不追加新需求，也不承诺一键导入 RKB。歌名与歌手之间使用短横线分隔；清单只保留官方歌名和官方艺人，维持当前最终顺序，不加入链接、专辑、版本猜测或未入选曲目；用户表达“需要”“可以”“要”“输出目录”等明确肯定意图时执行，模糊表达只确认一次。旧指令 `导出txt` 作为兼容入口保留，按既有 TXT 规则处理。收到 `导出到w4dj` 后设置 `w4dj_export.status: confirmed`，读取 [export.md](references/export.md) 和 [w4dj.schema.json](references/w4dj.schema.json)，只导出当前最终结果的推荐意图、顺序、完整官方歌名和艺人，以及可选的 `netease_track_id`；生成成功后设为 `generated`，宿主不能写入时设为 `manifest_only`。W4DJ v2 只写 UTF-8 JSON 的最小交接结构：根层 `format`、`format_version: 2`、`export_id`、`playlist.name`、`tracks`；每首只写 `position`、完整官方 `title`、`artist_display`，有网易云身份时写入 JSON 字符串 `netease_track_id`，没有时省略。不要把 BPM、调性、专辑、URL、平台状态、`record_id`、`dedupe_key`、`expected_filename_hint` 或本地路径写入 `.w4dj`；这些信息如果需要仍只在内部推荐记录中保留。旧 v1 文件直接拒绝，必须重新导出 v2，不做迁移。W4DJ 不处理本地音频、不生成占位文件、本地最终文件名、二维码或网易云下载；自然语言反馈只在当前会话自动生效，长期档案仍必须先形成摘要并获得明确确认。
 
 用户明确同意输出网易云目录后，使用以下模板，不再追加问题：
 
@@ -405,7 +405,7 @@ Official Title - Official Artist
 ```
 ````
 
-默认只导出最终交付表：极速版使用最终极速表，简要版使用综合结果，丰富版使用最后的动态综合结果，不把风格、场景、熟悉度与发现感三个视角重复拼接。若宿主只交付极速版首批，用户必须明确确认“导出当前首批”后才可导出当前结果，不能把它表述为完整歌单。TXT 每行一首，包含完整曲名、艺人和首选可用链接；W4DJ 使用 UTF-8 JSON `.w4dj` 文件，按 [w4dj.schema.json](references/w4dj.schema.json) 写入当前最终结果，保留最终顺序、完整官方歌名、已核验元数据、平台引用和 `dedupe_key`，不包含本地音频或绝对路径。极速版允许元数据为 `null` / `unknown`，不能为了补齐字段而猜测。
+默认只导出最终交付表：极速版使用最终极速表，简要版使用综合结果，丰富版使用最后的动态综合结果，不把风格、场景、熟悉度与发现感三个视角重复拼接。若宿主只交付极速版首批，用户必须明确确认“导出当前首批”后才可导出当前结果，不能把它表述为完整歌单。TXT 每行一首，包含完整曲名、艺人和首选可用链接；W4DJ 使用 UTF-8 JSON `.w4dj` 文件，按 [w4dj.schema.json](references/w4dj.schema.json) 写入当前最终结果，固定为全新的 `format_version: 2` 最小结构，只保留最终顺序、完整官方歌名、艺人和可选的字符串 `netease_track_id`。它不包含本地音频、绝对路径、URL、平台状态或内部去重键；旧 v1 不兼容且不迁移。极速版的内部元数据可以未知，但不得为了补齐 v2 字段而猜测。
 
 ## 降级行为
 
@@ -465,7 +465,7 @@ Official Title - Official Artist
 - [ ] 不确定字段明确标记
 - [ ] 导出操作满足授权、确认和凭证安全要求
 - [ ] 推荐报告结束后才询问 TXT/W4DJ 导出；确认前不创建本地文件
-- [ ] TXT 为 UTF-8 单曲单行清单，W4DJ 为 UTF-8 JSON `.w4dj`、schema v1
-- [ ] TXT 保持推荐顺序、去重、平台限制和已验证直接链接；W4DJ 保持最终顺序、完整官方歌名、平台引用、去重键和已核验元数据
-- [ ] W4DJ 使用 UTF-8 JSON `.w4dj`、schema v1；三种输出模式保留顺序、完整官方歌名、平台引用、去重键和已核验元数据，未知值为 `null` / `unknown`
+- [ ] TXT 为 UTF-8 单曲单行清单，W4DJ 为 UTF-8 JSON `.w4dj`、schema v2
+- [ ] TXT 保持推荐顺序、去重、平台限制和已验证直接链接；W4DJ 保持最终顺序、完整官方歌名、艺人，以及有网易云身份时的字符串 `netease_track_id`
+- [ ] W4DJ 使用全新的 UTF-8 JSON `.w4dj`、schema v2；三种输出模式都只写协议字段、歌单名、位置、完整官方歌名、艺人和可选网易云 ID，旧 v1 直接拒绝、不做迁移
 - [ ] W4DJ 不包含本地音频、绝对路径、二维码或下载动作；宿主无写入能力时只返回 manifest，不声称已生成文件

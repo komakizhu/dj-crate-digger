@@ -4,66 +4,22 @@
       "id": "composite-complete",
       "document": {
         "format": "w4dj",
-        "format_version": 1,
+        "format_version": 2,
         "export_id": "demo-001",
-        "created_at": "2026-08-17T12:00:00Z",
         "playlist": {
-          "name": "Night Bass Test",
-          "output_mode": "composite",
-          "scenario": "underground club",
-          "target_region": "中国大陆",
-          "platform_priority": ["netease_cloud_music", "spotify"]
+          "name": "Night Bass Test"
         },
         "tracks": [
           {
             "position": 1,
-            "record_id": "rec-001",
             "title": "LIKE ME",
             "artist_display": "Nikita, the Wicked",
-            "artists": ["Nikita, the Wicked"],
-            "album_or_ep": "LIKE ME - Single",
-            "duration": 207,
-            "bpm": 140,
-            "musical_key": {
-              "source_value": "A Minor",
-              "normalized_key": "A minor",
-              "camelot": "8A",
-              "evidence_url": "https://example.test/beatport/like-me",
-              "evidence_type": "authorized_dj_store",
-              "checked_at": "2026-08-17",
-              "status": "verified"
-            },
-            "platform_refs": [
-              {
-                "platform": "netease_cloud_music",
-                "track_id": "123",
-                "url": "https://music.163.com/#/song?id=123",
-                "status": "verified"
-              }
-            ],
-            "dedupe_key": "rec-001",
-            "expected_filename_hint": "001 - Nikita, the Wicked - LIKE ME.mp3"
+            "netease_track_id": "123456789012345678"
           },
           {
             "position": 2,
-            "record_id": "rec-002",
             "title": "Qawwali",
-            "artist_display": "Pinch",
-            "artists": ["Pinch"],
-            "album_or_ep": "Qawwali",
-            "duration": 321,
-            "bpm": "unknown",
-            "musical_key": "unknown",
-            "platform_refs": [
-              {
-                "platform": "netease_cloud_music",
-                "track_id": null,
-                "url": null,
-                "status": "unavailable"
-              }
-            ],
-            "dedupe_key": "rec-002",
-            "expected_filename_hint": null
+            "artist_display": "Pinch"
           }
         ]
       }
@@ -72,37 +28,41 @@
       "id": "fast-unknown-metadata",
       "document": {
         "format": "w4dj",
-        "format_version": 1,
+        "format_version": 2,
         "export_id": "fast-001",
-        "created_at": "2026-08-17T12:01:00Z",
         "playlist": {
-          "name": "Fast Test",
-          "output_mode": "fast",
-          "scenario": null,
-          "target_region": "unknown",
-          "platform_priority": ["soundcloud"]
+          "name": "Fast Test"
         },
         "tracks": [
           {
             "position": 1,
-            "record_id": "rec-fast-001",
             "title": "Unknown Title (Remix)",
-            "artist_display": "Unknown Artist",
-            "artists": ["Unknown Artist"],
-            "album_or_ep": null,
-            "duration": null,
-            "bpm": "unknown",
-            "musical_key": "unknown",
-            "platform_refs": [
-              {
-                "platform": "soundcloud",
-                "track_id": null,
-                "url": null,
-                "status": "unknown"
-              }
-            ],
-            "dedupe_key": "rec-fast-001",
-            "expected_filename_hint": null
+            "artist_display": "Unknown Artist"
+          }
+        ]
+      }
+    },
+    {
+      "id": "repeated-netease-id",
+      "document": {
+        "format": "w4dj",
+        "format_version": 2,
+        "export_id": "repeat-001",
+        "playlist": {
+          "name": "Repeated Drop Test"
+        },
+        "tracks": [
+          {
+            "position": 1,
+            "title": "First Appearance",
+            "artist_display": "Artist",
+            "netease_track_id": "987654321012345678"
+          },
+          {
+            "position": 2,
+            "title": "Second Appearance",
+            "artist_display": "Artist",
+            "netease_track_id": "987654321012345678"
           }
         ]
       }
@@ -112,11 +72,23 @@
     {
       "id": "missing-required-format",
       "document": {
-        "format_version": 1,
+        "format_version": 2,
         "export_id": "invalid-001",
+        "playlist": {
+          "name": "Invalid"
+        },
+        "tracks": []
+      }
+    },
+    {
+      "id": "legacy-v1-rejected",
+      "document": {
+        "format": "w4dj",
+        "format_version": 1,
+        "export_id": "legacy-001",
         "created_at": "2026-08-17T12:00:00Z",
         "playlist": {
-          "name": "Invalid",
+          "name": "Legacy",
           "output_mode": "fast",
           "scenario": null,
           "target_region": null,
@@ -129,30 +101,16 @@
       "id": "local-file-fields-not-allowed",
       "document": {
         "format": "w4dj",
-        "format_version": 1,
+        "format_version": 2,
         "export_id": "invalid-002",
-        "created_at": "2026-08-17T12:00:00Z",
         "playlist": {
-          "name": "Invalid",
-          "output_mode": "fast",
-          "scenario": null,
-          "target_region": null,
-          "platform_priority": []
+          "name": "Invalid"
         },
         "tracks": [
           {
             "position": 1,
-            "record_id": "rec-invalid",
             "title": "Track",
             "artist_display": "Artist",
-            "artists": ["Artist"],
-            "album_or_ep": null,
-            "duration": null,
-            "bpm": "unknown",
-            "musical_key": "unknown",
-            "platform_refs": [],
-            "dedupe_key": "rec-invalid",
-            "expected_filename_hint": null,
             "local_audio_path": "/Users/example/Music/track.mp3"
           }
         ]
@@ -162,48 +120,129 @@
       "id": "legacy-track-version-field-not-allowed",
       "document": {
         "format": "w4dj",
-        "format_version": 1,
-        "export_id": "invalid-004",
-        "created_at": "2026-08-17T12:00:00Z",
+        "format_version": 2,
+        "export_id": "invalid-003",
         "playlist": {
-          "name": "Invalid",
-          "output_mode": "fast",
-          "scenario": null,
-          "target_region": null,
-          "platform_priority": []
+          "name": "Invalid"
         },
         "tracks": [
           {
             "position": 1,
-            "record_id": "rec-invalid-version",
-            "title": "Track",
+            "title": "Track (Remix)",
             "artist_display": "Artist",
-            "artists": ["Artist"],
-            "album_or_ep": null,
-            "version": "Remix",
-            "duration": null,
-            "bpm": "unknown",
-            "musical_key": "unknown",
-            "platform_refs": [],
-            "dedupe_key": "rec-invalid-version",
-            "expected_filename_hint": null
+            "version": "Remix"
           }
         ]
       }
     },
     {
-      "id": "unsupported-output-mode",
+      "id": "numeric-netease-id-not-allowed",
       "document": {
         "format": "w4dj",
-        "format_version": 1,
-        "export_id": "invalid-003",
-        "created_at": "2026-08-17T12:00:00Z",
+        "format_version": 2,
+        "export_id": "invalid-004",
+        "playlist": {
+          "name": "Invalid"
+        },
+        "tracks": [
+          {
+            "position": 1,
+            "title": "Track",
+            "artist_display": "Artist",
+            "netease_track_id": 123456789012345678
+          }
+        ]
+      }
+    },
+    {
+      "id": "null-netease-id-not-allowed",
+      "document": {
+        "format": "w4dj",
+        "format_version": 2,
+        "export_id": "invalid-004b",
+        "playlist": {
+          "name": "Invalid"
+        },
+        "tracks": [
+          {
+            "position": 1,
+            "title": "Track",
+            "artist_display": "Artist",
+            "netease_track_id": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "placeholder-netease-id-not-allowed",
+      "document": {
+        "format": "w4dj",
+        "format_version": 2,
+        "export_id": "invalid-004c",
+        "playlist": {
+          "name": "Invalid"
+        },
+        "tracks": [
+          {
+            "position": 1,
+            "title": "Track",
+            "artist_display": "Artist",
+            "netease_track_id": "unknown"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metadata-fields-not-allowed",
+      "document": {
+        "format": "w4dj",
+        "format_version": 2,
+        "export_id": "invalid-005",
+        "playlist": {
+          "name": "Invalid"
+        },
+        "tracks": [
+          {
+            "position": 1,
+            "title": "Track",
+            "artist_display": "Artist",
+            "duration": 200
+          }
+        ]
+      }
+    },
+    {
+      "id": "duplicate-position-not-allowed",
+      "document": {
+        "format": "w4dj",
+        "format_version": 2,
+        "export_id": "invalid-007",
+        "playlist": {
+          "name": "Invalid"
+        },
+        "tracks": [
+          {
+            "position": 1,
+            "title": "First",
+            "artist_display": "Artist"
+          },
+          {
+            "position": 1,
+            "title": "Second",
+            "artist_display": "Artist"
+          }
+        ]
+      }
+    },
+    {
+      "id": "unsupported-playlist-fields",
+      "document": {
+        "format": "w4dj",
+        "format_version": 2,
+        "export_id": "invalid-006",
         "playlist": {
           "name": "Invalid",
-          "output_mode": "rich",
-          "scenario": null,
-          "target_region": null,
-          "platform_priority": []
+          "output_mode": "rich"
         },
         "tracks": []
       }
@@ -212,16 +251,19 @@
   "compatibility_cases": [
     {
       "document_id": "composite-complete",
-      "expected_output_mode": "composite",
       "expected_positions": [1, 2],
       "expected_titles": ["LIKE ME", "Qawwali"],
-      "expected_dedupe_keys": ["rec-001", "rec-002"]
+      "expected_netease_ids": ["123456789012345678", null]
     },
     {
       "document_id": "fast-unknown-metadata",
-      "expected_output_mode": "fast",
       "expected_positions": [1],
-      "expected_unknown_values": ["musical_key", "bpm", "duration"]
+      "expected_netease_ids": [null]
+    },
+    {
+      "document_id": "repeated-netease-id",
+      "expected_positions": [1, 2],
+      "expected_netease_ids": ["987654321012345678", "987654321012345678"]
     }
   ]
 }

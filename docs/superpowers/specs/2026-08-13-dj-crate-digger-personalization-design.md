@@ -450,7 +450,7 @@ published_at: YYYY-MM-DD | unknown
 
 ### 15.3 导出能力
 
-SoundCloud、Apple Music 和 Spotify 只有在官方连接器/API 可用且用户授权后，才可创建平台歌单。网易云音乐、Bandcamp、Beatport 和 Beatsource 不预设平台歌单写入能力。八个平台的合规网页链接均可按用户允许范围写入 TXT/W4DJ；W4DJ 只保存推荐交接数据，不包含本地音频。
+SoundCloud、Apple Music 和 Spotify 只有在官方连接器/API 可用且用户授权后，才可创建平台歌单。网易云音乐、Bandcamp、Beatport 和 Beatsource 不预设平台歌单写入能力。八个平台的合规网页链接均可按用户允许范围写入 TXT；W4DJ 使用全新的 UTF-8 `.w4dj` v2 最小交接格式，只保存歌单名、顺序、完整官方歌名、艺人和可选的字符串 `netease_track_id`，不包含本地音频。旧 v1 文件直接拒绝，不做迁移。
 
 ## 16. 故障与降级
 

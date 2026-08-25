@@ -124,13 +124,13 @@ Official Title - Official Artist
 
 ### W4DJ 交接格式
 
-`导出到w4dj` 生成 UTF-8 JSON 文件，扩展名固定为 `.w4dj`，格式版本固定为 `1`。根字段为 `format: "w4dj"`、`format_version`、`export_id`、`created_at`、`playlist` 和 `tracks`；完整 JSON Schema 见 [w4dj.schema.json](w4dj.schema.json)。
+`导出到w4dj` 生成 UTF-8 JSON 文件，扩展名固定为 `.w4dj`，格式固定为全新的 `format_version: 2`。旧 v1 文件直接拒绝，必须重新导出 v2，不做迁移。根层只写 `format: "w4dj"`、`format_version`、`export_id`、`playlist` 和 `tracks`；`playlist` 只写 `name`。完整 JSON Schema 见 [w4dj.schema.json](w4dj.schema.json)。
 
 三种输出模式都支持交接，内部 `output_mode` 固定映射为：极速版 `fast`、简要版 `composite`、丰富版 `four_views`。导出使用当前最终结果：简要版使用综合表，丰富版使用动态综合版，极速版使用最终 fast 表；如果用户已经完成五度圈重排，使用重排后的最终顺序。不得把四个丰富版视角拼成重复曲目。
 
-每个 `tracks[]` 项目保留 `position`、`record_id`、完整官方 `title`、`artist_display`、`artists`、`album_or_ep`、`duration`、`bpm`、`musical_key`、`platform_refs`、`dedupe_key` 和 `expected_filename_hint`。如果官方曲名包含 Remix、Edit、Live、Dub 或 Extended Mix 等限定，限定必须已经包含在 `title` 中，不另设 `version` 字段。`platform_refs` 只记录已经核验或明确不可用的具体平台曲目引用；不得写搜索结果页、平台首页或猜测链接。`expected_filename_hint` 只是给 W4DJ 的提示，不是本地文件名权威，也不能要求 Skill 生成或复制该文件。
+每个 `tracks[]` 项目只写 `position`、完整官方 `title` 和 `artist_display`；如果有网易云身份，额外写 `netease_track_id`，并且必须是 JSON 字符串，包括看起来像超大数字的 ID。没有网易云 ID 时省略该字段，不写 `null` 或 `unknown` 占位。官方曲名中的 Remix、Edit、Live、Dub、Instrumental、Radio Edit、Extended Mix 等限定必须已经包含在 `title` 中，不另设 `version` 字段。
 
-未知值保持 `null` 或 `"unknown"`，特别是极速版允许元数据未知；不得为了填满 schema 而臆造 BPM、调性、专辑、平台 ID 或链接。W4DJ 只交接推荐意图、顺序、完整官方歌名、已核验元数据、平台引用和去重键，不包含音频文件、`local_audio_path`、绝对路径、二维码或网易云下载动作；Skill 也不生成占位音频或本地文件。
+W4DJ v2 不写 BPM、调性、专辑、URL、平台状态、`record_id`、`artists`、`duration`、`musical_key`、`platform_refs`、`dedupe_key`、`expected_filename_hint`、`local_audio_path` 或任何本地路径。这些仍可作为 Skill 的内部推荐和验证记录，但不能泄漏到 `.w4dj`。W4DJ 只交接推荐意图、最终顺序、完整官方歌名、艺人和可选网易云 ID。
 
 宿主有文件写入能力时，用户明确回复 `导出到w4dj` 后生成 `.w4dj` 文件并返回本地文件链接；设置 `w4dj_export.status: generated`。宿主不能写入时，返回等价 JSON manifest 和保存步骤，设置 `w4dj_export.status: manifest_only`，不得声称已创建文件。
 

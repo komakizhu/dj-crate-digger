@@ -1,15 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/komakizhu/dj-crate-digger-skill/blob/main/references/w4dj.schema.json",
-  "title": "DJ Crate Digger W4DJ handoff",
-  "description": "Recommendation handoff data only; it does not contain audio files or Rekordbox paths.",
+  "title": "DJ Crate Digger W4DJ v2 handoff",
+  "description": "Minimal UTF-8 recommendation handoff. Version 1 and unknown fields are rejected; no migration is performed.",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "format",
     "format_version",
     "export_id",
-    "created_at",
     "playlist",
     "tracks"
   ],
@@ -18,13 +17,9 @@
       "const": "w4dj"
     },
     "format_version": {
-      "const": 1
+      "const": 2
     },
     "export_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "created_at": {
       "type": "string",
       "minLength": 1
     },
@@ -32,41 +27,12 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "name",
-        "output_mode",
-        "scenario",
-        "target_region",
-        "platform_priority"
+        "name"
       ],
       "properties": {
         "name": {
           "type": "string",
           "minLength": 1
-        },
-        "output_mode": {
-          "enum": [
-            "fast",
-            "composite",
-            "four_views"
-          ]
-        },
-        "scenario": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "target_region": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "platform_priority": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -78,196 +44,40 @@
     }
   },
   "$defs": {
-    "unknown_number": {
-      "oneOf": [
-        {
-          "type": [
-            "number",
-            "null"
-          ]
-        },
-        {
-          "const": "unknown"
-        }
-      ]
-    },
-    "musical_key": {
-      "oneOf": [
-        {
-          "const": "unknown"
-        },
-        {
-          "type": "null"
-        },
-        {
-          "type": "object",
-          "additionalProperties": false,
-          "required": [
-            "source_value",
-            "normalized_key",
-            "camelot",
-            "evidence_url",
-            "evidence_type",
-            "checked_at",
-            "status"
-          ],
-          "properties": {
-            "source_value": {
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "normalized_key": {
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "camelot": {
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "evidence_url": {
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "evidence_type": {
-              "enum": [
-                "authorized_dj_store",
-                "official_metadata",
-                "unknown"
-              ]
-            },
-            "checked_at": {
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "status": {
-              "enum": [
-                "verified",
-                "conflict",
-                "unknown"
-              ]
-            }
-          }
-        }
-      ]
-    },
-    "platform_ref": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "platform",
-        "track_id",
-        "url",
-        "status"
-      ],
-      "properties": {
-        "platform": {
-          "type": "string",
-          "minLength": 1
-        },
-        "track_id": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "url": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "status": {
-          "enum": [
-            "verified",
-            "unavailable",
-            "unknown"
-          ]
-        }
-      }
-    },
     "track": {
       "type": "object",
       "additionalProperties": false,
       "required": [
         "position",
-        "record_id",
         "title",
-        "artist_display",
-        "artists",
-        "album_or_ep",
-        "duration",
-        "bpm",
-        "musical_key",
-        "platform_refs",
-        "dedupe_key",
-        "expected_filename_hint"
+        "artist_display"
       ],
       "properties": {
         "position": {
           "type": "integer",
           "minimum": 1
         },
-        "record_id": {
-          "type": "string",
-          "minLength": 1
-        },
         "title": {
           "type": "string",
           "minLength": 1,
-          "description": "Complete official track title; any official Remix, Edit, Live, Dub, Instrumental, Radio Edit, or Extended Mix qualifier is part of this value."
+          "description": "Complete official track title; Remix, Edit, Live, Dub, Instrumental, Radio Edit, Extended Mix and other official qualifiers remain embedded here."
         },
         "artist_display": {
           "type": "string",
           "minLength": 1
         },
-        "artists": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
-        },
-        "album_or_ep": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "duration": {
-          "$ref": "#/$defs/unknown_number"
-        },
-        "bpm": {
-          "$ref": "#/$defs/unknown_number"
-        },
-        "musical_key": {
-          "$ref": "#/$defs/musical_key"
-        },
-        "platform_refs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/platform_ref"
-          }
-        },
-        "dedupe_key": {
+        "netease_track_id": {
           "type": "string",
-          "minLength": 1
-        },
-        "expected_filename_hint": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "minLength": 1,
+          "not": {
+            "enum": [
+              "unknown",
+              "null",
+              "none",
+              "undefined"
+            ]
+          },
+          "description": "Optional NetEase Cloud Music identity. It must remain a JSON string, including for large numeric-looking IDs."
         }
       }
     }

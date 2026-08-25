@@ -939,31 +939,33 @@
         "极速版、简要版、丰富版的 output_mode 分别为 fast、composite、four_views",
         "简要版使用综合表，丰富版使用动态综合版，极速版使用最终 fast 表，不拼接重复视角",
         "导出到w4dj 只在完整报告后的下一步出现，不插入第一轮或第二轮问卷",
-        "w4dj_export.status 在确认后为 confirmed，成功写入后为 generated"
+        "w4dj_export.status 在确认后为 confirmed，成功写入后为 generated",
+        "三种模式生成的交接文件都固定使用全新的 format_version=2 最小结构"
       ]
     },
     {
       "id": 84,
-      "name": "w4dj-schema-preserves-unknowns",
+      "name": "w4dj-v2-excludes-non-wire-metadata",
       "prompt": "/dj-crate-digger 选择极速版，部分曲目的 BPM、调性和专辑没有可靠数据；报告结束后导出到w4dj。",
-      "expected_output": "生成 schema v1 的 `.w4dj` JSON，未知元数据写为 null 或 unknown，不因交接格式要求而猜测。",
+      "expected_output": "生成全新的 schema v2 最小 `.w4dj` JSON；BPM、调性和专辑不进入文件，不因交接格式要求而猜测。",
       "expectations": [
-        "根字段包含 format=w4dj、format_version=1、export_id、created_at、playlist 和 tracks",
-        "tracks 保留 title、artist_display、artists、album_or_ep、duration、bpm、musical_key、platform_refs、dedupe_key 和 expected_filename_hint；不包含独立 version 字段",
-        "未知 BPM、调性、专辑、平台 ID 或链接保持 null/unknown",
+        "根字段只包含 format=w4dj、format_version=2、export_id、playlist 和 tracks；playlist 只包含 name",
+        "tracks 只包含 position、完整 title、artist_display 和可选的字符串 netease_track_id；不包含独立 version 字段",
+        "BPM、调性、专辑、平台链接、状态、dedupe_key 和本地路径不写入 W4DJ",
         "JSON 结构通过 references/w4dj.schema.json 校验"
       ]
     },
     {
       "id": 85,
-      "name": "w4dj-preserves-final-order-title-and-dedupe",
+      "name": "w4dj-preserves-final-order-and-title",
       "prompt": "/dj-crate-digger 简要版完成后用户确认按五度圈重排，再回复导出到w4dj。",
-      "expected_output": "W4DJ 使用重排后的最终顺序，同时保留每首歌的完整官方 title、platform_refs 和 dedupe_key，不重新搜索或拼接丰富版专项视角。",
+      "expected_output": "W4DJ 使用重排后的最终顺序，同时保留每首歌的完整官方 title、艺人和可选网易云 ID，不重新搜索或拼接丰富版专项视角。",
       "expectations": [
         "position 按重排后的最终顺序重新编号",
-        "完整官方 title（包括 Remix/Edit 等限定）不被替换或删减，且不产生独立 version 字段，dedupe_key 不丢失",
+        "完整官方 title（包括 Remix/Edit 等限定）不被替换或删减，且不产生独立 version 字段",
+        "如果有网易云身份，netease_track_id 以字符串保留；没有 ID 时省略字段",
         "W4DJ 的曲目集合与最终报告一致，不因为交接导出新增重复录音",
-        "导出后的平台引用仍符合 platform_policy 和 link_priority"
+        "导出文件不包含 platform_refs、dedupe_key 或其他内部字段"
       ]
     },
     {
@@ -973,7 +975,7 @@
       "expected_output": "只生成推荐数据交接，不创建音频、占位 MP3、本地最终文件名、二维码或网易云下载任务。",
       "expectations": [
         "W4DJ 不包含 local_audio_path 或绝对路径",
-        "expected_filename_hint 只是提示字段，不被当作本地文件名权威",
+        "W4DJ 不包含 expected_filename_hint 或任何本地文件名",
         "Skill 不下载音频、不生成占位文件、不执行二维码或网易云下载动作",
         "W4DJ 不生成本地文件或下载任务"
       ]
@@ -986,7 +988,18 @@
       "expectations": [
         "w4dj_export.status 为 manifest_only",
         "不得声称已经创建本地文件、文件路径或下载链接",
-        "manifest 仍通过 schema v1，且保留最终动态综合版的顺序、完整官方 title、平台引用和 dedupe_key"
+        "manifest 仍通过 schema v2，且只保留最终动态综合版的顺序、完整官方 title、艺人和可选字符串 netease_track_id"
+      ]
+    },
+    {
+      "id": 88,
+      "name": "w4dj-v1-rejected-without-migration",
+      "prompt": "/dj-crate-digger 用户上传旧的 format_version=1 .w4dj 文件，要求直接导入。",
+      "expected_output": "明确拒绝旧 v1 文件，说明需要从 DJ Crate Digger 重新导出全新的 v2；不读取旧字段、不自动迁移。",
+      "expectations": [
+        "format_version=1 不被当作可兼容输入",
+        "不从 created_at、output_mode、platform_refs、dedupe_key、duration 或其他旧字段拼装 v2",
+        "错误说明包含重新导出 v2 的下一步"
       ]
     }
   ]

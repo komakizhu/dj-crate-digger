@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/komakizhu/dj-crate-digger-skill/blob/main/references/w4dj.schema.json",
+  "$id": "https://github.com/komakizhu/dj-crate-digger/blob/main/references/w4dj.schema.json",
   "title": "DJ Crate Digger W4DJ v2 handoff",
   "description": "Minimal UTF-8 recommendation handoff. Version 1 and unknown fields are rejected; no migration is performed.",
   "type": "object",

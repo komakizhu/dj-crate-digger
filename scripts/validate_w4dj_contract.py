@@ -158,7 +158,7 @@ def source_contract_errors() -> list[str]:
             if old_format_marker in text:
                 errors.append(f"{path.name}: contains retired W4DJ format marker {old_format_marker!r}")
 
-    short_skill_link = "[dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)"
+    short_skill_link = "[dj-crate-digger](https://github.com/komakizhu/dj-crate-digger)"
     for path in (ROOT / "SKILL.md", ROOT / "references" / "report-template.md"):
         if short_skill_link not in path.read_text(encoding="utf-8"):
             errors.append(f"{path.name}: repository tutorial link must use the short label")

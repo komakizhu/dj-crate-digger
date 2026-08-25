@@ -3,7 +3,9 @@ name: dj-crate-digger
 description: "Use when a user asks to discover, curate, rank, sequence, arrange, or export music for a DJ set or playlist with clear music-curation context: a performance, venue, set, genre, artist, reference track, BPM, mood, or energy request. Activate for equivalent Chinese or English requests such as 挖歌, 找歌, 排set, setlist, crate digging, or DJ playlist. Do not activate for generic playlist requests or song identification alone."
 ---
 
-# DJ挖歌助手（DJ Crate Digger）
+# 老炮DJ（dj-crate-digger）
+
+中文名：老炮DJ；英文名、Skill 名与仓库名：`dj-crate-digger`。
 
 ## 目标
 
@@ -386,7 +388,7 @@ assumptions: []
 
 具体操作教程可以查看
 
-[dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)
+[dj-crate-digger](https://github.com/komakizhu/dj-crate-digger)
 
 `输出文字版歌单`的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
 

@@ -1,4 +1,6 @@
-# DJ Crate Digger Skill
+# 老炮DJ（dj-crate-digger）
+
+中文名：老炮DJ；英文名、Skill 名与仓库名：`dj-crate-digger`。
 
 面向 DJ、音乐制作人与电子音乐听众的 Agent Skills：把自然语言 Digging 需求转成经过联网搜索、逐曲验证、去重、排序和播放顺序设计的 Markdown 报告。
 
@@ -144,7 +146,7 @@ W4DJ 文件固定使用 `format_version: 2`，不包含 BPM、调性、专辑、
 
 本仓库以标准 `SKILL.md` 作为通用入口，`references/` 是按需读取的补充资源；支持 Agent Skills 标准的客户端可以按自身的技能目录发现并加载它。Claude Code、VS Code Agent 等支持该标准的客户端可以复用核心内容，但具体发现目录、权限确认和工具名称由客户端决定。
 
-本版本基于 Codex 版 DJ Crate Digger Skill 修改为 Agent Skills 通用格式。`agents/openai.yaml` 仅是 Codex 的可选 UI 与调用适配层，不包含独有的推荐算法；其他 Agent 可以忽略该目录，直接使用 `SKILL.md` 与 `references/`。不支持 Agent Skills 的客户端需要手动加载 `SKILL.md`，并将搜索、页面核验、文件写入和后台续跑映射到自身能力。
+本版本基于 Codex 版 `dj-crate-digger` Skill 修改为 Agent Skills 通用格式，中文名为「老炮DJ」。`agents/openai.yaml` 仅是 Codex 的可选 UI 与调用适配层，不包含独有的推荐算法；其他 Agent 可以忽略该目录，直接使用 `SKILL.md` 与 `references/`。不支持 Agent Skills 的客户端需要手动加载 `SKILL.md`，并将搜索、页面核验、文件写入和后台续跑映射到自身能力。
 
 ## 许可证
 

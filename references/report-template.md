@@ -53,7 +53,7 @@ First batch complete. Continuing to fill the playlist.
 
 具体操作教程可以查看
 
-[dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)
+[dj-crate-digger](https://github.com/komakizhu/dj-crate-digger)
 
 `输出文字版歌单`的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
 
@@ -78,7 +78,7 @@ Second, reply `export to w4dj` to hand off this recommendation, or `output text 
 
 `.w4dj` uses a new minimal v2 format containing only the playlist name, positions, complete official titles, artists, and an optional string `netease_track_id`; v1 is rejected without migration.
 
-For detailed instructions, see [the Skill repository](https://github.com/komakizhu/dj-crate-digger-skill).
+For detailed instructions, see [the Skill repository](https://github.com/komakizhu/dj-crate-digger).
 
 The track-list output is for manual import into NetEase Cloud Music; it cannot import tracks into RKB with one click.
 ```
@@ -186,7 +186,7 @@ The track-list output is for manual import into NetEase Cloud Music; it cannot i
 
 具体操作教程可以查看
 
-[dj-crate-digger-skill](https://github.com/komakizhu/dj-crate-digger-skill)
+[dj-crate-digger](https://github.com/komakizhu/dj-crate-digger)
 
 `输出文字版歌单`的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
 

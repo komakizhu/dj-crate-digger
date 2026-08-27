@@ -158,10 +158,17 @@ def source_contract_errors() -> list[str]:
             if old_format_marker in text:
                 errors.append(f"{path.name}: contains retired W4DJ format marker {old_format_marker!r}")
 
-    short_skill_link = "[dj-crate-digger](https://github.com/komakizhu/dj-crate-digger)"
+    tutorial_link = (
+        "[一键导入Set教程]"
+        "(https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)"
+    )
+    retired_repository_link = "[dj-crate-digger](https://github.com/komakizhu/dj-crate-digger)"
     for path in (ROOT / "SKILL.md", ROOT / "references" / "report-template.md"):
-        if short_skill_link not in path.read_text(encoding="utf-8"):
-            errors.append(f"{path.name}: repository tutorial link must use the short label")
+        text = path.read_text(encoding="utf-8")
+        if tutorial_link not in text:
+            errors.append(f"{path.name}: missing the dedicated W4DJ tutorial link")
+        if retired_repository_link in text:
+            errors.append(f"{path.name}: contains the retired repository-root tutorial link")
 
     chinese_template_paths = (
         ROOT / "SKILL.md",
@@ -181,6 +188,54 @@ def source_contract_errors() -> list[str]:
         for line in english_lines
     ):
         errors.append("report-template.md: English W4DJ command must share the track-list export sentence")
+
+    next_step_heading_contract = {
+        ROOT / "SKILL.md": {
+            "### **第一**｜反馈选歌情况": 1,
+            "### **第二**｜导出或交接歌单": 1,
+            "### **第三**｜排列 Set 顺序": 1,
+        },
+        ROOT / "references" / "report-template.md": {
+            "### **第一**｜反馈选歌情况": 2,
+            "### **第二**｜导出或交接歌单": 2,
+            "### **第三**｜排列 Set 顺序": 1,
+            "### **First**｜Share Selection Feedback": 1,
+            "### **Second**｜Export or Hand Off the Playlist": 1,
+            "### **Third**｜Sequence the Set": 0,
+        },
+    }
+    for path, expected_counts in next_step_heading_contract.items():
+        text = path.read_text(encoding="utf-8")
+        for heading, expected_count in expected_counts.items():
+            actual_count = text.count(heading)
+            if actual_count != expected_count:
+                errors.append(
+                    f"{path.name}: expected {expected_count} occurrences of {heading!r}, got {actual_count}"
+                )
+
+    chinese_tutorial_fragment = (
+        "[w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。"
+        "具体操作教程可以查看 [一键导入Set教程]"
+        "(https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)"
+    )
+    for path, expected_count in (
+        (ROOT / "SKILL.md", 1),
+        (ROOT / "references" / "report-template.md", 2),
+    ):
+        actual_count = path.read_text(encoding="utf-8").count(chinese_tutorial_fragment)
+        if actual_count != expected_count:
+            errors.append(
+                f"{path.name}: tutorial link must join the W4DJ sentence exactly {expected_count} time(s)"
+            )
+
+    english_tutorial_fragment = (
+        "[w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB). "
+        "For detailed instructions, see [One-click Set Import Tutorial]"
+        "(https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)."
+    )
+    report_text = (ROOT / "references" / "report-template.md").read_text(encoding="utf-8")
+    if report_text.count(english_tutorial_fragment) != 1:
+        errors.append("report-template.md: English tutorial link must join the W4DJ sentence")
     return errors
 
 

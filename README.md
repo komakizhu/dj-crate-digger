@@ -1,5 +1,7 @@
 # 老炮DJ（dj-crate-digger）
 
+[中文](README.md) | [English](README.en.md)
+
 中文名：老炮DJ；英文名、Skill 名与仓库名：`dj-crate-digger`。
 
 面向 DJ、音乐制作人与电子音乐听众的 Agent Skills：把自然语言 Digging 需求转成经过联网搜索、逐曲验证、去重、排序和播放顺序设计的 Markdown 报告。

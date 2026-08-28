@@ -1,5 +1,7 @@
 # [老炮DJ](https://github.com/komakizhu/dj-crate-digger) skill与.w4dj交接教程，一键下载set并导入RKB
 
+[中文](README.md) | [English](README.en.md)
+
 `.w4dj` 是 [老炮DJ](https://github.com/komakizhu/dj-crate-digger) 与 [W4DJ RKB](https://github.com/komakizhu/W4DJ-RKB) 之间的歌单交接文件。它保存歌单名称、曲目顺序、完整官方歌名和艺人信息，但不包含歌曲音频。
 
 完整流程是：

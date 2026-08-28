@@ -1,0 +1,53 @@
+{
+  "locale": "vi",
+  "stage": "round_2",
+  "round": {
+    "title": "[Vòng 2: làm rõ yêu cầu]",
+    "rules": [
+      "1. Bạn có thể sao chép ví dụ, điền tự do hoặc để trống"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "Phong cách cụ thể",
+        "example": "Ví dụ: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "Tốc độ / BPM",
+        "example": "Ví dụ: `105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "Mức quen thuộc và khám phá",
+        "example": "`Quen thuộc` / `Cân bằng` / `Khám phá`"
+      },
+      {
+        "key": "era_classic",
+        "label": "Thời đại và kinh điển",
+        "example": "`Đương đại` / `Một ít mốc kinh điển` / `Nối mới và cũ` / `Kinh điển trước`"
+      },
+      {
+        "key": "mood",
+        "label": "Tâm trạng",
+        "example": "Ví dụ: `hoài niệm` / `lạnh` / `lãng mạn`"
+      },
+      {
+        "key": "energy",
+        "label": "Mức hoặc đường năng lượng SET",
+        "example": "Ví dụ: `thấp` / `cao`; `ổn định` / `tàu lượn`"
+      },
+      {
+        "key": "platform",
+        "label": "Nền tảng và yêu cầu liên kết",
+        "example": "Ví dụ: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; một nền tảng nghĩa là chỉ dùng nền tảng đó, nhiều nền tảng theo thứ tự ghi"
+      },
+      {
+        "key": "other",
+        "label": "Khác",
+        "example": ""
+      }
+    ],
+    "prompt": "[Vòng 2: làm rõ yêu cầu]\n\nPhong cách cụ thể:\n“Ví dụ: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`”\nTốc độ / BPM:\n“Ví dụ: `105` / `128` / `140` / `150` / `170`”\nMức quen thuộc và khám phá:\n“`Quen thuộc` / `Cân bằng` / `Khám phá`”\nThời đại và kinh điển:\n“`Đương đại` / `Một ít mốc kinh điển` / `Nối mới và cũ` / `Kinh điển trước`”\nTâm trạng:\n“Ví dụ: `hoài niệm` / `lạnh` / `lãng mạn`”\nMức hoặc đường năng lượng SET:\n“Ví dụ: `thấp` / `cao`; `ổn định` / `tàu lượn`”\nNền tảng và yêu cầu liên kết:\n“Ví dụ: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; một nền tảng nghĩa là chỉ dùng nền tảng đó, nhiều nền tảng theo thứ tự ghi”\nKhác:\n\n```markdown\nPhong cách cụ thể:\nTốc độ / BPM:\nMức quen thuộc và khám phá:\nThời đại và kinh điển:\nTâm trạng:\nMức hoặc đường năng lượng SET:\nNền tảng và yêu cầu liên kết:\nKhác:\n```"
+  }
+}

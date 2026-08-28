@@ -323,6 +323,13 @@ This file is the fixed Türkçe UI and intent contract for dj-crate-digger. The 
     "harmonic": "Bilinen tonlarla Camelot çarkına göre sıralama isteyin.",
     "feedback": "Doğal dil geri bildirimi yalnızca oturumu günceller; uzun vadeli kayıt onay gerektirir.",
     "memory_confirmation": "Bunu zevk değişikliğinin kısa bir özeti olarak anladım. Özel uzun vadeli profile kaydedilsin mi?"
-  }
+  },
+  "trigger_capsule": [
+    "DJ seti",
+    "çalma listesi",
+    "müzik keşfi",
+    "parça bul",
+    "set oluştur"
+  ]
 }
 ```

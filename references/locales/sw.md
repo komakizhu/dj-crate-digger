@@ -323,6 +323,13 @@ This file is the fixed Kiswahili UI and intent contract for dj-crate-digger. The
     "harmonic": "Omba mpangilio wa gurudumu la Camelot ukitumia keys zinazojulikana.",
     "feedback": "Maoni ya lugha ya kawaida husasisha kipindi pekee; kuhifadhi muda mrefu kunahitaji uthibitisho.",
     "memory_confirmation": "Nimeelewa hili kama muhtasari mfupi wa mabadiliko ya ladha. Ihifadhi kwenye wasifu binafsi wa muda mrefu?"
-  }
+  },
+  "trigger_capsule": [
+    "seti ya DJ",
+    "orodha ya kucheza",
+    "tafuta muziki",
+    "tafuta nyimbo",
+    "panga seti"
+  ]
 }
 ```

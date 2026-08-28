@@ -113,15 +113,28 @@
   },
   {
     "query": "做个 playlist",
-    "should_trigger": false
+    "should_trigger": false,
+    "expected_route": "ambiguous_confirmation"
   },
   {
     "query": "帮我做一张歌单",
-    "should_trigger": false
+    "should_trigger": false,
+    "expected_route": "ambiguous_confirmation"
   },
   {
     "query": "/DJ",
-    "should_trigger": false
+    "should_trigger": false,
+    "expected_route": "ambiguous_confirmation"
+  },
+  {
+    "query": "DJ",
+    "should_trigger": false,
+    "expected_route": "ambiguous_confirmation"
+  },
+  {
+    "query": "挖歌",
+    "should_trigger": true,
+    "expected_route": "direct"
   },
   {
     "query": "帮我找一首歌的歌名，这段旋律是什么？",

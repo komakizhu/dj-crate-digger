@@ -1,0 +1,49 @@
+{
+  "locale": "de",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "Willkommen beim DJ-Auswahlassistenten. Dieses Agent Skill hilft dir, ein DJ-Set zusammenzustellen. Du bestätigst deine Wünsche in zwei Runden und erhältst Track-Empfehlungen. Ausfüllregeln:",
+    "tutorial_label": "Anleitung für den Ein-Klick-Set-Import",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md"
+  },
+  "round": {
+    "title": "[Runde 1: Grundinformationen]",
+    "rules": [
+      "1. Du kannst ein Beispiel kopieren, frei ausfüllen oder das Feld leer lassen",
+      "2. Ein leeres Feld bedeutet, dass die KI die Antwort intelligent einschätzt"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "Situation",
+        "example": "Auftrittssituation. Beispiele: `Bar` / `Club` / `Hochzeit` / `Kunstausstellung`"
+      },
+      {
+        "key": "target_market",
+        "label": "Zielland / Zielregion",
+        "example": "Beispiele: `Festlandchina` / `Taiwan` / `Hongkong` / `Japan` / `internationaler englischsprachiger Markt`"
+      },
+      {
+        "key": "core_sound",
+        "label": "Zentrale Klangrichtung",
+        "example": "Referenzkünstler, Track und Genre. Beispiel: `Tears` von `Skrillex`, modernes `UK Bass`"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "Anzahl Tracks oder Set-Dauer",
+        "example": "Beispiele: `20 Tracks` / `60 Minuten`"
+      },
+      {
+        "key": "output_mode",
+        "label": "Ausgabeversion",
+        "example": "Auswahl Fast / Brief / Rich"
+      },
+      {
+        "key": "other",
+        "label": "Weitere Einschränkungen",
+        "example": "Beispiele: `keine überstrapazierten Tracks`, `keine Vocals`, `nur Remix`; optional"
+      }
+    ],
+    "prompt": "Willkommen beim DJ-Auswahlassistenten. Dieses Agent Skill hilft dir, ein DJ-Set zusammenzustellen. Du bestätigst deine Wünsche in zwei Runden und erhältst Track-Empfehlungen. Ausfüllregeln:\n\n1. Du kannst ein Beispiel kopieren, frei ausfüllen oder das Feld leer lassen\n2. Ein leeres Feld bedeutet, dass die KI die Antwort intelligent einschätzt\n\n[Runde 1: Grundinformationen]\n\nSituation:\n“Auftrittssituation. Beispiele: `Bar` / `Club` / `Hochzeit` / `Kunstausstellung`”\nZielland / Zielregion:\n“Beispiele: `Festlandchina` / `Taiwan` / `Hongkong` / `Japan` / `internationaler englischsprachiger Markt`”\nZentrale Klangrichtung:\n“Referenzkünstler, Track und Genre. Beispiel: `Tears` von `Skrillex`, modernes `UK Bass`”\nAnzahl Tracks oder Set-Dauer:\n“Beispiele: `20 Tracks` / `60 Minuten`”\nAusgabeversion:\n“`Fast`: schnelle Playlist-Ausgabe; die Qualität kann geringer sein”\n“`Brief`: nur eine kombinierte Playlist”\n“`Rich`: getrennte Ansichten für Stil, Situation und Entdeckung, danach eine kombinierte Playlist”\nWeitere Einschränkungen:\n“Beispiele: `keine überstrapazierten Tracks`, `keine Vocals`, `nur Remix`; optional”\n\n```markdown\nSituation:\nZielland / Zielregion:\nZentrale Klangrichtung:\nAnzahl Tracks oder Set-Dauer:\nAusgabeversion:\nWeitere Einschränkungen:\n```"
+  }
+}

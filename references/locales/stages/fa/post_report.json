@@ -1,0 +1,78 @@
+{
+  "locale": "fa",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "ارسال بازخورد",
+      "positive": [
+        "این قطعه را دوست دارم"
+      ],
+      "negative": [
+        "این قطعه را دوست ندارم"
+      ],
+      "ambiguous": [
+        "درباره این قطعه مطمئن نیستم"
+      ]
+    },
+    "export_w4dj": {
+      "label": "خروجی برای W4DJ",
+      "positive": [
+        "خروجی برای W4DJ"
+      ],
+      "negative": [
+        "برای W4DJ خروجی نگیر"
+      ],
+      "ambiguous": [
+        "شاید برای W4DJ خروجی بگیر"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "خروجی playlist متنی",
+      "positive": [
+        "playlist متنی را خروجی بگیر"
+      ],
+      "negative": [
+        "playlist متنی را خروجی نگیر"
+      ],
+      "ambiguous": [
+        "شاید playlist متنی را خروجی بگیر"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "مرتب‌سازی هارمونیک",
+      "positive": [
+        "با چرخ Camelot مرتب کن"
+      ],
+      "negative": [
+        "مرتب نکن"
+      ],
+      "ambiguous": [
+        "شاید با چرخ Camelot مرتب کن"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "تأیید حافظه بلندمدت",
+      "positive": [
+        "این ترجیح را به خاطر بسپار"
+      ],
+      "negative": [
+        "این ترجیح را ذخیره نکن"
+      ],
+      "ambiguous": [
+        "شاید این ترجیح را به خاطر بسپار"
+      ]
+    }
+  },
+  "export": {
+    "text": "یک playlist متنی قابل‌کپی را با ترتیب فعلی تولید کن.",
+    "w4dj": "یک فایل تحویل UTF-8 با پسوند `.w4dj` برای W4DJ بساز.",
+    "harmonic": "ترتیب چرخ Camelot را با گام‌های شناخته‌شده درخواست کن.",
+    "feedback": "بازخورد طبیعی فقط جلسه را به‌روزرسانی می‌کند؛ ذخیره بلندمدت نیازمند تأیید است.",
+    "memory_confirmation": "این را به‌عنوان خلاصه‌ای کوتاه از تغییر سلیقه فهمیدم. در پروفایل خصوصی بلندمدت ذخیره شود؟"
+  },
+  "status": {
+    "unknown": "نامشخص",
+    "verified": "تأییدشده",
+    "target_platform_missing": "پلتفرم هدف در دسترس نیست"
+  }
+}

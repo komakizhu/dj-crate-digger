@@ -323,6 +323,13 @@ This file is the fixed اردو UI and intent contract for dj-crate-digger. The 
     "harmonic": "معلوم keys سے Camelot wheel ترتیب کی درخواست کریں۔",
     "feedback": "قدرتی زبان کی رائے صرف session اپڈیٹ کرتی ہے؛ طویل مدتی محفوظ کرنے کے لیے تصدیق ضروری ہے۔",
     "memory_confirmation": "میں نے اسے ذوق میں تبدیلی کے مختصر خلاصے کے طور پر سمجھا ہے۔ نجی طویل مدتی profile میں محفوظ کروں؟"
-  }
+  },
+  "trigger_capsule": [
+    "DJ سیٹ",
+    "پلے لسٹ",
+    "موسیقی تلاش",
+    "ٹریک تلاش",
+    "سیٹ ترتیب"
+  ]
 }
 ```

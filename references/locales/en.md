@@ -127,7 +127,7 @@ This file is the fixed English UI and intent contract for dj-crate-digger. The J
         },
         {
           "label": "Second | Export or hand off the playlist",
-          "body": "You can output a text playlist or hand it to W4DJ. Reply `export to w4dj` or `output text playlist`.\n\nW4DJ provides one-click playlist import, converts formats after download, and imports into DJ software. Export the `.w4dj` format and download [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB). For detailed instructions, see [One-Click Set Import Tutorial](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md).\n\n`.w4dj` uses a new minimal v2 format containing only the playlist name, positions, complete official titles, artists, and an optional string `netease_track_id`; v1 is rejected without migration.\n\nThe text-playlist action outputs copyable text that can be imported manually into NetEase Cloud Music, but it cannot import tracks into RKB with one click."
+          "body": "You can output a text playlist or hand it to W4DJ. Reply `export to w4dj` or `output text playlist`.\n\nW4DJ provides one-click playlist import, converts formats after download, and imports into DJ software. Export the `.w4dj` format and download [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB). For detailed instructions, see [One-Click Set Import Tutorial](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md).\n\nThe text-playlist action outputs copyable text that can be imported manually into NetEase Cloud Music, but it cannot import tracks into RKB with one click."
         }
       ],
       "digging_notes": "Digging notes",
@@ -161,7 +161,7 @@ This file is the fixed English UI and intent contract for dj-crate-digger. The J
         },
         {
           "label": "Second | Export or hand off the playlist",
-          "body": "You can output a text playlist or hand it to W4DJ. Reply `export to w4dj` or `output text playlist`.\n\nW4DJ provides one-click playlist import, converts formats after download, and imports into DJ software. Export the `.w4dj` format and download [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB). For detailed instructions, see [One-Click Set Import Tutorial](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md).\n\n`.w4dj` uses a new minimal v2 format containing only the playlist name, positions, complete official titles, artists, and an optional string `netease_track_id`; v1 is rejected without migration.\n\nThe text-playlist action outputs copyable text that can be imported manually into NetEase Cloud Music, but it cannot import tracks into RKB with one click."
+          "body": "You can output a text playlist or hand it to W4DJ. Reply `export to w4dj` or `output text playlist`.\n\nW4DJ provides one-click playlist import, converts formats after download, and imports into DJ software. Export the `.w4dj` format and download [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB). For detailed instructions, see [One-Click Set Import Tutorial](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md).\n\nThe text-playlist action outputs copyable text that can be imported manually into NetEase Cloud Music, but it cannot import tracks into RKB with one click."
         },
         {
           "label": "Third | Harmonic set order",
@@ -199,7 +199,7 @@ This file is the fixed English UI and intent contract for dj-crate-digger. The J
         },
         {
           "label": "Second | Export or hand off the playlist",
-          "body": "You can output a text playlist or hand it to W4DJ. Reply `export to w4dj` or `output text playlist`.\n\nW4DJ provides one-click playlist import, converts formats after download, and imports into DJ software. Export the `.w4dj` format and download [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB). For detailed instructions, see [One-Click Set Import Tutorial](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md).\n\n`.w4dj` uses a new minimal v2 format containing only the playlist name, positions, complete official titles, artists, and an optional string `netease_track_id`; v1 is rejected without migration.\n\nThe text-playlist action outputs copyable text that can be imported manually into NetEase Cloud Music, but it cannot import tracks into RKB with one click."
+          "body": "You can output a text playlist or hand it to W4DJ. Reply `export to w4dj` or `output text playlist`.\n\nW4DJ provides one-click playlist import, converts formats after download, and imports into DJ software. Export the `.w4dj` format and download [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB). For detailed instructions, see [One-Click Set Import Tutorial](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md).\n\nThe text-playlist action outputs copyable text that can be imported manually into NetEase Cloud Music, but it cannot import tracks into RKB with one click."
         },
         {
           "label": "Third | Harmonic set order",
@@ -323,6 +323,13 @@ This file is the fixed English UI and intent contract for dj-crate-digger. The J
     "harmonic": "Request Camelot-wheel ordering using known keys.",
     "feedback": "Use natural-language feedback to update the current session; long-term storage requires confirmation.",
     "memory_confirmation": "I understood this as a concise taste-change summary. Save it to the private long-term profile?"
-  }
+  },
+  "trigger_capsule": [
+    "DJ set",
+    "playlist",
+    "crate digging",
+    "find tracks",
+    "sequence a set"
+  ]
 }
 ```

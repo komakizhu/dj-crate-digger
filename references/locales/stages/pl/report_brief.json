@@ -1,0 +1,42 @@
+{
+  "locale": "pl",
+  "stage": "report_brief",
+  "report": {
+    "title": "# Tryb Brief",
+    "first_batch_title": "# Tryb Brief",
+    "final_title": "# Tryb Brief",
+    "columns": [
+      "Utwór",
+      "Artysta",
+      "Album / EP",
+      "Styl",
+      "BPM",
+      "Tonacja",
+      "Długość",
+      "Energia",
+      "Data wydania",
+      "Notatki",
+      "Powód wyboru",
+      "Link"
+    ],
+    "next_steps": [
+      {
+        "label": "Po pierwsze | Podziel się opinią",
+        "body": "Jeśli chcesz, opisz naturalnym językiem, jak sprawdziły się wybory. To poprawia prywatne preferencje i kolejne rekomendacje."
+      },
+      {
+        "label": "Po drugie | Eksportuj lub przekaż playlistę",
+        "body": "Możesz wyprowadzić playlistę tekstową albo przekazać ją do W4DJ. Odpowiedz `output text playlist` lub `export to w4dj`."
+      },
+      {
+        "label": "Po trzecie | Harmoniczna kolejność seta",
+        "body": "Czy mam ułożyć set według koła Camelota?"
+      }
+    ],
+    "digging_notes": "Notatki z diggingu",
+    "mix_suggestion": "Sugestia miksu",
+    "unknown": "Nieznane",
+    "verified": "Zweryfikowane",
+    "target_platform_missing": "Platforma docelowa niedostępna"
+  }
+}

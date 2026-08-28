@@ -1,0 +1,10 @@
+{
+  "locale": "en",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "Web search is unavailable, so I cannot verify a recommendation.",
+    "open_page": "Concrete page access is unavailable, so I cannot verify a recommendation.",
+    "file_write": "File writing is unavailable, so I cannot create a `.w4dj` file.",
+    "progress": "Automatic continuation is unavailable; I can deliver only the verified first batch."
+  }
+}

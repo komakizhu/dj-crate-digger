@@ -323,6 +323,13 @@ This file is the fixed Deutsch UI and intent contract for dj-crate-digger. The J
     "harmonic": "Eine Anordnung nach dem Camelot-Rad mit bekannten Tonarten anfordern.",
     "feedback": "Feedback in natürlicher Sprache aktualisiert nur die Sitzung; langfristiges Speichern braucht Bestätigung.",
     "memory_confirmation": "Ich verstehe das als kurze Zusammenfassung einer Geschmacksänderung. Im privaten Langzeitprofil speichern?"
-  }
+  },
+  "trigger_capsule": [
+    "DJ-Set",
+    "Playlist",
+    "Musik suchen",
+    "Tracks finden",
+    "Set zusammenstellen"
+  ]
 }
 ```

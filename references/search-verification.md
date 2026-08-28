@@ -2,11 +2,11 @@
 
 ## 语言包、语言与市场
 
-先读取 [locales/manifest.json](locales/manifest.json)，根据 `communication_language` 加载一个固定语言包。语言包只负责问卷、可见状态、平台策略表达和动作意图词；搜索查询可以保留用户原词并补充英文检索词。`communication_language` 与 `target_market` 始终分离：明确国家/地区只改变本轮搜索语境和可用性解释，空白地区只使用语言包定义的宽泛市场，不猜具体国家，也不持久化。
+先读取 [locales/manifest.json](locales/manifest.json)，根据 `communication_language` 只加载该语言的 `search_context` 资源。语言包负责固定问卷、报告可见文案、状态、平台策略表达和动作意图词；搜索查询可以保留用户原词并补充英文检索词。`communication_language` 与 `target_market` 始终分离：明确国家/地区只改变本轮搜索语境和可用性解释，空白地区只使用语言包定义的宽泛市场，不猜具体国家，也不持久化。
 
 ## 多语言平台意图
 
-平台名称、exclusive/preferred/fallback/forbidden 表达从当前语言包的 `platform_policy` 读取，并归一化到平台 ID。用户只填写一个平台且没有回退词时，默认为 `exclusive`；明确的“仅限/只使用”同样是 `exclusive`。多个平台按填写顺序构成 `preferred` 允许列表；优先词只影响链接和回退顺序，不进入内容排序。禁用表达从搜索、引用、报告和导出中硬过滤。动作请求使用语言包 `actions` 的 `action_intent`，不强迫用户用中文或某一种语言的命令。
+平台名称、exclusive/preferred/fallback/forbidden 表达从该语言 `search_context` 的 `platform_policy` 读取，并归一化到平台 ID。用户只填写一个平台且没有回退词时，默认为 `exclusive`；明确的“仅限/只使用”同样是 `exclusive`。多个平台按填写顺序构成 `preferred` 允许列表；优先词只影响链接和回退顺序，不进入内容排序。禁用表达从搜索、引用、报告和导出中硬过滤。动作请求使用语言包 `post_report` 的 `actions`，不强迫用户用中文或某一种语言的命令。
 
 ## 搜索策略
 
@@ -18,6 +18,8 @@
 4. 相邻子流派或同厂牌线索
 5. 用户明确的热门、冷门或熟悉度要求
 6. 目标国家 / 地区 + 平台、编辑、厂牌或本地场景线索
+
+每个与市场相关的查询至少保留三层文字：目标市场的主要语言、英语检索词、用户提供的艺人名或曲名原始文字。不要只把用户原文翻成英语后丢弃原写法；原始拼写用于身份召回，市场语言用于本地媒体、厂牌、活动和文化语境，英语用于跨市场目录和 DJ 资料。语言只是查询扩大器，不是把目标市场写成用户长期偏好，也不能改变可见沟通语言。
 
 用户未指定平台时，默认链接展示顺序为 SoundCloud → Apple Music → Spotify，但发现阶段采用均衡轮询或并行抽样，并用 Bandcamp、Beatport、Beatsource、Discogs、MusicBrainz、艺人官网和厂牌官网补充验证。用户指定平台时，目标平台中的可用性优先于跨平台覆盖。
 

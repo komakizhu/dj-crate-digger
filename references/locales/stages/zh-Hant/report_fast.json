@@ -1,0 +1,29 @@
+{
+  "locale": "zh-Hant",
+  "stage": "report_fast",
+  "report": {
+    "title": "# 極速版",
+    "first_batch_title": "# 極速版首批",
+    "final_title": "# 極速版",
+    "columns": [
+      "歌名",
+      "歌手",
+      "連結"
+    ],
+    "next_steps": [
+      {
+        "label": "第一｜回饋選歌情況",
+        "body": "如果願意，您可以用自然語言回覆選歌情況，這會豐富您的私人選歌偏好，讓推薦更準。回覆包括但不限於「`skream的歌不錯，但我這次因為客群的關係沒放`/`我不喜歡跳樓機，以後別再推了`/`我這次播放了這些歌（配圖/表）`」"
+      },
+      {
+        "label": "第二｜輸出或交接歌單",
+        "body": "您可以輸出文字版歌單或交接給 W4DJ，直接回覆 `交接到 W4DJ` 或 `輸出文字版歌單` 即可。\n\nW4DJ 的功能是一鍵導入歌單、下載後一鍵轉換格式，並一鍵導入打碟軟體；請輸出 `.w4dj` 格式並下載 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。具體操作教程可以查看 [一鍵導入 Set 教程](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)。\n\n`輸出文字版歌單` 的功能是輸出可複製文字，可以手動導入網易雲，但無法幫您一鍵把歌曲導入 RKB。"
+      }
+    ],
+    "digging_notes": "選歌碎碎念",
+    "mix_suggestion": "接歌建議",
+    "unknown": "未知",
+    "verified": "已核驗",
+    "target_platform_missing": "目標平台缺失"
+  }
+}

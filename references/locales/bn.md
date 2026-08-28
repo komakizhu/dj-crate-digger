@@ -323,6 +323,13 @@ This file is the fixed বাংলা UI and intent contract for dj-crate-digge
     "harmonic": "জানা key দিয়ে Camelot wheel order চাইুন।",
     "feedback": "স্বাভাবিক ভাষার মতামত শুধু session বদলায়; দীর্ঘমেয়াদি সংরক্ষণে নিশ্চিতকরণ দরকার।",
     "memory_confirmation": "আমি এটিকে রুচির পরিবর্তনের সংক্ষিপ্ত সারাংশ হিসেবে বুঝেছি। ব্যক্তিগত দীর্ঘমেয়াদি profile-এ সংরক্ষণ করব?"
-  }
+  },
+  "trigger_capsule": [
+    "ডিজে সেট",
+    "প্লেলিস্ট",
+    "গান খোঁজা",
+    "ট্র্যাক খোঁজা",
+    "সেট সাজানো"
+  ]
 }
 ```

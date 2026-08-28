@@ -1,0 +1,53 @@
+{
+  "locale": "fil",
+  "stage": "round_2",
+  "round": {
+    "title": "[Ikalawang round: linawin ang request]",
+    "rules": [
+      "1. Maaaring kopyahin ang halimbawa, magsulat nang malaya, o iwang blangko"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "Tiyak na style",
+        "example": "Halimbawa: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "Bilis / BPM",
+        "example": "Halimbawa: `105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "Pagkakakilala at discovery",
+        "example": "`Pamilyar` / `Balanse` / `Discovery`"
+      },
+      {
+        "key": "era_classic",
+        "label": "Panahon at classics",
+        "example": "`Contemporary` / `Kaunting classic anchor` / `Tulay ng bago at luma` / `Classics muna`"
+      },
+      {
+        "key": "mood",
+        "label": "Mood",
+        "example": "Halimbawa: `nostalgic` / `malamig` / `romantic`"
+      },
+      {
+        "key": "energy",
+        "label": "Antas o kurba ng enerhiya ng SET",
+        "example": "Halimbawa: `mababa` / `mataas`; `steady` / `roller coaster`"
+      },
+      {
+        "key": "platform",
+        "label": "Platform at mga kinakailangan sa link",
+        "example": "Halimbawa: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; kung isa, iyon lang; kung marami, sundin ang pagkakasunod"
+      },
+      {
+        "key": "other",
+        "label": "Iba pa",
+        "example": ""
+      }
+    ],
+    "prompt": "[Ikalawang round: linawin ang request]\n\nTiyak na style:\n“Halimbawa: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`”\nBilis / BPM:\n“Halimbawa: `105` / `128` / `140` / `150` / `170`”\nPagkakakilala at discovery:\n“`Pamilyar` / `Balanse` / `Discovery`”\nPanahon at classics:\n“`Contemporary` / `Kaunting classic anchor` / `Tulay ng bago at luma` / `Classics muna`”\nMood:\n“Halimbawa: `nostalgic` / `malamig` / `romantic`”\nAntas o kurba ng enerhiya ng SET:\n“Halimbawa: `mababa` / `mataas`; `steady` / `roller coaster`”\nPlatform at mga kinakailangan sa link:\n“Halimbawa: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; kung isa, iyon lang; kung marami, sundin ang pagkakasunod”\nIba pa:\n\n```markdown\nTiyak na style:\nBilis / BPM:\nPagkakakilala at discovery:\nPanahon at classics:\nMood:\nAntas o kurba ng enerhiya ng SET:\nPlatform at mga kinakailangan sa link:\nIba pa:\n```"
+  }
+}

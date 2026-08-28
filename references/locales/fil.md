@@ -323,6 +323,13 @@ This file is the fixed Filipino UI and intent contract for dj-crate-digger. The 
     "harmonic": "Humiling ng ayos ayon sa Camelot wheel gamit ang mga kilalang key.",
     "feedback": "Ang natural-language feedback ay nag-a-update lang ng session; kailangan ng kumpirmasyon para sa long-term storage.",
     "memory_confirmation": "Naiintindihan ko ito bilang maikling buod ng pagbabago sa panlasa. I-save sa pribadong long-term profile?"
-  }
+  },
+  "trigger_capsule": [
+    "DJ set",
+    "playlist",
+    "maghanap ng musika",
+    "maghanap ng track",
+    "bumuo ng set"
+  ]
 }
 ```

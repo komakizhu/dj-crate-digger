@@ -1,0 +1,78 @@
+{
+  "locale": "zh-Hans",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "反馈选歌情况",
+      "positive": [
+        "我喜欢这首歌"
+      ],
+      "negative": [
+        "我不喜欢这首歌"
+      ],
+      "ambiguous": [
+        "我不确定这首歌"
+      ]
+    },
+    "export_w4dj": {
+      "label": "导出到 W4DJ",
+      "positive": [
+        "导出到w4dj"
+      ],
+      "negative": [
+        "不要导出到w4dj"
+      ],
+      "ambiguous": [
+        "也许导出到w4dj"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "输出文字版歌单",
+      "positive": [
+        "输出文字版歌单"
+      ],
+      "negative": [
+        "不要输出文字版歌单"
+      ],
+      "ambiguous": [
+        "也许输出文字版歌单"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "五度圈排序",
+      "positive": [
+        "按五度圈原则排列"
+      ],
+      "negative": [
+        "不要重排"
+      ],
+      "ambiguous": [
+        "也许按五度圈原则排列"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "确认长期记忆",
+      "positive": [
+        "记住这个偏好"
+      ],
+      "negative": [
+        "不要保存这个偏好"
+      ],
+      "ambiguous": [
+        "也许记住这个偏好"
+      ]
+    }
+  },
+  "export": {
+    "text": "输出当前顺序的可复制文字版歌单。",
+    "w4dj": "生成交给 W4DJ 的 UTF-8 `.w4dj` 交接文件。",
+    "harmonic": "根据已知调性请求按五度圈原则排序。",
+    "feedback": "自然语言反馈只更新当前会话；长期保存必须先确认。",
+    "memory_confirmation": "我理解为这是一段简短的品味变化摘要。是否保存到私人长期档案？"
+  },
+  "status": {
+    "unknown": "未知",
+    "verified": "已核验",
+    "target_platform_missing": "目标平台缺失"
+  }
+}

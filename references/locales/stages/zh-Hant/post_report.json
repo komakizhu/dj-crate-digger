@@ -1,0 +1,78 @@
+{
+  "locale": "zh-Hant",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "回饋選歌情況",
+      "positive": [
+        "我喜歡這首歌"
+      ],
+      "negative": [
+        "我不喜歡這首歌"
+      ],
+      "ambiguous": [
+        "我不確定這首歌"
+      ]
+    },
+    "export_w4dj": {
+      "label": "交接給 W4DJ",
+      "positive": [
+        "交接到 W4DJ"
+      ],
+      "negative": [
+        "不要交接到 W4DJ"
+      ],
+      "ambiguous": [
+        "也許交接到 W4DJ"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "輸出文字版歌單",
+      "positive": [
+        "輸出文字版歌單"
+      ],
+      "negative": [
+        "不要輸出文字版歌單"
+      ],
+      "ambiguous": [
+        "也許輸出文字版歌單"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "五度圈排序",
+      "positive": [
+        "按五度圈原則排列"
+      ],
+      "negative": [
+        "不要重排"
+      ],
+      "ambiguous": [
+        "也許按五度圈原則排列"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "確認長期記憶",
+      "positive": [
+        "記住這個偏好"
+      ],
+      "negative": [
+        "不要保存這個偏好"
+      ],
+      "ambiguous": [
+        "也許記住這個偏好"
+      ]
+    }
+  },
+  "export": {
+    "text": "輸出目前順序的可複製文字版歌單。",
+    "w4dj": "生成交給 W4DJ 的 UTF-8 `.w4dj` 交接檔。",
+    "harmonic": "根據已知調性請求按五度圈原則排序。",
+    "feedback": "自然語言回饋只更新目前會話；長期保存必須先確認。",
+    "memory_confirmation": "我理解這是一段簡短的品味變化摘要。是否保存到私人長期檔案？"
+  },
+  "status": {
+    "unknown": "未知",
+    "verified": "已核驗",
+    "target_platform_missing": "目標平台缺失"
+  }
+}

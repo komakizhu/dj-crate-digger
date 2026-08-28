@@ -1,0 +1,78 @@
+{
+  "locale": "tr",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "Seçim geri bildirimi",
+      "positive": [
+        "Bu parçayı beğendim"
+      ],
+      "negative": [
+        "Bu parçayı beğenmedim"
+      ],
+      "ambiguous": [
+        "Bu parça hakkında emin değilim"
+      ]
+    },
+    "export_w4dj": {
+      "label": "W4DJ'e aktar",
+      "positive": [
+        "W4DJ'e aktar"
+      ],
+      "negative": [
+        "W4DJ'e aktarma"
+      ],
+      "ambiguous": [
+        "Belki W4DJ'e aktar"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Metin playlist'i çıkar",
+      "positive": [
+        "Metin playlist'ini çıkar"
+      ],
+      "negative": [
+        "Metin playlist'ini çıkarma"
+      ],
+      "ambiguous": [
+        "Belki metin playlist'i çıkar"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Harmonik yeniden sırala",
+      "positive": [
+        "Camelot çarkına göre sırala"
+      ],
+      "negative": [
+        "Yeniden sıralama"
+      ],
+      "ambiguous": [
+        "Belki Camelot çarkına göre sırala"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "Uzun vadeli belleği onayla",
+      "positive": [
+        "Bu tercihi hatırla"
+      ],
+      "negative": [
+        "Bu tercihi kaydetme"
+      ],
+      "ambiguous": [
+        "Belki bu tercihi hatırla"
+      ]
+    }
+  },
+  "export": {
+    "text": "Mevcut sırada kopyalanabilir bir metin playlist'i çıkarın.",
+    "w4dj": "W4DJ için UTF-8 `.w4dj` aktarım dosyası oluşturun.",
+    "harmonic": "Bilinen tonlarla Camelot çarkına göre sıralama isteyin.",
+    "feedback": "Doğal dil geri bildirimi yalnızca oturumu günceller; uzun vadeli kayıt onay gerektirir.",
+    "memory_confirmation": "Bunu zevk değişikliğinin kısa bir özeti olarak anladım. Özel uzun vadeli profile kaydedilsin mi?"
+  },
+  "status": {
+    "unknown": "Bilinmiyor",
+    "verified": "Doğrulandı",
+    "target_platform_missing": "Hedef platform kullanılamıyor"
+  }
+}

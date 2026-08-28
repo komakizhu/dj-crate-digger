@@ -1,13 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/komakizhu/dj-crate-digger/blob/main/references/w4dj.schema.json",
-  "title": "DJ Crate Digger W4DJ v2 handoff",
-  "description": "Minimal UTF-8 recommendation handoff. Version 1 and unknown fields are rejected; no migration is performed.",
+  "title": "DJ Crate Digger W4DJ handoff",
+  "description": "Minimal UTF-8 recommendation handoff. Only the current w4dj contract is accepted; unknown legacy fields are rejected and no migration is performed.",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "format",
-    "format_version",
     "export_id",
     "playlist",
     "tracks"
@@ -15,9 +14,6 @@
   "properties": {
     "format": {
       "const": "w4dj"
-    },
-    "format_version": {
-      "const": 2
     },
     "export_id": {
       "type": "string",
@@ -60,7 +56,7 @@
         "title": {
           "type": "string",
           "minLength": 1,
-          "description": "Complete official track title; Remix, Edit, Live, Dub, Instrumental, Radio Edit, Extended Mix and other official qualifiers remain embedded here."
+          "description": "Complete official track title; official qualifiers remain embedded here."
         },
         "artist_display": {
           "type": "string",
@@ -77,7 +73,7 @@
               "undefined"
             ]
           },
-          "description": "Optional NetEase Cloud Music identity. It must remain a JSON string, including for large numeric-looking IDs."
+          "description": "Optional NetEase Cloud Music identity; it remains a JSON string."
         }
       }
     }

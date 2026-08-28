@@ -1,0 +1,78 @@
+{
+  "locale": "ko",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "선곡 피드백",
+      "positive": [
+        "이 곡이 좋아요"
+      ],
+      "negative": [
+        "이 곡은 좋아하지 않아요"
+      ],
+      "ambiguous": [
+        "이 곡은 아직 판단하기 어려워요"
+      ]
+    },
+    "export_w4dj": {
+      "label": "W4DJ로 내보내기",
+      "positive": [
+        "W4DJ로 내보내기"
+      ],
+      "negative": [
+        "W4DJ로 내보내지 않기"
+      ],
+      "ambiguous": [
+        "W4DJ로 내보낼 수도 있어요"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "텍스트 playlist 출력",
+      "positive": [
+        "텍스트 playlist 출력"
+      ],
+      "negative": [
+        "텍스트 playlist를 출력하지 않기"
+      ],
+      "ambiguous": [
+        "텍스트 playlist를 출력할 수도 있어요"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "하모닉 재정렬",
+      "positive": [
+        "Camelot 휠로 정렬"
+      ],
+      "negative": [
+        "재정렬하지 않기"
+      ],
+      "ambiguous": [
+        "Camelot 휠로 정렬할 수도 있어요"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "장기 기억 확인",
+      "positive": [
+        "이 선호를 기억하기"
+      ],
+      "negative": [
+        "이 선호를 저장하지 않기"
+      ],
+      "ambiguous": [
+        "이 선호를 기억할 수도 있어요"
+      ]
+    }
+  },
+  "export": {
+    "text": "현재 순서로 복사 가능한 텍스트 playlist를 출력합니다.",
+    "w4dj": "W4DJ에 전달할 UTF-8 `.w4dj` 파일을 만듭니다.",
+    "harmonic": "확인된 키를 사용해 Camelot 휠 순서를 요청합니다.",
+    "feedback": "자연어 피드백은 현재 세션만 갱신하며 장기 저장에는 확인이 필요합니다.",
+    "memory_confirmation": "이 내용을 취향 변화의 짧은 요약으로 이해했습니다. 개인 장기 프로필에 저장할까요?"
+  },
+  "status": {
+    "unknown": "알 수 없음",
+    "verified": "검증됨",
+    "target_platform_missing": "대상 플랫폼 없음"
+  }
+}

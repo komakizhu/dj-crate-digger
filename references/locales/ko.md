@@ -323,6 +323,13 @@ This file is the fixed 한국어 UI and intent contract for dj-crate-digger. The
     "harmonic": "확인된 키를 사용해 Camelot 휠 순서를 요청합니다.",
     "feedback": "자연어 피드백은 현재 세션만 갱신하며 장기 저장에는 확인이 필요합니다.",
     "memory_confirmation": "이 내용을 취향 변화의 짧은 요약으로 이해했습니다. 개인 장기 프로필에 저장할까요?"
-  }
+  },
+  "trigger_capsule": [
+    "DJ 세트",
+    "플레이리스트",
+    "곡 찾기",
+    "트랙 찾기",
+    "세트 구성"
+  ]
 }
 ```

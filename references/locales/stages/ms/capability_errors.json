@@ -1,0 +1,10 @@
+{
+  "locale": "ms",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "Carian web tidak tersedia, jadi saya tidak dapat mengesahkan cadangan.",
+    "open_page": "Akses halaman khusus tidak tersedia, jadi saya tidak dapat mengesahkan cadangan.",
+    "file_write": "Penulisan fail tidak tersedia, jadi saya tidak dapat mencipta fail `.w4dj`.",
+    "progress": "Sambungan automatik tidak tersedia; saya hanya boleh memberikan kelompok pertama yang disahkan."
+  }
+}

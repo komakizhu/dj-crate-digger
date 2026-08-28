@@ -323,6 +323,13 @@ This file is the fixed Bahasa Melayu UI and intent contract for dj-crate-digger.
     "harmonic": "Minta susunan roda Camelot menggunakan nada yang diketahui.",
     "feedback": "Maklum balas bahasa semula jadi hanya mengemas kini sesi; simpanan jangka panjang memerlukan pengesahan.",
     "memory_confirmation": "Saya memahami ini sebagai ringkasan ringkas perubahan cita rasa. Simpan dalam profil peribadi jangka panjang?"
-  }
+  },
+  "trigger_capsule": [
+    "set DJ",
+    "senarai main",
+    "cari muzik",
+    "cari trek",
+    "susun set"
+  ]
 }
 ```

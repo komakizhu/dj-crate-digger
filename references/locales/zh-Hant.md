@@ -127,7 +127,7 @@ This file is the fixed 繁體中文 UI and intent contract for dj-crate-digger. 
         },
         {
           "label": "第二｜輸出或交接歌單",
-          "body": "您可以輸出文字版歌單或交接給 W4DJ，直接回覆 `交接到 W4DJ` 或 `輸出文字版歌單` 即可。\n\nW4DJ 的功能是一鍵導入歌單、下載後一鍵轉換格式，並一鍵導入打碟軟體；請輸出 `.w4dj` 格式並下載 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。具體操作教程可以查看 [一鍵導入 Set 教程](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)。\n\n`.w4dj` 使用全新的 v2 最小格式：只包含歌單名稱、順序、完整官方歌名、藝人和可選的字串 `netease_track_id`；舊 v1 不相容且不做遷移。\n\n`輸出文字版歌單` 的功能是輸出可複製文字，可以手動導入網易雲，但無法幫您一鍵把歌曲導入 RKB。"
+          "body": "您可以輸出文字版歌單或交接給 W4DJ，直接回覆 `交接到 W4DJ` 或 `輸出文字版歌單` 即可。\n\nW4DJ 的功能是一鍵導入歌單、下載後一鍵轉換格式，並一鍵導入打碟軟體；請輸出 `.w4dj` 格式並下載 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。具體操作教程可以查看 [一鍵導入 Set 教程](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)。\n\n`輸出文字版歌單` 的功能是輸出可複製文字，可以手動導入網易雲，但無法幫您一鍵把歌曲導入 RKB。"
         }
       ],
       "digging_notes": "選歌碎碎念",
@@ -161,7 +161,7 @@ This file is the fixed 繁體中文 UI and intent contract for dj-crate-digger. 
         },
         {
           "label": "第二｜輸出或交接歌單",
-          "body": "您可以輸出文字版歌單或交接給 W4DJ，直接回覆 `交接到 W4DJ` 或 `輸出文字版歌單` 即可。\n\nW4DJ 的功能是一鍵導入歌單、下載後一鍵轉換格式，並一鍵導入打碟軟體；請輸出 `.w4dj` 格式並下載 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。具體操作教程可以查看 [一鍵導入 Set 教程](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)。\n\n`.w4dj` 使用全新的 v2 最小格式：只包含歌單名稱、順序、完整官方歌名、藝人和可選的字串 `netease_track_id`；舊 v1 不相容且不做遷移。\n\n`輸出文字版歌單` 的功能是輸出可複製文字，可以手動導入網易雲，但無法幫您一鍵把歌曲導入 RKB。"
+          "body": "您可以輸出文字版歌單或交接給 W4DJ，直接回覆 `交接到 W4DJ` 或 `輸出文字版歌單` 即可。\n\nW4DJ 的功能是一鍵導入歌單、下載後一鍵轉換格式，並一鍵導入打碟軟體；請輸出 `.w4dj` 格式並下載 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。具體操作教程可以查看 [一鍵導入 Set 教程](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)。\n\n`輸出文字版歌單` 的功能是輸出可複製文字，可以手動導入網易雲，但無法幫您一鍵把歌曲導入 RKB。"
         },
         {
           "label": "第三｜五度圈排序",
@@ -199,7 +199,7 @@ This file is the fixed 繁體中文 UI and intent contract for dj-crate-digger. 
         },
         {
           "label": "第二｜輸出或交接歌單",
-          "body": "您可以輸出文字版歌單或交接給 W4DJ，直接回覆 `交接到 W4DJ` 或 `輸出文字版歌單` 即可。\n\nW4DJ 的功能是一鍵導入歌單、下載後一鍵轉換格式，並一鍵導入打碟軟體；請輸出 `.w4dj` 格式並下載 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。具體操作教程可以查看 [一鍵導入 Set 教程](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)。\n\n`.w4dj` 使用全新的 v2 最小格式：只包含歌單名稱、順序、完整官方歌名、藝人和可選的字串 `netease_track_id`；舊 v1 不相容且不做遷移。\n\n`輸出文字版歌單` 的功能是輸出可複製文字，可以手動導入網易雲，但無法幫您一鍵把歌曲導入 RKB。"
+          "body": "您可以輸出文字版歌單或交接給 W4DJ，直接回覆 `交接到 W4DJ` 或 `輸出文字版歌單` 即可。\n\nW4DJ 的功能是一鍵導入歌單、下載後一鍵轉換格式，並一鍵導入打碟軟體；請輸出 `.w4dj` 格式並下載 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。具體操作教程可以查看 [一鍵導入 Set 教程](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)。\n\n`輸出文字版歌單` 的功能是輸出可複製文字，可以手動導入網易雲，但無法幫您一鍵把歌曲導入 RKB。"
         },
         {
           "label": "第三｜五度圈排序",
@@ -326,6 +326,13 @@ This file is the fixed 繁體中文 UI and intent contract for dj-crate-digger. 
     "harmonic": "根據已知調性請求按五度圈原則排序。",
     "feedback": "自然語言回饋只更新目前會話；長期保存必須先確認。",
     "memory_confirmation": "我理解這是一段簡短的品味變化摘要。是否保存到私人長期檔案？"
-  }
+  },
+  "trigger_capsule": [
+    "挖歌",
+    "排set",
+    "排一套set",
+    "找歌單",
+    "排歌"
+  ]
 }
 ```

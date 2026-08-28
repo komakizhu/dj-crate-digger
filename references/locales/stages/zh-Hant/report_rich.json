@@ -1,0 +1,48 @@
+{
+  "locale": "zh-Hant",
+  "stage": "report_rich",
+  "report": {
+    "title": "# 豐富版",
+    "first_batch_title": "# 豐富版",
+    "final_title": "# 豐富版",
+    "columns": [
+      "歌名",
+      "藝人",
+      "專輯/EP",
+      "風格",
+      "BPM",
+      "調性",
+      "歌曲時長",
+      "能量級",
+      "發行時間",
+      "簡介",
+      "選擇原因",
+      "連結"
+    ],
+    "next_steps": [
+      {
+        "label": "第一｜回饋選歌情況",
+        "body": "如果願意，您可以用自然語言回覆選歌情況，這會豐富您的私人選歌偏好，讓推薦更準。回覆包括但不限於「`skream的歌不錯，但我這次因為客群的關係沒放`/`我不喜歡跳樓機，以後別再推了`/`我這次播放了這些歌（配圖/表）`」"
+      },
+      {
+        "label": "第二｜輸出或交接歌單",
+        "body": "您可以輸出文字版歌單或交接給 W4DJ，直接回覆 `交接到 W4DJ` 或 `輸出文字版歌單` 即可。\n\nW4DJ 的功能是一鍵導入歌單、下載後一鍵轉換格式，並一鍵導入打碟軟體；請輸出 `.w4dj` 格式並下載 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。具體操作教程可以查看 [一鍵導入 Set 教程](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)。\n\n`輸出文字版歌單` 的功能是輸出可複製文字，可以手動導入網易雲，但無法幫您一鍵把歌曲導入 RKB。"
+      },
+      {
+        "label": "第三｜五度圈排序",
+        "body": "需要我根據五度圈原則幫您排列 set 順序嗎？"
+      }
+    ],
+    "digging_notes": "選歌碎碎念",
+    "mix_suggestion": "接歌建議",
+    "unknown": "未知",
+    "verified": "已核驗",
+    "target_platform_missing": "目標平台缺失",
+    "view_titles": [
+      "風格視角",
+      "場景視角",
+      "熟悉度與發現感視角",
+      "動態綜合視角"
+    ]
+  }
+}

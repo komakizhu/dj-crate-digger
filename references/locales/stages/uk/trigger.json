@@ -1,0 +1,37 @@
+{
+  "locale": "uk",
+  "stage": "trigger",
+  "ambiguous_confirmation": "Знайти музику чи скласти для вас DJ-сет?",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "DJ-сет",
+    "зібрати DJ-сет",
+    "знайти музику для DJ",
+    "підготувати сет",
+    "вибудувати сет"
+  ],
+  "ambiguous": [
+    "плейлист",
+    "знайти треки",
+    "список відтворення",
+    "шукати музику",
+    "DJ",
+    "скласти сет"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "DJ-сет",
+    "плейлист",
+    "шукати музику",
+    "знайти треки",
+    "скласти сет"
+  ]
+}

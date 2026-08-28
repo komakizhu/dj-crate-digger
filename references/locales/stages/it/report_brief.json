@@ -1,0 +1,42 @@
+{
+  "locale": "it",
+  "stage": "report_brief",
+  "report": {
+    "title": "# Modalità Brief",
+    "first_batch_title": "# Modalità Brief",
+    "final_title": "# Modalità Brief",
+    "columns": [
+      "Brano",
+      "Artista",
+      "Album / EP",
+      "Stile",
+      "BPM",
+      "Tonalità",
+      "Durata",
+      "Energia",
+      "Data di uscita",
+      "Note",
+      "Motivo della scelta",
+      "Link"
+    ],
+    "next_steps": [
+      {
+        "label": "Primo | Condividi il feedback",
+        "body": "Se vuoi, descrivi in linguaggio naturale come hanno funzionato le selezioni. Questo migliora le tue preferenze private e i prossimi consigli."
+      },
+      {
+        "label": "Secondo | Esporta o consegna la playlist",
+        "body": "Puoi produrre una playlist testuale o consegnarla a W4DJ. Rispondi `output text playlist` o `export to w4dj`."
+      },
+      {
+        "label": "Terzo | Ordine armonico del set",
+        "body": "Vuoi che ordini il set usando la ruota di Camelot?"
+      }
+    ],
+    "digging_notes": "Note di digging",
+    "mix_suggestion": "Suggerimento di mix",
+    "unknown": "Sconosciuto",
+    "verified": "Verificato",
+    "target_platform_missing": "Piattaforma target non disponibile"
+  }
+}

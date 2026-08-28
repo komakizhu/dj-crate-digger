@@ -1,0 +1,29 @@
+{
+  "locale": "ru",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Режим Fast",
+    "first_batch_title": "# Первая подборка Fast",
+    "final_title": "# Режим Fast",
+    "columns": [
+      "Трек",
+      "Артист",
+      "Ссылка"
+    ],
+    "next_steps": [
+      {
+        "label": "Первое | Поделиться отзывом",
+        "body": "Если хотите, опишите естественным языком, как сработал подбор. Это улучшит ваши частные предпочтения и будущие рекомендации."
+      },
+      {
+        "label": "Второе | Экспортировать или передать playlist",
+        "body": "Можно вывести текстовый playlist или передать его W4DJ. Ответьте `output text playlist` или `export to w4dj`."
+      }
+    ],
+    "digging_notes": "Заметки digging",
+    "mix_suggestion": "Совет по миксу",
+    "unknown": "Неизвестно",
+    "verified": "Проверено",
+    "target_platform_missing": "Целевая платформа недоступна"
+  }
+}

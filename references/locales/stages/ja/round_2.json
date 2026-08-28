@@ -1,0 +1,53 @@
+{
+  "locale": "ja",
+  "stage": "round_2",
+  "round": {
+    "title": "【第2ラウンド：要件の詳細化】",
+    "rules": [
+      "1. 例からコピーしても、自由に入力しても、空欄にしてもかまいません"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "具体的なスタイル",
+        "example": "例：`House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "速度 / BPM",
+        "example": "例：`105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "親しみやすさと発見",
+        "example": "`親しみやすい` / `バランス` / `発見`"
+      },
+      {
+        "key": "era_classic",
+        "label": "時代とクラシック",
+        "example": "`現代中心` / `少数のクラシック軸` / `新旧の橋渡し` / `クラシック優先`"
+      },
+      {
+        "key": "mood",
+        "label": "ムード",
+        "example": "例：`ノスタルジック` / `冷たい` / `ロマンチック`"
+      },
+      {
+        "key": "energy",
+        "label": "SET のエネルギーまたは推移",
+        "example": "例：`低` / `高`；`安定` / `ジェットコースター`"
+      },
+      {
+        "key": "platform",
+        "label": "プラットフォームとリンク要件",
+        "example": "例：`NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`。1 つならそれだけ、複数なら記載順を優先"
+      },
+      {
+        "key": "other",
+        "label": "その他",
+        "example": ""
+      }
+    ],
+    "prompt": "【第2ラウンド：要件の詳細化】\n\n具体的なスタイル:\n「例：`House` / `Bass` / `Garage` / `Techno` / `Breakbeat`」\n速度 / BPM:\n「例：`105` / `128` / `140` / `150` / `170`」\n親しみやすさと発見:\n「`親しみやすい` / `バランス` / `発見`」\n時代とクラシック:\n「`現代中心` / `少数のクラシック軸` / `新旧の橋渡し` / `クラシック優先`」\nムード:\n「例：`ノスタルジック` / `冷たい` / `ロマンチック`」\nSET のエネルギーまたは推移:\n「例：`低` / `高`；`安定` / `ジェットコースター`」\nプラットフォームとリンク要件:\n「例：`NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`。1 つならそれだけ、複数なら記載順を優先」\nその他:\n\n```markdown\n具体的なスタイル:\n速度 / BPM:\n親しみやすさと発見:\n時代とクラシック:\nムード:\nSET のエネルギーまたは推移:\nプラットフォームとリンク要件:\nその他:\n```"
+  }
+}

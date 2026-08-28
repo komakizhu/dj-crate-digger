@@ -1,0 +1,49 @@
+{
+  "locale": "tr",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "DJ seçim asistanına hoş geldiniz. Bu Agent Skill bir DJ seti hazırlamanıza yardımcı olur. İhtiyaçlarınızı iki turda doğrulayacak ve parça önerileri alacaksınız. Doldurma kuralları:",
+    "tutorial_label": "Tek tıkla Set içe aktarma rehberi",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md"
+  },
+  "round": {
+    "title": "[Birinci tur: gerekli bilgiler]",
+    "rules": [
+      "1. Bir örneği kopyalayabilir, serbestçe doldurabilir veya boş bırakabilirsiniz",
+      "2. Boş bırakmak, yanıtı yapay zekânın akıllıca değerlendirmesi anlamına gelir"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "Sahne",
+        "example": "Performans bağlamı. Örnek: `bar` / `kulüp` / `düğün` / `sanat sergisi`"
+      },
+      {
+        "key": "target_market",
+        "label": "Hedef ülke / bölge",
+        "example": "Örnek: `Çin ana karası` / `Tayvan` / `Hong Kong` / `Japonya` / `uluslararası İngilizce pazar"
+      },
+      {
+        "key": "core_sound",
+        "label": "Ana ses yönü",
+        "example": "Referans sanatçı, parça ve tür. Örnek: `Skrillex` - `Tears`, modern `UK Bass`"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "Parça sayısı veya set süresi",
+        "example": "Örnek: `20 parça` / `60 dakika`"
+      },
+      {
+        "key": "output_mode",
+        "label": "Çıktı sürümü",
+        "example": "Fast / Brief / Rich seçenekleri"
+      },
+      {
+        "key": "other",
+        "label": "Diğer kısıtlar",
+        "example": "Örnek: `fazla çalınmış parçalardan kaçın`, `vokal olmasın`, `yalnızca Remix`; isteğe bağlı"
+      }
+    ],
+    "prompt": "DJ seçim asistanına hoş geldiniz. Bu Agent Skill bir DJ seti hazırlamanıza yardımcı olur. İhtiyaçlarınızı iki turda doğrulayacak ve parça önerileri alacaksınız. Doldurma kuralları:\n\n1. Bir örneği kopyalayabilir, serbestçe doldurabilir veya boş bırakabilirsiniz\n2. Boş bırakmak, yanıtı yapay zekânın akıllıca değerlendirmesi anlamına gelir\n\n[Birinci tur: gerekli bilgiler]\n\nSahne:\n“Performans bağlamı. Örnek: `bar` / `kulüp` / `düğün` / `sanat sergisi`”\nHedef ülke / bölge:\n“Örnek: `Çin ana karası` / `Tayvan` / `Hong Kong` / `Japonya` / `uluslararası İngilizce pazar”\nAna ses yönü:\n“Referans sanatçı, parça ve tür. Örnek: `Skrillex` - `Tears`, modern `UK Bass`”\nParça sayısı veya set süresi:\n“Örnek: `20 parça` / `60 dakika`”\nÇıktı sürümü:\n“`Fast`: hızlı playlist çıktısı; kalite daha düşük olabilir”\n“`Brief`: yalnızca tek bir birleşik playlist”\n“`Rich`: stil, sahne ve keşif görünümleri; ardından son birleşik playlist”\nDiğer kısıtlar:\n“Örnek: `fazla çalınmış parçalardan kaçın`, `vokal olmasın`, `yalnızca Remix`; isteğe bağlı”\n\n```markdown\nSahne:\nHedef ülke / bölge:\nAna ses yönü:\nParça sayısı veya set süresi:\nÇıktı sürümü:\nDiğer kısıtlar:\n```"
+  }
+}

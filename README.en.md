@@ -4,162 +4,88 @@
 
 Chinese name: 老炮DJ; English name, Skill name, and repository name: `dj-crate-digger`.
 
-An Agent Skill for DJs, music producers, and electronic-music listeners. It turns natural-language crate-digging requests into Markdown reports based on web search, track-by-track verification, deduplication, ranking, and set-order design.
+This is a native, portable Agent Skill package for DJs, producers, and electronic-music listeners. It turns natural-language curation requests into recommendations based on web search, track-level page verification, recording deduplication, ranking, and set sequencing. Every compatible client uses the same `SKILL.md` and `references/`; there is no host-specific algorithm or second prompt copy.
 
-## I. Core Features
+## I. Core capabilities
 
-### 1.1 Setting-Based Selection and Personal Taste
+### 1.1 Two-round intake and personalization
 
-Tell it where the set will be played, who it is for, what feeling you want, and roughly how long it should be. Add artists, tracks, or styles you like, and it will combine the needs of the performance with your taste while balancing familiar sounds and new discoveries. Classic tracks can appear as references without being forced into the final playlist.
+Round one collects scene, target country/region, core sound direction, track count or set duration, output mode, and other constraints. Round two collects specific style, BPM, familiarity/discovery, era/classics, mood, energy curve, platform/link requirements, and other details. Both rounds come from a fixed locale-pack Markdown template; there is no third ordinary requirements round.
 
-### 1.2 DJ Handoff and Flexible Outputs
+Communication language and target market are separate. Language controls visible text, while the market controls only current search context, cultural context, and availability. An explicit market never changes response language; a blank market stays broad and temporary and is never written to long-term taste memory.
 
-When track selection is complete, export a [`.w4dj`](https://github.com/komakizhu/W4DJ-RKB) file and hand it to [W4DJ RKB](https://github.com/komakizhu/W4DJ-RKB) for downloading, conversion, and Rekordbox import. This connects the recommendation to your actual DJ workflow. You can also specify NetEase Cloud Music, Spotify, Apple Music, SoundCloud, and other platforms, set their priority order, and choose Fast, Brief, or Rich output. For details, see the [One-Click Set Import Tutorial](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md).
+### 1.2 Three output modes
 
-### 1.3 Turn Tracks into a Set
+| Mode | Best for | Output |
+|---|---|---|
+| Fast | Getting usable tracks quickly | Independent three-column path with first-batch and continuation rules |
+| Brief | Receiving one complete playlist | One exact twelve-column table, keys, reasons, and one creative transition suggestion |
+| Rich | Comparing selection directions | Style, scene, familiarity/discovery views plus one dynamic combined view |
 
-It arranges tracks around the energy curve you want and gives you one creative transition suggestion. If you ask, it can also reorder tracks with known keys using the circle-of-fifths principle.
+Brief and Rich use exactly: `title | artist | album/EP | style | BPM | key | duration | energy | release date | notes | selection reason | link`. All modes preserve complete official titles, platform policy, track-level evidence, and recording-level deduplication.
 
-### 1.4 Keep Adjusting in Plain Language
+### 1.3 Search, cultural context, and ranking
 
-After receiving a playlist, simply say which tracks you like or which do not fit this performance, or paste the tracks you actually played. It can continue adjusting within the current conversation without adding a third intake round.
+Official artists, labels, distributors, and authorized DJ stores verify identity, complete titles, BPM, keys, and release facts. 1001Tracklists, Resident Advisor, Pitchfork, Mixmag, DJ Mag, and The Quietus may improve candidate recall, cultural context, and DJ-use signals, but they never replace the final track link. A user-specified platform controls allowed search and playback links; the Skill never silently falls back to another platform.
 
-## II. Quick Start
+Keys are accepted only when reliable evidence matches the same complete official title; unknown or conflicting keys keep the track and remain unknown. Brief and Rich reorder only after an unambiguous positive harmonic request, using basic Camelot compatibility and at most five double-drop candidates that still require DJ audition. Without waveform or listening evidence, transition advice is creative and tentative.
 
-In a client that supports Agent Skills, simply describe your DJ track-selection request. For more reliable activation, you can also use:
+### 1.4 Private feedback memory
+
+Users can say in ordinary language what they like, dislike, would use, or actually played. Current-session feedback applies immediately; a long-term profile is saved only after one round is summarized and explicitly confirmed. Feedback events and a rebuildable profile remain local and private, long-term taste contributes no more than 10% of recommendation weight, and the first phase does not upload or anonymously collaborate.
+
+## II. Quick start
+
+Place the complete repository directory in the client's Agent Skills directory so that `SKILL.md`, `references/`, and the locale packs remain together. Then describe the DJ request:
 
 ```text
 /dj-crate-digger
 ```
 
-Or:
+The legacy alias is also supported:
 
 ```text
 /迪歌
 ```
 
-Natural language can trigger the Skill as well, for example:
+Natural language works too:
 
 ```text
-Build a 60-minute UK Bass set for an underground club in Guangzhou. Use Skream and Nikita, the Wicked as references, and avoid cheesy tracks.
+Build a 60-minute UK Bass set for an underground club in Guangzhou, using Skream and Nikita, the Wicked as references.
 ```
 
-The complete workflow is fixed: submit a request → complete the first round (including the output version) → complete the second round → the Agent searches and verifies → receive the playlist → optionally provide feedback, export, or reorder by the circle-of-fifths principle.
+The fixed flow is: request → round one → round two → search and track-level verification → selected report mode → optional feedback, text playlist, W4DJ, or harmonic reorder.
 
-### 2.1 Step 1: Complete the First-Round Requirements
+## III. Export and handoff
 
-The Skill sends a copyable Markdown form. You can copy the examples or fill in the fields freely; fields left blank are judged by the Agent based on the information already provided.
+Only the post-report “next step” area offers export actions:
 
-For example (an example submission for reference only; you can copy and edit it or leave it blank):
+- `output text playlist`: returns copyable text in chat in the current final order. It does not create a local text file or claim one-click import into DJ software.
+- `export to w4dj`: when the current Agent truly has file-writing capability and the user explicitly triggers it, creates a UTF-8 `.w4dj` file. It contains only playlist name, order, complete official titles, artists, and an optional string `netease_track_id`; no local audio, paths, downloads, or internal metadata.
 
-```markdown
-Scene: Underground club
-Target country / region: Mainland China (Guangzhou)
-Core sound direction: Skream, Nikita, the Wicked, modern UK Bass, UK Dubstep
-Track count or set duration: 60 minutes
-Output version: Brief
-Other constraints: No cheesy tracks, avoid too many vocals
-```
+`.w4dj` has one current contract: root fields are `format`, `export_id`, `playlist`, and `tracks`; `playlist` contains only `name`; each track contains `position`, `title`, `artist_display`, and optional `netease_track_id`. For the complete workflow, see [One-Click Set Import Tutorial](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md). This Skill does not download music, create local audio, or perform downstream import steps.
 
-#### 2.1.1 Choose an Output Version (Required)
+## IV. Universal Agent compatibility
 
-The output version determines the response content, level of detail, and speed. Choose one in the first round's “Output version” field:
+This repository provides one standard Skill package. Clients that can import complete Agent Skills can load the same files according to their own directory rules. Search, page opening, file writing, and progress messages are mapped by the client; the Skill does not require a fixed tool name, SDK, command, or model.
 
-| Version | Best for | Output |
-|---|---|---|
-| Fast | Getting tracks quickly | About 15 tracks with only title, artist, and link |
-| Brief | Getting a complete playlist | One playlist with keys, reasons, and transition suggestions |
-| Rich | Comparing different directions | Four direction-specific playlists plus a final combined version (five in total) |
+Compatibility uses three statuses: formally supported, natively compatible but not replay-tested, and pending confirmation. Because complete cold-start replays have not yet been run for every combination, the following clients remain “natively compatible but not replay-tested”; documentation compatibility is not presented as runtime acceptance:
 
-The first round determines what this playlist needs to accomplish: where it will be played, which region it targets, its core sound, its duration, the output version, and any hard constraints.
+| Client | Status |
+|---|---|
+| Codex | Natively compatible, not replay-tested |
+| Claude Code, Gemini CLI | Natively compatible, not replay-tested |
+| VS Code / GitHub Copilot, Cursor, Windsurf, OpenCode | Natively compatible, not replay-tested |
+| WorkBuddy / CodeBuddy, Qoder / QoderWork, Trae / TraeWork | Natively compatible, not replay-tested |
+| Doubao Work | Pending confirmation |
+| Other clients that advertise “skills” | Pending confirmation |
 
-### 2.2 Step 2: Complete the Second-Round Details
+The repository ships 26 fixed locale packs, listed in [`references/locales/manifest.json`](references/locales/manifest.json). At runtime, only the selected stage resource for triggers, intake, search context, reports, or post-report actions is loaded; intake, reports, statuses, actions, and platform expressions are read from fixed resources rather than translated as a complete template at runtime. Unsupported languages fall back to English. Full multilingual support claims still require native-speaker review and the planned 312 cold-start replays.
 
-After receiving the first round, the Agent sends a second form to determine the specific musical direction and arrangement details.
+Directory discovery follows each client's public Agent Skills documentation, including [Claude Code](https://code.claude.com/docs/en/skills), [Gemini CLI](https://geminicli.com/docs/cli/using-agent-skills/), [VS Code Agent Skills](https://code.visualstudio.com/docs/agent-customization/agent-skills), [Cursor](https://prod.cursor.com/docs/skills), [Windsurf](https://docs.windsurf.com/windsurf/cascade/skills), [OpenCode](https://opencode.ai/docs/skills/), [WorkBuddy/CodeBuddy](https://www.workbuddy.cn/docs/cli/skills), [Qoder/QoderWork](https://docs.qoder.com/qoder/skills), and [Trae](https://docs.trae.cn/ide_skills). These links describe standard import boundaries; they do not replace runtime replay acceptance for this project.
 
-For example (an example submission for reference only; you can copy and edit it or leave it blank):
+## V. Capability boundaries
 
-```markdown
-Specific styles: UK Bass / UK Dubstep
-Speed / BPM: 130–140
-Familiarity and discovery: Balanced
-Era and classics: A few classic anchors
-Mood: Deep / cold
-SET energy level or energy curve: Steady rise
-Platform and link requirements: NetEase Cloud Music
-Other: Avoid consecutive tracks by the same artist
-```
+Without web search or concrete page-opening capability, the Skill does not present a fake verified playlist. Without file-writing capability, it does not claim to have created a `.w4dj` file. Missing platform tracks, title mismatches, key conflicts, or insufficient candidates reduce the actual count with an explanation instead of filling with wrong links, invented titles, unverified tracks, or duplicate recordings.
 
-After the second-round reply, the Skill starts searching directly and does not add a third round of ordinary requirements questions.
-
-#### 2.2.1 How to Fill in Platforms and Links
-
-Enter platform names in the second round. For example, “NetEase Cloud Music” means use NetEase Cloud Music only. Separate multiple platforms with `/`; platforms listed earlier have higher priority. Leaving this blank enables cross-platform mode. Platform selection affects the search scope and final links only; it does not change the track-selection direction.
-
-### 2.3 Step 3: Wait for the Recommendation Report
-
-#### 2.3.1 What You Can Do After the Recommendation
-
-After the recommendation is complete, you can use natural language to say which tracks you like, dislike, or would use; the system first updates the current session. In Brief and Rich modes, you can also reply “Arrange it by the Camelot wheel” to have the system reorder the set using the known keys. You can also use the localized action phrases from the selected pack, such as `output text playlist` or `export to w4dj`.
-
-#### 2.3.2 Output a Text Playlist or W4DJ
-
-After the recommendation is complete, reply with the localized phrase for the action you want. In English, for example:
-
-```text
-output text playlist
-```
-
-Or:
-
-```text
-export to w4dj
-```
-
-Both outputs use the final delivered result: Fast mode uses the final Fast table, Brief mode uses the combined table, and Rich mode uses the dynamic combined table. If the playlist has already been reordered using the circle of fifths, the reordered sequence is used.
-
-##### Text Playlist
-
-The localized text-playlist action outputs copyable text that can be imported manually into NetEase Cloud Music, but it cannot import tracks into RKB with one click.
-
-##### W4DJ
-
-`.w4dj` is a UTF-8 JSON v2 handoff file. To hand off a playlist generated by 老炮DJ to W4DJ RKB, download the tracks through NetEase Cloud Music, and import them into Rekordbox, see [One-Click Set Import Tutorial](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md).
-
-## III. FAQ
-
-### 3.1 Why Are There Two Rounds?
-
-The first round defines the performance task, output mode, and hard constraints. The second round defines the specific sound and platform. Searching starts immediately after the second round, avoiding repeated changes to the target while tracks are being found.
-
-### 3.2 Can I Leave Some Fields Blank?
-
-Yes. Leaving a field blank allows the Agent to judge it from the clues already provided. An explicitly stated region, platform, exclusion, or complete official-title qualifier is a hard constraint and takes priority over automatic inference.
-
-### 3.3 Why Might the Actual Track Count Be Lower Than Requested?
-
-When the target platform lacks a track, the complete official title cannot be verified, or candidates are duplicates, the Skill reduces the number of tracks instead of using another platform, an incorrect title qualifier, or a fabricated link to fill the quota.
-
-### 3.4 Can It Write Directly to Spotify, Apple Music, or Other Platform Playlists?
-
-Only when the current client has an officially authorized connector and the user has explicitly confirmed the target platform and track summary. Otherwise, it outputs verified Markdown, TXT, or W4DJ only and does not claim to have created a platform playlist.
-
-### 3.5 Can This Skill Identify the Track Currently Playing?
-
-No. It discovers, filters, ranks, and arranges DJ playlists; it is not a music-identification tool.
-
-## IV. Agent Skills Compatibility and Source
-
-This repository uses the standard `SKILL.md` as its universal entry point, while `references/` contains supplementary resources loaded as needed. Clients that support the Agent Skills standard can discover and load it according to their own conventions. Claude Code, VS Code Agent, and other clients that support the standard can reuse the core content, but their discovery directories, permission confirmations, and tool names may differ.
-
-This version adapts the Codex `dj-crate-digger` Skill to the general Agent Skills format. Its Chinese name is 「老炮DJ」. `agents/openai.yaml` is an optional Codex UI and invocation adapter; it does not contain a proprietary recommendation algorithm. Other Agents can ignore that directory and use `SKILL.md` and `references/` directly. Clients that do not support Agent Skills must load `SKILL.md` manually and map search, page verification, file writing, and background continuation to their own capabilities.
-
-### 4.1 Locale Packs and Target Markets
-
-The repository ships 26 fixed locale packs, listed in [`references/locales/manifest.json`](references/locales/manifest.json): English, Simplified Chinese, Traditional Chinese, Spanish, Portuguese, French, German, Japanese, Korean, Arabic, Russian, Turkish, Hindi, Indonesian, Vietnamese, Thai, Italian, Dutch, Polish, Ukrainian, Persian, Bengali, Urdu, Malay, Filipino, and Swahili. Chinese and English are covered by repository regressions; the other packs have the fixed structure but still require native-speaker review and the planned 312 medium/xhigh cold-start replays before they can be advertised as fully reviewed language support.
-
-The fixed intake prompts, Fast/Brief/Rich headers, statuses, action intents, and platform-policy expressions are read from the selected pack. The Skill does not free-translate or compress a template. `communication_language` controls the response language; `target_market` independently controls the current search and cultural context. An explicit market overrides language inference without changing the response language. A blank market uses only the pack's broad-language fallback for the current session and is never persisted. Unsupported languages fall back to English.
-
-## V. License
-
-This project is released under the Apache License 2.0. The rights to third-party platform names, links, and external materials belong to their respective owners. See [LICENSE](LICENSE) for details.
+This project is released under the Apache License 2.0. See [LICENSE](LICENSE).

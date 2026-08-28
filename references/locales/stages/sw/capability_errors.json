@@ -1,0 +1,10 @@
+{
+  "locale": "sw",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "Utafutaji wa wavuti haupatikani, kwa hiyo siwezi kuthibitisha pendekezo.",
+    "open_page": "Ukurasa mahususi hauwezi kufunguliwa, kwa hiyo siwezi kuthibitisha pendekezo.",
+    "file_write": "Uandishi wa faili haupatikani, kwa hiyo siwezi kuunda faili ya `.w4dj`.",
+    "progress": "Kuendelea kiotomatiki hakupatikani; ninaweza kutoa kundi la kwanza lililothibitishwa pekee."
+  }
+}

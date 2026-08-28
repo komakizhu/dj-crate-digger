@@ -1,0 +1,46 @@
+{
+  "locale": "uk",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "Якщо регіон порожній, використовуйте в цій сесії лише широкий україномовний ринок.",
+    "explicit_region": "Явно названі країна або регіон переважають мовний висновок, але не змінюють мову спілкування.",
+    "persistence": "Не зберігайте цільовий ринок як довгострокове вподобання."
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "лише",
+      "тільки",
+      "використовувати лише"
+    ],
+    "preferred_markers": [
+      "перевага",
+      "бажано",
+      "пріоритет"
+    ],
+    "fallback_markers": [
+      "резервна",
+      "альтернатива",
+      "якщо недоступна"
+    ],
+    "forbidden_markers": [
+      "не використовувати",
+      "виключити",
+      "без"
+    ]
+  },
+  "status": {
+    "unknown": "Невідомо",
+    "verified": "Перевірено",
+    "target_platform_missing": "Цільова платформа недоступна"
+  }
+}

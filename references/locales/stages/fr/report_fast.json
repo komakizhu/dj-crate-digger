@@ -1,0 +1,29 @@
+{
+  "locale": "fr",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Mode Fast",
+    "first_batch_title": "# Première sélection Fast",
+    "final_title": "# Mode Fast",
+    "columns": [
+      "Morceau",
+      "Artiste",
+      "Lien"
+    ],
+    "next_steps": [
+      {
+        "label": "Premier | Partager un retour",
+        "body": "Si vous le souhaitez, répondez en langage naturel sur l’utilité des sélections. Cela améliore vos préférences privées et les prochaines recommandations."
+      },
+      {
+        "label": "Deuxième | Exporter ou transmettre la playlist",
+        "body": "Vous pouvez produire une playlist texte ou la transmettre à W4DJ. Répondez `output text playlist` ou `export to w4dj`."
+      }
+    ],
+    "digging_notes": "Notes de digging",
+    "mix_suggestion": "Suggestion de mix",
+    "unknown": "Inconnu",
+    "verified": "Vérifié",
+    "target_platform_missing": "Plateforme cible indisponible"
+  }
+}

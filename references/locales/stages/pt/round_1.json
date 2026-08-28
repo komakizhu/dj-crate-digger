@@ -1,0 +1,49 @@
+{
+  "locale": "pt",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "Bem-vindo ao assistente de seleção de DJ. Esta Skill de Agent ajuda a preparar um set. Você confirmará suas necessidades em duas rodadas e receberá recomendações de faixas. Regras de preenchimento:",
+    "tutorial_label": "Tutorial de importação de Set em um clique",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md"
+  },
+  "round": {
+    "title": "[Primeira rodada: informações necessárias]",
+    "rules": [
+      "1. Você pode copiar um exemplo, preencher livremente ou deixar em branco",
+      "2. Deixar um campo em branco significa que a IA julgará a resposta de forma inteligente"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "Cenário",
+        "example": "Ambiente da apresentação. Exemplos: `bar` / `clube` / `casamento` / `exposição de arte`"
+      },
+      {
+        "key": "target_market",
+        "label": "País / região de destino",
+        "example": "Exemplos: `China continental` / `Taiwan` / `Hong Kong` / `Japão` / `mercado internacional em inglês`"
+      },
+      {
+        "key": "core_sound",
+        "label": "Direção sonora principal",
+        "example": "Artista, faixa e gênero de referência. Exemplo: `Tears` de `Skrillex`, gênero `UK Bass` moderno"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "Quantidade de faixas ou duração do set",
+        "example": "Exemplos: `20 faixas` / `60 minutos`"
+      },
+      {
+        "key": "output_mode",
+        "label": "Versão de saída",
+        "example": "Opções Fast / Brief / Rich"
+      },
+      {
+        "key": "other",
+        "label": "Outras restrições",
+        "example": "Exemplos: `evitar faixas batidas`, `sem vocais`, `somente Remix`; opcional"
+      }
+    ],
+    "prompt": "Bem-vindo ao assistente de seleção de DJ. Esta Skill de Agent ajuda a preparar um set. Você confirmará suas necessidades em duas rodadas e receberá recomendações de faixas. Regras de preenchimento:\n\n1. Você pode copiar um exemplo, preencher livremente ou deixar em branco\n2. Deixar um campo em branco significa que a IA julgará a resposta de forma inteligente\n\n[Primeira rodada: informações necessárias]\n\nCenário:\n“Ambiente da apresentação. Exemplos: `bar` / `clube` / `casamento` / `exposição de arte`”\nPaís / região de destino:\n“Exemplos: `China continental` / `Taiwan` / `Hong Kong` / `Japão` / `mercado internacional em inglês`”\nDireção sonora principal:\n“Artista, faixa e gênero de referência. Exemplo: `Tears` de `Skrillex`, gênero `UK Bass` moderno”\nQuantidade de faixas ou duração do set:\n“Exemplos: `20 faixas` / `60 minutos`”\nVersão de saída:\n“`Fast`: playlist rápida; a qualidade pode ser menor”\n“`Brief`: apenas uma playlist combinada”\n“`Rich`: visões separadas de estilo, cenário e descoberta, seguidas de uma playlist combinada final”\nOutras restrições:\n“Exemplos: `evitar faixas batidas`, `sem vocais`, `somente Remix`; opcional”\n\n```markdown\nCenário:\nPaís / região de destino:\nDireção sonora principal:\nQuantidade de faixas ou duração do set:\nVersão de saída:\nOutras restrições:\n```"
+  }
+}

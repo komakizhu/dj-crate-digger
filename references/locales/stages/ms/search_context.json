@@ -1,0 +1,46 @@
+{
+  "locale": "ms",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "Jika wilayah kosong, gunakan pasaran bahasa Melayu yang luas untuk sesi ini sahaja.",
+    "explicit_region": "Negara atau wilayah yang dinyatakan mengatasi inferens bahasa tanpa mengubah bahasa komunikasi.",
+    "persistence": "Jangan simpan pasaran sasaran sebagai pilihan jangka panjang."
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "sahaja",
+      "hanya",
+      "gunakan hanya"
+    ],
+    "preferred_markers": [
+      "keutamaan",
+      "utamakan",
+      "pilihan utama"
+    ],
+    "fallback_markers": [
+      "sandaran",
+      "alternatif",
+      "jika tidak tersedia"
+    ],
+    "forbidden_markers": [
+      "jangan gunakan",
+      "kecualikan",
+      "tanpa"
+    ]
+  },
+  "status": {
+    "unknown": "Tidak diketahui",
+    "verified": "Disahkan",
+    "target_platform_missing": "Platform sasaran tidak tersedia"
+  }
+}

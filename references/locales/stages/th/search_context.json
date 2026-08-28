@@ -1,0 +1,46 @@
+{
+  "locale": "th",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "ถ้าเว้นภูมิภาคว่าง ให้ใช้ตลาดภาษาไทยแบบกว้างเฉพาะเซสชันนี้",
+    "explicit_region": "ประเทศหรือภูมิภาคที่ระบุชัดมีผลเหนือการอนุมานจากภาษา แต่ไม่เปลี่ยนภาษาสื่อสาร",
+    "persistence": "อย่าบันทึกตลาดเป้าหมายเป็นความชอบระยะยาว"
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "เท่านั้น",
+      "เฉพาะ",
+      "ใช้เพียง"
+    ],
+    "preferred_markers": [
+      "ต้องการ",
+      "ลำดับความสำคัญ",
+      "ชอบเป็นพิเศษ"
+    ],
+    "fallback_markers": [
+      "สำรอง",
+      "ทางเลือก",
+      "หากใช้ไม่ได้"
+    ],
+    "forbidden_markers": [
+      "ไม่ใช้",
+      "ตัดออก",
+      "ไม่มี"
+    ]
+  },
+  "status": {
+    "unknown": "ไม่ทราบ",
+    "verified": "ตรวจสอบแล้ว",
+    "target_platform_missing": "แพลตฟอร์มเป้าหมายไม่พร้อมใช้งาน"
+  }
+}

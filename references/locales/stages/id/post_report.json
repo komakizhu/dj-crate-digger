@@ -1,0 +1,78 @@
+{
+  "locale": "id",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "Bagikan masukan",
+      "positive": [
+        "Saya suka track ini"
+      ],
+      "negative": [
+        "Saya tidak suka track ini"
+      ],
+      "ambiguous": [
+        "Saya belum yakin tentang track ini"
+      ]
+    },
+    "export_w4dj": {
+      "label": "Ekspor ke W4DJ",
+      "positive": [
+        "Ekspor ke W4DJ"
+      ],
+      "negative": [
+        "Jangan ekspor ke W4DJ"
+      ],
+      "ambiguous": [
+        "Mungkin ekspor ke W4DJ"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Keluarkan playlist teks",
+      "positive": [
+        "Keluarkan playlist teks"
+      ],
+      "negative": [
+        "Jangan keluarkan playlist teks"
+      ],
+      "ambiguous": [
+        "Mungkin keluarkan playlist teks"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Susun ulang harmonis",
+      "positive": [
+        "Susun dengan roda Camelot"
+      ],
+      "negative": [
+        "Jangan susun ulang"
+      ],
+      "ambiguous": [
+        "Mungkin susun dengan roda Camelot"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "Konfirmasi memori jangka panjang",
+      "positive": [
+        "Ingat preferensi ini"
+      ],
+      "negative": [
+        "Jangan simpan preferensi ini"
+      ],
+      "ambiguous": [
+        "Mungkin ingat preferensi ini"
+      ]
+    }
+  },
+  "export": {
+    "text": "Keluarkan playlist teks yang dapat disalin dalam urutan saat ini.",
+    "w4dj": "Buat berkas serah-terima UTF-8 `.w4dj` untuk W4DJ.",
+    "harmonic": "Minta pengurutan roda Camelot menggunakan nada yang diketahui.",
+    "feedback": "Masukan bahasa alami hanya memperbarui sesi; penyimpanan jangka panjang memerlukan konfirmasi.",
+    "memory_confirmation": "Saya memahami ini sebagai ringkasan singkat perubahan selera. Simpan ke profil pribadi jangka panjang?"
+  },
+  "status": {
+    "unknown": "Tidak diketahui",
+    "verified": "Terverifikasi",
+    "target_platform_missing": "Platform target tidak tersedia"
+  }
+}

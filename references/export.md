@@ -1,145 +1,39 @@
-# 平台导出与授权边界
+# Handoff and text-playlist actions
 
-## 语言包与动作意图
+Load [locales/manifest.json](locales/manifest.json) and only the selected locale's `post_report` resource before rendering post-report actions. The visible labels, explanations, tutorial link, and action phrases come from that stage resource. Internal action names are `output_text_playlist` and `export_w4dj`; users may express them naturally in any supported language.
 
-先读取 [locales/manifest.json](locales/manifest.json)，用 `communication_language` 选择语言包。可见的导出说明、确认文案和本地化命令来自该包；内部统一使用 `export_w4dj` 与 `output_text_playlist` 两个动作意图，不要求用户使用中文或固定拼写。平台名称和平台约束同样从语言包归一化，`target_market` 不改变沟通语言。
+These actions are offered only after a complete recommendation report. They do not add a third requirements round, change the track collection, or trigger a new search. The export source is the current final order: Fast uses its final table, Brief uses its combined table, and Rich uses its dynamic-combined view. A confirmed harmonic reorder changes the order used for both actions.
 
-## 平台顺序
+## Text playlist
 
-默认导出优先级：SoundCloud → Apple Music → Spotify。用户指定 `export_platform` 时直接采用该目标；如果它同时出现在用户的 forbidden 列表中，先指出冲突并澄清，不自行选择另一个平台。
+`output_text_playlist` displays a copyable list in chat and never creates a local text file or writes to a platform. Each line contains the official artist and complete official title, in final order. It may be manually pasted into the user's chosen service, but it cannot promise one-click import to DJ software. Do not add an unselected track, a guessed qualifier, a search page, or a hidden platform fallback.
 
-已知官方能力边界：
+The action is independent from W4DJ. If a track has no valid allowed-platform direct link, keep it out of link-dependent output and explain the skipped count in the current language; do not invent a URL or replace the recording silently.
 
-- SoundCloud：官方 OAuth 后可创建或更新 playlist。
-- Apple Music：MusicKit 用户授权后可创建用户资料库 playlist。
-- Spotify：OAuth 授权并获得 playlist modify scope 后可创建 playlist 并添加曲目。
-- 网易云音乐：不预设官方导出连接器或授权能力；如果用户选择其作为导出目标，仍需先检查当前环境，工具不可用时只能提供已验证的链接清单，不得声称已导出。
+## W4DJ file
 
-不要仅凭这份说明假定当前运行环境已经拥有连接器、Client ID 或有效授权。每次先检查实际可用工具。
+`export_w4dj` creates one UTF-8 JSON file with the `.w4dj` extension. The current contract has no revision field and no migration path. Unknown fields are rejected. Its root contains exactly:
 
-## 导出状态机
-
-### 1. Prepare
-
-先读取需求卡的 `export_intent`。`explain` 只返回流程；`prepare` 才做能力检查并生成确认摘要；只有当前上下文中确认过该摘要才能进入 `execute`。从 `export_platform` 确定目标平台，不要用 `search_platform` 或首选搜索平台代替。确定：
-
-- 目标平台
-- 要导出的版本，默认综合版
-- 歌单名称
-- 曲目数量
-- 目标平台已匹配和未匹配数量
-  - 匹配依据（ISRC 或艺人 + 完整官方曲名）
-- public / private；用户未指定时默认 private
-
-### 2. Capability Check
-
-检查当前环境是否存在：
-
-- 官方平台连接器
-- 支持官方 OAuth 的浏览器会话
-- 用户已配置且允许使用的安全凭证
-
-工具不可用时，不要声称可以一键创建。返回只含目标平台或用户允许平台的导出清单，并说明所缺能力；不要为了“方便导入”加入被禁止的平台链接。
-
-### 3. Authorization
-
-首次授权必须让用户在官方页面完成登录和同意。不要：
-
-- 询问、读取或代填用户密码
-- 绕过 MFA、CAPTCHA 或平台限制
-- 将 access token、refresh token 写入报告、Skill、普通 JSON、`.env` 或 Git
-
-默认只在当前会话使用授权。用户明确同意持久化后，只能使用连接器安全存储、系统 Keychain 或等价的受保护凭证存储。没有安全存储能力时拒绝持久化，但仍可继续当前会话。
-
-### 4. Confirm
-
-任何外部写入前，展示一行确认摘要：
-
-```text
-准备在 SoundCloud 创建 private 歌单 “Sunset Organic House”：综合版，30 首；已匹配 27 首，缺失 3 首。是否创建？
+```json
+{
+  "format": "w4dj",
+  "export_id": "unique-export-id",
+  "playlist": {"name": "Playlist Name"},
+  "tracks": [
+    {
+      "position": 1,
+      "title": "Complete Official Title (Extended Mix)",
+      "artist_display": "Official Artist",
+      "netease_track_id": "123456"
+    }
+  ]
+}
 ```
 
-没有确认就停在此处。确认只覆盖摘要中这一个动作，不扩展为后续修改权限。
+`tracks[]` contains only `position`, complete official `title`, `artist_display`, and the optional string `netease_track_id`. The ID is omitted when no reliable identity is available; never write a placeholder or numeric JSON value. Remix, Edit, Live, Dub, Instrumental, Radio Edit, Extended Mix, and other official qualifiers stay embedded in `title`; there is no separate title-variant field.
 
-### 5. Create
+W4DJ carries recommendation handoff data only. It does not contain BPM, key, album, playback URLs, platform state, source records, recording keys, local audio, local paths, filenames, downloads, or import instructions. 不生成占位文件，不处理本地音频；downstream W4DJ tools own those steps.
 
-确认后调用官方连接器或官方 API。一次只创建一个平台歌单。保持推荐顺序；平台批量限制需要分批时，最终验证曲目总数和顺序。
+## File permission and safety
 
-### 6. Reconcile
-
-返回：
-
-- 创建成功的歌单 URL
-- 实际加入数量
-- 未找到或失败的原始曲目清单
-- 是否使用了替代曲目
-
-目标平台找不到曲目时默认跳过并列出。只有用户明确允许相似替代后，才搜索替代，并逐项标注“原曲 → 替代曲 + 原因”；替代曲仍必须逐曲核验，不得因为标题相似自动写入。
-
-## 匹配规则
-
-平台内匹配依次使用：
-
-1. ISRC
-2. 艺人 + 完整官方曲名
-3. 艺人 + 规范化曲名，并人工检查官方标题是否完整一致
-
-禁止仅根据标题相似度自动选择不同录音。不要删除或改写歌名中的 `(Remix)`、`(Edit)`、`(Live)`、`(Dub)`、`(Extended Mix)` 等官方限定；无法确认完整官方歌名时归入未匹配，不冒险写入。
-
-## 无连接器时的降级交付
-
-提供可复制清单：
-
-```markdown
-1. Artist — Official Track Title — target-platform search/direct URL
-```
-
-说明缺少的是 OAuth 客户端、平台连接器还是当前会话授权。不要把“需要用户手动导入”表述成“一键导出成功”。
-
-## 下一步中的歌单名 / TXT / W4DJ 导出
-
-本地文件导出与平台歌单写入相互独立，但只在完整推荐报告后的“下一步”中提供。这个区域不得在两轮需求收集期间提前出现，也不是第三轮需求收集。报告正文不展示私人记忆状态、本轮反馈状态、长期画像、缺失信息或来源栏目；相关状态和核验资料保留在后台记录中。
-
-用户在完整报告后的“下一步”中看到的导出话术、代码短语和本地化变体，统一来自所选 `locale_pack` 的 `export` 与 `actions` 字段。运行时只路由两个动作意图：`output_text_playlist` 与 `export_w4dj`；不要求用户额外填写导出问卷，也不把导出提前到两轮需求收集期间。用户可以只反馈、只触发一个导出动作、组合使用，或不回复。旧的 `导出txt` 仅作为兼容输入保留，不作为新的可见固定指令。
-
-### Text playlist structure
-
-`output_text_playlist` 的功能由 locale pack 本地化，但语义固定：输出可复制文本，可以手动导入用户选择的平台，但无法帮您一键把歌曲导入 RKB。它不创建本地文件，也不执行平台写入；内容直接基于当前最终结果，保持最终顺序，只包含官方歌名和官方艺人。标题、平台说明和格式由 `locale_pack.export` 提供：
-
-````markdown
-## <localized playlist title>
-
-```markdown
-Official Title - Official Artist
-```
-````
-
-该清单可以手动导入用户选择的平台，但不能一键把歌曲导入 RKB；不得加入未入选曲目、猜测的歌名限定、链接或额外问题。兼容输入 `导出txt` 继续按下方 TXT 规则处理。
-
-默认导出报告中的最终结果：极速版导出最终 fast 表；简要版直接使用综合表；丰富版使用最后的动态综合结果，不把四个视角拼成一份重复歌单。若用户已经确认五度圈重排，简要版或丰富版导出必须使用重排后的最终顺序；不得重新搜索、恢复原顺序或把专项视角拼入导出。若不支持中间消息的宿主只交付极速版首批，必须由用户明确确认“导出当前首批”后才可导出该当前结果，并明确它不是完整歌单。只导出已进入最终报告或已确认当前首批、通过验证的记录；TXT 记录必须拥有符合平台策略的直接曲目/发行链接，W4DJ 记录必须来自当前最终结果。同一录音跨平台只写一条，TXT 链接按 `link_priority` 选择第一条可用链接；exclusive 模式只使用目标平台链接。无可用链接的 TXT 曲目按跳过规则处理，并在导出结果中列出。
-
-### W4DJ 交接格式
-
-`export_w4dj` 生成 UTF-8 JSON 文件，扩展名固定为 `.w4dj`，格式固定为全新的 `format_version: 2`。旧 v1 文件直接拒绝，必须重新导出 v2，不做迁移。根层只写 `format: "w4dj"`、`format_version`、`export_id`、`playlist` 和 `tracks`；`playlist` 只写 `name`。完整 JSON Schema 见 [w4dj.schema.json](w4dj.schema.json)。
-
-三种输出模式都支持交接，内部 `output_mode` 固定映射为：极速版 `fast`、简要版 `composite`、丰富版 `four_views`。导出使用当前最终结果：简要版使用综合表，丰富版使用动态综合版，极速版使用最终 fast 表；如果用户已经完成五度圈重排，使用重排后的最终顺序。不得把四个丰富版视角拼成重复曲目。
-
-每个 `tracks[]` 项目只写 `position`、完整官方 `title` 和 `artist_display`；如果有网易云身份，额外写 `netease_track_id`，并且必须是 JSON 字符串，包括看起来像超大数字的 ID。没有网易云 ID 时省略该字段，不写 `null` 或 `unknown` 占位。官方曲名中的 Remix、Edit、Live、Dub、Instrumental、Radio Edit、Extended Mix 等限定必须已经包含在 `title` 中，不另设 `version` 字段。
-
-W4DJ v2 不写 BPM、调性、专辑、URL、平台状态、`record_id`、`artists`、`duration`、`musical_key`、`platform_refs`、`dedupe_key`、`expected_filename_hint`、`local_audio_path` 或任何本地路径。这些仍可作为 Skill 的内部推荐和验证记录，但不能泄漏到 `.w4dj`。W4DJ 只交接推荐意图、最终顺序、完整官方歌名、艺人和可选网易云 ID。
-
-宿主有文件写入能力时，用户明确触发 `export_w4dj` 后生成 `.w4dj` 文件并返回本地文件链接；设置 `w4dj_export.status: generated`。宿主不能写入时，返回等价 JSON manifest 和保存步骤，设置 `w4dj_export.status: manifest_only`，不得声称已创建文件。
-
-TXT 使用 UTF-8 纯文本，每行一首，保留包含官方限定的完整曲名以及可用的直接曲目页链接：
-
-```text
-Artist — Official Track Title — https://direct-track-url
-```
-
-W4DJ 不处理本地音频、不生成占位文件或本地文件路径；Skill 不下载音乐，也不猜测本地文件。
-
-W4DJ 文件只包含推荐交接数据，不包含本地音频、文件夹结构或本地路径。
-
-TXT 与 W4DJ 都不保存本地音频路径；文件名和路径由后续本地工具负责。
-
-用户确认后在当前工作区生成 UTF-8 文件，并返回可点击的本地文件链接。默认文件名为 `<playlist-slug>.txt` 和 `<playlist-slug>.w4dj`；已有同名文件时追加时间戳，不覆盖旧文件。返回实际写入数量、跳过数量、跳过原因和文件路径。用户选择“不导出”时不创建文件。宿主不能写入时，返回等价的 W4DJ JSON manifest 和保存步骤，`w4dj_export.status` 设为 `manifest_only`，不得声称已经生成本地文件。
+Before writing, verify `file_write` in the current environment and use a safe, non-overwriting filename. If the capability is absent, refuse `export_w4dj` and say that no `.w4dj` file was created; do not return an equivalent chat manifest, pretend a download exists, or provide a local path. Do not ask for passwords or store platform tokens.

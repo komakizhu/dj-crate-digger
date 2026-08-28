@@ -323,6 +323,13 @@ This file is the fixed Nederlands UI and intent contract for dj-crate-digger. Th
     "harmonic": "Vraag om ordening volgens het Camelot-wiel met bekende toonsoorten.",
     "feedback": "Feedback in natuurlijke taal werkt alleen de sessie bij; langdurige opslag vereist bevestiging.",
     "memory_confirmation": "Ik begrijp dit als een korte samenvatting van een smaakverandering. Opslaan in het privé-langetermijnprofiel?"
-  }
+  },
+  "trigger_capsule": [
+    "DJ-set",
+    "playlist",
+    "muziek zoeken",
+    "tracks vinden",
+    "een set samenstellen"
+  ]
 }
 ```

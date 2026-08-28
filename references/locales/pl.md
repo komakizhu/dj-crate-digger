@@ -323,6 +323,13 @@ This file is the fixed Polski UI and intent contract for dj-crate-digger. The JS
     "harmonic": "Poproś o kolejność według koła Camelota z użyciem znanych tonacji.",
     "feedback": "Opinia w języku naturalnym aktualizuje tylko sesję; zapis długoterminowy wymaga potwierdzenia.",
     "memory_confirmation": "Rozumiem to jako krótkie podsumowanie zmiany gustu. Zapisać je w prywatnym profilu długoterminowym?"
-  }
+  },
+  "trigger_capsule": [
+    "set DJ",
+    "playlista",
+    "szukać muzyki",
+    "znaleźć utwory",
+    "ułożyć set"
+  ]
 }
 ```

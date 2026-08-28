@@ -1,0 +1,49 @@
+{
+  "locale": "zh-Hans",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "留空时只使用宽泛的中文市场作为本轮临时线索。",
+    "explicit_region": "明确填写的国家或地区覆盖语言推断，但不改变沟通语言。",
+    "persistence": "目标市场只保留在当前会话，不写入长期偏好。"
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "网易云",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "唯一平台",
+      "仅限",
+      "只使用",
+      "只在",
+      "只要",
+      "仅接受"
+    ],
+    "preferred_markers": [
+      "优先",
+      "最好有",
+      "首选"
+    ],
+    "fallback_markers": [
+      "备用",
+      "回退",
+      "可回退"
+    ],
+    "forbidden_markers": [
+      "不要",
+      "不提供",
+      "排除"
+    ]
+  },
+  "status": {
+    "unknown": "未知",
+    "verified": "已核验",
+    "target_platform_missing": "目标平台缺失"
+  }
+}

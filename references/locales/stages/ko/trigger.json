@@ -1,0 +1,38 @@
+{
+  "locale": "ko",
+  "stage": "trigger",
+  "ambiguous_confirmation": "음악을 찾거나 DJ 세트를 만들어 드릴까요?",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "DJ 세트",
+    "DJ 세트 만들기",
+    "DJ용 음악 찾기",
+    "세트 준비하기",
+    "세트 구성하기"
+  ],
+  "ambiguous": [
+    "플레이리스트",
+    "곡 찾기",
+    "음악 목록",
+    "음악 찾기",
+    "DJ",
+    "트랙 찾기",
+    "세트 구성"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "DJ 세트",
+    "플레이리스트",
+    "곡 찾기",
+    "트랙 찾기",
+    "세트 구성"
+  ]
+}

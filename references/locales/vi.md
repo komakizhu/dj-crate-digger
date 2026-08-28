@@ -323,6 +323,13 @@ This file is the fixed Tiếng Việt UI and intent contract for dj-crate-digger
     "harmonic": "Yêu cầu sắp xếp theo vòng Camelot với các tông đã biết.",
     "feedback": "Phản hồi tự nhiên chỉ cập nhật phiên hiện tại; lưu dài hạn cần xác nhận.",
     "memory_confirmation": "Tôi hiểu đây là tóm tắt ngắn về thay đổi gu nhạc. Lưu vào hồ sơ riêng dài hạn chứ?"
-  }
+  },
+  "trigger_capsule": [
+    "set DJ",
+    "playlist",
+    "tìm nhạc",
+    "tìm track",
+    "xếp set"
+  ]
 }
 ```

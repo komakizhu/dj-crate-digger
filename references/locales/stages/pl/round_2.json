@@ -1,0 +1,53 @@
+{
+  "locale": "pl",
+  "stage": "round_2",
+  "round": {
+    "title": "[Runda 2: doprecyzowanie prośby]",
+    "rules": [
+      "1. Możesz skopiować przykład, wpisać własną treść albo zostawić pole puste"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "Konkretny styl",
+        "example": "Przykłady: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "Szybkość / BPM",
+        "example": "Przykłady: `105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "Znajomość i odkrywanie",
+        "example": "`Znane` / `Zrównoważone` / `Odkrywanie`"
+      },
+      {
+        "key": "era_classic",
+        "label": "Epoka i klasyka",
+        "example": "`Współczesne` / `Kilka klasycznych kotwic` / `Most między nowym i starym` / `Najpierw klasyka`"
+      },
+      {
+        "key": "mood",
+        "label": "Nastrój",
+        "example": "Przykłady: `nostalgiczny` / `chłodny` / `romantyczny`"
+      },
+      {
+        "key": "energy",
+        "label": "Poziom lub przebieg energii SET",
+        "example": "Przykłady: `niski` / `wysoki`; `stały` / `rollercoaster`"
+      },
+      {
+        "key": "platform",
+        "label": "Platforma i wymagania dotyczące linków",
+        "example": "Przykłady: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; jedna platforma oznacza tylko ją, kilka zachowuje podaną kolejność"
+      },
+      {
+        "key": "other",
+        "label": "Inne",
+        "example": ""
+      }
+    ],
+    "prompt": "[Runda 2: doprecyzowanie prośby]\n\nKonkretny styl:\n“Przykłady: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`”\nSzybkość / BPM:\n“Przykłady: `105` / `128` / `140` / `150` / `170`”\nZnajomość i odkrywanie:\n“`Znane` / `Zrównoważone` / `Odkrywanie`”\nEpoka i klasyka:\n“`Współczesne` / `Kilka klasycznych kotwic` / `Most między nowym i starym` / `Najpierw klasyka`”\nNastrój:\n“Przykłady: `nostalgiczny` / `chłodny` / `romantyczny`”\nPoziom lub przebieg energii SET:\n“Przykłady: `niski` / `wysoki`; `stały` / `rollercoaster`”\nPlatforma i wymagania dotyczące linków:\n“Przykłady: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; jedna platforma oznacza tylko ją, kilka zachowuje podaną kolejność”\nInne:\n\n```markdown\nKonkretny styl:\nSzybkość / BPM:\nZnajomość i odkrywanie:\nEpoka i klasyka:\nNastrój:\nPoziom lub przebieg energii SET:\nPlatforma i wymagania dotyczące linków:\nInne:\n```"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "locale": "fil",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "Kung blangko ang rehiyon, malawak na Filipino-language market lang ang gamitin para sa session na ito.",
+    "explicit_region": "Ang tahasang bansa o rehiyon ay mas mahalaga kaysa language inference nang hindi binabago ang communication language.",
+    "persistence": "Huwag i-save ang target market bilang pangmatagalang preference."
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "lang",
+      "lamang",
+      "gamitin lang"
+    ],
+    "preferred_markers": [
+      "mas gusto",
+      "priority",
+      "unang pili"
+    ],
+    "fallback_markers": [
+      "backup",
+      "alternatibo",
+      "kung hindi available"
+    ],
+    "forbidden_markers": [
+      "huwag gamitin",
+      "ibukod",
+      "walang"
+    ]
+  },
+  "status": {
+    "unknown": "Hindi alam",
+    "verified": "Na-verify",
+    "target_platform_missing": "Hindi available ang target platform"
+  }
+}

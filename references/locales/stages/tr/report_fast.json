@@ -1,0 +1,29 @@
+{
+  "locale": "tr",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Fast modu",
+    "first_batch_title": "# Fast ilk parti",
+    "final_title": "# Fast modu",
+    "columns": [
+      "Parça",
+      "Sanatçı",
+      "Bağlantı"
+    ],
+    "next_steps": [
+      {
+        "label": "Birinci | Seçim geri bildirimi",
+        "body": "İsterseniz seçimlerin nasıl çalıştığını doğal dille anlatın. Bu, özel seçim tercihlerinizi ve sonraki önerileri geliştirir."
+      },
+      {
+        "label": "İkinci | Playlist'i dışa aktarma veya aktarma",
+        "body": "Metin playlist'i çıkarabilir ya da W4DJ'e aktarabilirsiniz. `output text playlist` veya `export to w4dj` diye yanıt verin."
+      }
+    ],
+    "digging_notes": "Digging notları",
+    "mix_suggestion": "Mix önerisi",
+    "unknown": "Bilinmiyor",
+    "verified": "Doğrulandı",
+    "target_platform_missing": "Hedef platform kullanılamıyor"
+  }
+}

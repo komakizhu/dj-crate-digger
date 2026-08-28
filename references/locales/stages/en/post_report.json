@@ -1,0 +1,78 @@
+{
+  "locale": "en",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "Share selection feedback",
+      "positive": [
+        "I like this track"
+      ],
+      "negative": [
+        "I do not like this track"
+      ],
+      "ambiguous": [
+        "I am unsure about this track"
+      ]
+    },
+    "export_w4dj": {
+      "label": "Export to W4DJ",
+      "positive": [
+        "Export to W4DJ"
+      ],
+      "negative": [
+        "Do not export to W4DJ"
+      ],
+      "ambiguous": [
+        "Maybe export to W4DJ"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Output text playlist",
+      "positive": [
+        "Output the text playlist"
+      ],
+      "negative": [
+        "Do not output the text playlist"
+      ],
+      "ambiguous": [
+        "Maybe output the text playlist"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Harmonic reorder",
+      "positive": [
+        "Arrange it by the Camelot wheel"
+      ],
+      "negative": [
+        "Do not reorder it"
+      ],
+      "ambiguous": [
+        "Maybe arrange it by the Camelot wheel"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "Confirm long-term memory",
+      "positive": [
+        "Remember this preference"
+      ],
+      "negative": [
+        "Do not save this preference"
+      ],
+      "ambiguous": [
+        "Maybe remember this preference"
+      ]
+    }
+  },
+  "export": {
+    "text": "Output a copyable text playlist in the current order.",
+    "w4dj": "Create a UTF-8 `.w4dj` handoff for W4DJ.",
+    "harmonic": "Request Camelot-wheel ordering using known keys.",
+    "feedback": "Use natural-language feedback to update the current session; long-term storage requires confirmation.",
+    "memory_confirmation": "I understood this as a concise taste-change summary. Save it to the private long-term profile?"
+  },
+  "status": {
+    "unknown": "Unknown",
+    "verified": "Verified",
+    "target_platform_missing": "Target platform unavailable"
+  }
+}

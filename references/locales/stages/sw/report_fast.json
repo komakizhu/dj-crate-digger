@@ -1,0 +1,29 @@
+{
+  "locale": "sw",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Hali ya Fast",
+    "first_batch_title": "# Kundi la kwanza la Fast",
+    "final_title": "# Hali ya Fast",
+    "columns": [
+      "Wimbo",
+      "Msanii",
+      "Kiungo"
+    ],
+    "next_steps": [
+      {
+        "label": "Kwanza | Shiriki maoni ya uchaguzi",
+        "body": "Ukitaka, jibu kwa lugha ya kawaida kuhusu jinsi uchaguzi ulivyofanya kazi. Hii huboresha mapendeleo yako binafsi na mapendekezo yajayo."
+      },
+      {
+        "label": "Pili | Hamisha au kabidhi playlist",
+        "body": "Unaweza kutoa playlist ya maandishi au kuikabidhi kwa W4DJ. Jibu `output text playlist` au `export to w4dj`."
+      }
+    ],
+    "digging_notes": "Maelezo ya digging",
+    "mix_suggestion": "Pendekezo la mix",
+    "unknown": "Haijulikani",
+    "verified": "Imethibitishwa",
+    "target_platform_missing": "Jukwaa lengwa halipatikani"
+  }
+}

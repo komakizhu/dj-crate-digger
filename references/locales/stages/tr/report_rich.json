@@ -1,0 +1,48 @@
+{
+  "locale": "tr",
+  "stage": "report_rich",
+  "report": {
+    "title": "# Rich modu",
+    "first_batch_title": "# Rich modu",
+    "final_title": "# Rich modu",
+    "columns": [
+      "Parça",
+      "Sanatçı",
+      "Albüm / EP",
+      "Stil",
+      "BPM",
+      "Ton",
+      "Süre",
+      "Enerji",
+      "Yayın tarihi",
+      "Notlar",
+      "Seçim nedeni",
+      "Bağlantı"
+    ],
+    "next_steps": [
+      {
+        "label": "Birinci | Seçim geri bildirimi",
+        "body": "İsterseniz seçimlerin nasıl çalıştığını doğal dille anlatın. Bu, özel seçim tercihlerinizi ve sonraki önerileri geliştirir."
+      },
+      {
+        "label": "İkinci | Playlist'i dışa aktarma veya aktarma",
+        "body": "Metin playlist'i çıkarabilir ya da W4DJ'e aktarabilirsiniz. `output text playlist` veya `export to w4dj` diye yanıt verin."
+      },
+      {
+        "label": "Üçüncü | Harmonik set sırası",
+        "body": "Seti Camelot çarkını kullanarak sıralamamı ister misiniz?"
+      }
+    ],
+    "digging_notes": "Digging notları",
+    "mix_suggestion": "Mix önerisi",
+    "unknown": "Bilinmiyor",
+    "verified": "Doğrulandı",
+    "target_platform_missing": "Hedef platform kullanılamıyor",
+    "view_titles": [
+      "Stil görünümü",
+      "Sahne görünümü",
+      "Aşinalık / keşif görünümü",
+      "Dinamik birleşik görünüm"
+    ]
+  }
+}

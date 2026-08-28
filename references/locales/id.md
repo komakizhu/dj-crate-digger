@@ -323,6 +323,13 @@ This file is the fixed Bahasa Indonesia UI and intent contract for dj-crate-digg
     "harmonic": "Minta pengurutan roda Camelot menggunakan nada yang diketahui.",
     "feedback": "Masukan bahasa alami hanya memperbarui sesi; penyimpanan jangka panjang memerlukan konfirmasi.",
     "memory_confirmation": "Saya memahami ini sebagai ringkasan singkat perubahan selera. Simpan ke profil pribadi jangka panjang?"
-  }
+  },
+  "trigger_capsule": [
+    "set DJ",
+    "playlist",
+    "mencari musik",
+    "mencari track",
+    "menyusun set"
+  ]
 }
 ```

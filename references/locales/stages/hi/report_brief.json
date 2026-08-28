@@ -1,0 +1,42 @@
+{
+  "locale": "hi",
+  "stage": "report_brief",
+  "report": {
+    "title": "# Brief मोड",
+    "first_batch_title": "# Brief मोड",
+    "final_title": "# Brief मोड",
+    "columns": [
+      "ट्रैक",
+      "कलाकार",
+      "एल्बम / EP",
+      "शैली",
+      "BPM",
+      "की",
+      "अवधि",
+      "ऊर्जा",
+      "रिलीज़ तारीख",
+      "नोट्स",
+      "चयन कारण",
+      "लिंक"
+    ],
+    "next_steps": [
+      {
+        "label": "पहला | चयन प्रतिक्रिया साझा करें",
+        "body": "यदि चाहें तो प्राकृतिक भाषा में बताएँ कि चयन कैसा रहा। इससे आपकी निजी पसंद और आगे के सुझाव बेहतर होंगे।"
+      },
+      {
+        "label": "दूसरा | playlist निर्यात या हस्तांतरण",
+        "body": "आप टेक्स्ट playlist निकाल सकते हैं या W4DJ को दे सकते हैं। `output text playlist` या `export to w4dj` लिखें।"
+      },
+      {
+        "label": "तीसरा | हार्मोनिक सेट क्रम",
+        "body": "क्या मैं Camelot wheel का उपयोग करके सेट को क्रमबद्ध करूँ?"
+      }
+    ],
+    "digging_notes": "Digging नोट्स",
+    "mix_suggestion": "Mix सुझाव",
+    "unknown": "अज्ञात",
+    "verified": "सत्यापित",
+    "target_platform_missing": "लक्षित प्लेटफ़ॉर्म उपलब्ध नहीं"
+  }
+}

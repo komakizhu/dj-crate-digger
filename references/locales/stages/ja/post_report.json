@@ -1,0 +1,78 @@
+{
+  "locale": "ja",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "選曲フィードバック",
+      "positive": [
+        "この曲が好きです"
+      ],
+      "negative": [
+        "この曲は好きではありません"
+      ],
+      "ambiguous": [
+        "この曲はまだ判断できません"
+      ]
+    },
+    "export_w4dj": {
+      "label": "W4DJ に書き出す",
+      "positive": [
+        "W4DJ に書き出す"
+      ],
+      "negative": [
+        "W4DJ に書き出さない"
+      ],
+      "ambiguous": [
+        "W4DJ に書き出すかもしれません"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "テキスト playlist を出力",
+      "positive": [
+        "テキスト playlist を出力する"
+      ],
+      "negative": [
+        "テキスト playlist を出力しない"
+      ],
+      "ambiguous": [
+        "テキスト playlist を出力するかもしれません"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "ハーモニック並べ替え",
+      "positive": [
+        "Camelot ホイールで並べる"
+      ],
+      "negative": [
+        "並べ替えない"
+      ],
+      "ambiguous": [
+        "Camelot ホイールで並べるかもしれません"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "長期記憶を確認",
+      "positive": [
+        "この好みを記憶する"
+      ],
+      "negative": [
+        "この好みを保存しない"
+      ],
+      "ambiguous": [
+        "この好みを記憶するかもしれません"
+      ]
+    }
+  },
+  "export": {
+    "text": "現在の順序でコピー可能なテキスト playlist を出力します。",
+    "w4dj": "W4DJ に渡す UTF-8 `.w4dj` 引き継ぎファイルを作成します。",
+    "harmonic": "判明しているキーで Camelot ホイール順を依頼します。",
+    "feedback": "自然言語のフィードバックは現在のセッションだけを更新し、長期保存には確認が必要です。",
+    "memory_confirmation": "これは好みの変化をまとめた短い要約だと理解しました。個人の長期プロフィールに保存しますか？"
+  },
+  "status": {
+    "unknown": "不明",
+    "verified": "検証済み",
+    "target_platform_missing": "対象プラットフォームなし"
+  }
+}

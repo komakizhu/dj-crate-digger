@@ -1,0 +1,78 @@
+{
+  "locale": "nl",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "Selectiefeedback delen",
+      "positive": [
+        "Ik vind deze track goed"
+      ],
+      "negative": [
+        "Ik vind deze track niet goed"
+      ],
+      "ambiguous": [
+        "Ik weet het niet zeker over deze track"
+      ]
+    },
+    "export_w4dj": {
+      "label": "Exporteren naar W4DJ",
+      "positive": [
+        "Exporteren naar W4DJ"
+      ],
+      "negative": [
+        "Niet exporteren naar W4DJ"
+      ],
+      "ambiguous": [
+        "Misschien exporteren naar W4DJ"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Tekstplaylist maken",
+      "positive": [
+        "De tekstplaylist maken"
+      ],
+      "negative": [
+        "De tekstplaylist niet maken"
+      ],
+      "ambiguous": [
+        "Misschien de tekstplaylist maken"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Harmonisch herschikken",
+      "positive": [
+        "Ordenen met het Camelot-wiel"
+      ],
+      "negative": [
+        "Niet herschikken"
+      ],
+      "ambiguous": [
+        "Misschien ordenen met het Camelot-wiel"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "Langetermijngeheugen bevestigen",
+      "positive": [
+        "Deze voorkeur onthouden"
+      ],
+      "negative": [
+        "Deze voorkeur niet opslaan"
+      ],
+      "ambiguous": [
+        "Deze voorkeur misschien onthouden"
+      ]
+    }
+  },
+  "export": {
+    "text": "Maak een kopieerbare tekstplaylist in de huidige volgorde.",
+    "w4dj": "Maak een UTF-8 `.w4dj`-overdrachtsbestand voor W4DJ.",
+    "harmonic": "Vraag om ordening volgens het Camelot-wiel met bekende toonsoorten.",
+    "feedback": "Feedback in natuurlijke taal werkt alleen de sessie bij; langdurige opslag vereist bevestiging.",
+    "memory_confirmation": "Ik begrijp dit als een korte samenvatting van een smaakverandering. Opslaan in het privé-langetermijnprofiel?"
+  },
+  "status": {
+    "unknown": "Onbekend",
+    "verified": "Geverifieerd",
+    "target_platform_missing": "Doelplatform niet beschikbaar"
+  }
+}

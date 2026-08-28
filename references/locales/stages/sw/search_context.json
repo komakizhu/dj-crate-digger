@@ -1,0 +1,46 @@
+{
+  "locale": "sw",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "Eneo likiachwa wazi, tumia soko pana la Kiswahili kwa kipindi hiki pekee.",
+    "explicit_region": "Nchi au eneo lililotajwa wazi hushinda makisio ya lugha bila kubadilisha lugha ya mawasiliano.",
+    "persistence": "Usihifadhi soko lengwa kama upendeleo wa muda mrefu."
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "pekee",
+      "tu",
+      "tumia tu"
+    ],
+    "preferred_markers": [
+      "pendelea",
+      "kipaumbele",
+      "inayopendelewa"
+    ],
+    "fallback_markers": [
+      "mbadala",
+      "akiba",
+      "ikiwa haipatikani"
+    ],
+    "forbidden_markers": [
+      "usitumie",
+      "toa",
+      "bila"
+    ]
+  },
+  "status": {
+    "unknown": "Haijulikani",
+    "verified": "Imethibitishwa",
+    "target_platform_missing": "Jukwaa lengwa halipatikani"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "locale": "fil",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "Hindi available ang web search, kaya hindi ko mabe-verify ang rekomendasyon.",
+    "open_page": "Hindi mabuksan ang partikular na page, kaya hindi ko mabe-verify ang rekomendasyon.",
+    "file_write": "Hindi available ang pagsusulat ng file, kaya hindi ako makakagawa ng `.w4dj` file.",
+    "progress": "Hindi available ang awtomatikong pagpapatuloy; maibibigay ko lang ang unang na-verify na batch."
+  }
+}

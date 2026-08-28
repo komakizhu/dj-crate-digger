@@ -1,0 +1,46 @@
+{
+  "locale": "tr",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "Bölge boş bırakılırsa bu oturum için yalnızca geniş Türkçe konuşulan pazarı kullanın.",
+    "explicit_region": "Açıkça belirtilen ülke veya bölge dil çıkarımının önüne geçer, iletişim dilini değiştirmez.",
+    "persistence": "Hedef pazarı uzun vadeli tercih olarak kaydetmeyin."
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "yalnızca",
+      "sadece",
+      "tek"
+    ],
+    "preferred_markers": [
+      "tercih",
+      "öncelik",
+      "tercihen"
+    ],
+    "fallback_markers": [
+      "yedek",
+      "alternatif",
+      "kullanılamazsa"
+    ],
+    "forbidden_markers": [
+      "kullanma",
+      "hariç",
+      "olmasın"
+    ]
+  },
+  "status": {
+    "unknown": "Bilinmiyor",
+    "verified": "Doğrulandı",
+    "target_platform_missing": "Hedef platform kullanılamıyor"
+  }
+}

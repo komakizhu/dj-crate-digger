@@ -1,0 +1,10 @@
+{
+  "locale": "pl",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "Wyszukiwanie w sieci jest niedostępne, więc nie mogę zweryfikować rekomendacji.",
+    "open_page": "Nie można otworzyć konkretnej strony, więc nie mogę zweryfikować rekomendacji.",
+    "file_write": "Zapis plików jest niedostępny, więc nie mogę utworzyć pliku `.w4dj`.",
+    "progress": "Automatyczna kontynuacja jest niedostępna; mogę dostarczyć tylko zweryfikowaną pierwszą partię."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "locale": "tr",
+  "stage": "round_2",
+  "round": {
+    "title": "[İkinci tur: isteği ayrıntılandırma]",
+    "rules": [
+      "1. Bir örneği kopyalayabilir, serbestçe doldurabilir veya boş bırakabilirsiniz"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "Belirli stil",
+        "example": "Örnek: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "Hız / BPM",
+        "example": "Örnek: `105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "Aşinalık ve keşif",
+        "example": "`Tanıdık` / `Dengeli` / `Keşif`"
+      },
+      {
+        "key": "era_classic",
+        "label": "Dönem ve klasikler",
+        "example": "`Güncel` / `Az sayıda klasik çapa` / `Yeni-eski köprüsü` / `Klasikler önce`"
+      },
+      {
+        "key": "mood",
+        "label": "Ruh hâli",
+        "example": "Örnek: `nostaljik` / `soğuk` / `romantik`"
+      },
+      {
+        "key": "energy",
+        "label": "SET enerji seviyesi veya enerji eğrisi",
+        "example": "Örnek: `düşük` / `yüksek`; `sabit` / `lunapark treni`"
+      },
+      {
+        "key": "platform",
+        "label": "Platform ve bağlantı gereksinimleri",
+        "example": "Örnek: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; tek platform yalnızca onu, birden fazla belirtilen önceliği kullanır"
+      },
+      {
+        "key": "other",
+        "label": "Diğer",
+        "example": ""
+      }
+    ],
+    "prompt": "[İkinci tur: isteği ayrıntılandırma]\n\nBelirli stil:\n“Örnek: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`”\nHız / BPM:\n“Örnek: `105` / `128` / `140` / `150` / `170`”\nAşinalık ve keşif:\n“`Tanıdık` / `Dengeli` / `Keşif`”\nDönem ve klasikler:\n“`Güncel` / `Az sayıda klasik çapa` / `Yeni-eski köprüsü` / `Klasikler önce`”\nRuh hâli:\n“Örnek: `nostaljik` / `soğuk` / `romantik`”\nSET enerji seviyesi veya enerji eğrisi:\n“Örnek: `düşük` / `yüksek`; `sabit` / `lunapark treni`”\nPlatform ve bağlantı gereksinimleri:\n“Örnek: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; tek platform yalnızca onu, birden fazla belirtilen önceliği kullanır”\nDiğer:\n\n```markdown\nBelirli stil:\nHız / BPM:\nAşinalık ve keşif:\nDönem ve klasikler:\nRuh hâli:\nSET enerji seviyesi veya enerji eğrisi:\nPlatform ve bağlantı gereksinimleri:\nDiğer:\n```"
+  }
+}

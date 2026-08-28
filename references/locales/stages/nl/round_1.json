@@ -1,0 +1,49 @@
+{
+  "locale": "nl",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "Welkom bij de DJ-keuzeassistent. Deze Agent Skill helpt je een DJ-set samen te stellen. Je bevestigt je wensen in twee rondes en krijgt trackaanbevelingen. Invulregels:",
+    "tutorial_label": "Handleiding voor Set-import met één klik",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md"
+  },
+  "round": {
+    "title": "[Ronde 1: noodzakelijke informatie]",
+    "rules": [
+      "1. Je kunt een voorbeeld kopiëren, vrij invullen of het veld leeg laten",
+      "2. Een leeg veld betekent dat de AI het antwoord intelligent afleidt"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "Context",
+        "example": "Context van het optreden. Voorbeelden: `bar` / `club` / `bruiloft` / `kunsttentoonstelling`"
+      },
+      {
+        "key": "target_market",
+        "label": "Doelland / doelregio",
+        "example": "Voorbeelden: `vasteland China` / `Taiwan` / `Hongkong` / `Japan` / `internationale Engelstalige markt`"
+      },
+      {
+        "key": "core_sound",
+        "label": "Belangrijkste klankrichting",
+        "example": "Referentieartiest, track en genre. Voorbeeld: `Tears` van `Skrillex`, modern `UK Bass`"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "Aantal tracks of setduur",
+        "example": "Voorbeelden: `20 tracks` / `60 minuten`"
+      },
+      {
+        "key": "output_mode",
+        "label": "Uitvoerversie",
+        "example": "Keuze Fast / Brief / Rich"
+      },
+      {
+        "key": "other",
+        "label": "Andere beperkingen",
+        "example": "Voorbeelden: `geen platgedraaide tracks`, `geen vocalen`, `alleen Remix`; optioneel"
+      }
+    ],
+    "prompt": "Welkom bij de DJ-keuzeassistent. Deze Agent Skill helpt je een DJ-set samen te stellen. Je bevestigt je wensen in twee rondes en krijgt trackaanbevelingen. Invulregels:\n\n1. Je kunt een voorbeeld kopiëren, vrij invullen of het veld leeg laten\n2. Een leeg veld betekent dat de AI het antwoord intelligent afleidt\n\n[Ronde 1: noodzakelijke informatie]\n\nContext:\n“Context van het optreden. Voorbeelden: `bar` / `club` / `bruiloft` / `kunsttentoonstelling`”\nDoelland / doelregio:\n“Voorbeelden: `vasteland China` / `Taiwan` / `Hongkong` / `Japan` / `internationale Engelstalige markt`”\nBelangrijkste klankrichting:\n“Referentieartiest, track en genre. Voorbeeld: `Tears` van `Skrillex`, modern `UK Bass`”\nAantal tracks of setduur:\n“Voorbeelden: `20 tracks` / `60 minuten`”\nUitvoerversie:\n“`Fast`: snelle playlist; kwaliteit kan lager zijn”\n“`Brief`: alleen één gecombineerde playlist”\n“`Rich`: aparte stijl-, context- en ontdekkingsweergaven, gevolgd door een gecombineerde playlist”\nAndere beperkingen:\n“Voorbeelden: `geen platgedraaide tracks`, `geen vocalen`, `alleen Remix`; optioneel”\n\n```markdown\nContext:\nDoelland / doelregio:\nBelangrijkste klankrichting:\nAantal tracks of setduur:\nUitvoerversie:\nAndere beperkingen:\n```"
+  }
+}

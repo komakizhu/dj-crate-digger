@@ -1,0 +1,29 @@
+{
+  "locale": "zh-Hans",
+  "stage": "report_fast",
+  "report": {
+    "title": "# 极速版",
+    "first_batch_title": "# 极速版首批",
+    "final_title": "# 极速版",
+    "columns": [
+      "歌名",
+      "歌手",
+      "链接"
+    ],
+    "next_steps": [
+      {
+        "label": "第一｜反馈选歌情况",
+        "body": "如果愿意，您可以用自然语言回复我选歌情况，这会丰富您的私人选歌偏好，让推荐更准。回复包括但不限于「`skream的歌不错，但我这次因为客群的关系没放`/`我不喜欢跳楼机，以后别再推了`/`我这次打了这些歌（配图/表）`」"
+      },
+      {
+        "label": "第二｜导出或交接歌单",
+        "body": "您可以输出文字版歌单或交接给 W4DJ，直接回复 `导出到w4dj` 或者 `输出文字版歌单` 即可。\n\n`w4dj`的功能：一键导入歌单，下载后一键转换格式，并一键导入打碟软件，请导出`.w4dj`格式并且下载 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。具体操作教程可以查看 [一键导入Set教程](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)\n\n`输出文字版歌单`的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。"
+      }
+    ],
+    "digging_notes": "选歌碎碎念",
+    "mix_suggestion": "接歌建议",
+    "unknown": "未知",
+    "verified": "已核验",
+    "target_platform_missing": "目标平台缺失"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "locale": "id",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "Pencarian web tidak tersedia, jadi saya tidak dapat memverifikasi rekomendasi.",
+    "open_page": "Akses ke halaman konkret tidak tersedia, jadi saya tidak dapat memverifikasi rekomendasi.",
+    "file_write": "Penulisan file tidak tersedia, jadi saya tidak dapat membuat file `.w4dj`.",
+    "progress": "Kelanjutan otomatis tidak tersedia; saya hanya dapat memberikan batch pertama yang terverifikasi."
+  }
+}

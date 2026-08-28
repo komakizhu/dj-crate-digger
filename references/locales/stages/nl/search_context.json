@@ -1,0 +1,46 @@
+{
+  "locale": "nl",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "Als de regio leeg is, gebruik dan alleen een brede Nederlandstalige markt voor deze sessie.",
+    "explicit_region": "Een expliciete regio gaat vóór taalafleiding, maar verandert de communicatietaal niet.",
+    "persistence": "Sla de doelmarkt niet op als langetermijnvoorkeur."
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "alleen",
+      "uitsluitend",
+      "alleen gebruiken"
+    ],
+    "preferred_markers": [
+      "voorkeur",
+      "bij voorkeur",
+      "prioriteit"
+    ],
+    "fallback_markers": [
+      "reserve",
+      "alternatief",
+      "als het niet beschikbaar is"
+    ],
+    "forbidden_markers": [
+      "niet gebruiken",
+      "uitsluiten",
+      "zonder"
+    ]
+  },
+  "status": {
+    "unknown": "Onbekend",
+    "verified": "Geverifieerd",
+    "target_platform_missing": "Doelplatform niet beschikbaar"
+  }
+}

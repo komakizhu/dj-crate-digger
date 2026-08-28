@@ -1,0 +1,29 @@
+{
+  "locale": "th",
+  "stage": "report_fast",
+  "report": {
+    "title": "# โหมด Fast",
+    "first_batch_title": "# ชุดแรกของ Fast",
+    "final_title": "# โหมด Fast",
+    "columns": [
+      "เพลง",
+      "ศิลปิน",
+      "ลิงก์"
+    ],
+    "next_steps": [
+      {
+        "label": "ข้อแรก | แชร์ความคิดเห็น",
+        "body": "หากต้องการ ตอบเป็นภาษาธรรมชาติว่าการคัดเพลงใช้ได้อย่างไร ข้อมูลนี้ช่วยปรับความชอบส่วนตัวและคำแนะนำครั้งต่อไปให้ดีขึ้น"
+      },
+      {
+        "label": "ข้อสอง | ส่งออกหรือส่งต่อ playlist",
+        "body": "คุณสามารถส่งออก playlist แบบข้อความหรือส่งต่อให้ W4DJ ตอบ `output text playlist` หรือ `export to w4dj`"
+      }
+    ],
+    "digging_notes": "บันทึก Digging",
+    "mix_suggestion": "คำแนะนำการมิกซ์",
+    "unknown": "ไม่ทราบ",
+    "verified": "ตรวจสอบแล้ว",
+    "target_platform_missing": "แพลตฟอร์มเป้าหมายไม่พร้อมใช้งาน"
+  }
+}

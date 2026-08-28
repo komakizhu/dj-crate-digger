@@ -1,0 +1,78 @@
+{
+  "locale": "ur",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "انتخاب پر رائے",
+      "positive": [
+        "مجھے یہ track پسند ہے"
+      ],
+      "negative": [
+        "مجھے یہ track پسند نہیں"
+      ],
+      "ambiguous": [
+        "اس track کے بارے میں یقین نہیں"
+      ]
+    },
+    "export_w4dj": {
+      "label": "W4DJ کو export",
+      "positive": [
+        "W4DJ کو export کریں"
+      ],
+      "negative": [
+        "W4DJ کو export نہ کریں"
+      ],
+      "ambiguous": [
+        "شاید W4DJ کو export کریں"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Text playlist نکالیں",
+      "positive": [
+        "Text playlist نکالیں"
+      ],
+      "negative": [
+        "Text playlist نہ نکالیں"
+      ],
+      "ambiguous": [
+        "شاید text playlist نکالیں"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Harmonic reorder",
+      "positive": [
+        "Camelot wheel کے مطابق ترتیب دیں"
+      ],
+      "negative": [
+        "دوبارہ ترتیب نہ دیں"
+      ],
+      "ambiguous": [
+        "شاید Camelot wheel کے مطابق ترتیب دیں"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "طویل مدتی memory کی تصدیق",
+      "positive": [
+        "یہ ترجیح یاد رکھیں"
+      ],
+      "negative": [
+        "یہ ترجیح محفوظ نہ کریں"
+      ],
+      "ambiguous": [
+        "شاید یہ ترجیح یاد رکھیں"
+      ]
+    }
+  },
+  "export": {
+    "text": "موجودہ ترتیب میں copy ہونے والی text playlist نکالیں۔",
+    "w4dj": "W4DJ کے لیے UTF-8 `.w4dj` handoff file بنائیں۔",
+    "harmonic": "معلوم keys سے Camelot wheel ترتیب کی درخواست کریں۔",
+    "feedback": "قدرتی زبان کی رائے صرف session اپڈیٹ کرتی ہے؛ طویل مدتی محفوظ کرنے کے لیے تصدیق ضروری ہے۔",
+    "memory_confirmation": "میں نے اسے ذوق میں تبدیلی کے مختصر خلاصے کے طور پر سمجھا ہے۔ نجی طویل مدتی profile میں محفوظ کروں؟"
+  },
+  "status": {
+    "unknown": "نامعلوم",
+    "verified": "تصدیق شدہ",
+    "target_platform_missing": "ہدف platform دستیاب نہیں"
+  }
+}

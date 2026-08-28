@@ -85,16 +85,73 @@
       "scope": "all-locales",
       "assertions": [
         "text playlist and .w4dj actions are offered only after the complete report",
-        ".w4dj remains UTF-8 JSON with format=w4dj and format_version=2",
-        "TXT and .w4dj use the current final order after a confirmed harmonic reorder",
+        ".w4dj remains UTF-8 JSON with format=w4dj and the current minimal field set",
+        "Text playlists and .w4dj use the current final order after a confirmed harmonic reorder",
         "track verification, title completeness, version-safe deduplication, key evidence, and safety rules remain unchanged"
       ]
+    }
+  ],
+  "global_market_cases": [
+    {
+      "id": "mainland-china",
+      "locale": "zh-Hans",
+      "target_market": "Mainland China",
+      "platforms": "NetEase Cloud Music",
+      "required_query_layers": ["target-market-main-language", "English", "original-artist-title"],
+      "status": "not_run",
+      "reason": "Prepared for live replay; no callable model/web replay client is exposed in the repository test environment."
+    },
+    {
+      "id": "united-kingdom",
+      "locale": "en",
+      "target_market": "United Kingdom",
+      "platforms": "SoundCloud, Bandcamp, Beatport",
+      "required_query_layers": ["target-market-main-language", "English", "original-artist-title"],
+      "status": "not_run",
+      "reason": "Prepared for live replay; no callable model/web replay client is exposed in the repository test environment."
+    },
+    {
+      "id": "japan",
+      "locale": "ja",
+      "target_market": "Japan",
+      "platforms": "Apple Music",
+      "required_query_layers": ["target-market-main-language", "English", "original-artist-title"],
+      "status": "not_run",
+      "reason": "Prepared for live replay; no callable model/web replay client is exposed in the repository test environment."
+    },
+    {
+      "id": "germany",
+      "locale": "de",
+      "target_market": "Germany",
+      "platforms": "Spotify",
+      "required_query_layers": ["target-market-main-language", "English", "original-artist-title"],
+      "status": "not_run",
+      "reason": "Prepared for live replay; no callable model/web replay client is exposed in the repository test environment."
+    },
+    {
+      "id": "brazil",
+      "locale": "pt",
+      "target_market": "Brazil",
+      "platforms": "Spotify, SoundCloud",
+      "required_query_layers": ["target-market-main-language", "English", "original-artist-title"],
+      "status": "not_run",
+      "reason": "Prepared for live replay; no callable model/web replay client is exposed in the repository test environment."
+    },
+    {
+      "id": "south-korea",
+      "locale": "ko",
+      "target_market": "South Korea",
+      "platforms": "Apple Music, Spotify",
+      "required_query_layers": ["target-market-main-language", "English", "original-artist-title"],
+      "status": "not_run",
+      "reason": "Prepared for live replay; no callable model/web replay client is exposed in the repository test environment."
     }
   ],
   "model_replay": {
     "required_runs": 312,
     "matrix": "26 locales × 6 cold-start flows × 2 model profiles",
     "model_profiles": ["medium", "xhigh"],
+    "required_model_families": ["international-mainstream", "DeepSeek", "Qwen", "local-model"],
     "status": "not_run",
     "reason": "The repository test environment does not expose callable GPT-5.6 medium/xhigh replay clients; no model replay is being represented as passed.",
     "required_review": "Each locale requires native-speaker or professional-translator review before release claims are upgraded."

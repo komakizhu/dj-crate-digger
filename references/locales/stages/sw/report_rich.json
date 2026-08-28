@@ -1,0 +1,48 @@
+{
+  "locale": "sw",
+  "stage": "report_rich",
+  "report": {
+    "title": "# Hali ya Rich",
+    "first_batch_title": "# Hali ya Rich",
+    "final_title": "# Hali ya Rich",
+    "columns": [
+      "Wimbo",
+      "Msanii",
+      "Album / EP",
+      "Mtindo",
+      "BPM",
+      "Key",
+      "Muda",
+      "Nishati",
+      "Tarehe ya kutolewa",
+      "Maelezo",
+      "Sababu ya kuchagua",
+      "Kiungo"
+    ],
+    "next_steps": [
+      {
+        "label": "Kwanza | Shiriki maoni ya uchaguzi",
+        "body": "Ukitaka, jibu kwa lugha ya kawaida kuhusu jinsi uchaguzi ulivyofanya kazi. Hii huboresha mapendeleo yako binafsi na mapendekezo yajayo."
+      },
+      {
+        "label": "Pili | Hamisha au kabidhi playlist",
+        "body": "Unaweza kutoa playlist ya maandishi au kuikabidhi kwa W4DJ. Jibu `output text playlist` au `export to w4dj`."
+      },
+      {
+        "label": "Tatu | Mpangilio wa harmoniki wa set",
+        "body": "Ungependa nipange set kwa kutumia gurudumu la Camelot?"
+      }
+    ],
+    "digging_notes": "Maelezo ya digging",
+    "mix_suggestion": "Pendekezo la mix",
+    "unknown": "Haijulikani",
+    "verified": "Imethibitishwa",
+    "target_platform_missing": "Jukwaa lengwa halipatikani",
+    "view_titles": [
+      "Mtazamo wa mtindo",
+      "Mtazamo wa muktadha",
+      "Mtazamo wa uzoefu / ugunduzi",
+      "Mtazamo wa muunganiko wa nguvu"
+    ]
+  }
+}

@@ -15,32 +15,491 @@
     "blank_target_market_is_broad_and_session_only": true,
     "unsupported_locale_falls_back_to_en": true
   },
+  "progressive_resources": {
+    "preflight": "references/capabilities.md",
+    "trigger": "references/trigger-routing.md",
+    "intake": "references/intake-routing.md",
+    "search": "references/search-verification.md",
+    "ranking": "references/ranking.md",
+    "deduplication": "references/deduplication.md",
+    "key_and_sequencing": "references/key-and-sequencing.md",
+    "feedback_memory": "references/feedback-memory.md",
+    "export": "references/export.md",
+    "mode_fast": "references/modes/fast.md",
+    "mode_brief": "references/modes/brief.md",
+    "mode_rich": "references/modes/rich.md",
+    "report": "references/report-template.md"
+  },
   "locales": [
-    {"id": "en", "file": "en.md", "language_name": "English", "native_name": "English", "direction": "ltr"},
-    {"id": "zh-Hans", "file": "zh-Hans.md", "language_name": "Simplified Chinese", "native_name": "简体中文", "direction": "ltr"},
-    {"id": "zh-Hant", "file": "zh-Hant.md", "language_name": "Traditional Chinese", "native_name": "繁體中文", "direction": "ltr"},
-    {"id": "es", "file": "es.md", "language_name": "Spanish", "native_name": "Español", "direction": "ltr"},
-    {"id": "pt", "file": "pt.md", "language_name": "Portuguese", "native_name": "Português", "direction": "ltr"},
-    {"id": "fr", "file": "fr.md", "language_name": "French", "native_name": "Français", "direction": "ltr"},
-    {"id": "de", "file": "de.md", "language_name": "German", "native_name": "Deutsch", "direction": "ltr"},
-    {"id": "ja", "file": "ja.md", "language_name": "Japanese", "native_name": "日本語", "direction": "ltr"},
-    {"id": "ko", "file": "ko.md", "language_name": "Korean", "native_name": "한국어", "direction": "ltr"},
-    {"id": "ar", "file": "ar.md", "language_name": "Arabic", "native_name": "العربية", "direction": "rtl"},
-    {"id": "ru", "file": "ru.md", "language_name": "Russian", "native_name": "Русский", "direction": "ltr"},
-    {"id": "tr", "file": "tr.md", "language_name": "Turkish", "native_name": "Türkçe", "direction": "ltr"},
-    {"id": "hi", "file": "hi.md", "language_name": "Hindi", "native_name": "हिन्दी", "direction": "ltr"},
-    {"id": "id", "file": "id.md", "language_name": "Indonesian", "native_name": "Bahasa Indonesia", "direction": "ltr"},
-    {"id": "vi", "file": "vi.md", "language_name": "Vietnamese", "native_name": "Tiếng Việt", "direction": "ltr"},
-    {"id": "th", "file": "th.md", "language_name": "Thai", "native_name": "ไทย", "direction": "ltr"},
-    {"id": "it", "file": "it.md", "language_name": "Italian", "native_name": "Italiano", "direction": "ltr"},
-    {"id": "nl", "file": "nl.md", "language_name": "Dutch", "native_name": "Nederlands", "direction": "ltr"},
-    {"id": "pl", "file": "pl.md", "language_name": "Polish", "native_name": "Polski", "direction": "ltr"},
-    {"id": "uk", "file": "uk.md", "language_name": "Ukrainian", "native_name": "Українська", "direction": "ltr"},
-    {"id": "fa", "file": "fa.md", "language_name": "Persian", "native_name": "فارسی", "direction": "rtl"},
-    {"id": "bn", "file": "bn.md", "language_name": "Bengali", "native_name": "বাংলা", "direction": "ltr"},
-    {"id": "ur", "file": "ur.md", "language_name": "Urdu", "native_name": "اردو", "direction": "rtl"},
-    {"id": "ms", "file": "ms.md", "language_name": "Malay", "native_name": "Bahasa Melayu", "direction": "ltr"},
-    {"id": "fil", "file": "fil.md", "language_name": "Filipino", "native_name": "Filipino", "direction": "ltr"},
-    {"id": "sw", "file": "sw.md", "language_name": "Swahili", "native_name": "Kiswahili", "direction": "ltr"}
-  ]
+    {
+      "id": "en",
+      "file": "en.md",
+      "language_name": "English",
+      "native_name": "English",
+      "direction": "ltr"
+    },
+    {
+      "id": "zh-Hans",
+      "file": "zh-Hans.md",
+      "language_name": "Simplified Chinese",
+      "native_name": "简体中文",
+      "direction": "ltr"
+    },
+    {
+      "id": "zh-Hant",
+      "file": "zh-Hant.md",
+      "language_name": "Traditional Chinese",
+      "native_name": "繁體中文",
+      "direction": "ltr"
+    },
+    {
+      "id": "es",
+      "file": "es.md",
+      "language_name": "Spanish",
+      "native_name": "Español",
+      "direction": "ltr"
+    },
+    {
+      "id": "pt",
+      "file": "pt.md",
+      "language_name": "Portuguese",
+      "native_name": "Português",
+      "direction": "ltr"
+    },
+    {
+      "id": "fr",
+      "file": "fr.md",
+      "language_name": "French",
+      "native_name": "Français",
+      "direction": "ltr"
+    },
+    {
+      "id": "de",
+      "file": "de.md",
+      "language_name": "German",
+      "native_name": "Deutsch",
+      "direction": "ltr"
+    },
+    {
+      "id": "ja",
+      "file": "ja.md",
+      "language_name": "Japanese",
+      "native_name": "日本語",
+      "direction": "ltr"
+    },
+    {
+      "id": "ko",
+      "file": "ko.md",
+      "language_name": "Korean",
+      "native_name": "한국어",
+      "direction": "ltr"
+    },
+    {
+      "id": "ar",
+      "file": "ar.md",
+      "language_name": "Arabic",
+      "native_name": "العربية",
+      "direction": "rtl"
+    },
+    {
+      "id": "ru",
+      "file": "ru.md",
+      "language_name": "Russian",
+      "native_name": "Русский",
+      "direction": "ltr"
+    },
+    {
+      "id": "tr",
+      "file": "tr.md",
+      "language_name": "Turkish",
+      "native_name": "Türkçe",
+      "direction": "ltr"
+    },
+    {
+      "id": "hi",
+      "file": "hi.md",
+      "language_name": "Hindi",
+      "native_name": "हिन्दी",
+      "direction": "ltr"
+    },
+    {
+      "id": "id",
+      "file": "id.md",
+      "language_name": "Indonesian",
+      "native_name": "Bahasa Indonesia",
+      "direction": "ltr"
+    },
+    {
+      "id": "vi",
+      "file": "vi.md",
+      "language_name": "Vietnamese",
+      "native_name": "Tiếng Việt",
+      "direction": "ltr"
+    },
+    {
+      "id": "th",
+      "file": "th.md",
+      "language_name": "Thai",
+      "native_name": "ไทย",
+      "direction": "ltr"
+    },
+    {
+      "id": "it",
+      "file": "it.md",
+      "language_name": "Italian",
+      "native_name": "Italiano",
+      "direction": "ltr"
+    },
+    {
+      "id": "nl",
+      "file": "nl.md",
+      "language_name": "Dutch",
+      "native_name": "Nederlands",
+      "direction": "ltr"
+    },
+    {
+      "id": "pl",
+      "file": "pl.md",
+      "language_name": "Polish",
+      "native_name": "Polski",
+      "direction": "ltr"
+    },
+    {
+      "id": "uk",
+      "file": "uk.md",
+      "language_name": "Ukrainian",
+      "native_name": "Українська",
+      "direction": "ltr"
+    },
+    {
+      "id": "fa",
+      "file": "fa.md",
+      "language_name": "Persian",
+      "native_name": "فارسی",
+      "direction": "rtl"
+    },
+    {
+      "id": "bn",
+      "file": "bn.md",
+      "language_name": "Bengali",
+      "native_name": "বাংলা",
+      "direction": "ltr"
+    },
+    {
+      "id": "ur",
+      "file": "ur.md",
+      "language_name": "Urdu",
+      "native_name": "اردو",
+      "direction": "rtl"
+    },
+    {
+      "id": "ms",
+      "file": "ms.md",
+      "language_name": "Malay",
+      "native_name": "Bahasa Melayu",
+      "direction": "ltr"
+    },
+    {
+      "id": "fil",
+      "file": "fil.md",
+      "language_name": "Filipino",
+      "native_name": "Filipino",
+      "direction": "ltr"
+    },
+    {
+      "id": "sw",
+      "file": "sw.md",
+      "language_name": "Swahili",
+      "native_name": "Kiswahili",
+      "direction": "ltr"
+    }
+  ],
+  "locale_progressive_resources": {
+    "en": {
+      "trigger": "references/locales/stages/en/trigger.json",
+      "round_1": "references/locales/stages/en/round_1.json",
+      "round_2": "references/locales/stages/en/round_2.json",
+      "search_context": "references/locales/stages/en/search_context.json",
+      "report_fast": "references/locales/stages/en/report_fast.json",
+      "report_brief": "references/locales/stages/en/report_brief.json",
+      "report_rich": "references/locales/stages/en/report_rich.json",
+      "post_report": "references/locales/stages/en/post_report.json",
+      "capability_errors": "references/locales/stages/en/capability_errors.json"
+    },
+    "zh-Hans": {
+      "trigger": "references/locales/stages/zh-Hans/trigger.json",
+      "round_1": "references/locales/stages/zh-Hans/round_1.json",
+      "round_2": "references/locales/stages/zh-Hans/round_2.json",
+      "search_context": "references/locales/stages/zh-Hans/search_context.json",
+      "report_fast": "references/locales/stages/zh-Hans/report_fast.json",
+      "report_brief": "references/locales/stages/zh-Hans/report_brief.json",
+      "report_rich": "references/locales/stages/zh-Hans/report_rich.json",
+      "post_report": "references/locales/stages/zh-Hans/post_report.json",
+      "capability_errors": "references/locales/stages/zh-Hans/capability_errors.json"
+    },
+    "zh-Hant": {
+      "trigger": "references/locales/stages/zh-Hant/trigger.json",
+      "round_1": "references/locales/stages/zh-Hant/round_1.json",
+      "round_2": "references/locales/stages/zh-Hant/round_2.json",
+      "search_context": "references/locales/stages/zh-Hant/search_context.json",
+      "report_fast": "references/locales/stages/zh-Hant/report_fast.json",
+      "report_brief": "references/locales/stages/zh-Hant/report_brief.json",
+      "report_rich": "references/locales/stages/zh-Hant/report_rich.json",
+      "post_report": "references/locales/stages/zh-Hant/post_report.json",
+      "capability_errors": "references/locales/stages/zh-Hant/capability_errors.json"
+    },
+    "es": {
+      "trigger": "references/locales/stages/es/trigger.json",
+      "round_1": "references/locales/stages/es/round_1.json",
+      "round_2": "references/locales/stages/es/round_2.json",
+      "search_context": "references/locales/stages/es/search_context.json",
+      "report_fast": "references/locales/stages/es/report_fast.json",
+      "report_brief": "references/locales/stages/es/report_brief.json",
+      "report_rich": "references/locales/stages/es/report_rich.json",
+      "post_report": "references/locales/stages/es/post_report.json",
+      "capability_errors": "references/locales/stages/es/capability_errors.json"
+    },
+    "pt": {
+      "trigger": "references/locales/stages/pt/trigger.json",
+      "round_1": "references/locales/stages/pt/round_1.json",
+      "round_2": "references/locales/stages/pt/round_2.json",
+      "search_context": "references/locales/stages/pt/search_context.json",
+      "report_fast": "references/locales/stages/pt/report_fast.json",
+      "report_brief": "references/locales/stages/pt/report_brief.json",
+      "report_rich": "references/locales/stages/pt/report_rich.json",
+      "post_report": "references/locales/stages/pt/post_report.json",
+      "capability_errors": "references/locales/stages/pt/capability_errors.json"
+    },
+    "fr": {
+      "trigger": "references/locales/stages/fr/trigger.json",
+      "round_1": "references/locales/stages/fr/round_1.json",
+      "round_2": "references/locales/stages/fr/round_2.json",
+      "search_context": "references/locales/stages/fr/search_context.json",
+      "report_fast": "references/locales/stages/fr/report_fast.json",
+      "report_brief": "references/locales/stages/fr/report_brief.json",
+      "report_rich": "references/locales/stages/fr/report_rich.json",
+      "post_report": "references/locales/stages/fr/post_report.json",
+      "capability_errors": "references/locales/stages/fr/capability_errors.json"
+    },
+    "de": {
+      "trigger": "references/locales/stages/de/trigger.json",
+      "round_1": "references/locales/stages/de/round_1.json",
+      "round_2": "references/locales/stages/de/round_2.json",
+      "search_context": "references/locales/stages/de/search_context.json",
+      "report_fast": "references/locales/stages/de/report_fast.json",
+      "report_brief": "references/locales/stages/de/report_brief.json",
+      "report_rich": "references/locales/stages/de/report_rich.json",
+      "post_report": "references/locales/stages/de/post_report.json",
+      "capability_errors": "references/locales/stages/de/capability_errors.json"
+    },
+    "ja": {
+      "trigger": "references/locales/stages/ja/trigger.json",
+      "round_1": "references/locales/stages/ja/round_1.json",
+      "round_2": "references/locales/stages/ja/round_2.json",
+      "search_context": "references/locales/stages/ja/search_context.json",
+      "report_fast": "references/locales/stages/ja/report_fast.json",
+      "report_brief": "references/locales/stages/ja/report_brief.json",
+      "report_rich": "references/locales/stages/ja/report_rich.json",
+      "post_report": "references/locales/stages/ja/post_report.json",
+      "capability_errors": "references/locales/stages/ja/capability_errors.json"
+    },
+    "ko": {
+      "trigger": "references/locales/stages/ko/trigger.json",
+      "round_1": "references/locales/stages/ko/round_1.json",
+      "round_2": "references/locales/stages/ko/round_2.json",
+      "search_context": "references/locales/stages/ko/search_context.json",
+      "report_fast": "references/locales/stages/ko/report_fast.json",
+      "report_brief": "references/locales/stages/ko/report_brief.json",
+      "report_rich": "references/locales/stages/ko/report_rich.json",
+      "post_report": "references/locales/stages/ko/post_report.json",
+      "capability_errors": "references/locales/stages/ko/capability_errors.json"
+    },
+    "ar": {
+      "trigger": "references/locales/stages/ar/trigger.json",
+      "round_1": "references/locales/stages/ar/round_1.json",
+      "round_2": "references/locales/stages/ar/round_2.json",
+      "search_context": "references/locales/stages/ar/search_context.json",
+      "report_fast": "references/locales/stages/ar/report_fast.json",
+      "report_brief": "references/locales/stages/ar/report_brief.json",
+      "report_rich": "references/locales/stages/ar/report_rich.json",
+      "post_report": "references/locales/stages/ar/post_report.json",
+      "capability_errors": "references/locales/stages/ar/capability_errors.json"
+    },
+    "ru": {
+      "trigger": "references/locales/stages/ru/trigger.json",
+      "round_1": "references/locales/stages/ru/round_1.json",
+      "round_2": "references/locales/stages/ru/round_2.json",
+      "search_context": "references/locales/stages/ru/search_context.json",
+      "report_fast": "references/locales/stages/ru/report_fast.json",
+      "report_brief": "references/locales/stages/ru/report_brief.json",
+      "report_rich": "references/locales/stages/ru/report_rich.json",
+      "post_report": "references/locales/stages/ru/post_report.json",
+      "capability_errors": "references/locales/stages/ru/capability_errors.json"
+    },
+    "tr": {
+      "trigger": "references/locales/stages/tr/trigger.json",
+      "round_1": "references/locales/stages/tr/round_1.json",
+      "round_2": "references/locales/stages/tr/round_2.json",
+      "search_context": "references/locales/stages/tr/search_context.json",
+      "report_fast": "references/locales/stages/tr/report_fast.json",
+      "report_brief": "references/locales/stages/tr/report_brief.json",
+      "report_rich": "references/locales/stages/tr/report_rich.json",
+      "post_report": "references/locales/stages/tr/post_report.json",
+      "capability_errors": "references/locales/stages/tr/capability_errors.json"
+    },
+    "hi": {
+      "trigger": "references/locales/stages/hi/trigger.json",
+      "round_1": "references/locales/stages/hi/round_1.json",
+      "round_2": "references/locales/stages/hi/round_2.json",
+      "search_context": "references/locales/stages/hi/search_context.json",
+      "report_fast": "references/locales/stages/hi/report_fast.json",
+      "report_brief": "references/locales/stages/hi/report_brief.json",
+      "report_rich": "references/locales/stages/hi/report_rich.json",
+      "post_report": "references/locales/stages/hi/post_report.json",
+      "capability_errors": "references/locales/stages/hi/capability_errors.json"
+    },
+    "id": {
+      "trigger": "references/locales/stages/id/trigger.json",
+      "round_1": "references/locales/stages/id/round_1.json",
+      "round_2": "references/locales/stages/id/round_2.json",
+      "search_context": "references/locales/stages/id/search_context.json",
+      "report_fast": "references/locales/stages/id/report_fast.json",
+      "report_brief": "references/locales/stages/id/report_brief.json",
+      "report_rich": "references/locales/stages/id/report_rich.json",
+      "post_report": "references/locales/stages/id/post_report.json",
+      "capability_errors": "references/locales/stages/id/capability_errors.json"
+    },
+    "vi": {
+      "trigger": "references/locales/stages/vi/trigger.json",
+      "round_1": "references/locales/stages/vi/round_1.json",
+      "round_2": "references/locales/stages/vi/round_2.json",
+      "search_context": "references/locales/stages/vi/search_context.json",
+      "report_fast": "references/locales/stages/vi/report_fast.json",
+      "report_brief": "references/locales/stages/vi/report_brief.json",
+      "report_rich": "references/locales/stages/vi/report_rich.json",
+      "post_report": "references/locales/stages/vi/post_report.json",
+      "capability_errors": "references/locales/stages/vi/capability_errors.json"
+    },
+    "th": {
+      "trigger": "references/locales/stages/th/trigger.json",
+      "round_1": "references/locales/stages/th/round_1.json",
+      "round_2": "references/locales/stages/th/round_2.json",
+      "search_context": "references/locales/stages/th/search_context.json",
+      "report_fast": "references/locales/stages/th/report_fast.json",
+      "report_brief": "references/locales/stages/th/report_brief.json",
+      "report_rich": "references/locales/stages/th/report_rich.json",
+      "post_report": "references/locales/stages/th/post_report.json",
+      "capability_errors": "references/locales/stages/th/capability_errors.json"
+    },
+    "it": {
+      "trigger": "references/locales/stages/it/trigger.json",
+      "round_1": "references/locales/stages/it/round_1.json",
+      "round_2": "references/locales/stages/it/round_2.json",
+      "search_context": "references/locales/stages/it/search_context.json",
+      "report_fast": "references/locales/stages/it/report_fast.json",
+      "report_brief": "references/locales/stages/it/report_brief.json",
+      "report_rich": "references/locales/stages/it/report_rich.json",
+      "post_report": "references/locales/stages/it/post_report.json",
+      "capability_errors": "references/locales/stages/it/capability_errors.json"
+    },
+    "nl": {
+      "trigger": "references/locales/stages/nl/trigger.json",
+      "round_1": "references/locales/stages/nl/round_1.json",
+      "round_2": "references/locales/stages/nl/round_2.json",
+      "search_context": "references/locales/stages/nl/search_context.json",
+      "report_fast": "references/locales/stages/nl/report_fast.json",
+      "report_brief": "references/locales/stages/nl/report_brief.json",
+      "report_rich": "references/locales/stages/nl/report_rich.json",
+      "post_report": "references/locales/stages/nl/post_report.json",
+      "capability_errors": "references/locales/stages/nl/capability_errors.json"
+    },
+    "pl": {
+      "trigger": "references/locales/stages/pl/trigger.json",
+      "round_1": "references/locales/stages/pl/round_1.json",
+      "round_2": "references/locales/stages/pl/round_2.json",
+      "search_context": "references/locales/stages/pl/search_context.json",
+      "report_fast": "references/locales/stages/pl/report_fast.json",
+      "report_brief": "references/locales/stages/pl/report_brief.json",
+      "report_rich": "references/locales/stages/pl/report_rich.json",
+      "post_report": "references/locales/stages/pl/post_report.json",
+      "capability_errors": "references/locales/stages/pl/capability_errors.json"
+    },
+    "uk": {
+      "trigger": "references/locales/stages/uk/trigger.json",
+      "round_1": "references/locales/stages/uk/round_1.json",
+      "round_2": "references/locales/stages/uk/round_2.json",
+      "search_context": "references/locales/stages/uk/search_context.json",
+      "report_fast": "references/locales/stages/uk/report_fast.json",
+      "report_brief": "references/locales/stages/uk/report_brief.json",
+      "report_rich": "references/locales/stages/uk/report_rich.json",
+      "post_report": "references/locales/stages/uk/post_report.json",
+      "capability_errors": "references/locales/stages/uk/capability_errors.json"
+    },
+    "fa": {
+      "trigger": "references/locales/stages/fa/trigger.json",
+      "round_1": "references/locales/stages/fa/round_1.json",
+      "round_2": "references/locales/stages/fa/round_2.json",
+      "search_context": "references/locales/stages/fa/search_context.json",
+      "report_fast": "references/locales/stages/fa/report_fast.json",
+      "report_brief": "references/locales/stages/fa/report_brief.json",
+      "report_rich": "references/locales/stages/fa/report_rich.json",
+      "post_report": "references/locales/stages/fa/post_report.json",
+      "capability_errors": "references/locales/stages/fa/capability_errors.json"
+    },
+    "bn": {
+      "trigger": "references/locales/stages/bn/trigger.json",
+      "round_1": "references/locales/stages/bn/round_1.json",
+      "round_2": "references/locales/stages/bn/round_2.json",
+      "search_context": "references/locales/stages/bn/search_context.json",
+      "report_fast": "references/locales/stages/bn/report_fast.json",
+      "report_brief": "references/locales/stages/bn/report_brief.json",
+      "report_rich": "references/locales/stages/bn/report_rich.json",
+      "post_report": "references/locales/stages/bn/post_report.json",
+      "capability_errors": "references/locales/stages/bn/capability_errors.json"
+    },
+    "ur": {
+      "trigger": "references/locales/stages/ur/trigger.json",
+      "round_1": "references/locales/stages/ur/round_1.json",
+      "round_2": "references/locales/stages/ur/round_2.json",
+      "search_context": "references/locales/stages/ur/search_context.json",
+      "report_fast": "references/locales/stages/ur/report_fast.json",
+      "report_brief": "references/locales/stages/ur/report_brief.json",
+      "report_rich": "references/locales/stages/ur/report_rich.json",
+      "post_report": "references/locales/stages/ur/post_report.json",
+      "capability_errors": "references/locales/stages/ur/capability_errors.json"
+    },
+    "ms": {
+      "trigger": "references/locales/stages/ms/trigger.json",
+      "round_1": "references/locales/stages/ms/round_1.json",
+      "round_2": "references/locales/stages/ms/round_2.json",
+      "search_context": "references/locales/stages/ms/search_context.json",
+      "report_fast": "references/locales/stages/ms/report_fast.json",
+      "report_brief": "references/locales/stages/ms/report_brief.json",
+      "report_rich": "references/locales/stages/ms/report_rich.json",
+      "post_report": "references/locales/stages/ms/post_report.json",
+      "capability_errors": "references/locales/stages/ms/capability_errors.json"
+    },
+    "fil": {
+      "trigger": "references/locales/stages/fil/trigger.json",
+      "round_1": "references/locales/stages/fil/round_1.json",
+      "round_2": "references/locales/stages/fil/round_2.json",
+      "search_context": "references/locales/stages/fil/search_context.json",
+      "report_fast": "references/locales/stages/fil/report_fast.json",
+      "report_brief": "references/locales/stages/fil/report_brief.json",
+      "report_rich": "references/locales/stages/fil/report_rich.json",
+      "post_report": "references/locales/stages/fil/post_report.json",
+      "capability_errors": "references/locales/stages/fil/capability_errors.json"
+    },
+    "sw": {
+      "trigger": "references/locales/stages/sw/trigger.json",
+      "round_1": "references/locales/stages/sw/round_1.json",
+      "round_2": "references/locales/stages/sw/round_2.json",
+      "search_context": "references/locales/stages/sw/search_context.json",
+      "report_fast": "references/locales/stages/sw/report_fast.json",
+      "report_brief": "references/locales/stages/sw/report_brief.json",
+      "report_rich": "references/locales/stages/sw/report_rich.json",
+      "post_report": "references/locales/stages/sw/post_report.json",
+      "capability_errors": "references/locales/stages/sw/capability_errors.json"
+    }
+  }
 }

@@ -1,0 +1,42 @@
+{
+  "locale": "ur",
+  "stage": "report_brief",
+  "report": {
+    "title": "# Brief mode",
+    "first_batch_title": "# Brief mode",
+    "final_title": "# Brief mode",
+    "columns": [
+      "Track",
+      "فنکار",
+      "Album / EP",
+      "Style",
+      "BPM",
+      "Key",
+      "دورانیہ",
+      "Energy",
+      "ریلیز تاریخ",
+      "نوٹس",
+      "انتخاب کی وجہ",
+      "Link"
+    ],
+    "next_steps": [
+      {
+        "label": "اول | انتخاب پر رائے",
+        "body": "اگر چاہیں تو قدرتی زبان میں بتائیں کہ انتخاب کیسا رہا۔ اس سے نجی ترجیحات اور اگلی تجاویز بہتر ہوں گی۔"
+      },
+      {
+        "label": "دوم | playlist export یا حوالگی",
+        "body": "Text playlist نکال سکتے ہیں یا W4DJ کو دے سکتے ہیں۔ `output text playlist` یا `export to w4dj` جواب دیں۔"
+      },
+      {
+        "label": "سوم | Harmonic set order",
+        "body": "کیا Camelot wheel سے set ترتیب دوں؟"
+      }
+    ],
+    "digging_notes": "Digging نوٹس",
+    "mix_suggestion": "Mix تجویز",
+    "unknown": "نامعلوم",
+    "verified": "تصدیق شدہ",
+    "target_platform_missing": "ہدف platform دستیاب نہیں"
+  }
+}

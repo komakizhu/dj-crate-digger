@@ -1,0 +1,78 @@
+{
+  "locale": "bn",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "নির্বাচন সম্পর্কে মতামত",
+      "positive": [
+        "এই track আমার ভালো লেগেছে"
+      ],
+      "negative": [
+        "এই track আমার ভালো লাগেনি"
+      ],
+      "ambiguous": [
+        "এই track নিয়ে নিশ্চিত নই"
+      ]
+    },
+    "export_w4dj": {
+      "label": "W4DJ-তে export",
+      "positive": [
+        "W4DJ-তে export করুন"
+      ],
+      "negative": [
+        "W4DJ-তে export করবেন না"
+      ],
+      "ambiguous": [
+        "হয়তো W4DJ-তে export করুন"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Text playlist তৈরি",
+      "positive": [
+        "Text playlist তৈরি করুন"
+      ],
+      "negative": [
+        "Text playlist তৈরি করবেন না"
+      ],
+      "ambiguous": [
+        "হয়তো text playlist তৈরি করুন"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Harmonic reorder",
+      "positive": [
+        "Camelot wheel অনুযায়ী সাজান"
+      ],
+      "negative": [
+        "পুনরায় সাজাবেন না"
+      ],
+      "ambiguous": [
+        "হয়তো Camelot wheel অনুযায়ী সাজান"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "দীর্ঘমেয়াদি memory নিশ্চিত",
+      "positive": [
+        "এই পছন্দ মনে রাখুন"
+      ],
+      "negative": [
+        "এই পছন্দ সংরক্ষণ করবেন না"
+      ],
+      "ambiguous": [
+        "হয়তো এই পছন্দ মনে রাখুন"
+      ]
+    }
+  },
+  "export": {
+    "text": "বর্তমান ক্রমে কপি করা যায় এমন text playlist তৈরি করুন।",
+    "w4dj": "W4DJ-এর জন্য UTF-8 `.w4dj` handoff file তৈরি করুন।",
+    "harmonic": "জানা key দিয়ে Camelot wheel order চাইুন।",
+    "feedback": "স্বাভাবিক ভাষার মতামত শুধু session বদলায়; দীর্ঘমেয়াদি সংরক্ষণে নিশ্চিতকরণ দরকার।",
+    "memory_confirmation": "আমি এটিকে রুচির পরিবর্তনের সংক্ষিপ্ত সারাংশ হিসেবে বুঝেছি। ব্যক্তিগত দীর্ঘমেয়াদি profile-এ সংরক্ষণ করব?"
+  },
+  "status": {
+    "unknown": "অজানা",
+    "verified": "যাচাই করা",
+    "target_platform_missing": "লক্ষ্য platform পাওয়া যায়নি"
+  }
+}

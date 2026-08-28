@@ -58,6 +58,29 @@ EXPECTED_LOCALE_SELECTION_ORDER = (
     "current_session_language",
     "fallback_locale",
 )
+EXPECTED_GLOBAL_MARKETS = (
+    ("mainland-china", "zh-Hans", "Mainland China", "NetEase Cloud Music"),
+    ("united-kingdom", "en", "United Kingdom", "SoundCloud, Bandcamp, Beatport"),
+    ("japan", "ja", "Japan", "Apple Music"),
+    ("germany", "de", "Germany", "Spotify"),
+    ("brazil", "pt", "Brazil", "Spotify, SoundCloud"),
+    ("south-korea", "ko", "South Korea", "Apple Music, Spotify"),
+)
+REQUIRED_PROGRESSIVE_RESOURCES = (
+    "preflight",
+    "trigger",
+    "intake",
+    "search",
+    "ranking",
+    "deduplication",
+    "key_and_sequencing",
+    "feedback_memory",
+    "export",
+    "mode_fast",
+    "mode_brief",
+    "mode_rich",
+    "report",
+)
 FIRST_FIELDS = (
     "scene",
     "target_market",
@@ -82,6 +105,18 @@ ACTION_INTENTS = (
     "output_text_playlist",
     "harmonic_reorder",
     "confirm_long_term_memory",
+)
+TRIGGER_CAPSULE_MINIMUM = 4
+REQUIRED_LOCALE_STAGE_KEYS = (
+    "trigger",
+    "round_1",
+    "round_2",
+    "search_context",
+    "report_fast",
+    "report_brief",
+    "report_rich",
+    "post_report",
+    "capability_errors",
 )
 REPORT_MODES = ("fast", "brief", "rich")
 REQUIRED_STATUS_KEYS = (
@@ -271,6 +306,16 @@ def validate_pack(pack: dict[str, Any], expected_locale: str) -> list[str]:
     if pack.get("direction") not in ("ltr", "rtl"):
         errors.append(f"{expected_locale}.direction: expected ltr or rtl")
 
+    trigger_capsule = pack.get("trigger_capsule")
+    if (
+        not isinstance(trigger_capsule, list)
+        or len(trigger_capsule) < TRIGGER_CAPSULE_MINIMUM
+        or not all(isinstance(item, str) and item.strip() for item in trigger_capsule)
+    ):
+        errors.append(
+            f"{expected_locale}.trigger_capsule: expected at least {TRIGGER_CAPSULE_MINIMUM} localized DJ triggers"
+        )
+
     market_policy = pack.get("market_policy")
     if not isinstance(market_policy, dict):
         errors.append(f"{expected_locale}: missing market_policy")
@@ -326,6 +371,18 @@ def validate_pack(pack: dict[str, Any], expected_locale: str) -> list[str]:
     else:
         for key in ("text", "w4dj", "harmonic", "feedback", "memory_confirmation"):
             require_text(export.get(key), f"{expected_locale}.export.{key}", errors)
+    serialized = json.dumps(pack, ensure_ascii=False).lower()
+    retired_tokens = (
+        "v1",
+        "v2",
+        "format_" + "version",
+        "." + "t" + "x" + "t",
+        "." + "w4djcrate",
+        "m" + "3u8",
+    )
+    for token in retired_tokens:
+        if token in serialized:
+            errors.append(f"{expected_locale}: locale pack contains retired token {token!r}")
     return errors
 
 
@@ -346,6 +403,67 @@ def validate_manifest() -> tuple[dict[str, Any] | None, list[str]]:
         routing.get("locale_selection_order", [])
     ) != EXPECTED_LOCALE_SELECTION_ORDER:
         errors.append("manifest.routing: locale selection order is incomplete or changed")
+    progressive_resources = manifest.get("progressive_resources")
+    if not isinstance(progressive_resources, dict):
+        errors.append("manifest.progressive_resources: missing resource map")
+    else:
+        for key in REQUIRED_PROGRESSIVE_RESOURCES:
+            resource = progressive_resources.get(key)
+            if not isinstance(resource, str) or not (ROOT / resource).exists():
+                errors.append(f"manifest.progressive_resources: missing {key}")
+    locale_progressive = manifest.get("locale_progressive_resources")
+    if not isinstance(locale_progressive, dict):
+        errors.append("manifest.locale_progressive_resources: missing resource map")
+    else:
+        if tuple(locale_progressive) != EXPECTED_LOCALES:
+            errors.append("manifest.locale_progressive_resources: locale order does not match manifest")
+        for locale in EXPECTED_LOCALES:
+            mapping = locale_progressive.get(locale)
+            if not isinstance(mapping, dict):
+                errors.append(f"manifest.locale_progressive_resources: missing {locale}")
+                continue
+            if set(mapping) != set(REQUIRED_LOCALE_STAGE_KEYS):
+                errors.append(f"manifest.locale_progressive_resources.{locale}: stage keys are incomplete")
+            for stage in REQUIRED_LOCALE_STAGE_KEYS:
+                resource = mapping.get(stage)
+                if not isinstance(resource, str):
+                    errors.append(f"manifest.locale_progressive_resources.{locale}: missing {stage}")
+                    continue
+                path = ROOT / resource
+                if not path.exists():
+                    errors.append(f"manifest.locale_progressive_resources.{locale}: missing file {resource}")
+                    continue
+                try:
+                    payload = json.loads(path.read_text(encoding="utf-8"))
+                except (OSError, json.JSONDecodeError) as exc:
+                    errors.append(f"{resource}: invalid JSON: {exc}")
+                    continue
+                if payload.get("locale") != locale or payload.get("stage") != stage:
+                    errors.append(f"{resource}: locale/stage metadata mismatch")
+                if stage in ("round_1", "round_2") and not isinstance(payload.get("round"), dict):
+                    errors.append(f"{resource}: missing round payload")
+                if stage.startswith("report_") and not isinstance(payload.get("report"), dict):
+                    errors.append(f"{resource}: missing report payload")
+                if stage == "trigger":
+                    if not isinstance(payload.get("ambiguous_confirmation"), str):
+                        errors.append(f"{resource}: missing ambiguous confirmation")
+                    for trigger_kind in ("direct", "ambiguous", "non_trigger"):
+                        require_string_list(
+                            payload.get(trigger_kind),
+                            f"{resource}.{trigger_kind}",
+                            errors,
+                        )
+                    direct = set(payload.get("direct", []))
+                    ambiguous = set(payload.get("ambiguous", []))
+                    overlap = sorted(direct & ambiguous)
+                    if overlap:
+                        errors.append(f"{resource}: direct and ambiguous triggers overlap: {overlap!r}")
+                if stage == "search_context" and not isinstance(payload.get("platform_policy"), dict):
+                    errors.append(f"{resource}: missing platform policy")
+                if stage == "post_report" and not isinstance(payload.get("actions"), dict):
+                    errors.append(f"{resource}: missing post-report actions")
+                if stage == "capability_errors" and not isinstance(payload.get("messages"), dict):
+                    errors.append(f"{resource}: missing capability messages")
     entries = manifest.get("locales")
     if not isinstance(entries, list):
         return manifest, errors + ["manifest.locales must be a list"]
@@ -413,8 +531,10 @@ def validate_action_fixtures() -> list[str]:
         intent = str(case.get("intent"))
         kind = str(case.get("kind"))
         try:
-            pack = load_pack(LOCALES_DIR / f"{locale}.md")
-            expressions = pack["actions"][intent][kind]
+            manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+            post_report = manifest["locale_progressive_resources"][locale]["post_report"]
+            payload = json.loads((ROOT / post_report).read_text(encoding="utf-8"))
+            expressions = payload["actions"][intent][kind]
         except (OSError, KeyError, TypeError, ValueError) as exc:
             errors.append(f"action fixture {case.get('input', '<missing>')!r}: {exc}")
             continue
@@ -463,10 +583,30 @@ def validate_multilingual_eval_spec() -> list[str]:
         errors.append("multilingual eval required_runs must equal 312")
     if tuple(replay.get("model_profiles", [])) != ("medium", "xhigh"):
         errors.append("multilingual eval model profiles must be medium and xhigh")
+    required_families = {str(item) for item in replay.get("required_model_families", [])}
+    if not {"international-mainstream", "DeepSeek", "Qwen", "local-model"} <= required_families:
+        errors.append("multilingual eval must name mainstream, DeepSeek, Qwen, and local-model coverage")
     if replay.get("status") not in ("not_run", "passed"):
         errors.append("multilingual eval replay status must be not_run or passed")
     if replay.get("status") == "not_run" and not str(replay.get("reason", "")).strip():
         errors.append("multilingual eval not_run status must include a reason")
+    market_cases = spec.get("global_market_cases")
+    if not isinstance(market_cases, list):
+        errors.append("multilingual eval global_market_cases must be a list")
+    else:
+        by_id = {case.get("id"): case for case in market_cases if isinstance(case, dict)}
+        for case_id, locale, market, platforms in EXPECTED_GLOBAL_MARKETS:
+            case = by_id.get(case_id)
+            if case is None:
+                errors.append(f"multilingual eval is missing global market case {case_id}")
+                continue
+            if tuple(case.get(key) for key in ("locale", "target_market", "platforms")) != (locale, market, platforms):
+                errors.append(f"multilingual eval global market case {case_id} has incorrect routing")
+            if case.get("status") != "not_run":
+                errors.append(f"multilingual eval global market case {case_id} must remain not_run")
+            required_layers = set(case.get("required_query_layers", []))
+            if not {"target-market-main-language", "English", "original-artist-title"} <= required_layers:
+                errors.append(f"multilingual eval global market case {case_id} lacks query-language coverage")
     return errors
 
 
@@ -496,6 +636,32 @@ def validate_existing_eval_coverage() -> list[str]:
     return errors
 
 
+def validate_trigger_routing_cases() -> list[str]:
+    """Keep the direct-versus-ambiguous trigger boundary explicit."""
+    expected_routes = {
+        "做个 playlist": "ambiguous_confirmation",
+        "帮我做一张歌单": "ambiguous_confirmation",
+        "/DJ": "ambiguous_confirmation",
+        "DJ": "ambiguous_confirmation",
+        "挖歌": "direct",
+    }
+    try:
+        cases = json.loads(TRIGGER_EVAL_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return [f"trigger routing cases cannot be read: {exc}"]
+    indexed = {
+        case.get("query"): case
+        for case in cases
+        if isinstance(case, dict) and "query" in case
+    } if isinstance(cases, list) else {}
+    errors: list[str] = []
+    for query, route in expected_routes.items():
+        case = indexed.get(query)
+        if case is None or case.get("expected_route") != route:
+            errors.append(f"trigger routing case {query!r} must declare {route}")
+    return errors
+
+
 def main() -> int:
     _, failures = validate_manifest()
     if MANIFEST_PATH.exists():
@@ -516,6 +682,7 @@ def main() -> int:
     failures.extend(validate_action_fixtures())
     failures.extend(validate_multilingual_eval_spec())
     failures.extend(validate_existing_eval_coverage())
+    failures.extend(validate_trigger_routing_cases())
     if failures:
         print("\n".join(failures), file=sys.stderr)
         return 1

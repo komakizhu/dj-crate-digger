@@ -1,0 +1,29 @@
+{
+  "locale": "nl",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Fast-modus",
+    "first_batch_title": "# Eerste Fast-selectie",
+    "final_title": "# Fast-modus",
+    "columns": [
+      "Track",
+      "Artiest",
+      "Link"
+    ],
+    "next_steps": [
+      {
+        "label": "Eerste | Deel selectiefeedback",
+        "body": "Als je wilt, beschrijf in natuurlijke taal hoe de selectie werkte. Dit verbetert je privévoorkeuren en volgende aanbevelingen."
+      },
+      {
+        "label": "Tweede | Playlist exporteren of doorgeven",
+        "body": "Je kunt een tekstplaylist maken of die aan W4DJ doorgeven. Antwoord `output text playlist` of `export to w4dj`."
+      }
+    ],
+    "digging_notes": "Digging-notities",
+    "mix_suggestion": "Mixsuggestie",
+    "unknown": "Onbekend",
+    "verified": "Geverifieerd",
+    "target_platform_missing": "Doelplatform niet beschikbaar"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "locale": "de",
+  "stage": "report_brief",
+  "report": {
+    "title": "# Brief-Modus",
+    "first_batch_title": "# Brief-Modus",
+    "final_title": "# Brief-Modus",
+    "columns": [
+      "Track",
+      "Künstler",
+      "Album / EP",
+      "Stil",
+      "BPM",
+      "Tonart",
+      "Dauer",
+      "Energie",
+      "Veröffentlichung",
+      "Notizen",
+      "Auswahlgrund",
+      "Link"
+    ],
+    "next_steps": [
+      {
+        "label": "Erstens | Auswahl-Feedback teilen",
+        "body": "Wenn du möchtest, beschreibe in natürlicher Sprache, wie die Auswahl funktioniert hat. Das verbessert deine privaten Auswahlpräferenzen und künftige Empfehlungen."
+      },
+      {
+        "label": "Zweitens | Playlist exportieren oder übergeben",
+        "body": "Du kannst eine Text-Playlist ausgeben oder sie an W4DJ übergeben. Antworte mit `output text playlist` oder `export to w4dj`."
+      },
+      {
+        "label": "Drittens | Harmonische Set-Reihenfolge",
+        "body": "Soll ich das Set mit dem Camelot-Rad ordnen?"
+      }
+    ],
+    "digging_notes": "Digging-Notizen",
+    "mix_suggestion": "Mix-Vorschlag",
+    "unknown": "Unbekannt",
+    "verified": "Verifiziert",
+    "target_platform_missing": "Zielplattform nicht verfügbar"
+  }
+}

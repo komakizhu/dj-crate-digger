@@ -1,0 +1,78 @@
+{
+  "locale": "fr",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "Partager un retour",
+      "positive": [
+        "J’aime ce morceau"
+      ],
+      "negative": [
+        "Je n’aime pas ce morceau"
+      ],
+      "ambiguous": [
+        "Je ne suis pas sûr pour ce morceau"
+      ]
+    },
+    "export_w4dj": {
+      "label": "Exporter vers W4DJ",
+      "positive": [
+        "Exporter vers W4DJ"
+      ],
+      "negative": [
+        "Ne pas exporter vers W4DJ"
+      ],
+      "ambiguous": [
+        "Exporter peut-être vers W4DJ"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Produire la playlist texte",
+      "positive": [
+        "Produire la playlist texte"
+      ],
+      "negative": [
+        "Ne pas produire la playlist texte"
+      ],
+      "ambiguous": [
+        "Produire peut-être la playlist texte"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Réordonner harmoniquement",
+      "positive": [
+        "Ordonner avec la roue de Camelot"
+      ],
+      "negative": [
+        "Ne pas réordonner"
+      ],
+      "ambiguous": [
+        "Ordonner peut-être avec la roue de Camelot"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "Confirmer la mémoire longue",
+      "positive": [
+        "Mémoriser cette préférence"
+      ],
+      "negative": [
+        "Ne pas enregistrer cette préférence"
+      ],
+      "ambiguous": [
+        "Mémoriser peut-être cette préférence"
+      ]
+    }
+  },
+  "export": {
+    "text": "Produire une playlist texte copiable dans l’ordre actuel.",
+    "w4dj": "Créer un fichier `.w4dj` UTF-8 à transmettre à W4DJ.",
+    "harmonic": "Demander un ordre selon la roue de Camelot avec les tonalités connues.",
+    "feedback": "Les retours en langage naturel ne mettent à jour que la session ; la conservation longue exige une confirmation.",
+    "memory_confirmation": "J’ai compris ceci comme un bref résumé d’évolution des goûts. L’enregistrer dans le profil privé à long terme ?"
+  },
+  "status": {
+    "unknown": "Inconnu",
+    "verified": "Vérifié",
+    "target_platform_missing": "Plateforme cible indisponible"
+  }
+}

@@ -4,11 +4,8 @@
       "id": "composite-complete",
       "document": {
         "format": "w4dj",
-        "format_version": 2,
         "export_id": "demo-001",
-        "playlist": {
-          "name": "Night Bass Test"
-        },
+        "playlist": {"name": "Night Bass Test"},
         "tracks": [
           {
             "position": 1,
@@ -16,11 +13,7 @@
             "artist_display": "Nikita, the Wicked",
             "netease_track_id": "123456789012345678"
           },
-          {
-            "position": 2,
-            "title": "Qawwali",
-            "artist_display": "Pinch"
-          }
+          {"position": 2, "title": "Qawwali (Extended Mix)", "artist_display": "Pinch"}
         ]
       }
     },
@@ -28,42 +21,20 @@
       "id": "fast-unknown-metadata",
       "document": {
         "format": "w4dj",
-        "format_version": 2,
         "export_id": "fast-001",
-        "playlist": {
-          "name": "Fast Test"
-        },
-        "tracks": [
-          {
-            "position": 1,
-            "title": "Unknown Title (Remix)",
-            "artist_display": "Unknown Artist"
-          }
-        ]
+        "playlist": {"name": "Fast Test"},
+        "tracks": [{"position": 1, "title": "Unknown Title (Remix)", "artist_display": "Unknown Artist"}]
       }
     },
     {
-      "id": "repeated-netease-id",
+      "id": "repeated-identity-is-allowed-by-wire",
       "document": {
         "format": "w4dj",
-        "format_version": 2,
         "export_id": "repeat-001",
-        "playlist": {
-          "name": "Repeated Drop Test"
-        },
+        "playlist": {"name": "Repeated Drop Test"},
         "tracks": [
-          {
-            "position": 1,
-            "title": "First Appearance",
-            "artist_display": "Artist",
-            "netease_track_id": "987654321012345678"
-          },
-          {
-            "position": 2,
-            "title": "Second Appearance",
-            "artist_display": "Artist",
-            "netease_track_id": "987654321012345678"
-          }
+          {"position": 1, "title": "First Appearance", "artist_display": "Artist", "netease_track_id": "987654321012345678"},
+          {"position": 2, "title": "Second Appearance", "artist_display": "Artist", "netease_track_id": "987654321012345678"}
         ]
       }
     }
@@ -71,199 +42,72 @@
   "invalid_documents": [
     {
       "id": "missing-required-format",
-      "document": {
-        "format_version": 2,
-        "export_id": "invalid-001",
-        "playlist": {
-          "name": "Invalid"
-        },
-        "tracks": []
-      }
+      "document": {"export_id": "invalid-001", "playlist": {"name": "Invalid"}, "tracks": []}
     },
     {
-      "id": "legacy-v1-rejected",
-      "document": {
-        "format": "w4dj",
-        "format_version": 1,
-        "export_id": "legacy-001",
-        "created_at": "2026-08-17T12:00:00Z",
-        "playlist": {
-          "name": "Legacy",
-          "output_mode": "fast",
-          "scenario": null,
-          "target_region": null,
-          "platform_priority": []
-        },
-        "tracks": []
-      }
+      "id": "legacy-revision-rejected",
+      "document": {"format": "w4dj", "legacy_revision": 1, "export_id": "legacy-001", "playlist": {"name": "Legacy"}, "tracks": []}
     },
     {
       "id": "local-file-fields-not-allowed",
       "document": {
-        "format": "w4dj",
-        "format_version": 2,
-        "export_id": "invalid-002",
-        "playlist": {
-          "name": "Invalid"
-        },
-        "tracks": [
-          {
-            "position": 1,
-            "title": "Track",
-            "artist_display": "Artist",
-            "local_audio_path": "/Users/example/Music/track.mp3"
-          }
-        ]
+        "format": "w4dj", "export_id": "invalid-002", "playlist": {"name": "Invalid"},
+        "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "local_audio_path": "/Users/example/Music/track.mp3"}]
       }
     },
     {
       "id": "legacy-track-version-field-not-allowed",
       "document": {
-        "format": "w4dj",
-        "format_version": 2,
-        "export_id": "invalid-003",
-        "playlist": {
-          "name": "Invalid"
-        },
-        "tracks": [
-          {
-            "position": 1,
-            "title": "Track (Remix)",
-            "artist_display": "Artist",
-            "version": "Remix"
-          }
-        ]
+        "format": "w4dj", "export_id": "invalid-003", "playlist": {"name": "Invalid"},
+        "tracks": [{"position": 1, "title": "Track (Remix)", "artist_display": "Artist", "version": "Remix"}]
       }
     },
     {
       "id": "numeric-netease-id-not-allowed",
       "document": {
-        "format": "w4dj",
-        "format_version": 2,
-        "export_id": "invalid-004",
-        "playlist": {
-          "name": "Invalid"
-        },
-        "tracks": [
-          {
-            "position": 1,
-            "title": "Track",
-            "artist_display": "Artist",
-            "netease_track_id": 123456789012345678
-          }
-        ]
+        "format": "w4dj", "export_id": "invalid-004", "playlist": {"name": "Invalid"},
+        "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "netease_track_id": 123456789012345678}]
       }
     },
     {
       "id": "null-netease-id-not-allowed",
       "document": {
-        "format": "w4dj",
-        "format_version": 2,
-        "export_id": "invalid-004b",
-        "playlist": {
-          "name": "Invalid"
-        },
-        "tracks": [
-          {
-            "position": 1,
-            "title": "Track",
-            "artist_display": "Artist",
-            "netease_track_id": null
-          }
-        ]
+        "format": "w4dj", "export_id": "invalid-004b", "playlist": {"name": "Invalid"},
+        "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "netease_track_id": null}]
       }
     },
     {
       "id": "placeholder-netease-id-not-allowed",
       "document": {
-        "format": "w4dj",
-        "format_version": 2,
-        "export_id": "invalid-004c",
-        "playlist": {
-          "name": "Invalid"
-        },
-        "tracks": [
-          {
-            "position": 1,
-            "title": "Track",
-            "artist_display": "Artist",
-            "netease_track_id": "unknown"
-          }
-        ]
+        "format": "w4dj", "export_id": "invalid-004c", "playlist": {"name": "Invalid"},
+        "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "netease_track_id": "unknown"}]
       }
     },
     {
       "id": "metadata-fields-not-allowed",
       "document": {
-        "format": "w4dj",
-        "format_version": 2,
-        "export_id": "invalid-005",
-        "playlist": {
-          "name": "Invalid"
-        },
-        "tracks": [
-          {
-            "position": 1,
-            "title": "Track",
-            "artist_display": "Artist",
-            "duration": 200
-          }
-        ]
+        "format": "w4dj", "export_id": "invalid-005", "playlist": {"name": "Invalid"},
+        "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "duration": 200}]
       }
     },
     {
       "id": "duplicate-position-not-allowed",
       "document": {
-        "format": "w4dj",
-        "format_version": 2,
-        "export_id": "invalid-007",
-        "playlist": {
-          "name": "Invalid"
-        },
+        "format": "w4dj", "export_id": "invalid-007", "playlist": {"name": "Invalid"},
         "tracks": [
-          {
-            "position": 1,
-            "title": "First",
-            "artist_display": "Artist"
-          },
-          {
-            "position": 1,
-            "title": "Second",
-            "artist_display": "Artist"
-          }
+          {"position": 1, "title": "First", "artist_display": "Artist"},
+          {"position": 1, "title": "Second", "artist_display": "Artist"}
         ]
       }
     },
     {
       "id": "unsupported-playlist-fields",
-      "document": {
-        "format": "w4dj",
-        "format_version": 2,
-        "export_id": "invalid-006",
-        "playlist": {
-          "name": "Invalid",
-          "output_mode": "rich"
-        },
-        "tracks": []
-      }
+      "document": {"format": "w4dj", "export_id": "invalid-006", "playlist": {"name": "Invalid", "output_mode": "rich"}, "tracks": []}
     }
   ],
   "compatibility_cases": [
-    {
-      "document_id": "composite-complete",
-      "expected_positions": [1, 2],
-      "expected_titles": ["LIKE ME", "Qawwali"],
-      "expected_netease_ids": ["123456789012345678", null]
-    },
-    {
-      "document_id": "fast-unknown-metadata",
-      "expected_positions": [1],
-      "expected_netease_ids": [null]
-    },
-    {
-      "document_id": "repeated-netease-id",
-      "expected_positions": [1, 2],
-      "expected_netease_ids": ["987654321012345678", "987654321012345678"]
-    }
+    {"document_id": "composite-complete", "expected_positions": [1, 2], "expected_titles": ["LIKE ME", "Qawwali (Extended Mix)"], "expected_netease_ids": ["123456789012345678", null]},
+    {"document_id": "fast-unknown-metadata", "expected_positions": [1], "expected_netease_ids": [null]},
+    {"document_id": "repeated-identity-is-allowed-by-wire", "expected_positions": [1, 2], "expected_netease_ids": ["987654321012345678", "987654321012345678"]}
   ]
 }

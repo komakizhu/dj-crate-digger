@@ -323,6 +323,13 @@ This file is the fixed Español UI and intent contract for dj-crate-digger. The 
     "harmonic": "Solicitar orden según la rueda de Camelot usando las tonalidades conocidas.",
     "feedback": "Los comentarios en lenguaje natural actualizan solo la sesión; guardar a largo plazo requiere confirmación.",
     "memory_confirmation": "Entiendo esto como un resumen breve del cambio de gustos. ¿Guardarlo en el perfil privado a largo plazo?"
-  }
+  },
+  "trigger_capsule": [
+    "set de DJ",
+    "playlist",
+    "buscar música",
+    "buscar pistas",
+    "ordenar un set"
+  ]
 }
 ```

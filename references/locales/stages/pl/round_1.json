@@ -1,0 +1,49 @@
+{
+  "locale": "pl",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "Witamy w asystencie wyboru DJ. Ta Agent Skill pomaga przygotować set DJ. W dwóch rundach potwierdzisz potrzeby i otrzymasz propozycje utworów. Zasady wypełniania:",
+    "tutorial_label": "Przewodnik importu Set jednym kliknięciem",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md"
+  },
+  "round": {
+    "title": "[Runda 1: podstawowe informacje]",
+    "rules": [
+      "1. Możesz skopiować przykład, wpisać własną treść albo zostawić pole puste",
+      "2. Puste pole oznacza, że AI inteligentnie oceni odpowiedź"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "Kontekst",
+        "example": "Kontekst występu. Przykłady: `bar` / `klub` / `wesele` / `wystawa sztuki`"
+      },
+      {
+        "key": "target_market",
+        "label": "Docelowy kraj / region",
+        "example": "Przykłady: `Chiny kontynentalne` / `Tajwan` / `Hongkong` / `Japonia` / `międzynarodowy rynek anglojęzyczny`"
+      },
+      {
+        "key": "core_sound",
+        "label": "Główny kierunek brzmienia",
+        "example": "Artysta, utwór i gatunek referencyjny. Przykład: `Tears` od `Skrillex`, nowoczesny `UK Bass`"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "Liczba utworów lub długość seta",
+        "example": "Przykłady: `20 utworów` / `60 minut`"
+      },
+      {
+        "key": "output_mode",
+        "label": "Wersja wyjścia",
+        "example": "Wybór Fast / Brief / Rich"
+      },
+      {
+        "key": "other",
+        "label": "Inne ograniczenia",
+        "example": "Przykłady: `unikaj ogranych utworów`, `bez wokalu`, `tylko Remix`; opcjonalne"
+      }
+    ],
+    "prompt": "Witamy w asystencie wyboru DJ. Ta Agent Skill pomaga przygotować set DJ. W dwóch rundach potwierdzisz potrzeby i otrzymasz propozycje utworów. Zasady wypełniania:\n\n1. Możesz skopiować przykład, wpisać własną treść albo zostawić pole puste\n2. Puste pole oznacza, że AI inteligentnie oceni odpowiedź\n\n[Runda 1: podstawowe informacje]\n\nKontekst:\n“Kontekst występu. Przykłady: `bar` / `klub` / `wesele` / `wystawa sztuki`”\nDocelowy kraj / region:\n“Przykłady: `Chiny kontynentalne` / `Tajwan` / `Hongkong` / `Japonia` / `międzynarodowy rynek anglojęzyczny`”\nGłówny kierunek brzmienia:\n“Artysta, utwór i gatunek referencyjny. Przykład: `Tears` od `Skrillex`, nowoczesny `UK Bass`”\nLiczba utworów lub długość seta:\n“Przykłady: `20 utworów` / `60 minut`”\nWersja wyjścia:\n“`Fast`: szybka playlista; jakość może być niższa”\n“`Brief`: tylko jedna połączona playlista”\n“`Rich`: osobne widoki stylu, kontekstu i odkrywania, a potem końcowa playlista połączona”\nInne ograniczenia:\n“Przykłady: `unikaj ogranych utworów`, `bez wokalu`, `tylko Remix`; opcjonalne”\n\n```markdown\nKontekst:\nDocelowy kraj / region:\nGłówny kierunek brzmienia:\nLiczba utworów lub długość seta:\nWersja wyjścia:\nInne ograniczenia:\n```"
+  }
+}

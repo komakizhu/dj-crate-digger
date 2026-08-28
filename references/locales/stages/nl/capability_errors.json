@@ -1,0 +1,10 @@
+{
+  "locale": "nl",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "Webzoeken is niet beschikbaar, dus ik kan een aanbeveling niet verifiëren.",
+    "open_page": "Toegang tot concrete pagina’s is niet beschikbaar, dus ik kan een aanbeveling niet verifiëren.",
+    "file_write": "Bestanden schrijven is niet beschikbaar, dus ik kan geen `.w4dj`-bestand maken.",
+    "progress": "Automatisch doorgaan is niet beschikbaar; ik kan alleen de geverifieerde eerste batch leveren."
+  }
+}

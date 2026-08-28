@@ -1,1076 +1,186 @@
 {
   "skill_name": "dj-crate-digger",
+  "contract": "universal-agent-skill",
   "evals": [
     {
-      "id": 1,
-      "name": "scene-first-organic-house",
-      "prompt": "/迪歌 下周六海边日落，我想先要温暖、松弛的氛围，再慢慢进入 groove。以 Organic House 和 Deep House 为主，不要太商业。给我做一套 30 首的歌单。",
-      "expected_output": "中文 Markdown Digging 报告；场景在动态综合权重中优先；默认输出综合版、真实直接链接、假设与四段式播放顺序。",
-      "expectations": [
-        "报告语言为中文，官方曲名与艺人名不翻译",
-        "需求卡明确场景优先于风格和流行度",
-        "默认只输出综合版，并分为 Warm Up、Groove、Peak、Closing",
-        "最终曲目使用具体曲目页或具体发行页链接，不使用搜索结果页",
-        "未验证 BPM、调性或音频混音能力时不写成确定事实"
-      ]
+      "id": "01-direct-dj-trigger",
+      "prompt": "为周末地下俱乐部排一套 60 分钟 UK Bass DJ set。",
+      "expected_output": "加载 Skill 后先用当前沟通语言发送第一轮固定 Markdown 问卷。",
+      "expectations": ["触发 DJ 选歌流程", "不先搜索或推荐", "第一轮只有六个字段"]
     },
     {
-      "id": 2,
-      "name": "popularity-first-export-boundary",
-      "prompt": "/迪歌 大家都熟、能马上有反应的歌先考虑，周五晚上小酒吧，House 为主，但别全是最俗的榜单歌。先给报告，然后帮我导出 SoundCloud。",
-      "expected_output": "流行度优先的中文报告；综合版共享候选池；在 SoundCloud 外部写入前显示导出摘要并等待确认。",
-      "expectations": [
-        "动态综合版把流行度意图放在第一优先级",
-        "解释流行度优先仍需兼顾不俗与 House 场景",
-        "先输出报告，不直接声称已创建 SoundCloud 歌单",
-        "区分搜索平台、SoundCloud 导出目标与 prepare/execute 状态",
-        "外部写入前展示平台、版本、数量、缺失曲目并请求确认"
-      ]
+      "id": "02-ambiguous-playlist-trigger",
+      "prompt": "帮我做一个 playlist。",
+      "expected_output": "只询问一次是否需要挖歌或排一个 DJ set；不直接进入推荐。",
+      "expectations": ["不把普通 playlist 当作直接 DJ 触发", "使用当前沟通语言", "肯定后才进入第一轮"]
     },
     {
-      "id": 3,
-      "name": "english-leftfield-techno",
-      "prompt": "Find me a left-field techno set for a tiny basement after 2am. Keep it tense and strange, avoid obvious festival tracks, and give me SoundCloud links where possible. I didn't specify BPM, so use your judgment.",
-      "expected_output": "English report that infers BPM/energy conservatively, prioritizes genre because it is selected as the primary focus, and returns one verified composite playlist view without pretending to have performed audio analysis.",
-      "expectations": [
-        "报告语言为英文，官方曲名与艺人名保持原文",
-        "动态优先顺序为 style → scene → popularity",
-        "BPM/energy 推断被明确标为假设或未知",
-        "包含综合版与四段式播放顺序",
-        "SoundCloud 直接曲目链接优先且不冒充做过 beatmatching 或听音频"
-      ]
+      "id": "03-no-trigger-song-identification",
+      "prompt": "这是什么歌？",
+      "expected_output": "不激活 DJ Crate Digger。",
+      "expectations": ["不发送两轮问卷", "不执行 DJ 搜索流程"]
     },
     {
-      "id": 4,
-      "name": "chinese-dj-culture-and-platform-order",
-      "prompt": "/迪歌 周五午夜 12 点的左场小酒吧，我要把赵小六式喊麦、弹舌、压声和越南鼓当成采样语汇，先从大家熟的土味素材开场，再进入地下、怪一点的中国俱乐部声响。Apple Music 优先，SoundCloud 次之，明确不要 Spotify；不要创建歌单，只给报告，20 首。",
-      "expected_output": "准确理解中文 DJ 术语与文化语境；把赵小六作为声音/文化参考而非只做艺人串烧；Apple Music 在允许平台中排第一，SoundCloud 第二，完全不出现 Spotify；不执行导出。",
-      "expectations": [
-        "需求理解同时保留场景、中文 DJ 术语、声音参考、熟悉度变化和平台约束",
-        "没有把赵小六主题机械扩展成整晚只放该艺人作品",
-        "平台顺序明确为 Apple Music → SoundCloud，Spotify 被列为禁止且不出现在曲目链接中",
-        "动态综合优先级按原始提示词的明确顺序解释，而不是把平台顺序误当内容权重",
-        "export_intent 为 none，不询问登录或声称创建歌单"
-      ]
+      "id": "04-capability-preflight",
+      "prompt": "我想排一个 DJ set，但当前 Agent 不能搜索网页或打开网页。",
+      "expected_output": "在第一轮前说明无法完成逐曲实时核验，不输出伪验证歌单。",
+      "expectations": ["检查 web_search 与 open_page", "不以模型记忆补歌", "不增加无关问卷"]
     },
     {
-      "id": 5,
-      "name": "allowed-platforms-only",
-      "prompt": "/dj-crate-digger 找 15 首适合凌晨地下室的 left-field techno，风格先于场景；只使用 SoundCloud 和 Apple Music，SoundCloud 优先；不要出现任何 Spotify 链接。综合版按紧张、怪异但能推进的顺序排列。",
-      "expected_output": "仅使用允许的平台；SoundCloud 链接优先、Apple Music 作为后备；不把平台偏好改写成风格排序；若平台缺失，明确标记而不是偷偷添加 Spotify。",
-      "expectations": [
-        "报告没有 Spotify URL 或 Spotify 作为来源",
-        "平台约束与平台优先级分开记录，SoundCloud 链接在可用时排在 Apple Music 前",
-        "风格优先的动态顺序仍为 style → scene → popularity",
-        "平台不可用时给出缺失/部分验证说明，不伪造可用性"
-      ]
+      "id": "05-fixed-two-round-intake",
+      "prompt": "请开始 DJ 选歌流程。",
+      "expected_output": "严格发送第一轮，再发送第二轮；第二轮结束后直接进入搜索。",
+      "expectations": ["每轮一个可复制 Markdown 块", "第一轮六字段", "第二轮八字段", "没有第三轮普通需求收集"]
     },
     {
-      "id": 6,
-      "name": "track-by-track-verification",
-      "prompt": "/dj-crate-digger 请联网搜索 12 首适合凌晨公路、氛围第一的电子乐，并逐曲核验。每首都要给具体曲目页或具体发行页直接链接；不要用搜索结果页、下载站或只凭记忆补歌。找不到可靠 BPM、发行时间或流派时写未知，不要猜。输出四个版本，但不要声称听过音频或做过 beatmatching。",
-      "expected_output": "中文联网 Digging 报告；每首最终曲目可追溯到直接来源；未知元数据显式标记；四版本和四段式顺序完整；不越界声称音频分析。",
-      "expectations": [
-        "报告说明使用联网搜索，并对最终曲目逐项提供直接链接",
-        "没有把搜索结果页、下载站或泛化首页当作曲目证据",
-        "不可靠的 BPM/发行时间/流派标为未知或不确定",
-        "每个版本来自同一验证候选池且综合版不重复录音",
-        "不声称听过未分析音频、已 beatmatch 或已 harmonic mix"
-      ]
+      "id": "06-language-market-separation",
+      "prompt": "用英文沟通，为日本市场做一套 set；地区留空时也不要猜具体国家。",
+      "expected_output": "visible language is English; explicit Japan is a session market; blank market is broad and temporary.",
+      "expectations": ["communication_language 与 target_market 分开", "明确地区不改变语言", "市场不进入长期画像"]
     },
     {
-      "id": 7,
-      "name": "four-views-shared-pool",
-      "prompt": "/迪歌 为一个 30 首的 rooftop sunset set 挖歌：从温暖有机开始，进入有 groove 的 House，最后到更深的夜色。请明确从同一个去重候选池输出风格优先版、场景优先版、流行度优先版和动态综合版；三个专项版各 10 首，综合版 30 首，候选不足就诚实少给，不要复制凑数。",
-      "expected_output": "四个视角均明确呈现；用户 prompt 中保留的“流行度优先版”只作为 compatibility / legacy input，实际规范视图名称为“熟悉度与发现感优先版”；专项版各 10 首、综合版 30 首（或透明标注实际数量）；四版共享同一去重且已验证候选池。",
-      "expectations": [
-        "四个视角都存在且标题清晰；prompt 中的“流行度优先版”按 compatibility / legacy input 解析，第三视角的规范命名为熟悉度与发现感优先版",
-        "专项版默认 10 首，综合版目标 30 首，数量不足时不复制曲目",
-        "报告说明四版来自同一候选池，并按整份报告级录音键去重；默认零重复，只有一首满足严格质量条件的曲目可跨两个视角出现",
-        "动态综合版包含 Warm Up、Groove、Peak、Closing"
-      ]
+      "id": "07-platform-exclusive-netease",
+      "prompt": "平台只填写网易云。",
+      "expected_output": "平台策略为 exclusive，只交付逐曲核验的网易云页面。",
+      "expectations": ["不加入 Spotify 或默认平台", "网易云缺失时减少数量", "不以其他平台补位"]
     },
     {
-      "id": 8,
-      "name": "dedupe-title-qualifiers-and-sequence",
-      "prompt": "/迪歌 做一套 16 首的中国地下俱乐部歌单。跨 SoundCloud、Apple Music、Spotify 搜索，但同一录音在多个平台出现时只占一个位置并合并链接；官方曲名中的 Original、Remix、Dub、Live 标题限定要保留在歌名中。综合版必须按 Warm Up → Groove → Peak → Closing 排序，四段之间不得重复同一录音，也不要连续塞同一个艺人。",
-      "expected_output": "展示完整官方歌名与去重规则；综合版按四段组成一条不重复的播放顺序，并在平台间合并同录音链接。",
-      "expectations": [
-        "同一录音的跨平台链接合并而不是重复占位",
-        "完整官方歌名中的 Original/Remix/Dub/Live 限定不被删除或误合并",
-        "综合版四段顺序清楚且四段之间无重复录音",
-        "相邻曲目避免同艺人，必要时说明例外"
-      ]
+      "id": "08-platform-preferred-order",
+      "prompt": "网易云优先，Spotify 备用。",
+      "expected_output": "平台策略为 preferred，只允许按声明顺序使用网易云和 Spotify。",
+      "expectations": ["网易云优先", "Spotify 只在必要时回退", "不加入未声明平台"]
     },
     {
-      "id": 9,
-      "name": "target-platform-missing-fallback",
-      "prompt": "/dj-crate-digger 我只接受 Apple Music 链接。请为一个很小众的中国 left-field club 夜晚找 12 首歌；如果某个候选在 Apple Music 找不到，就把它放到“目标平台缺失”清单，不要用相似曲替代，也不要放 Spotify 或 SoundCloud 代替。不要导出歌单，只给可核验报告。",
-      "expected_output": "严格按 Apple Music 目标平台交付；缺失曲目单独列出；不自动替换、不出现其他平台链接、不执行导出。",
-      "expectations": [
-        "最终可用曲目只提供 Apple Music 直接链接",
-        "找不到 Apple Music 页面时列入缺失清单而不是自动找相似曲",
-        "报告披露候选不足或平台限制，不为了凑数降低验证门槛",
-        "export_intent 为 none，不发起外部写入",
-        "默认只输出综合版；只有用户在互动需求中选择四个版本时才展开专项视角"
-      ]
+      "id": "09-platform-forbidden-hard-filter",
+      "prompt": "不要使用 Spotify，其他平台可以。",
+      "expected_output": "Spotify 从搜索、证据和用户可见链接中硬过滤。",
+      "expectations": ["forbidden 平台不出现在来源汇总", "其他允许平台仍可验证", "不把禁用平台当作候选"]
     },
     {
-      "id": 10,
-      "name": "explicit-priority-over-order",
-      "prompt": "/迪歌 适合下周六海边日落的 Deep House，场景和风格都要顾及，但我明确说：风格优先，场景第二，流行度最后。给我四个版本，综合版 18 首，说明你如何处理这个显式优先级。",
-      "expected_output": "即使场景词先出现，报告也遵循用户明确声明的 style → scene → popularity，并说明显式优先级覆盖文本出现顺序。",
-      "expectations": [
-        "需求卡记录显式优先级为 style → scene → popularity",
-        "综合版不因场景词更早出现而改成 scene-first",
-        "四个版本均有输出，综合版目标为 18 首且不复制凑数",
-        "说明显式优先级覆盖默认的首次出现顺序"
-      ]
+      "id": "10-fast-independent-path",
+      "prompt": "选择极速版，找 15 首 Breakbeat。",
+      "expected_output": "独立 fast 路径，输出严格三列表格并执行单主导向和时间预算。",
+      "expectations": ["表格只有歌名、歌手、链接", "不显示调性或选歌碎碎念", "不借用 Brief/Rich 输出路径"]
     },
     {
-      "id": 11,
-      "name": "balanced-platform-discovery",
-      "prompt": "/dj-crate-digger Apple Music 优先，SoundCloud 次之，不要 Spotify。请为周五午夜的小酒吧找 12 首 left-field house；Apple Music 能找到的优先给 Apple Music 链接，但两个允许平台都要参与发现。",
-      "expected_output": "需求卡将链接优先级与发现策略分开；Apple Music 为主链接、SoundCloud 为回退；两个允许平台均至少完成一轮发现；Spotify 不被搜索、引用或输出。",
-      "expectations": [
-        "discovery_strategy 为 balanced_round_robin 或等价的均衡跨平台发现",
-        "link_priority 为 Apple Music → SoundCloud，且不进入内容排序权重",
-        "候选池不因 Apple Music 先达到局部结果而跳过 SoundCloud",
-        "Spotify 不出现在搜索摘要、曲目链接或来源汇总中"
-      ]
+      "id": "11-fast-continuation",
+      "prompt": "极速版需要 40 首，宿主支持中间消息和持续执行。",
+      "expected_output": "先交付约 15 首首批，再从同一查询结果继续补齐，不重新解释需求。",
+      "expectations": ["首批 10–20 首", "最终最多 50 首", "首批曲目全部保留", "无能力时不声称后台续跑"]
     },
     {
-      "id": 12,
-      "name": "adaptive-search-budget",
-      "prompt": "/迪歌 请联网找 6 首适合凌晨公路、氛围第一的电子乐，逐曲核验直接链接；候选不足就诚实少给，不要用记忆补歌。",
-      "expected_output": "小目标使用自适应候选预算；候选池目标按 min(max(2×6, 6+8), 120) 计算为 14 首左右，而不是固定收集 60–120 首；最终曲目逐曲深度核验。",
-      "expectations": [
-        "报告或内部摘要体现自适应候选池，而不是固定 60–120",
-        "候选阶段可以保留 partial/unknown，但最终曲目必须达到直接链接验证门槛",
-        "同一录音出现在多个版本时只进行一次深度核验",
-        "达到预算或连续低产时停止，并披露实际数量与缺口"
-      ]
+      "id": "12-brief-twelve-columns",
+      "prompt": "选择简要版，做一份带调性的 DJ 歌单。",
+      "expected_output": "一张综合表，严格十二列，BPM 后紧接调性。",
+      "expectations": ["不添加序号、Mix、来源或验证状态列", "逐曲核验", "未知调性显示未知而不换曲"]
     },
     {
-      "id": 13,
-      "name": "evidence-record-and-title-schema",
-      "prompt": "/dj-crate-digger 跨 SoundCloud、Bandcamp 和 Beatport 找一套 12 首地下 House；完整官方歌名带 Original、Dub、Radio Edit、Extended Mix 等限定时必须分别核验，最终每首都要有播放/发行链接和独立核验来源。",
-      "expected_output": "候选记录保留完整官方 title、playback_urls、verification_sources、availability、metadata_evidence 和 dedupe_key；不设置独立 version 字段，播放链接不被元数据来源替代。",
-      "expectations": [
-        "完整官方歌名保留，Dub/Radio Edit/Extended Mix 不被压成没有限定的标题",
-        "playback_urls 与 verification_sources 分开记录",
-        "每个最终曲目都有自己的可追溯来源和平台可用性状态",
-        "ISRC 或规范化录音键用于跨平台去重"
-      ]
+      "id": "13-rich-shared-pool",
+      "prompt": "选择丰富版，分别看看风格、场景和熟悉度/发现感，再给综合版。",
+      "expected_output": "共享一个候选池，输出三个专项视角和一个动态综合视角。",
+      "expectations": ["每个视角严格十二列", "默认不跨视角重复录音", "导出与重排只用动态综合视角"]
     },
     {
-      "id": 14,
-      "name": "interactive-intake-before-search",
-      "prompt": "/迪歌 我想为周五午夜的小酒吧找一套温暖但逐渐变深的 House。",
-      "expected_output": "触发后先展示严格两轮的 Markdown 需求收集；第一轮确认必要信息，第二轮完成需求细化，不立即联网搜索或输出曲目；第二轮答复完成后才进入搜索，不追加第三轮普通确认。",
-      "expectations": [
-        "intake_status 初始为 collecting",
-        "第一轮只询问场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、其他限制",
-        "第二轮一次性询问具体风格、速度/BPM、熟悉度与发现感、时代与经典、情绪、SET 能量级或能量走势、平台与链接要求、其他，不重复询问第一轮已确认的输出版本",
-        "需求收集完成前没有候选曲目、搜索结果或推荐链接",
-        "两轮提问各自使用一个可复制的 markdown 代码块，摘要不构成第三轮普通问题",
-        "第二轮答复后 intake_status 才变为 ready"
-      ]
+      "id": "14-complete-title",
+      "prompt": "请保留官方的 Extended Mix、Live、Dub 等完整限定。",
+      "expected_output": "限定保留在完整 title 中，不增加独立版本字段。",
+      "expectations": ["官方标题原样保留", "不同标题变体不误合并", "平台页面与最终标题逐曲对应"]
     },
     {
-      "id": 15,
-      "name": "interactive-output-mode",
-      "prompt": "/dj-crate-digger 我想找 20 首适合婚礼 afterparty 的电子歌，先从熟悉的歌开始。",
-      "expected_output": "互动需求收集在第一轮提供极速版、简要版和丰富版；极速版映射为独立 fast 三列路径，简要版只输出一张 12 列曲目表，丰富版才输出四个视角并最终给出综合结果。",
-      "expectations": [
-        "output_mode 默认是 composite",
-        "用户在第一轮填写丰富版后才出现风格、场景、熟悉度与发现感和动态综合四个视角；极速版不自动套用 composite 或 four_views",
-        "综合版表头严格为歌名、艺术家、专辑/EP、风格、BPM、调性、歌曲时长、能量级、发行时间、简介、选择原因、链接",
-        "报告不增加序号、Mix、段落或验证状态列"
-      ]
+      "id": "15-recording-deduplication",
+      "prompt": "同一录音在多个平台出现时只要一行，但不同 Remix 要分开。",
+      "expected_output": "按 ISRC 或艺人加完整标题去重，跨平台链接合并到同一记录。",
+      "expectations": ["单表录音零重复", "不同官方变体不误合并", "不靠 URL slug 判断身份"]
     },
     {
-      "id": 16,
-      "name": "interactive-platform-selection",
-      "prompt": "/迪歌 Apple Music 主平台，SoundCloud 备用；给我一套凌晨左场 House，主导向场景，次导向风格。",
-      "expected_output": "互动流程在第二轮通过一个平台与链接要求字段收集 Apple Music 主选、SoundCloud 备用等自然语言约束，并将其写入需求卡；主链接优先，备用链接只在必要时使用。",
-      "expectations": [
-        "平台自然语言被解析为 platform_policy 优先顺序 Apple Music → SoundCloud",
-        "平台选择不进入内容排序权重",
-        "同一录音的多个平台链接合并在同一表格行",
-        "exclusive 选择时不出现其他平台链接"
-      ]
+      "id": "16-key-evidence",
+      "prompt": "简要版中请可靠核验调性；如果来源冲突就显示未知。",
+      "expected_output": "只使用同一完整标题的授权 DJ 商店或官方元数据；冲突不生成 Camelot。",
+      "expectations": ["不使用搜索摘要或模型记忆", "不跨版本借用调性", "非 major/minor 不参加五度圈排序"]
     },
     {
-      "id": 17,
-      "name": "markdown-intake-format",
-      "prompt": "/dj-crate-digger 当前环境没有结构化用户输入工具，请帮我找 10 首适合公路夜听的电子乐。",
-      "expected_output": "无论交互工具是否可用，都输出两轮 Markdown 需求问卷；不声称显示了可点击 checkbox，也不在需求收集完成前搜索。",
-      "expectations": [
-        "intake_mode 为 markdown_fallback，且两轮都是 fenced Markdown 代码块",
-        "问卷包含导向、数量、版本、平台、场景和限制字段",
-        "第一轮和第二轮各自使用可直接复制的 markdown fenced code block，而不是散乱项目符号或普通文本",
-        "BPM、情绪、能量级与走势分别出现，其中能量级与走势合并为一个问题，并包含 BPM 参考提示",
-        "平台问题按固定模板列出网易云、Apple Music、SoundCloud、Bandcamp、Beatport 和 Spotify，并保留全部行内反引号",
-        "用户完成问卷前不建立候选池",
-        "回答后仍使用同一验证、去重、排序和表格输出规则"
-      ]
+      "id": "17-harmonic-positive",
+      "prompt": "简要版完成后，按五度圈原则帮我排顺序。",
+      "expected_output": "只重排简要版综合表，保留曲目集合、标题、链接、去重和艺人比例。",
+      "expectations": ["基础 Camelot 兼容优先", "实验性 ±2 只作兜底并标明", "未知调性曲目保留在末尾"]
     },
     {
-      "id": 18,
-      "name": "two-round-intake-no-empty-prompts",
-      "prompt": "/迪歌 我想为周五午夜小酒吧排一套逐渐升高的 House set。",
-      "expected_output": "严格两轮需求收集：第一轮确认必要信息，第二轮完成需求细化和交付设置；每轮各有一个可复制 Markdown 代码块，不能增加第三轮普通追问。",
-      "expectations": [
-        "第一轮只出现场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、输出版本、其他限制六个字段",
-        "第一轮开头固定为“填写规则为：”；规则只包含“可以从例子中复制，也可以自由填写或不填”和“不填意味着ai智能判断答案”两条",
-        "需求收集只分为两轮，第二轮答复后 intake_status 才变为 ready",
-        "第二轮包含具体风格、速度/BPM、熟悉度与发现感、时代与经典、情绪、SET 能量级或能量走势、平台与链接要求、其他，不重复询问输出版本",
-        "需求收集完成前没有搜索结果、候选曲目或推荐链接"
-      ]
+      "id": "18-harmonic-ambiguous",
+      "prompt": "也许可以按五度圈排一下。",
+      "expected_output": "只追问一句是否确认重排，不立即改变顺序。",
+      "expectations": ["识别为 ambiguous action", "不是第三轮问卷", "确认前不导出新顺序"]
     },
     {
-      "id": 19,
-      "name": "theme-refinement-options-and-separate-dimensions",
-      "prompt": "/dj-crate-digger 我想为周五午夜小酒吧排一套逐渐升高的 House set；20 首，Spotify 或 SoundCloud 均可。",
-      "expected_output": "第一轮确定输出版本，第二轮根据第一轮必要信息完成需求细化，同时一次性收集具体风格、BPM、熟悉度与发现感、时代与经典、平台和其他限制；不再询问主题、副主题、时间、听众或链接策略。",
-      "expectations": [
-        "第二轮字段与用户提供的需求细化模板一致：具体风格、速度/BPM、熟悉度与发现感、时代与经典、情绪、SET 能量级或能量走势、平台与链接要求、其他",
-        "第二轮的示例能覆盖 House、Bass、Garage、Techno、Breakbeat 等风格，105/128/140/150/170 等 BPM，以及热门熟悉/平衡/小众发现和当代为主/少量经典锚点/新旧桥接/经典优先等表达",
-        "极速版映射为 fast 独立三列路径；简要版映射为 composite，丰富版映射为 four_views，并说明最终提供综合结果",
-        "平台与链接要求允许 Spotify、Apple Music、网易云音乐、Bandcamp、SoundCloud、Beatport 等自然语言输入"
-      ]
+      "id": "19-double-drop-gate",
+      "prompt": "给我两个可以 double drop 的组合，但其中一首调性未知。",
+      "expected_output": "不称为 double drop；改为更宽泛的叠歌尝试，并说明需要 DJ 试听。",
+      "expectations": ["调性、基础兼容和 BPM 门槛同时满足才可用 double drop", "不伪造试听或 beatmatch"]
     },
     {
-      "id": 20,
-      "name": "markdown-blocks-are-mandatory",
-      "prompt": "/迪歌 我想为周五午夜小酒吧排一套 House set。",
-      "expected_output": "第一轮和第二轮提问都以可复制的 markdown fenced code block 展示；第一轮是必要信息模板，第二轮是需求细化模板，代码块是权威提问内容，结构化控件不得替代它。",
-      "expectations": [
-        "第一轮只出现一个 markdown 代码块，包含场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、输出版本、其他限制",
-        "第二轮只出现一个 markdown 代码块，包含具体风格、速度/BPM、熟悉度与发现感、时代与经典、情绪、SET 能量级或能量走势、平台与链接要求、其他",
-        "不会把第一轮或第二轮渲染成截图所示的无代码块普通文本",
-        "不会以 request_user_input 的 UI 控件替代可复制 Markdown",
-        "两轮代码块之外不追加第三轮普通需求问题"
-      ]
+      "id": "20-creative-transition-fallback",
+      "prompt": "简要版必须给我一句有创意的接歌建议，但没有可靠波形资料。",
+      "expected_output": "选歌碎碎念中恰好一条可尝试的行动建议，不编造精确结构。",
+      "expectations": ["最多两种核心技巧", "可以使用 EQ、loop、filter、echo、reverb 或飞歌思路", "使用条件语气"]
     },
     {
-      "id": 21,
-      "name": "low-cognitive-load-intake",
-      "prompt": "/dj-crate-digger 我想做一套周五酒吧 House set。",
-      "expected_output": "两轮问卷保持可复制 Markdown；第一轮只收集必要信息，第二轮完成全部需求细化，并通过歌曲数量或 Set 时长建立目标。",
-      "expectations": [
-        "第一轮字段固定为场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、输出版本、其他限制；固定说明只包含复制、自由填写或不填，以及不填意味着ai智能判断答案",
-        "第二轮字段固定为具体风格、速度/BPM、熟悉度与发现感、时代与经典、情绪、SET 能量级或能量走势、平台与链接要求、其他",
-        "不新增主题、副主题、时间、听众、演出时长、主平台/备用平台或链接策略等单独问题",
-        "歌曲数量和 Set 时长都可以直接填写；没有填写时默认 composite 目标 30 首并披露假设，若第一轮选择 fast 则使用 fast 的 15 首默认目标",
-        "两轮都各自只有一个可复制的 Markdown 代码块"
-      ]
+      "id": "21-feedback-session-only",
+      "prompt": "我喜欢 Skream，但这次婚礼不会用；当前会话按这个调整。",
+      "expected_output": "更新当前会话中的 taste 与 wedding utility，不直接写入长期档案。",
+      "expectations": ["自然语言反馈低负担", "个人喜欢与场景会用分离", "长期保存需要摘要确认"]
     },
     {
-      "id": 22,
-      "name": "user-provided-intake-template",
-      "prompt": "/dj-crate-digger 我想做一套艺术展的电子音乐 set。",
-      "expected_output": "严格采用用户确认的两轮 Markdown 模板：第一轮必要信息，第二轮需求细化；每轮只出现一个可复制代码块，字段顺序和名称稳定。",
-      "expectations": [
-        "第一轮代码块字段顺序严格为场景、目标国家 / 地区、核心声音方向、歌曲数量或 Set 时长、输出版本、其他限制",
-        "第二轮代码块字段顺序严格为具体风格、速度 / BPM、熟悉度与发现感、时代与经典、情绪、SET能量级或能量走势、平台与链接要求、其他",
-        "第一轮开头固定为“填写规则为：”，只说明可以从例子中复制、自由填写或不填，以及不填意味着ai智能判断答案；不再出现旧的双击复制、只需两轮或留空说明",
-        "输出版本解释极速版为独立 fast 三列 playlist 路径，简要版为一张综合 playlist，丰富版为多个视角建议并最终输出综合结果",
-        "平台与链接要求是一个自然语言字段，示例覆盖 Spotify、Apple Music、网易云音乐、Bandcamp、SoundCloud 和 Beatport"
-      ]
+      "id": "22-feedback-low-confidence",
+      "prompt": "这几首感觉不太对，也许吧。",
+      "expected_output": "低置信度时默认不更新，保留待后续摘要纠正。",
+      "expectations": ["不强行猜标签", "不把一次模糊反馈泛化成流派偏好"]
     },
     {
-      "id": 23,
-      "name": "post-report-local-export-offer",
-      "prompt": "/dj-crate-digger 为周五酒吧 House set 找 10 首歌；只要简要版。",
-      "expected_output": "先完成并输出选歌建议，再在下一步提示用户反馈、直接回复 `导出txt` 或 `导出到w4dj`，并提供可选五度圈排序邀请；需求收集期间不提前询问，也不在用户确认前生成文件。",
-      "expectations": [
-        "TXT/W4DJ 导出询问出现在完整推荐报告之后",
-        "下一步直接提供 `导出txt` 和 `导出到w4dj` 指令，不展示合并或拒绝导出的选项列表；五度圈邀请保持单句可选动作",
-        "导出询问不被当成第三轮需求收集",
-        "用户确认前 local_export.status 和 w4dj_export.status 不超过 offered，且没有创建文件",
-        "默认导出最终综合版，不把平台歌单写入误当成本地文件导出"
-      ]
+      "id": "23-private-memory-summary",
+      "prompt": "把这一轮反馈整理成摘要，问我是否保存。",
+      "expected_output": "展示一段简短品味变化摘要，统一请求明确确认；拒绝或模糊不保存。",
+      "expectations": ["事件日志与可重建画像双层存储", "不逐曲轰炸确认", "长期记忆权重不超过 10%"]
     },
     {
-      "id": 24,
-      "name": "txt-export-order-and-metadata",
-      "prompt": "/dj-crate-digger 找 3 首有 SoundCloud 直接曲目页的 Deep House，报告完成后导出 TXT。",
-      "expected_output": "用户确认后生成 UTF-8 TXT 文件；每行一首，保持报告推荐顺序、包含官方限定的完整曲名，并附艺人与首选可用直链。",
-      "expectations": [
-        "TXT 只包含最终报告中的已验证、可追溯曲目",
-        "同一录音跨平台只写一次，顺序与报告一致",
-        "每行包含 Artist、完整官方 Track Title（限定词已在标题内）和直接曲目或发行链接",
-        "没有直接链接的曲目不写入，并在导出结果中列出跳过原因",
-        "文件使用 UTF-8 并返回可点击的本地文件链接"
-      ]
+      "id": "24-report-actions-after-only",
+      "prompt": "用户刚回答第一轮，要求马上导出或按五度圈排列。",
+      "expected_output": "拒绝提前执行，完成两轮和完整报告后才显示可选后续动作。",
+      "expectations": ["导出与重排不是需求收集字段", "不提前创建文件", "不增加第三轮"]
     },
     {
-      "id": 26,
-      "name": "language-independent-explicit-uk-market",
-      "prompt": "/迪歌 我用中文沟通，这次要为英国市场准备一套 12 首 UK garage / House set。地区请按英国处理，报告也请用中文。",
-      "expected_output": "报告标题、需求摘要、状态和解释保持中文；目标市场明确采用英国，市场来源标记为 user_provided；沟通语言与目标市场彼此独立。",
-      "expectations": [
-        "communication_language 解析为中文，报告的自然语言部分保持中文",
-        "target_market 采用英国，且 target_market_source 为 user_provided",
-        "明确填写的英国市场覆盖语言推断，但不把英国改写成沟通语言或长期偏好",
-        "需求卡和报告披露本轮市场，未声明创建跨会话市场记忆"
-      ]
+      "id": "25-text-playlist-chat-only",
+      "prompt": "报告完成后输出文字版歌单。",
+      "expected_output": "在聊天中返回当前最终顺序的可复制文本，不创建文本文件。",
+      "expectations": ["不重新搜索", "保留完整标题和顺序", "不声称一键写入 DJ 软件"]
     },
     {
-      "id": 27,
-      "name": "language-independent-explicit-japan-market",
-      "prompt": "/dj-crate-digger I communicate in English and need a 12-track House set for the Japanese market. Keep the report in English.",
-      "expected_output": "报告标题、需求摘要、状态和解释保持英文；目标市场明确采用日本，市场来源标记为 user_provided；沟通语言与目标市场彼此独立。",
-      "expectations": [
-        "communication_language 解析为英文，报告的自然语言部分保持英文",
-        "target_market 采用日本，且 target_market_source 为 user_provided",
-        "明确填写的日本市场覆盖语言推断，但不把日本改写成沟通语言或长期偏好",
-        "需求卡和报告披露本轮市场，未声明创建跨会话市场记忆"
-      ]
+      "id": "26-w4dj-file-contract",
+      "prompt": "报告完成后导出到w4dj。",
+      "expected_output": "有文件写入能力时创建 UTF-8 `.w4dj`，根字段和曲目字段严格符合当前合同。",
+      "expectations": ["根字段只有 format、export_id、playlist、tracks", "playlist 只有 name", "tracks 只有 position、title、artist_display 和可选字符串 netease_track_id", "不写本地音频、路径或内部元数据"]
     },
     {
-      "id": 28,
-      "name": "simplified-chinese-language-market-inference",
-      "prompt": "/dj-crate-digger 请用简体中文帮我找一套适合深夜酒吧的 House set；目标国家 / 地区留空。",
-      "expected_output": "报告保持简体中文；地区留空时本轮只采用宽泛的中文市场，target_market_source 为 language_inferred；不指定具体国家且该推断不持久化。",
-      "expectations": [
-        "communication_language 解析为简体中文，报告自然语言保持中文",
-        "target_market 临时采用宽泛的中文市场，且来源明确为 language_inferred",
-        "推断只服务本轮语境、来源选择和平台判断，不指定具体国家，也不被呈现为用户明确填写",
-        "persist_target_market 为 false，且不创建跨会话市场偏好"
-      ]
+      "id": "27-w4dj-no-file-capability",
+      "prompt": "报告完成后导出到w4dj，但宿主不能写文件。",
+      "expected_output": "拒绝声称已生成文件，说明需要文件写入能力。",
+      "expectations": ["不返回伪造文件路径", "不以聊天 JSON 冒充文件", "不触发下载或本地音频处理"]
     },
     {
-      "id": 29,
-      "name": "traditional-chinese-market-uncertainty",
-      "prompt": "/dj-crate-digger 請用繁體中文幫我找一套適合深夜酒吧的 House set；地區留白，沒有其他地區用詞。",
-      "expected_output": "报告保持繁体中文；没有足够地区词时保留宽泛的繁体中文市场或未知市场，不武断指定香港或台湾，也不把不确定性写入长期记忆。",
-      "expectations": [
-        "communication_language 解析为繁体中文，报告自然语言保持繁体中文",
-        "target_market 不武断填写香港或台湾；市场可保持宽泛繁体中文市场或 unknown",
-        "target_market_source 如为 language_inferred，必须说明这是低置信度的本轮假设而非确定地区",
-        "不因繁体字自动创建香港或台湾的持久化市场偏好"
-      ]
+      "id": "28-w4dj-unknown-legacy-fields",
+      "prompt": "用户提供一个含未知旧字段的 w4dj 文件，要求直接导入。",
+      "expected_output": "拒绝未知旧合同，不读取旧字段，不自动迁移；请用户从当前 Skill 重新导出。",
+      "expectations": ["当前格式不接受未知字段", "不从旧字段重建文件", "不声称兼容"]
     },
     {
-      "id": 30,
-      "name": "generic-english-market-uncertainty",
-      "prompt": "/dj-crate-digger Please find a late-night House set in English; leave the target country / region blank.",
-      "expected_output": "报告保持英文；一般英文且地区留空时使用宽泛的“英语国际市场”，不武断指定美国或英国，也不持久化该市场。",
-      "expectations": [
-        "communication_language 解析为英文，报告自然语言保持英文",
-        "target_market 使用英语国际市场这一宽泛市场，而不是美国或英国",
-        "市场来源或摘要明确表达地区不确定性，不把普通英文当作单一国家证据",
-        "persist_target_market 为 false，且不创建美国或英国的跨会话偏好"
-      ]
+      "id": "29-all-locale-structure",
+      "prompt": "用 26 种支持语言分别运行两轮 DJ 选歌流程。",
+      "expected_output": "每种语言从固定语言包读取问卷、报告、动作、平台和状态文本。",
+      "expectations": ["manifest 包含 26 个语言包", "不临场整套翻译", "固定结构一致"]
     },
     {
-      "id": 31,
-      "name": "separate-familiarity-and-era-intent",
-      "prompt": "/迪歌 第一轮完成后，第二轮请分别设置：熟悉度与发现感选平衡；时代与经典选少量经典锚点。",
-      "expected_output": "第二轮同时收集两个独立字段；熟悉度与发现感写入 familiarity_intent，时代与经典写入 era_classic_intent；少量经典锚点只影响本轮候选覆盖和搜索约束，不生成固定最终比例或配额。",
-      "expectations": [
-        "第二轮分别出现熟悉度与发现感、时代与经典，不能合并为单一流行度字段",
-        "平衡映射为 familiarity_intent，少量经典锚点映射为 era_classic_intent",
-        "少量经典锚点可影响查询拆分或候选覆盖，但最终仍使用现有验证、去重和排序规则",
-        "报告不承诺固定经典曲目数量、比例、独立经典视图或经典关系图"
-      ]
-    },
-    {
-      "id": 32,
-      "name": "phase-a-closeout-memory-and-feedback",
-      "prompt": "/dj-crate-digger 完成这次歌单报告后，请展示 Phase A 的收尾状态。",
-      "expected_output": "完整报告后显示“下一步”区域，包含可选自然语言反馈邀请、导出指令和普通模式的五度圈邀请；长期记忆、本轮反馈、长期画像、缺失信息与来源状态保留在后台，不直接展示。",
-      "expectations": [
-        "收尾标题使用下一步，不使用可选后续",
-        "提供自然语言的可选反馈邀请，而不是强制填写或新增一轮普通需求问卷",
-        "不直接显示长期记忆、本轮反馈、长期画像、缺失信息或来源栏目",
-        "不出现长期摘要确认、已启用记忆、等待确认项目或反馈已跨会话保存等 Phase B 能力"
-      ]
-    },
-    {
-      "id": 33,
-      "name": "phase-a-regression-output-and-closeout",
-      "prompt": "/dj-crate-digger 做一套丰富版 House set；完成两轮问卷和报告后，再选择导出并提供可选反馈。",
-      "expected_output": "Phase A 回归行为保持成立：丰富版仍输出四个视角，简要/丰富版主表为 12 列；报告后的“下一步”提供自然语言反馈、导出指令和可选五度圈邀请，不构成第三轮需求收集。",
-      "expectations": [
-        "丰富版恰好输出风格、场景、熟悉度与发现感、动态综合四个视角，共享同一已验证去重候选池",
-        "综合主表仍严格保持歌名、艺术家、专辑/EP、风格、BPM、调性、歌曲时长、能量级、发行时间、简介、选择原因、链接 12 列",
-        "TXT/W4DJ 导出指令在完整报告之后出现，不能插入第一轮或第二轮问卷",
-        "自然语言反馈邀请在完整报告后的下一步区域出现，导出与反馈均不被计为第三轮需求收集",
-        "默认报告不出现独立的缺失与不确定信息、来源或导出栏目",
-        "不输出 Phase C 的 DJ 品味优先视图、不启用长期记忆，也不要求外部平台适配器"
-      ]
-    },
-    {
-      "id": 34,
-      "name": "rich-view-global-recording-dedup",
-      "prompt": "/dj-crate-digger 以 Nikita, the Wicked 为参考艺人做一套丰富版 UK Bass 歌单。LIKE ME 在多个视角得分都很高。",
-      "expected_output": "丰富版默认在整份报告范围内按录音键去重；只有一首证据充分的高质量核心曲可以跨两个视角出现，整份报告最多只有这一首重复曲，且任何曲目最多出现两次。参考艺人和参考曲目不获得额外重复名额。",
-      "expectations": [
-        "先按 ISRC 或规范化艺人、完整官方曲名生成 dedupe_key，再按整份丰富版而非单个视角统计出现次数",
-        "默认优先选择未出现过的录音；整份丰富版最多允许一个 dedupe_key 重复",
-        "获准重复的曲目必须已验证且完整官方歌名明确，在至少两个视角进入前 3 名且距最高分不超过 10 分，拥有独立质量信号，并在第二个视角比最佳未使用替代曲至少高 10 分",
-        "Nikita, the Wicked 或用户提供的其他参考艺人、参考曲目不享受重复豁免，同一录音仍最多出现两次",
-        "候选不足时减少实际曲目数并披露，不得用重复曲目补足每个视角"
-      ]
-    },
-    {
-      "id": 35,
-      "name": "fast-mode-default-count",
-      "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，不填写歌曲数量。",
-      "expected_output": "极速版将未填写数量解析为内部目标 15 首，允许最终交付 10–20 首，首批即最终。",
-      "expectations": [
-        "解析输出模式前保留 track_count 为 null 或 unset，而不是预设 30",
-        "第一轮确认 fast 后才应用默认 15 首",
-        "最终标题和表格为极速版最终三列结构，并显示固定下一步",
-        "不将未填数量沿用为 composite 的默认 30 首",
-        "单次最终上限为 50 首；超过上限时按 50 首执行并在标题标明"
-      ]
-    },
-    {
-      "id": 36,
-      "name": "fast-mode-short-request",
-      "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，请给我 12 首 UK Bass。",
-      "expected_output": "12 首请求的首批目标等于 12，直接以最终极速版交付。",
-      "expectations": [
-        "第一轮的极速版映射为 output_mode: fast，不复用 composite 或 four_views",
-        "first_batch_target 等于 12，首批即最终",
-        "不发送首批续跑状态，也不声明后台继续",
-        "每行只含官方歌名、官方艺人和一条已验证直接页"
-      ]
-    },
-    {
-      "id": 37,
-      "name": "fast-mode-segmented-supported-host",
-      "prompt": "/dj-crate-digger 在支持中间消息的 Codex 宿主中，完成两轮问卷后选择极速版，请给我 35 首 Dubstep。",
-      "expected_output": "先交付目标为 15 首的极速版首批，再继续补齐至最终目标。",
-      "expectations": [
-        "首批目标为 15 首，因时限可在 10–20 首之间截断",
-        "首批标题为 # 极速版首批（X/N），表后固定写 已完成第一批，正在继续补齐。",
-        "续跑使用同一精确/回退查询的后续结果，不新增第三查询或切换主导向",
-        "最终保留首批全部曲目但允许重新排序，且只有最终显示下一步"
-      ]
-    },
-    {
-      "id": 38,
-      "name": "fast-mode-fifty-cap",
-      "prompt": "/dj-crate-digger 在支持中间消息的宿主中，完成两轮问卷后选择极速版，请给我 70 首 Techno。",
-      "expected_output": "请求按 final_target 50 执行，首批后继续，中文最终标题明确单次上限 50 首。",
-      "expectations": [
-        "final_target 等于 min(user_target, 50)",
-        "中文最终标题为 # 极速版（X/50；单次上限 50 首）",
-        "不通过未验证曲目或重复曲目补足 50 首"
-      ]
-    },
-    {
-      "id": 39,
-      "name": "fast-mode-no-intermediate-host",
-      "prompt": "/dj-crate-digger 在不支持中间消息的宿主中，完成两轮问卷后选择极速版，请给我 30 首 House。",
-      "expected_output": "只交付首批，仍使用极速版首批标题，并明确当前宿主无法自动续跑。",
-      "expectations": [
-        "表后固定写 当前宿主无法自动续跑；如需补齐，请继续此任务。",
-        "不声称正在后台继续或已经补齐最终数量",
-        "用户明确当前首批后才可导出当前结果"
-      ]
-    },
-    {
-      "id": 40,
-      "name": "fast-mode-single-channel-budget",
-      "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，以 Burial 的 Archangel 为参考曲目，风格 UK Garage，140 BPM。",
-      "expected_output": "极速版只走 anchor_style，BPM 作为风格限定，最多一个精确查询和一个放宽一级回退查询，并遵循首批主动计算预算。",
-      "expectations": [
-        "不切换到 scene_context 或 familiarity_era",
-        "fast_pool_goal 为 min(max(2 × first_batch_target, first_batch_target + 5), 40)，每批并行核验 5 首",
-        "轻量评分只定义一次并使用 60% 主导向、25% 其它约束、15% 多样性",
-        "50 秒后停止扩池；网络等待不计入 5+20+20+10+5 秒主动计算预算"
-      ]
-    },
-    {
-      "id": 41,
-      "name": "fast-mode-preferred-platform-fallback",
-      "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，请给我 15 首 Deep House，Apple Music 优先，SoundCloud 回退。",
-      "expected_output": "每首优先交付 Apple Music 直接页，仅首选不可用时回退到 SoundCloud。",
-      "expectations": [
-        "最终链接不是搜索结果页、平台首页或模型记忆",
-        "每个链接格只含一条直接曲目或发行页",
-        "完整官方歌名（包括标题内的 Remix/Edit 等限定）和官方艺人均逐曲核验"
-      ]
-    },
-    {
-      "id": 42,
-      "name": "fast-mode-exclusive-platform",
-      "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，请给我 15 首 Techno，只接受 Apple Music。",
-      "expected_output": "exclusive 模式只交付 Apple Music 已验证直接页，不能跨到任何回退平台。",
-      "expectations": [
-        "Apple Music 缺失的候选不进入最终表",
-        "平台限制、完整官方歌名要求和禁用平台是评分前硬过滤",
-        "候选不足时少给，不自动找相似替代"
-      ]
-    },
-    {
-      "id": 43,
-      "name": "fast-mode-candidate-shortage",
-      "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，请给我 20 首只在 Bandcamp 可验证的极小众子流派曲目。",
-      "expected_output": "候选不足时只交付已核验录音，不用重复、错误完整官方歌名或未核验曲目补数。",
-      "expectations": [
-        "极速版单表按 dedupe_key 零重复",
-        "fast 艺人上限按 actual_target 计算，artist_cap=max(1,floor(0.15×actual_target))，艺人专题才豁免",
-        "内部记录停止原因和平台限制"
-      ]
-    },
-    {
-      "id": 44,
-      "name": "fast-mode-zero-results",
-      "prompt": "/dj-crate-digger 完成两轮问卷后选择极速版，请找 10 首只接受 Apple Music、由虚构艺人 No Such Artist 404 发布的曲目；如果没有逐曲页面就交付零条，不要澄清、换艺人或换平台。",
-      "expected_output": "零有效结果时交付零条或明确无法交付，不用模型记忆补歌。",
-      "expectations": [
-        "不使用搜索结果页、平台首页或猜测链接",
-        "不输出 composite 或 four_views 的 12 列报告",
-        "内部保留查询、验证、去重、平台降级、计时和停止原因"
-      ]
-    },
-    {
-      "id": 45,
-      "name": "fast-mode-continuation-incremental-merge",
-      "prompt": "/dj-crate-digger 在支持中间消息的宿主中，完成两轮问卷后选择极速版，请给我 40 首 Garage。",
-      "expected_output": "续跑只读取首批同一精确/回退查询的后续结果或更多返回项，按同一评分函数增量合并。",
-      "expectations": [
-        "final_target 为 40，continuation_pool_goal 为 min(max(2 × final_target, final_target + 10), 100)",
-        "续跑不得新增第三查询、切换主导向、重新解释需求或切换权重",
-        "每 5 首批次继续，直到目标、候选池、同一两查询耗尽、连续两批无新增可交付录音或平台不可继续"
-      ]
-    },
-    {
-      "id": 46,
-      "name": "fast-mode-output-template-and-reorder",
-      "prompt": "/dj-crate-digger 在支持中间消息的 Codex 宿主中，完成两轮问卷后选择极速版，请给我 30 首 Breakbeat。",
-      "expected_output": "首批和最终都严格三列；最终保留首批曲目但可重排，极速版不展示摘要、12 列表或选歌碎碎念。",
-      "expectations": [
-        "中文首批使用 # 极速版首批（X/N）及固定续跑句",
-        "中文最终使用 # 极速版（X/N），并且只有最终显示下一步",
-        "简要版、丰富版、两轮 Markdown 问卷、TXT/W4DJ 导出和安全边界保持不变"
-      ]
-    },
-    {
-      "id": 47,
-      "name": "fast-mode-english-fifty-cap",
-      "prompt": "/dj-crate-digger After completing both rounds, choose Fast Mode and find 70 Techno tracks in English on a host that supports intermediate messages.",
-      "expected_output": "The request is capped at 50 tracks and the final English title states the single-request limit.",
-      "expectations": [
-        "final_target equals min(user_target, 50)",
-        "The final title is # Fast Mode (X/50; single-request limit: 50 tracks)",
-        "The output does not use unverified or duplicate tracks to fill the cap"
-      ]
-    },
-    {
-      "id": 48,
-      "name": "fast-mode-english-output-template-and-reorder",
-      "prompt": "/dj-crate-digger In English, after completing both rounds choose Fast Mode on a host that supports intermediate messages and find 30 Breakbeat tracks.",
-      "expected_output": "The first batch and final output use exactly three columns; the final output retains all first-batch tracks and may reorder them.",
-      "expectations": [
-        "The first batch uses # Fast Mode First Batch (X/N) and First batch complete. Continuing to fill the playlist.",
-        "The final output uses # Fast Mode (X/N) and shows Next steps only in the final output",
-        "The output omits the requirements summary, 12-column table, and Digging notes while preserving export and safety rules"
-      ]
-    },
-    {
-      "id": 49,
-      "name": "agent-skills-standard-entrypoint",
-      "prompt": "Load this skill from a generic Agent Skills-compatible client without Codex-specific UI metadata or slash-command support, then handle a natural-language request for a DJ set.",
-      "expected_output": "The client can use SKILL.md as the canonical entrypoint, resolve its relative references, and operate without agents/openai.yaml.",
-      "expectations": [
-        "The skill's required entrypoint is SKILL.md with valid name and description frontmatter",
-        "Relative references resolve from the skill root and do not depend on an absolute Codex path",
-        "The core workflow does not require agents/openai.yaml, a Codex command, or a Codex-only tool name"
-      ]
-    },
-    {
-      "id": 50,
-      "name": "natural-language-trigger-without-codex-command",
-      "prompt": "I am DJing a small basement club after midnight. Find 12 left-field techno tracks, verify each direct link, and arrange them as a set.",
-      "expected_output": "The DJ crate-digging workflow activates from natural-language music-curation context, even when no slash command or Codex skill invocation is present.",
-      "expectations": [
-        "The request is treated as DJ curation rather than ordinary song identification or generic playlist generation",
-        "The agent starts the existing two-round Markdown intake before searching",
-        "No Codex-specific command is required in the user's request"
-      ]
-    },
-    {
-      "id": 51,
-      "name": "agent-without-web-capability",
-      "prompt": "Use the DJ crate-digging skill, but this client has no web_search or open_page capability. The user asks for 12 verified current track links.",
-      "expected_output": "The agent does not fabricate a verified playlist; it explains that current verification is unavailable and may provide only the intake or search plan.",
-      "expectations": [
-        "The agent does not use model memory as existence, version, or direct-link evidence",
-        "The agent does not claim that individual tracks were opened or verified",
-        "The response states the missing capability and does not silently lower the verification threshold"
-      ]
-    },
-    {
-      "id": 52,
-      "name": "agent-without-file-write-capability",
-      "prompt": "The recommendation is complete. The user replies export txt, but this client cannot write files.",
-      "expected_output": "The agent does not claim that a local TXT file was generated; it explains the missing file-write capability and can provide safe text content when appropriate.",
-      "expectations": [
-        "The agent distinguishes preparing TXT content from writing a local file",
-        "The agent does not return a fabricated local path or download link",
-        "Track validation, platform restrictions, and export safety rules remain in force"
-      ]
-    },
-    {
-      "id": 53,
-      "name": "agent-without-streaming-background-capability",
-      "prompt": "The user requests 35 tracks in Fast Mode, but this client cannot send intermediate messages or continue a task in the background.",
-      "expected_output": "The agent delivers only the verified first batch and uses the existing no-automatic-continuation status; it does not claim that continuation is running.",
-      "expectations": [
-        "The first batch remains a strict three-column table",
-        "The response explicitly states that the current host cannot continue automatically",
-        "The agent does not fabricate remaining tracks, unverified links, or background progress"
-      ]
-    },
-    {
-      "id": 54,
-      "name": "codex-adapter-is-optional",
-      "prompt": "A Codex client loads the optional agents/openai.yaml adapter while a generic Agent Skills client ignores that directory. Both clients receive the same natural-language DJ set request.",
-      "expected_output": "Both clients follow the same core workflow and output rules; the Codex adapter only adds UI/invocation metadata and does not contain unique recommendation logic.",
-      "expectations": [
-        "The canonical behavior is defined in SKILL.md and references rather than agents/openai.yaml",
-        "Codex-specific invocation metadata is treated as optional compatibility support",
-        "Both clients preserve the two-round intake, verification, deduplication, output contracts, and safety boundaries"
-      ]
-    },
-    {
-      "id": 55,
-      "name": "key-verification-and-twelve-column-contract",
-      "prompt": "/dj-crate-digger 为 20 首 UK Bass 输出简要版，并要求每首附带调性。调性必须从可靠来源核验，找不到就写未知。",
-      "expected_output": "简要版使用 12 列表格，在 BPM 后显示标准调名 / Camelot；调性只来自与完整官方歌名对应的可靠 DJ 商店或官方元数据，无法核验时为未知。",
-      "expectations": [
-        "表头严格为歌名、艺术家、专辑/EP、风格、BPM、调性、歌曲时长、能量级、发行时间、简介、选择原因、链接",
-        "调性示例使用 A minor / 8A，不把 Camelot 当作来源原文",
-        "Beatport、Beatsource 或同等级官方元数据可作为调性证据",
-        "调性缺失、冲突、完整歌名不匹配或非 major/minor 时显示未知，不用模型记忆或单一分析站补齐",
-        "极速版三列表契约不因本请求改变"
-      ]
-    },
-    {
-      "id": 56,
-      "name": "harmonic-ordering-opt-in-composite",
-      "prompt": "/dj-crate-digger 完成简要版后，用户回复“可以，按五度圈帮我排 set”。",
-      "expected_output": "只对简要版综合表执行后置五度圈重排，输出连续 12 列表和最多 5 组 double drop 候选。",
-      "expectations": [
-        "明确肯定意图触发重排，不增加第三轮问卷",
-        "五度圈全局优先于原 Warm Up、Groove、Peak、Closing 段落",
-        "基础兼容优先：同码、同字母 ±1、同编号 A/B；同字母 ±2 只作实验性兜底",
-        "重排不改变曲目集合、完整官方歌名、dedupe_key、艺人比例或平台链接",
-        "TXT/W4DJ 后续使用重排后的最终顺序"
-      ]
-    },
-    {
-      "id": 57,
-      "name": "harmonic-ordering-rich-dynamic-only",
-      "prompt": "/dj-crate-digger 输出丰富版；报告完成后用户回复“需要，请按五度圈排列”。",
-      "expected_output": "只重排丰富版动态综合视角；风格、场景、熟悉度与发现感三个专项视角保持原样。",
-      "expectations": [
-        "丰富版重排只作用于动态综合版",
-        "重排后的动态综合版是一张连续 12 列表，不强行套用四段标题",
-        "专项视角仍保留原有排名和报告级去重结果",
-        "最多输出 5 组相邻 double drop 候选，并声明需要 DJ 试听"
-      ]
-    },
-    {
-      "id": 58,
-      "name": "harmonic-unknown-and-conflict-keep-tracks",
-      "prompt": "/dj-crate-digger 简要版中有些曲目调性未知或两个可靠来源冲突，用户随后要求按五度圈排列。",
-      "expected_output": "已知调性曲目先按五度圈排序；未知、冲突或非 major/minor 曲目全部保留并置于末尾待试听定位组。",
-      "expectations": [
-        "未知调性曲目不被删除、不猜测、不借用其他完整官方歌名的调性",
-        "来源冲突记录为 conflict，Camelot 为空，表格显示未知",
-        "待试听定位组不声称与前后曲目调性兼容",
-        "重排前后曲目数量、完整官方歌名和链接完全一致"
-      ]
-    },
-    {
-      "id": 59,
-      "name": "double-drop-bpm-and-camelot-boundary",
-      "prompt": "/dj-crate-digger 用户确认五度圈排序，并要求指出可以尝试的 double drop。歌单包含 70/140、87/174、128/131、128/132 BPM 组合。",
-      "expected_output": "最多列出 5 组 double drop 候选；候选必须基础 Camelot 兼容且半拍/双拍归一化 BPM 差不超过 3%。",
-      "expectations": [
-        "70/140 和 87/174 可按半拍/双拍归一化进入 BPM 候选范围",
-        "128/131 在 3% 以内，128/132 超过 3% 不作为 BPM 合格候选",
-        "实验性 ±2 不进入 double drop 候选",
-        "结果称为候选并提醒试听乐句、鼓组、主旋律和叠放效果",
-        "不声称已经试听、beatmatch 或验证可直接双押"
-      ]
-    },
-    {
-      "id": 60,
-      "name": "fast-mode-harmonic-boundary",
-      "prompt": "/dj-crate-digger 选择极速版，要求 15 首，并在最终报告后询问是否按五度圈排序。",
-      "expected_output": "极速版仍为严格三列，不追查或展示调性，也不显示五度圈邀请。",
-      "expectations": [
-        "极速版保留原三列表格、单通道召回、验证门槛和时间预算",
-        "极速版最终下一步包含自然语言反馈、TXT/W4DJ 导出指令，但不包含五度圈邀请",
-        "不自动进入调性补查或后置 harmonic reorder"
-      ]
-    },
-    {
-      "id": 61,
-      "name": "key-title-mismatch-and-enharmonic-normalization",
-      "prompt": "/dj-crate-digger 对同一作品的完整官方歌名与带 Remix 限定的完整歌名分别核验调性；一个来源写 G♭ Major，另一个来源写 F# Major。",
-      "expected_output": "等音异名可规范为同一调性；两个完整官方歌名分别核验，不能互借调性。",
-      "expectations": [
-        "G♭ Major 与 F# Major 可规范到同一 Camelot 结果",
-        "完整官方歌名中的 Original、Remix、Dub、Edit 限定必须分别匹配调性证据",
-        "完整歌名错配时调性为未知，不用另一个完整歌名的调性补齐",
-        "非 major/minor 调式保留来源原值但不生成 Camelot"
-      ]
-    },
-    {
-      "id": 62,
-      "name": "harmonic-export-order",
-      "prompt": "/dj-crate-digger 简要版完成后，用户确认按五度圈排列，再回复导出txt。",
-      "expected_output": "TXT 按五度圈重排后的综合顺序导出，不重新搜索、不恢复原顺序。",
-      "expectations": [
-        "导出使用已重排的最终综合表",
-        "曲目、完整官方歌名、dedupe_key 和直接链接保持与重排结果一致",
-        "导出安全边界、UTF-8、逐曲链接和无链接跳过规则保持不变"
-      ]
-    },
-    {
-      "id": 63,
-      "name": "transition-advice-composite-single-line",
-      "prompt": "/dj-crate-digger 为周末俱乐部做一份简要版歌单；报告中请给一些接歌建议。",
-      "expected_output": "简要版选歌碎碎念中恰好增加一条可尝试的接歌建议，可自由选择具体曲目组合或整套 set 技巧。",
-      "expectations": [
-        "接歌建议位于选歌碎碎念模块，使用单个 `- 接歌建议：` 条目",
-        "建议至少包含一个可执行动作，并可给出小节数、EQ、loop 或效果器参数",
-        "建议使用创意假设语气，不把未试听内容写成事实"
-      ]
-    },
-    {
-      "id": 64,
-      "name": "transition-advice-rich-dynamic-source",
-      "prompt": "/dj-crate-digger 输出丰富版 House set，并在选歌碎碎念中给接歌建议。",
-      "expected_output": "丰富版只从动态综合版中选择接歌建议素材；三个专项视角不单独生成或追加接歌建议。",
-      "expectations": [
-        "整份丰富版只出现一条接歌建议",
-        "建议引用的曲目都属于动态综合版最终集合",
-        "内部 `transition_advice.source_view` 明确记录为 `dynamic_composite`，不能从专项视角生成后只借用动态综合版曲名",
-        "不因四个视角而输出四条或逐视角重复建议"
-      ]
-    },
-    {
-      "id": 65,
-      "name": "transition-advice-fast-exclusion",
-      "prompt": "/dj-crate-digger 选择极速版，为今晚找 15 首 Breakbeat，并要求给接歌建议。",
-      "expected_output": "极速版仍严格三列，不输出选歌碎碎念或接歌建议。",
-      "expectations": [
-        "极速版首批和最终表都只包含歌名、歌手、链接三列",
-        "极速版不显示 `选歌碎碎念`、`接歌建议`、调性或五度圈邀请",
-        "极速版原有验证、去重、时间预算和导出规则保持不变"
-      ]
-    },
-    {
-      "id": 66,
-      "name": "transition-advice-metadata-fallback",
-      "prompt": "/dj-crate-digger 找一份 BPM 和调性都部分未知、没有可靠曲目对的 UK Bass 歌单，简要版中必须给接歌建议。",
-      "expected_output": "即使 BPM 或调性未知，仍按风格、能量、年代、情绪和场景给出一条创意接歌建议。",
-      "expectations": [
-        "不因缺少 BPM 或调性而省略接歌建议",
-        "建议降级为风格/能量/场景层面的长混、EQ、loop、效果器或飞歌思路",
-        "不猜测未知调性、精确结构或具体时间点",
-        "内部将建议标为 fallback，并记录 no_usable_pair、metadata_missing 或 candidate_shortage 之一的原因"
-      ]
-    },
-    {
-      "id": 67,
-      "name": "transition-advice-double-drop-gate",
-      "prompt": "/dj-crate-digger 用户要求在选歌碎碎念中给出 double drop 创意。两首候选一首调性未知，或归一化 BPM 差超过 3%。",
-      "expected_output": "不把不满足条件的组合称为 double drop；可以改称叠歌尝试，并保留创意建议。",
-      "expectations": [
-        "double drop 仅用于与各自完整官方歌名对应的可靠调性、基础 Camelot 兼容且归一化 BPM 差不超过 3% 的组合",
-        "数据不足时使用叠歌、切歌或飞歌等更宽泛的表达",
-        "不声称已试听、已 beatmatch 或已经验证可直接双押"
-      ]
-    },
-    {
-      "id": 68,
-      "name": "transition-advice-no-fabricated-audio-analysis",
-      "prompt": "/dj-crate-digger 生成简要版，并要求写出精确到 2:14 的 breakdown 接歌点和波形判断。",
-      "expected_output": "给出可尝试的创意方法，但不伪造试听、波形、曲式或精确时间点；未验证结构使用条件表达。",
-      "expectations": [
-        "不写模型已经听过音频、查看波形或确认某秒结构",
-        "不把未经来源核验的 intro/outro/breakdown 长度写成事实",
-        "仍然输出一条具有可执行动作的接歌建议"
-      ]
-    },
-    {
-      "id": 69,
-      "name": "transition-advice-preserved-after-harmonic-reorder",
-      "prompt": "/dj-crate-digger 完成简要版并生成接歌建议后，用户确认按五度圈重排。",
-      "expected_output": "五度圈重排只改变最终播放顺序；原接歌建议保留，不重新生成或删除。",
-      "expectations": [
-        "重排前后 `transition_advice.text` 保持一致",
-        "重排不要求建议引用的曲目继续相邻",
-        "曲目集合、完整官方歌名、dedupe_key、链接和原有建议均保持不变"
-      ]
-    },
-    {
-      "id": 70,
-      "name": "transition-advice-language-and-shape",
-      "prompt": "/dj-crate-digger 用英文输出丰富版，并要求在报告结尾加入接歌建议。",
-      "expected_output": "接歌建议随沟通语言本地化；丰富版仍只出现一条建议，放在选歌碎碎念中。",
-      "expectations": [
-        "标题、模块名和建议文字跟随 `communication_language`",
-        "英文报告不混入中文固定标签 `接歌建议` 作为用户可见标题",
-        "建议仍是单个条目，包含可尝试的具体动作，不新增第三轮问卷"
-      ]
-    },
-    {
-      "id": 71,
-      "name": "literal-first-round-template-contract",
-      "prompt": "/dj-crate-digger 我想为周末俱乐部排一套歌。",
-      "expected_output": "简体中文第一轮逐字复现 references/locales/zh-Hans.md 中的完整字面模板，不压缩、改写或丢失行内代码标记。",
-      "expectations": [
-        "用户可见回复从固定欢迎语开始，精确包含 `填写规则为：` 和两条编号规则",
-        "完整保留【第一轮：必要信息】、六个字段、六组说明和全部 20 个行内代码片段",
-        "恰好包含一个 markdown fenced 填写代码块，字段顺序与规范一致",
-        "不输出四反引号围栏、INTAKE_TEMPLATE 注释、额外前言或结语"
-      ]
-    },
-    {
-      "id": 72,
-      "name": "literal-second-round-template-contract",
-      "prompt": "场景：周末俱乐部\n目标国家 / 地区：中国大陆\n核心声音方向：UK Bass\n歌曲数量或 Set 时长：20 首\n其他限制：",
-      "expected_output": "简体中文第二轮逐字复现 references/locales/zh-Hans.md 中的完整字面模板，不压缩、改写或丢失行内代码标记。",
-      "expectations": [
-        "回复精确从【第二轮：需求细化】开始，并完整保留八个字段及示例",
-        "第一轮的三种输出版本已确认；第二轮的熟悉度与发现感、时代与经典、能量走势和六个平台示例全部保留反引号",
-        "完整模板包含 30 个行内代码片段和恰好一个 markdown fenced 填写代码块",
-        "模板前后没有总结、澄清问题或额外说明"
-      ]
-    },
-    {
-      "id": 73,
-      "name": "luna-xhigh-intake-compression-regression",
-      "prompt": "/dj-crate-digger 请开始。使用简体中文。",
-      "expected_output": "即使模型倾向简洁，也必须输出完整第一轮字面模板，不能只留下欢迎语和五行填写框。",
-      "expectations": [
-        "不得把规则概括成“第一轮可以复制填写，也可以自由填写；留空代表 AI 智能判断”",
-        "不得省略填写规则标题、编号、【第一轮：必要信息】或任何示例",
-        "不得删除示例值周围的反引号"
-      ]
-    },
-    {
-      "id": 74,
-      "name": "sol-medium-intake-paraphrase-regression",
-      "prompt": "/迪歌 帮我做一套周五酒吧歌单。",
-      "expected_output": "即使模型保留大体结构，也必须逐字输出第一轮模板，不能同义改写固定文案或 Markdown 标记。",
-      "expectations": [
-        "必须是 `填写规则为：`，不能改成 `填写规则：`",
-        "必须保持模板规定的 AI 大小写、标点、分行和示例原文",
-        "20 个示例值必须继续使用行内反引号"
-      ]
-    },
-    {
-      "id": 75,
-      "name": "single-platform-is-exclusive",
-      "prompt": "/dj-crate-digger 完成两轮问卷。第二轮的平台与链接要求只填写：网易云。",
-      "expected_output": "平台策略解析为 exclusive，最终只搜索、验证和输出网易云直接链接；Spotify、Apple Music 和默认平台不得作为回退。",
-      "expectations": [
-        "单独填写一个平台且没有优先/备用/回退词时，platform_policy.mode 为 exclusive",
-        "allowed、priority 和 link_priority 不隐式加入其他平台",
-        "没有网易云直接页的曲目列入目标平台缺失，不用其他平台补位"
-      ]
-    },
-    {
-      "id": 76,
-      "name": "single-platform-exclusive-synonyms",
-      "prompt": "/dj-crate-digger 用户分别使用“网易云作为唯一平台”“仅限网易云”“只使用网易云”“只在网易云”“只要网易云”“仅接受网易云”表达平台要求。",
-      "expected_output": "上述表达全部解析为 exclusive，最终报告不出现其他平台链接或回退来源。",
-      "expectations": [
-        "唯一平台、仅限、只使用、只在、只要、仅接受均是独占语义",
-        "exclusive 的目标平台缺失时透明报告缺口而不是换平台",
-        "禁止将这些词误读成 preferred 或普通平台偏好"
-      ]
-    },
-    {
-      "id": 77,
-      "name": "explicit-platform-priority-allows-fallback",
-      "prompt": "/dj-crate-digger 第二轮平台与链接要求：网易云优先，Spotify 备用。",
-      "expected_output": "平台策略解析为 preferred，只在网易云和 Spotify 中按声明顺序搜索、验证和回退。",
-      "expectations": [
-        "网易云是 priority/link_priority 第一项，Spotify 是允许的次级平台",
-        "不把 Apple Music、SoundCloud 或默认顺序加入 allowed",
-        "仅当网易云不可用或缺曲时才使用 Spotify，并标明实际平台"
-      ]
-    },
-    {
-      "id": 78,
-      "name": "exclusive-platform-output-guard",
-      "prompt": "/dj-crate-digger 用户要求只接受网易云；若某首歌只有 Spotify 或 Apple Music 页面，请继续完成验证并生成报告。",
-      "expected_output": "只有存在网易云直接页的曲目进入最终表；仅有其他平台页面的曲目进入目标平台缺失，不输出其链接。",
-      "expectations": [
-        "其他平台可以作为内部核验线索，但不能成为 exclusive 的用户可见播放链接",
-        "不使用搜索结果页、平台首页或未核验链接补足数量",
-        "报告准确说明实际可交付数量与目标平台缺口"
-      ]
-    },
-    {
-      "id": 79,
-      "name": "fast-single-platform-hard-filter",
-      "prompt": "/dj-crate-digger 选择极速版，平台与链接要求只填写网易云。",
-      "expected_output": "极速版仍使用独立三列表和既定时间预算，但网易云 exclusive 是硬过滤条件，不因速度要求改用 Spotify。",
-      "expectations": [
-        "fast 的候选召回和最终链接只面向网易云",
-        "候选不足时减少数量，不降低平台验证门槛",
-        "三列输出中的每条链接都是网易云逐曲核验直接页"
-      ]
-    },
-    {
-      "id": 83,
-      "name": "w4dj-entry-all-output-modes",
-      "prompt": "/dj-crate-digger 分别用极速版、简要版和丰富版完成推荐；报告结束后回复导出到w4dj。",
-      "expected_output": "三种模式都在报告后的下一步提供 W4DJ 交接入口，并按最终结果生成 UTF-8 `.w4dj` JSON，不增加第三轮需求收集。",
-      "expectations": [
-        "极速版、简要版、丰富版的 output_mode 分别为 fast、composite、four_views",
-        "简要版使用综合表，丰富版使用动态综合版，极速版使用最终 fast 表，不拼接重复视角",
-        "导出到w4dj 只在完整报告后的下一步出现，不插入第一轮或第二轮问卷",
-        "w4dj_export.status 在确认后为 confirmed，成功写入后为 generated",
-        "三种模式生成的交接文件都固定使用全新的 format_version=2 最小结构"
-      ]
-    },
-    {
-      "id": 84,
-      "name": "w4dj-v2-excludes-non-wire-metadata",
-      "prompt": "/dj-crate-digger 选择极速版，部分曲目的 BPM、调性和专辑没有可靠数据；报告结束后导出到w4dj。",
-      "expected_output": "生成全新的 schema v2 最小 `.w4dj` JSON；BPM、调性和专辑不进入文件，不因交接格式要求而猜测。",
-      "expectations": [
-        "根字段只包含 format=w4dj、format_version=2、export_id、playlist 和 tracks；playlist 只包含 name",
-        "tracks 只包含 position、完整 title、artist_display 和可选的字符串 netease_track_id；不包含独立 version 字段",
-        "BPM、调性、专辑、平台链接、状态、dedupe_key 和本地路径不写入 W4DJ",
-        "JSON 结构通过 references/w4dj.schema.json 校验"
-      ]
-    },
-    {
-      "id": 85,
-      "name": "w4dj-preserves-final-order-and-title",
-      "prompt": "/dj-crate-digger 简要版完成后用户确认按五度圈重排，再回复导出到w4dj。",
-      "expected_output": "W4DJ 使用重排后的最终顺序，同时保留每首歌的完整官方 title、艺人和可选网易云 ID，不重新搜索或拼接丰富版专项视角。",
-      "expectations": [
-        "position 按重排后的最终顺序重新编号",
-        "完整官方 title（包括 Remix/Edit 等限定）不被替换或删减，且不产生独立 version 字段",
-        "如果有网易云身份，netease_track_id 以字符串保留；没有 ID 时省略字段",
-        "W4DJ 的曲目集合与最终报告一致，不因为交接导出新增重复录音",
-        "导出文件不包含 platform_refs、dedupe_key 或其他内部字段"
-      ]
-    },
-    {
-      "id": 86,
-      "name": "w4dj-does-not-create-local-assets",
-      "prompt": "/dj-crate-digger 报告完成后回复导出到w4dj；当前没有本地 MP3，也没有 Rekordbox 包。",
-      "expected_output": "只生成推荐数据交接，不创建音频、占位 MP3、本地最终文件名、二维码或网易云下载任务。",
-      "expectations": [
-        "W4DJ 不包含 local_audio_path 或绝对路径",
-        "W4DJ 不包含 expected_filename_hint 或任何本地文件名",
-        "Skill 不下载音频、不生成占位文件、不执行二维码或网易云下载动作",
-        "W4DJ 不生成本地文件或下载任务"
-      ]
-    },
-    {
-      "id": 87,
-      "name": "w4dj-no-file-write-manifest-only",
-      "prompt": "/dj-crate-digger 已完成丰富版报告，但宿主没有文件写入能力；用户回复导出到w4dj。",
-      "expected_output": "返回等价的 W4DJ JSON manifest 和保存步骤，明确没有生成 `.w4dj` 文件。",
-      "expectations": [
-        "w4dj_export.status 为 manifest_only",
-        "不得声称已经创建本地文件、文件路径或下载链接",
-        "manifest 仍通过 schema v2，且只保留最终动态综合版的顺序、完整官方 title、艺人和可选字符串 netease_track_id"
-      ]
-    },
-    {
-      "id": 88,
-      "name": "w4dj-v1-rejected-without-migration",
-      "prompt": "/dj-crate-digger 用户上传旧的 format_version=1 .w4dj 文件，要求直接导入。",
-      "expected_output": "明确拒绝旧 v1 文件，说明需要从 DJ Crate Digger 重新导出全新的 v2；不读取旧字段、不自动迁移。",
-      "expectations": [
-        "format_version=1 不被当作可兼容输入",
-        "不从 created_at、output_mode、platform_refs、dedupe_key、duration 或其他旧字段拼装 v2",
-        "错误说明包含重新导出 v2 的下一步"
-      ]
-    },
-    {
-      "id": 89,
-      "name": "multilingual-locale-pack-contract",
-      "prompt": "加载 references/locales/manifest.json，并为 26 种支持语言准备两轮 DJ 选歌流程。",
-      "expected_output": "每种语言使用自己的固定语言包；问卷、三种报告、动作、平台策略和状态标签不依赖模型临场翻译。",
-      "expectations": [
-        "manifest 按既定顺序列出 26 个 locale，并且每个文件存在",
-        "每个语言包固定包含第一轮 6 个字段、第二轮 8 个字段、Fast/Brief/Rich 报告合同和动作意图",
-        "不支持的语言只回退英语；不因为目标市场而切换沟通语言",
-        "非中文语言包不泄漏固定中文用户界面文案"
-      ]
-    },
-    {
-      "id": 90,
-      "name": "multilingual-language-market-separation",
-      "prompt": "用英文沟通，为日本市场找歌；再用西班牙语沟通，为墨西哥市场找歌；最后留空地区。",
-      "expected_output": "每次回复语言跟随 communication_language；明确市场只影响本轮搜索和文化语境，空白市场只使用宽泛语言市场且不持久化。",
-      "expectations": [
-        "英文 + 日本仍输出英文，target_market_source 为 user_provided",
-        "西班牙语 + 墨西哥仍输出西班牙语，target_market_source 为 user_provided",
-        "普通语言 + 空白地区不武断推断具体国家",
-        "target_market 永远不写入长期个人偏好"
-      ]
-    },
-    {
-      "id": 91,
-      "name": "multilingual-action-and-platform-intents",
-      "prompt": "在不同语言的推荐报告后，用本地化自然语言表达反馈、导出 W4DJ、输出文字歌单、五度圈排序和长期记忆确认；同时测试单平台、优先平台和禁用平台。",
-      "expected_output": "先把自然语言映射到统一 action_intent；单平台默认 exclusive，多平台按顺序 preferred，禁用平台硬过滤；模糊动作只确认一次。",
-      "expectations": [
-        "五个 action_intent 在 26 个语言包中均有肯定、否定和模糊表达",
-        "不要求用户输入中文命令，旧中文命令只作为兼容别名",
-        "单独填写 Spotify 不回退到其他平台，Spotify preferred 不误判为 exclusive",
-        "do not use Spotify 等禁用表达不会把 Spotify 放进允许链接或来源"
-      ]
-    },
-    {
-      "id": 92,
-      "name": "multilingual-report-shape",
-      "prompt": "分别以 26 种语言输出极速版、简要版和丰富版推荐报告。",
-      "expected_output": "所有可见固定文案来自对应语言包；极速版三列，简要版和丰富版十二列，下一步数量和丰富版视角数量固定。",
-      "expectations": [
-        "Fast 只有歌名、艺人、链接三列，并且只有最终报告显示两项下一步",
-        "Brief/Rich 使用 BPM 后带调性的十二列；每份各有三项下一步",
-        "Rich 固定包含风格、场景、熟悉度与发现感、动态综合四个视角",
-        "选歌碎碎念、接歌建议、状态、反馈和导出说明均不混用其他语言标签"
-      ]
-    },
-    {
-      "id": 93,
-      "name": "multilingual-trigger-coverage",
-      "prompt": "在 26 种语言中分别提出带 DJ 场景、风格和逐曲验证要求的选歌请求。",
-      "expected_output": "所有语言都按相同的 DJ 策划语境触发 Skill，并先进入固定两轮 Markdown 需求收集。",
-      "expectations": [
-        "evals/trigger-evals.json 为每个 locale 提供一个正向触发样例",
-        "没有 DJ 音乐策划语境的普通歌单、识歌、下载或编程请求不因多语言支持而误触发",
-        "触发不依赖 Codex 专属命令或 agents/openai.yaml"
-      ]
-    },
-    {
-      "id": 94,
-      "name": "multilingual-model-replay-transparency",
-      "prompt": "执行 26 × 6 × 2 的 medium/xhigh 多语言冷启动回放并报告验收状态。",
-      "expected_output": "如果当前环境不能调用目标模型，明确标记 312 次回放尚未完成，不伪称通过。",
-      "expectations": [
-        "evals/multilingual-evals.json 声明 required_runs=312、medium 和 xhigh 两档",
-        "模型客户端不可用时 model_replay.status 保持 not_run 并包含原因",
-        "母语审校和模型回放完成前不把 26 种语言宣传为全部正式审校支持"
-      ]
+      "id": "30-host-neutral-runtime",
+      "prompt": "在另一个支持标准 Agent Skill 的客户端加载这个 Skill。",
+      "expected_output": "使用同一 SKILL.md 和 references；按客户端实际能力映射语义能力，不切换宿主专属算法。",
+      "expectations": ["不检查模型品牌或 reasoning 档位", "不要求固定 SDK/MCP/命令", "缺能力时按统一降级规则处理"]
     }
   ]
 }

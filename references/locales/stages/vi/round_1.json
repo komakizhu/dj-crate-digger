@@ -1,0 +1,49 @@
+{
+  "locale": "vi",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "Chào mừng đến với Trợ lý chọn nhạc DJ. Skill Agent này giúp bạn chuẩn bị một set DJ. Bạn sẽ xác nhận nhu cầu trong hai vòng và nhận gợi ý track. Quy tắc điền:",
+    "tutorial_label": "Hướng dẫn nhập Set một cú nhấp",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md"
+  },
+  "round": {
+    "title": "[Vòng 1: thông tin cần thiết]",
+    "rules": [
+      "1. Bạn có thể sao chép ví dụ, điền tự do hoặc để trống",
+      "2. Để trống nghĩa là AI sẽ tự suy xét câu trả lời một cách thông minh"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "Bối cảnh",
+        "example": "Bối cảnh biểu diễn. Ví dụ: `bar` / `club` / `đám cưới` / `triển lãm nghệ thuật`"
+      },
+      {
+        "key": "target_market",
+        "label": "Quốc gia / khu vực mục tiêu",
+        "example": "Ví dụ: `Trung Quốc đại lục` / `Đài Loan` / `Hồng Kông` / `Nhật Bản` / `thị trường quốc tế dùng tiếng Anh`"
+      },
+      {
+        "key": "core_sound",
+        "label": "Hướng âm thanh chính",
+        "example": "Nghệ sĩ, track và thể loại tham chiếu. Ví dụ: `Tears` của `Skrillex`, thể loại `UK Bass` hiện đại"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "Số track hoặc thời lượng set",
+        "example": "Ví dụ: `20 track` / `60 phút`"
+      },
+      {
+        "key": "output_mode",
+        "label": "Phiên bản đầu ra",
+        "example": "Chọn Fast / Brief / Rich"
+      },
+      {
+        "key": "other",
+        "label": "Các giới hạn khác",
+        "example": "Ví dụ: `tránh bài quá phổ biến`, `không vocal`, `chỉ Remix`; tùy chọn"
+      }
+    ],
+    "prompt": "Chào mừng đến với Trợ lý chọn nhạc DJ. Skill Agent này giúp bạn chuẩn bị một set DJ. Bạn sẽ xác nhận nhu cầu trong hai vòng và nhận gợi ý track. Quy tắc điền:\n\n1. Bạn có thể sao chép ví dụ, điền tự do hoặc để trống\n2. Để trống nghĩa là AI sẽ tự suy xét câu trả lời một cách thông minh\n\n[Vòng 1: thông tin cần thiết]\n\nBối cảnh:\n“Bối cảnh biểu diễn. Ví dụ: `bar` / `club` / `đám cưới` / `triển lãm nghệ thuật`”\nQuốc gia / khu vực mục tiêu:\n“Ví dụ: `Trung Quốc đại lục` / `Đài Loan` / `Hồng Kông` / `Nhật Bản` / `thị trường quốc tế dùng tiếng Anh`”\nHướng âm thanh chính:\n“Nghệ sĩ, track và thể loại tham chiếu. Ví dụ: `Tears` của `Skrillex`, thể loại `UK Bass` hiện đại”\nSố track hoặc thời lượng set:\n“Ví dụ: `20 track` / `60 phút`”\nPhiên bản đầu ra:\n“`Fast`: xuất playlist nhanh; chất lượng có thể thấp hơn”\n“`Brief`: chỉ một playlist tổng hợp”\n“`Rich`: các góc nhìn riêng về phong cách, bối cảnh và khám phá, sau đó là playlist tổng hợp”\nCác giới hạn khác:\n“Ví dụ: `tránh bài quá phổ biến`, `không vocal`, `chỉ Remix`; tùy chọn”\n\n```markdown\nBối cảnh:\nQuốc gia / khu vực mục tiêu:\nHướng âm thanh chính:\nSố track hoặc thời lượng set:\nPhiên bản đầu ra:\nCác giới hạn khác:\n```"
+  }
+}

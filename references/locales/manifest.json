@@ -5,17 +5,22 @@
   "fallback_locale": "en",
   "routing": {
     "locale_selection_order": [
-      "explicit_communication_language",
-      "dominant_current_message_language",
-      "current_session_language",
-      "fallback_locale"
+      "explicit_current_language",
+      "current_message_language",
+      "recent_user_language_signals",
+      "identity_language_read",
+      "host_locale",
+      "language_confirmation"
     ],
     "communication_language_is_independent_from_target_market": true,
     "explicit_target_market_wins_over_language_inference": true,
     "blank_target_market_is_broad_and_session_only": true,
-    "unsupported_locale_falls_back_to_en": true
+    "unsupported_locale_falls_back_to_en": true,
+    "slash_only_reads_language_signals_before_output": true,
+    "default_locale_is_not_cold_start_inference": true
   },
   "progressive_resources": {
+    "language_routing": "references/language-routing.json",
     "preflight": "references/capabilities.md",
     "trigger": "references/trigger-routing.md",
     "intake": "references/intake-routing.md",

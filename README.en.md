@@ -14,6 +14,8 @@ Round one collects scene, target country/region, core sound direction, track cou
 
 Communication language and target market are separate. Language controls visible text, while the market controls only current search context, cultural context, and availability. An explicit market never changes response language; a blank market stays broad and temporary and is never written to long-term taste memory.
 
+On a new chat started with a slash entry such as `/dj`, the Skill first reads recent user-language signals and the saved identity language preference before choosing visible language; recent sessions take priority. It auto-learns a communication-language preference only when four of the last five eligible sessions agree. With no usable signal, it shows one fixed bilingual language confirmation instead of silently emitting the English template. This preference remains separate from DJ taste and target-market data.
+
 ### 1.2 Three output modes
 
 | Mode | Best for | Output |

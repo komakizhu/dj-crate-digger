@@ -1,0 +1,146 @@
+{
+  "schema": "dj-crate-digger-language-routing-fixtures",
+  "cases": [
+    {
+      "id": "explicit-current-language",
+      "explicit_language": "zh-Hans",
+      "current_message_language": "en",
+      "recent_sessions": [
+        {"language": "en", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "en", "complete": true, "user_message_count": 2, "confidence": "high"}
+      ],
+      "identity_language": "en",
+      "host_locale": "en",
+      "expected": {"locale": "zh-Hans", "source": "explicit_current", "route": "render", "write_locale": null}
+    },
+    {
+      "id": "slash-recent-wins-over-identity",
+      "invocation": "/dj",
+      "recent_sessions": [
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "en", "complete": true, "user_message_count": 2, "confidence": "high"}
+      ],
+      "identity_language": "en",
+      "host_locale": "en",
+      "expected": {"locale": "zh-Hans", "source": "recent_sessions", "route": "render", "write_locale": null}
+    },
+    {
+      "id": "slash-identity-fallback",
+      "invocation": "/dj",
+      "recent_sessions": [
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "en", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "en", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"}
+      ],
+      "identity_language": "en",
+      "host_locale": "en",
+      "expected": {"locale": "en", "source": "identity_memory", "route": "render", "write_locale": null}
+    },
+    {
+      "id": "slash-host-fallback",
+      "invocation": "/dj",
+      "host_locale": "ja",
+      "expected": {"locale": "ja", "source": "host_locale", "route": "render", "write_locale": null}
+    },
+    {
+      "id": "slash-no-signal-confirmation",
+      "invocation": "/dj",
+      "expected": {"locale": null, "source": "confirmation", "route": "language_confirmation", "write_locale": null}
+    },
+    {
+      "id": "auto-learn-four-of-five",
+      "invocation": "/dj",
+      "recent_sessions": [
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "en", "complete": true, "user_message_count": 2, "confidence": "high"}
+      ],
+      "expected": {"locale": "zh-Hans", "source": "recent_sessions", "route": "render", "write_locale": "zh-Hans"}
+    },
+    {
+      "id": "do-not-learn-three-of-five",
+      "invocation": "/dj",
+      "recent_sessions": [
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "en", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "en", "complete": true, "user_message_count": 2, "confidence": "high"}
+      ],
+      "expected": {"locale": "zh-Hans", "source": "recent_sessions", "route": "render", "write_locale": null}
+    },
+    {
+      "id": "ineligible-history-does-not-learn",
+      "invocation": "/dj",
+      "recent_sessions": [
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 1, "confidence": "high"},
+        {"language": "zh-Hans", "complete": false, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "low"},
+        {"language": "en", "complete": true, "user_message_count": 2, "confidence": "high"}
+      ],
+      "identity_language": "en",
+      "expected": {"locale": "zh-Hans", "source": "recent_sessions", "route": "render", "write_locale": null}
+    },
+    {
+      "id": "regular-request-ignores-recent-language",
+      "invocation": "music planning",
+      "recent_sessions": [
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"}
+      ],
+      "identity_language": "en",
+      "host_locale": "en",
+      "expected": {"locale": "en", "source": "identity_memory", "route": "render", "write_locale": "zh-Hans"}
+    },
+    {
+      "id": "slash-command-with-natural-language-is-not-slash-only",
+      "invocation": "/dj build a set in Spanish",
+      "recent_sessions": [
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"},
+        {"language": "zh-Hans", "complete": true, "user_message_count": 2, "confidence": "high"}
+      ],
+      "identity_language": "en",
+      "host_locale": "en",
+      "expected": {"locale": "en", "source": "identity_memory", "route": "render", "write_locale": null}
+    },
+    {
+      "id": "unsupported-explicit-language-falls-back",
+      "explicit_language": "xx",
+      "expected": {"locale": "en", "source": "fallback_locale", "route": "render", "write_locale": null}
+    },
+    {
+      "id": "missing-write-capability-does-not-persist",
+      "explicit_language": "zh-Hans",
+      "persistence_request": true,
+      "available_capabilities": ["recent_user_language_signals", "identity_language_read", "host_locale"],
+      "expected": {"locale": "zh-Hans", "source": "explicit_current", "route": "render", "write_locale": null}
+    },
+    {
+      "id": "explicit-long-term-language",
+      "explicit_language": "zh-Hans",
+      "persistence_request": true,
+      "expected": {"locale": "zh-Hans", "source": "explicit_current", "route": "render", "write_locale": "zh-Hans"}
+    },
+    {
+      "id": "temporary-language-does-not-write",
+      "explicit_language": "en",
+      "persistence_request": false,
+      "expected": {"locale": "en", "source": "explicit_current", "route": "render", "write_locale": null}
+    },
+    {
+      "id": "market-does-not-change-language",
+      "current_message_language": "zh-Hans",
+      "target_market": "Japan",
+      "expected": {"locale": "zh-Hans", "source": "current_message", "route": "render", "write_locale": null, "target_market": "Japan"}
+    }
+  ]
+}

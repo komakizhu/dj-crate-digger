@@ -15,6 +15,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+import validate_language_routing
+
 
 ROOT = Path(__file__).resolve().parents[1]
 LOCALES_DIR = ROOT / "references" / "locales"
@@ -53,10 +55,12 @@ EXPECTED_LOCALES = (
     "sw",
 )
 EXPECTED_LOCALE_SELECTION_ORDER = (
-    "explicit_communication_language",
-    "dominant_current_message_language",
-    "current_session_language",
-    "fallback_locale",
+    "explicit_current_language",
+    "current_message_language",
+    "recent_user_language_signals",
+    "identity_language_read",
+    "host_locale",
+    "language_confirmation",
 )
 EXPECTED_GLOBAL_MARKETS = (
     ("mainland-china", "zh-Hans", "Mainland China", "NetEase Cloud Music"),
@@ -67,6 +71,7 @@ EXPECTED_GLOBAL_MARKETS = (
     ("south-korea", "ko", "South Korea", "Apple Music, Spotify"),
 )
 REQUIRED_PROGRESSIVE_RESOURCES = (
+    "language_routing",
     "preflight",
     "trigger",
     "intake",
@@ -562,6 +567,7 @@ def validate_multilingual_eval_spec() -> list[str]:
         errors.append("multilingual eval locales do not match the 26-locale manifest")
 
     expected_case_ids = {
+        "slash-cold-start-language",
         "language-market-separation",
         "fixed-intake-template",
         "report-shape",
@@ -683,6 +689,7 @@ def main() -> int:
     failures.extend(validate_multilingual_eval_spec())
     failures.extend(validate_existing_eval_coverage())
     failures.extend(validate_trigger_routing_cases())
+    failures.extend(validate_language_routing.validate_contract())
     if failures:
         print("\n".join(failures), file=sys.stderr)
         return 1

@@ -1,6 +1,6 @@
 # Trigger routing
 
-Activate for a request to discover, curate, rank, sequence, or hand off music for a DJ performance. Load the selected locale's `trigger` resource from `references/locales/manifest.json`; it is the source of the full localized trigger list and the one-line ambiguous confirmation. The frontmatter capsule is only for discovery.
+Activate for a request to discover, curate, rank, sequence, or hand off music for a DJ performance. Lock the communication language first using [language-routing.json](language-routing.json). Then load the selected locale's `trigger` resource from `references/locales/manifest.json`; it is the source of the full localized trigger list and the one-line ambiguous confirmation. The frontmatter capsule is only for discovery.
 
 ## Decision order
 

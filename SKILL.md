@@ -9,12 +9,13 @@ description: "Use when a user asks in any supported language to discover, curate
 
 ## Start here
 
-1. Read [capabilities.md](references/capabilities.md) and perform the capability preflight before showing the first question.
-2. Read [trigger-routing.md](references/trigger-routing.md) and the selected locale's `trigger` resource to decide whether the request is a direct DJ trigger, an ambiguous music trigger, or unrelated.
-3. Read [locales/manifest.json](references/locales/manifest.json), resolve `communication_language`, and load only that locale's `trigger`, `round_1`, `round_2`, `search_context`, `report_*`, `post_report`, or `capability_errors` resource required by the current stage.
-4. Run exactly the two Markdown intake rounds described by [intake-routing.md](references/intake-routing.md). Do not search, recommend, or add a third ordinary requirements round before round two is answered.
-5. After round two, read [search-verification.md](references/search-verification.md) and [ranking.md](references/ranking.md); then load only that locale's `search_context` and the selected mode resource under [modes](references/modes/), followed by its corresponding `report_*` resource.
-6. Before rendering the report, read [report-template.md](references/report-template.md). Load [key-and-sequencing.md](references/key-and-sequencing.md), [feedback-memory.md](references/feedback-memory.md), or [export.md](references/export.md) only when the corresponding post-report action occurs, together with that locale's `post_report` resource.
+1. Read [language-routing.json](references/language-routing.json) and resolve `communication_language` before producing any visible text; for a slash-only invocation, query recent user-language signals and identity language memory first.
+2. Read [capabilities.md](references/capabilities.md) and perform the silent capability preflight before showing the first question.
+3. Read [trigger-routing.md](references/trigger-routing.md) and the selected locale's `trigger` resource to decide whether the request is a direct DJ trigger, an ambiguous music trigger, or unrelated.
+4. Read [locales/manifest.json](references/locales/manifest.json) and load only that locale's `trigger`, `round_1`, `round_2`, `search_context`, `report_*`, `post_report`, or `capability_errors` resource required by the current stage.
+5. Run exactly the two Markdown intake rounds described by [intake-routing.md](references/intake-routing.md). Do not search, recommend, or add a third ordinary requirements round before round two is answered.
+6. After round two, read [search-verification.md](references/search-verification.md) and [ranking.md](references/ranking.md); then load only that locale's `search_context` and the selected mode resource under [modes](references/modes/), followed by its corresponding `report_*` resource.
+7. Before rendering the report, read [report-template.md](references/report-template.md). Load [key-and-sequencing.md](references/key-and-sequencing.md), [feedback-memory.md](references/feedback-memory.md), or [export.md](references/export.md) only when the corresponding post-report action occurs, together with that locale's `post_report` resource.
 
 ## Non-negotiable boundaries
 
@@ -25,16 +26,17 @@ description: "Use when a user asks in any supported language to discover, curate
 - Deduplicate recordings by ISRC or normalized artist plus complete official title. Merge platform links for the same recording; never merge distinct title variants.
 - Unknown BPM, key, date, style, availability, or popularity stays unknown. Do not lower verification standards to fill a requested count. A short or empty result is preferable to an invented track.
 - The first language pack supplies fixed visible text. Preserve its headings, punctuation, inline code, bold markers, field order, table columns, links, and two-round Markdown shape literally; replace only declared placeholders and real track data.
+- Lock `communication_language` before any visible response. A slash-only request is not evidence of English; use the language-routing policy and available user-language signals first. If no signal is sufficient, render only the fixed bilingual language confirmation and wait for its answer.
 
 ## Capability preflight and state
 
-The minimum capability for a verified recommendation is `web_search` plus `open_page`. The minimum capability for a W4DJ handoff is `file_write`. A host that cannot provide the required capability must say so before the first intake round and must not present an unverified playlist or claim that a file exists. Do not inspect or infer the model brand, context size, reasoning tier, or host identity.
+The minimum capability for a verified recommendation is `web_search` plus `open_page`. The minimum capability for a W4DJ handoff is `file_write`. Language-history and identity-language capabilities are optional; their absence triggers the documented language fallback. A host that cannot provide the required capability must say so before the first intake round and must not present an unverified playlist or claim that a file exists. Do not inspect or infer the model brand, context size, reasoning tier, or host identity.
 
-Track internal state with the semantic fields `communication_language`, `locale_pack`, `target_market`, `target_market_source`, `persist_target_market: false`, `platform_policy`, `intake_status`, `output_mode`, `selection_priority`, `track_count`, verification records, `dedupe_key`, `musical_key`, `harmonic_order`, `transition_advice`, feedback events, and export status. These records are internal unless a referenced report contract explicitly makes a field visible.
+Track internal state with the semantic fields `communication_language`, `locale_pack`, `locale_source`, `locale_confidence`, `language_locked`, `language_preference_write_status`, `target_market`, `target_market_source`, `persist_target_market: false`, `platform_policy`, `intake_status`, `output_mode`, `selection_priority`, `track_count`, verification records, `dedupe_key`, `musical_key`, `harmonic_order`, `transition_advice`, feedback events, and export status. These records are internal unless a referenced report contract explicitly makes a field visible.
 
 ## Fixed interaction
 
-The trigger aliases `/dj-crate-digger`, `/crate-digger`, `/迪歌`, and their natural-language equivalents are supported. A bare “playlist”, “DJ”, “找歌”, or “歌单” is ambiguous unless the surrounding message contains DJ planning context; ask the selected locale's one-line confirmation at most once, and do not trigger for song identification, programming objects, or Skill-development discussion.
+The trigger aliases `/dj-crate-digger`, `/crate-digger`, `/迪歌`, and their natural-language equivalents are supported. A slash-only invocation first completes language resolution, then routes the trigger. A bare “playlist”, “DJ”, “找歌”, or “歌单” is ambiguous unless the surrounding message contains DJ planning context; ask the selected locale's one-line confirmation at most once, and do not trigger for song identification, programming objects, or Skill-development discussion.
 
 The first round has exactly six fields: scene; target country/region; core sound direction; track count or set duration; output mode; and other constraints. The second has exactly eight: specific style; BPM; familiarity/discovery; era/classics; mood; set energy level or curve; platform/link requirements; and other. Each round is the selected locale's literal Markdown block with one copyable fenced section. Empty fields mean intelligent judgment, not a new question. The first round's mode maps to `fast`, `composite`, or `four_views`; mode-specific quantity and continuation rules live in [modes/fast.md](references/modes/fast.md).
 
@@ -58,4 +60,4 @@ Only after a complete report render the selected locale's “next step” action
 
 Do not download music, provide piracy sources, bypass paywalls, ask for passwords, store tokens, create platform playlists without explicit confirmation, or build an application, database, user system, or background service. W4DJ receives recommendation data only; downstream tools handle local downloads and DJ-software import.
 
-Before answering, verify the selected locale, exact two-round state, platform hard filters, per-track evidence, complete titles, recording deduplication, mode table shape, output action timing, and any requested harmonic-order or export invariants. If a required capability or evidence is missing, report the limitation clearly and reduce scope rather than guessing.
+Before answering, verify the language is locked, the selected locale is used consistently, the exact two-round state, platform hard filters, per-track evidence, complete titles, recording deduplication, mode table shape, output action timing, and any requested harmonic-order or export invariants. If a required capability or evidence is missing, report the limitation clearly and reduce scope rather than guessing.

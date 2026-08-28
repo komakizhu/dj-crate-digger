@@ -88,6 +88,17 @@ def main() -> int:
         if not path.exists():
             errors.append(f"missing progressive resource: {relative}")
 
+    language_resource = ROOT / "references" / "language-routing.json"
+    if language_resource.exists():
+        try:
+            language_policy = json.loads(language_resource.read_text(encoding="utf-8"))
+            required_capabilities = set(fixtures.get("required_language_capabilities", []))
+            configured_capabilities = set(language_policy.get("optional_capabilities", []))
+            if not required_capabilities <= configured_capabilities:
+                errors.append("language routing policy omits required optional capabilities")
+        except (OSError, json.JSONDecodeError, TypeError):
+            errors.append("language routing policy cannot be loaded")
+
     schema_path = ROOT / "references" / "w4dj.schema.json"
     try:
         schema = json.loads(schema_path.read_text(encoding="utf-8"))

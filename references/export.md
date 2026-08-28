@@ -1,5 +1,9 @@
 # 平台导出与授权边界
 
+## 语言包与动作意图
+
+先读取 [locales/manifest.json](locales/manifest.json)，用 `communication_language` 选择语言包。可见的导出说明、确认文案和本地化命令来自该包；内部统一使用 `export_w4dj` 与 `output_text_playlist` 两个动作意图，不要求用户使用中文或固定拼写。平台名称和平台约束同样从语言包归一化，`target_market` 不改变沟通语言。
+
 ## 平台顺序
 
 默认导出优先级：SoundCloud → Apple Music → Spotify。用户指定 `export_platform` 时直接采用该目标；如果它同时出现在用户的 forbidden 列表中，先指出冲突并澄清，不自行选择另一个平台。
@@ -96,35 +100,27 @@
 
 本地文件导出与平台歌单写入相互独立，但只在完整推荐报告后的“下一步”中提供。这个区域不得在两轮需求收集期间提前出现，也不是第三轮需求收集。报告正文不展示私人记忆状态、本轮反馈状态、长期画像、缺失信息或来源栏目；相关状态和核验资料保留在后台记录中。
 
-用户直接回复以下任一指令即可触发对应导出：
+用户在完整报告后的“下一步”中看到的导出话术、代码短语和本地化变体，统一来自所选 `locale_pack` 的 `export` 与 `actions` 字段。运行时只路由两个动作意图：`output_text_playlist` 与 `export_w4dj`；不要求用户额外填写导出问卷，也不把导出提前到两轮需求收集期间。用户可以只反馈、只触发一个导出动作、组合使用，或不回复。旧的 `导出txt` 仅作为兼容输入保留，不作为新的可见固定指令。
 
-```text
-输出文字版歌单
-导出txt
-导出到w4dj
-```
+### Text playlist structure
 
-不再展示导出选项列表，也不要求用户额外填写导出问卷。用户可以只反馈、只输出歌单名、只导出、只交接、组合使用，或不回复。所有导出和交接都发生在完整报告后的“下一步”，不增加第三轮需求收集。
-
-### 文字版歌单目录
-
-`输出文字版歌单`的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。它不创建本地文件，也不执行平台写入；内容直接基于当前最终结果，保持最终顺序，只包含官方歌名和官方艺人：
+`output_text_playlist` 的功能由 locale pack 本地化，但语义固定：输出可复制文本，可以手动导入用户选择的平台，但无法帮您一键把歌曲导入 RKB。它不创建本地文件，也不执行平台写入；内容直接基于当前最终结果，保持最终顺序，只包含官方歌名和官方艺人。标题、平台说明和格式由 `locale_pack.export` 提供：
 
 ````markdown
-## 网易云歌单目录
+## <localized playlist title>
 
 ```markdown
 Official Title - Official Artist
 ```
 ````
 
-该清单可以手动导入网易云，但不能一键把歌曲导入 RKB；不得加入未入选曲目、猜测的歌名限定、链接或额外问题。旧指令 `导出txt` 继续按下方 TXT 规则处理。
+该清单可以手动导入用户选择的平台，但不能一键把歌曲导入 RKB；不得加入未入选曲目、猜测的歌名限定、链接或额外问题。兼容输入 `导出txt` 继续按下方 TXT 规则处理。
 
 默认导出报告中的最终结果：极速版导出最终 fast 表；简要版直接使用综合表；丰富版使用最后的动态综合结果，不把四个视角拼成一份重复歌单。若用户已经确认五度圈重排，简要版或丰富版导出必须使用重排后的最终顺序；不得重新搜索、恢复原顺序或把专项视角拼入导出。若不支持中间消息的宿主只交付极速版首批，必须由用户明确确认“导出当前首批”后才可导出该当前结果，并明确它不是完整歌单。只导出已进入最终报告或已确认当前首批、通过验证的记录；TXT 记录必须拥有符合平台策略的直接曲目/发行链接，W4DJ 记录必须来自当前最终结果。同一录音跨平台只写一条，TXT 链接按 `link_priority` 选择第一条可用链接；exclusive 模式只使用目标平台链接。无可用链接的 TXT 曲目按跳过规则处理，并在导出结果中列出。
 
 ### W4DJ 交接格式
 
-`导出到w4dj` 生成 UTF-8 JSON 文件，扩展名固定为 `.w4dj`，格式固定为全新的 `format_version: 2`。旧 v1 文件直接拒绝，必须重新导出 v2，不做迁移。根层只写 `format: "w4dj"`、`format_version`、`export_id`、`playlist` 和 `tracks`；`playlist` 只写 `name`。完整 JSON Schema 见 [w4dj.schema.json](w4dj.schema.json)。
+`export_w4dj` 生成 UTF-8 JSON 文件，扩展名固定为 `.w4dj`，格式固定为全新的 `format_version: 2`。旧 v1 文件直接拒绝，必须重新导出 v2，不做迁移。根层只写 `format: "w4dj"`、`format_version`、`export_id`、`playlist` 和 `tracks`；`playlist` 只写 `name`。完整 JSON Schema 见 [w4dj.schema.json](w4dj.schema.json)。
 
 三种输出模式都支持交接，内部 `output_mode` 固定映射为：极速版 `fast`、简要版 `composite`、丰富版 `four_views`。导出使用当前最终结果：简要版使用综合表，丰富版使用动态综合版，极速版使用最终 fast 表；如果用户已经完成五度圈重排，使用重排后的最终顺序。不得把四个丰富版视角拼成重复曲目。
 
@@ -132,7 +128,7 @@ Official Title - Official Artist
 
 W4DJ v2 不写 BPM、调性、专辑、URL、平台状态、`record_id`、`artists`、`duration`、`musical_key`、`platform_refs`、`dedupe_key`、`expected_filename_hint`、`local_audio_path` 或任何本地路径。这些仍可作为 Skill 的内部推荐和验证记录，但不能泄漏到 `.w4dj`。W4DJ 只交接推荐意图、最终顺序、完整官方歌名、艺人和可选网易云 ID。
 
-宿主有文件写入能力时，用户明确回复 `导出到w4dj` 后生成 `.w4dj` 文件并返回本地文件链接；设置 `w4dj_export.status: generated`。宿主不能写入时，返回等价 JSON manifest 和保存步骤，设置 `w4dj_export.status: manifest_only`，不得声称已创建文件。
+宿主有文件写入能力时，用户明确触发 `export_w4dj` 后生成 `.w4dj` 文件并返回本地文件链接；设置 `w4dj_export.status: generated`。宿主不能写入时，返回等价 JSON manifest 和保存步骤，设置 `w4dj_export.status: manifest_only`，不得声称已创建文件。
 
 TXT 使用 UTF-8 纯文本，每行一首，保留包含官方限定的完整曲名以及可用的直接曲目页链接：
 

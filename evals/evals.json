@@ -334,11 +334,11 @@
       "id": 28,
       "name": "simplified-chinese-language-market-inference",
       "prompt": "/dj-crate-digger 请用简体中文帮我找一套适合深夜酒吧的 House set；目标国家 / 地区留空。",
-      "expected_output": "报告保持简体中文；地区留空时本轮临时采用中国大陆，target_market_source 为 language_inferred；该推断不持久化。",
+      "expected_output": "报告保持简体中文；地区留空时本轮只采用宽泛的中文市场，target_market_source 为 language_inferred；不指定具体国家且该推断不持久化。",
       "expectations": [
         "communication_language 解析为简体中文，报告自然语言保持中文",
-        "target_market 临时推断为中国大陆，且来源明确为 language_inferred",
-        "推断只服务本轮语境、来源选择和平台判断，不被呈现为用户明确填写",
+        "target_market 临时采用宽泛的中文市场，且来源明确为 language_inferred",
+        "推断只服务本轮语境、来源选择和平台判断，不指定具体国家，也不被呈现为用户明确填写",
         "persist_target_market 为 false，且不创建跨会话市场偏好"
       ]
     },
@@ -833,7 +833,7 @@
       "id": 71,
       "name": "literal-first-round-template-contract",
       "prompt": "/dj-crate-digger 我想为周末俱乐部排一套歌。",
-      "expected_output": "简体中文第一轮逐字复现 SKILL.md 中的完整字面模板，不压缩、改写或丢失行内代码标记。",
+      "expected_output": "简体中文第一轮逐字复现 references/locales/zh-Hans.md 中的完整字面模板，不压缩、改写或丢失行内代码标记。",
       "expectations": [
         "用户可见回复从固定欢迎语开始，精确包含 `填写规则为：` 和两条编号规则",
         "完整保留【第一轮：必要信息】、六个字段、六组说明和全部 20 个行内代码片段",
@@ -845,9 +845,9 @@
       "id": 72,
       "name": "literal-second-round-template-contract",
       "prompt": "场景：周末俱乐部\n目标国家 / 地区：中国大陆\n核心声音方向：UK Bass\n歌曲数量或 Set 时长：20 首\n其他限制：",
-      "expected_output": "简体中文第二轮逐字复现 SKILL.md 中的完整字面模板，不压缩、改写或丢失行内代码标记。",
+      "expected_output": "简体中文第二轮逐字复现 references/locales/zh-Hans.md 中的完整字面模板，不压缩、改写或丢失行内代码标记。",
       "expectations": [
-        "回复精确从【第二轮：需求细化】开始，并完整保留九个字段及示例",
+        "回复精确从【第二轮：需求细化】开始，并完整保留八个字段及示例",
         "第一轮的三种输出版本已确认；第二轮的熟悉度与发现感、时代与经典、能量走势和六个平台示例全部保留反引号",
         "完整模板包含 30 个行内代码片段和恰好一个 markdown fenced 填写代码块",
         "模板前后没有总结、澄清问题或额外说明"
@@ -1000,6 +1000,76 @@
         "format_version=1 不被当作可兼容输入",
         "不从 created_at、output_mode、platform_refs、dedupe_key、duration 或其他旧字段拼装 v2",
         "错误说明包含重新导出 v2 的下一步"
+      ]
+    },
+    {
+      "id": 89,
+      "name": "multilingual-locale-pack-contract",
+      "prompt": "加载 references/locales/manifest.json，并为 26 种支持语言准备两轮 DJ 选歌流程。",
+      "expected_output": "每种语言使用自己的固定语言包；问卷、三种报告、动作、平台策略和状态标签不依赖模型临场翻译。",
+      "expectations": [
+        "manifest 按既定顺序列出 26 个 locale，并且每个文件存在",
+        "每个语言包固定包含第一轮 6 个字段、第二轮 8 个字段、Fast/Brief/Rich 报告合同和动作意图",
+        "不支持的语言只回退英语；不因为目标市场而切换沟通语言",
+        "非中文语言包不泄漏固定中文用户界面文案"
+      ]
+    },
+    {
+      "id": 90,
+      "name": "multilingual-language-market-separation",
+      "prompt": "用英文沟通，为日本市场找歌；再用西班牙语沟通，为墨西哥市场找歌；最后留空地区。",
+      "expected_output": "每次回复语言跟随 communication_language；明确市场只影响本轮搜索和文化语境，空白市场只使用宽泛语言市场且不持久化。",
+      "expectations": [
+        "英文 + 日本仍输出英文，target_market_source 为 user_provided",
+        "西班牙语 + 墨西哥仍输出西班牙语，target_market_source 为 user_provided",
+        "普通语言 + 空白地区不武断推断具体国家",
+        "target_market 永远不写入长期个人偏好"
+      ]
+    },
+    {
+      "id": 91,
+      "name": "multilingual-action-and-platform-intents",
+      "prompt": "在不同语言的推荐报告后，用本地化自然语言表达反馈、导出 W4DJ、输出文字歌单、五度圈排序和长期记忆确认；同时测试单平台、优先平台和禁用平台。",
+      "expected_output": "先把自然语言映射到统一 action_intent；单平台默认 exclusive，多平台按顺序 preferred，禁用平台硬过滤；模糊动作只确认一次。",
+      "expectations": [
+        "五个 action_intent 在 26 个语言包中均有肯定、否定和模糊表达",
+        "不要求用户输入中文命令，旧中文命令只作为兼容别名",
+        "单独填写 Spotify 不回退到其他平台，Spotify preferred 不误判为 exclusive",
+        "do not use Spotify 等禁用表达不会把 Spotify 放进允许链接或来源"
+      ]
+    },
+    {
+      "id": 92,
+      "name": "multilingual-report-shape",
+      "prompt": "分别以 26 种语言输出极速版、简要版和丰富版推荐报告。",
+      "expected_output": "所有可见固定文案来自对应语言包；极速版三列，简要版和丰富版十二列，下一步数量和丰富版视角数量固定。",
+      "expectations": [
+        "Fast 只有歌名、艺人、链接三列，并且只有最终报告显示两项下一步",
+        "Brief/Rich 使用 BPM 后带调性的十二列；每份各有三项下一步",
+        "Rich 固定包含风格、场景、熟悉度与发现感、动态综合四个视角",
+        "选歌碎碎念、接歌建议、状态、反馈和导出说明均不混用其他语言标签"
+      ]
+    },
+    {
+      "id": 93,
+      "name": "multilingual-trigger-coverage",
+      "prompt": "在 26 种语言中分别提出带 DJ 场景、风格和逐曲验证要求的选歌请求。",
+      "expected_output": "所有语言都按相同的 DJ 策划语境触发 Skill，并先进入固定两轮 Markdown 需求收集。",
+      "expectations": [
+        "evals/trigger-evals.json 为每个 locale 提供一个正向触发样例",
+        "没有 DJ 音乐策划语境的普通歌单、识歌、下载或编程请求不因多语言支持而误触发",
+        "触发不依赖 Codex 专属命令或 agents/openai.yaml"
+      ]
+    },
+    {
+      "id": 94,
+      "name": "multilingual-model-replay-transparency",
+      "prompt": "执行 26 × 6 × 2 的 medium/xhigh 多语言冷启动回放并报告验收状态。",
+      "expected_output": "如果当前环境不能调用目标模型，明确标记 312 次回放尚未完成，不伪称通过。",
+      "expectations": [
+        "evals/multilingual-evals.json 声明 required_runs=312、medium 和 xhigh 两档",
+        "模型客户端不可用时 model_replay.status 保持 not_run 并包含原因",
+        "母语审校和模型回放完成前不把 26 种语言宣传为全部正式审校支持"
       ]
     }
   ]

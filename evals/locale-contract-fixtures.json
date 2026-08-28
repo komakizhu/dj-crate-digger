@@ -1,0 +1,21 @@
+{
+  "language_market_cases": [
+    {"name": "english-explicit-japan", "communication_language": "en", "target_market": "Japan", "target_market_source": "user_provided", "persist_target_market": false},
+    {"name": "spanish-explicit-mexico", "communication_language": "es", "target_market": "Mexico", "target_market_source": "user_provided", "persist_target_market": false},
+    {"name": "arabic-explicit-uk", "communication_language": "ar", "target_market": "United Kingdom", "target_market_source": "user_provided", "persist_target_market": false},
+    {"name": "blank-language-market", "communication_language": "en", "target_market": "broad English-language market", "target_market_source": "language_inferred", "persist_target_market": false}
+  ],
+  "action_cases": [
+    {"locale": "en", "intent": "share_feedback", "kind": "positive", "input": "I like this track"},
+    {"locale": "zh-Hans", "intent": "export_w4dj", "kind": "positive", "input": "导出到w4dj"},
+    {"locale": "es", "intent": "output_text_playlist", "kind": "ambiguous", "input": "Quizá sacar la playlist de texto"},
+    {"locale": "ja", "intent": "harmonic_reorder", "kind": "negative", "input": "並べ替えない"},
+    {"locale": "ar", "intent": "confirm_long_term_memory", "kind": "positive", "input": "تذكر هذا التفضيل"}
+  ],
+  "platform_cases": [
+    {"locale": "en", "text": "Spotify only", "expected_mode": "exclusive", "expected_platform": "spotify"},
+    {"locale": "zh-Hans", "text": "网易云", "expected_mode": "exclusive", "expected_platform": "netease_cloud_music"},
+    {"locale": "es", "text": "Spotify / SoundCloud", "expected_mode": "preferred", "expected_platform": "spotify"},
+    {"locale": "fr", "text": "ne pas utiliser Spotify", "expected_mode": "cross-platform", "expected_forbidden": "spotify"}
+  ]
+}

@@ -1,5 +1,13 @@
 # 搜索、验证与去重
 
+## 语言包、语言与市场
+
+先读取 [locales/manifest.json](locales/manifest.json)，根据 `communication_language` 加载一个固定语言包。语言包只负责问卷、可见状态、平台策略表达和动作意图词；搜索查询可以保留用户原词并补充英文检索词。`communication_language` 与 `target_market` 始终分离：明确国家/地区只改变本轮搜索语境和可用性解释，空白地区只使用语言包定义的宽泛市场，不猜具体国家，也不持久化。
+
+## 多语言平台意图
+
+平台名称、exclusive/preferred/fallback/forbidden 表达从当前语言包的 `platform_policy` 读取，并归一化到平台 ID。用户只填写一个平台且没有回退词时，默认为 `exclusive`；明确的“仅限/只使用”同样是 `exclusive`。多个平台按填写顺序构成 `preferred` 允许列表；优先词只影响链接和回退顺序，不进入内容排序。禁用表达从搜索、引用、报告和导出中硬过滤。动作请求使用语言包 `actions` 的 `action_intent`，不强迫用户用中文或某一种语言的命令。
+
 ## 搜索策略
 
 把需求拆成多个查询，不依赖一次宽泛搜索。至少覆盖：

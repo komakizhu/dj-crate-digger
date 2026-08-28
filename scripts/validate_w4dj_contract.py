@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -113,131 +114,70 @@ def source_contract_errors() -> list[str]:
         ROOT / "README.md",
         ROOT / "references" / "export.md",
         ROOT / "references" / "report-template.md",
+        ROOT / "references" / "search-verification.md",
     )
     source = "\n".join(path.read_text(encoding="utf-8") for path in source_paths)
     required = (
-        "导出到w4dj",
-        "输出文字版歌单",
+        "locales/manifest.json",
+        "locale_pack",
+        "communication_language",
+        "target_market",
+        "action_intent",
+        "output_text_playlist",
+        "export_w4dj",
         ".w4dj",
         "UTF-8 JSON",
-        "w4dj.schema.json",
         "format_version: 2",
         "netease_track_id",
-        "v1",
-        "不做迁移",
-        "只保留",
-        "未知",
         "不生成占位文件",
         "不处理本地音频",
     )
     errors = [f"source contract missing {fragment!r}" for fragment in required if fragment not in source]
 
-    concise_track_list_notice = (
-        "`输出文字版歌单`的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。"
-    )
-    old_track_list_notice = (
-        "导出歌单名的功能：输出标题“## 网易云歌单目录”，并在标题下方用 Markdown 代码围栏包住"
-    )
-    user_template_paths = (
-        ROOT / "SKILL.md",
-        ROOT / "README.md",
-        ROOT / "references" / "export.md",
-        ROOT / "references" / "report-template.md",
-    )
-    for path in user_template_paths:
-        text = path.read_text(encoding="utf-8")
-        if concise_track_list_notice not in text:
-            errors.append(f"{path.name}: missing concise track-list export notice")
-        if old_track_list_notice in text:
-            errors.append(f"{path.name}: contains the old verbose track-list export notice")
+    for old_command in ("导出w4dj", "导出歌单名"):
+        if old_command in source:
+            errors.append(f"source contract contains retired export command {old_command!r}")
 
-        for old_command in ("导出w4dj", "导出歌单名"):
-            if old_command in text:
-                errors.append(f"{path.name}: contains retired export command {old_command!r}")
-        for old_format_marker in ("schema v1", "format_version: 1", "格式版本固定为 `1`"):
-            if old_format_marker in text:
-                errors.append(f"{path.name}: contains retired W4DJ format marker {old_format_marker!r}")
-
-    tutorial_link = (
-        "[一键导入Set教程]"
-        "(https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)"
-    )
-    retired_repository_link = "[dj-crate-digger](https://github.com/komakizhu/dj-crate-digger)"
-    for path in (ROOT / "SKILL.md", ROOT / "references" / "report-template.md"):
-        text = path.read_text(encoding="utf-8")
-        if tutorial_link not in text:
-            errors.append(f"{path.name}: missing the dedicated W4DJ tutorial link")
-        if retired_repository_link in text:
-            errors.append(f"{path.name}: contains the retired repository-root tutorial link")
-
-    chinese_template_paths = (
-        ROOT / "SKILL.md",
-        ROOT / "references" / "report-template.md",
-    )
-    for path in chinese_template_paths:
-        lines = path.read_text(encoding="utf-8").splitlines()
-        export_lines = [line for line in lines if "输出文字版歌单" in line]
-        if not any("导出到w4dj" in line for line in export_lines):
-            errors.append(f"{path.name}: W4DJ must share the track-list export sentence")
-        if any("您可以把本次推荐交接给 W4DJ" in line for line in lines):
-            errors.append(f"{path.name}: W4DJ must not be a separate numbered line")
-
-    english_lines = (ROOT / "references" / "report-template.md").read_text(encoding="utf-8").splitlines()
-    if not any(
-        "output text playlist" in line and "export to w4dj" in line
-        for line in english_lines
-    ):
-        errors.append("report-template.md: English W4DJ command must share the track-list export sentence")
-
-    next_step_heading_contract = {
-        ROOT / "SKILL.md": {
-            "### **第一**｜反馈选歌情况": 1,
-            "### **第二**｜导出或交接歌单": 1,
-            "### **第三**｜排列 Set 顺序": 1,
-        },
-        ROOT / "references" / "report-template.md": {
-            "### **第一**｜反馈选歌情况": 2,
-            "### **第二**｜导出或交接歌单": 2,
-            "### **第三**｜排列 Set 顺序": 1,
-            "### **First**｜Share Selection Feedback": 1,
-            "### **Second**｜Export or Hand Off the Playlist": 1,
-            "### **Third**｜Sequence the Set": 0,
-        },
-    }
-    for path, expected_counts in next_step_heading_contract.items():
-        text = path.read_text(encoding="utf-8")
-        for heading, expected_count in expected_counts.items():
-            actual_count = text.count(heading)
-            if actual_count != expected_count:
-                errors.append(
-                    f"{path.name}: expected {expected_count} occurrences of {heading!r}, got {actual_count}"
-                )
-
-    chinese_tutorial_fragment = (
-        "[w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。"
-        "具体操作教程可以查看 [一键导入Set教程]"
-        "(https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)"
-    )
-    for path, expected_count in (
-        (ROOT / "SKILL.md", 1),
-        (ROOT / "references" / "report-template.md", 2),
-    ):
-        actual_count = path.read_text(encoding="utf-8").count(chinese_tutorial_fragment)
-        if actual_count != expected_count:
-            errors.append(
-                f"{path.name}: tutorial link must join the W4DJ sentence exactly {expected_count} time(s)"
-            )
-
-    english_tutorial_fragment = (
-        "[w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB). "
-        "For detailed instructions, see [One-click Set Import Tutorial]"
-        "(https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)."
-    )
     report_text = (ROOT / "references" / "report-template.md").read_text(encoding="utf-8")
-    if report_text.count(english_tutorial_fragment) != 1:
-        errors.append("report-template.md: English tutorial link must join the W4DJ sentence")
-    return errors
+    if "locale_pack.report" not in report_text or "action_intent" not in report_text:
+        errors.append("report-template.md: visible text is not routed through locale packs and action intents")
 
+    manifest_path = ROOT / "references" / "locales" / "manifest.json"
+    locale_dir = ROOT / "references" / "locales"
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        entries = manifest["locales"]
+    except (OSError, json.JSONDecodeError, KeyError, TypeError) as exc:
+        return errors + [f"locale manifest cannot be read by W4DJ contract: {exc}"]
+    if len(entries) != 26:
+        errors.append(f"locale manifest: expected 26 entries, got {len(entries)}")
+    for entry in entries:
+        locale = entry.get("id")
+        filename = entry.get("file")
+        if not isinstance(locale, str) or not isinstance(filename, str):
+            errors.append("locale manifest: malformed entry")
+            continue
+        pack_path = locale_dir / filename
+        if not pack_path.exists():
+            errors.append(f"locale manifest: missing {filename}")
+            continue
+        try:
+            matches = re.findall(
+                r"```json\s*\n(.*?)\n```",
+                pack_path.read_text(encoding="utf-8"),
+                flags=re.DOTALL,
+            )
+            pack = json.loads(matches[0])
+        except (OSError, json.JSONDecodeError, IndexError, TypeError) as exc:
+            errors.append(f"{locale}: invalid locale pack in source contract: {exc}")
+            continue
+        if pack.get("locale") != locale:
+            errors.append(f"{locale}: locale pack metadata mismatch")
+        tutorial_url = str(pack.get("quick_start", {}).get("tutorial_url", ""))
+        expected_tutorial = "/docs/w4dj/README.md" if locale.startswith("zh-") else "/docs/w4dj/README.en.md"
+        if expected_tutorial not in tutorial_url:
+            errors.append(f"{locale}: tutorial link is not localized to the documented language")
+    return errors
 
 def title_embedded_version_errors(schema: dict[str, Any], fixtures: dict[str, Any]) -> list[str]:
     """Enforce that an official title carries its own Remix/Edit/Live qualifier."""

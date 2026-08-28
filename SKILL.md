@@ -1,6 +1,6 @@
 ---
 name: dj-crate-digger
-description: "Use when a user asks to discover, curate, rank, sequence, arrange, or export music for a DJ set or playlist with clear music-curation context: a performance, venue, set, genre, artist, reference track, BPM, mood, or energy request. Activate for equivalent Chinese or English requests such as 挖歌, 找歌, 排set, setlist, crate digging, or DJ playlist. Do not activate for generic playlist requests or song identification alone."
+description: "Use when a user asks in any supported locale to discover, curate, rank, sequence, arrange, or export music for a DJ set or playlist with clear music-curation context: a performance, venue, set, genre, artist, reference track, BPM, mood, or energy request. Activate for equivalent requests such as 挖歌, 找歌, 排set, setlist, crate digging, or DJ playlist. Do not activate for generic playlist requests or song identification alone."
 ---
 
 # 老炮DJ（dj-crate-digger）
@@ -23,6 +23,10 @@ description: "Use when a user asks to discover, curate, rank, sequence, arrange,
 - 没有平台约束时，最终链接展示顺序默认为 SoundCloud → Apple Music → Spotify；跨平台发现采用均衡轮询或并行抽样，而不是按默认平台顺序偏置候选池。用户给出的平台顺序、允许列表或禁用列表覆盖默认值，但平台优先级只决定发现覆盖与链接呈现，不改变风格、场景和熟悉度与发现感的内容排序。
 
 ## 资源路由
+
+开始任何可见回复前读取 [locales/manifest.json](references/locales/manifest.json)，根据当前输入解析 `communication_language` 并加载对应的固定语言包。语言包是问卷、报告标签、状态词、动作意图和平台策略表达的唯一可见文本来源；不支持的语言只回退到 `en`，不临场拼接另一种语言。
+
+语言选择顺序固定为：用户在当前消息中明确要求的回复语言 → 当前自然语言正文的主要语言 → 当前会话已经使用的沟通语言 → `en` 回退。把语言或脚本映射到 manifest 中的 locale ID 后，整次回复沿用同一个语言包；歌曲、艺人、平台和官方标题仍保留原文。混合语言消息不改变目标市场：以明确语言要求或主要沟通语言选择 `communication_language`，再独立读取 `target_market`。
 
 开始搜索前读取 [search-verification.md](references/search-verification.md)。
 
@@ -47,7 +51,7 @@ description: "Use when a user asks to discover, curate, rank, sequence, arrange,
 
 以下自然语言表达可以直接触发：`/dj-crate-digger`、旧别名 `/crate-digger`、`/迪歌`、`迪歌`、`挖歌`、`crate digger`、`crate digging`。明确的 DJ 编排表达也可以直接触发：`排set`、`排 set`、`排一套 set`、`setlist`、`编排 set`、`安排 DJ set`、`sequence a DJ set`。客户端可以提供自己的命令别名，但核心 Skill 不依赖任何特定命令。`digger`、`digging` 需要同时有音乐语境，例如 track、music、house、techno、DJ 或 set。
 
-`找歌`、`找歌单`、`排歌`、`排歌单`、`歌单`、`playlist`、`做个 playlist`、`找一套`、`find tracks` 和 `build a set` 需要同时出现 DJ、打碟、演出、set、club、暖场、开场、压场、推峰、收场、舞池、场地、流派、艺人、参考曲目、BPM、情绪或明确音乐场景等策划语境。`打碟歌单`、`暖场歌单`、`DJ playlist`、`DJ setlist` 等自身已经包含足够语境。
+`找歌`、`找歌单`、`排歌`、`排歌单`、`歌单`、`playlist`、`做个 playlist`、`找一套`、`find tracks` 和 `build a set` 需要同时出现 DJ、打碟、演出、set、club、暖场、开场、压场、推峰、收场、舞池、场地、流派、艺人、参考曲目、BPM、情绪或明确音乐场景等策划语境。语言包列出的其他支持语言也遵循同一音乐策划语境判断；不要求用户使用中文、英语或某个斜杠命令。`打碟歌单`、`暖场歌单`、`DJ playlist`、`DJ setlist` 等自身已经包含足够语境。
 
 不要仅因 `/DJ`、`做歌单`、`找一套`、`playlist` 或 `歌单` 单独出现而触发；“这是什么歌”“帮我识别歌名”等识别已有曲目的请求也不属于本 skill。
 
@@ -57,73 +61,11 @@ description: "Use when a user asks to discover, curate, rank, sequence, arrange,
 
 触发 skill 后先进入 `collect_requirements`。不能在第二轮答复完成前搜索、建立候选池或推荐曲目。两轮提问都必须使用一个可复制的 Markdown 代码块，不得用结构化控件、散落项目符号或额外问题替代。第二轮答复后直接生成只读需求摘要并进入搜索，不追加普通澄清问题。
 
-把问卷渲染视为低自由度的字面输出任务，而不是可改写的文案任务。简体中文会话必须逐字输出下面对应 `START` 与 `END` HTML 注释之间的全部内容；边界注释不得输出给用户。不得总结、润色、合并、删减或改写模板；必须保留标题、空行、编号、大小写、中文标点、每一对行内反引号，以及唯一一个三反引号 `markdown` 填写代码块。模板前后不得添加说明，也不得给整段模板再包一层代码围栏。
+把问卷渲染视为低自由度的字面输出任务，而不是可改写的文案任务。固定问卷不再内嵌在本文件；先读取 [locales/manifest.json](references/locales/manifest.json)，再按 `communication_language` 精确选择对应的 `references/locales/<locale>.md` 语言包。语言包 JSON 中 `intake.round_1.prompt` 与 `intake.round_2.prompt` 是唯一可见问卷正文，必须原样输出；不得临场翻译、总结、润色、合并、删减、改写或用其他语言包回填。
 
-繁体中文或其他语言可以等义本地化自然语言，但必须保持相同字段、顺序、示例数量、行内代码标记和单个填写代码块。无论语言为何，问卷结构都不得压缩。
+每轮只能输出语言包中的一段问卷，并保留相同的字段顺序、示例数量、行内代码标记、空行和唯一一个三反引号 `markdown` 填写代码块。模板前后不得添加说明，也不得给整段模板再包一层代码围栏。简体中文的 `zh-Hans` 包继续作为既有字面合同；其 20/30 个行内代码片段和固定中文标点由校验器逐字检查。语言包缺失或不受支持时才回退 `en`，并在内部记录回退原因。
 
-<!-- INTAKE_TEMPLATE_ROUND_1_ZH_CN_START -->
-欢迎来到 DJ 选歌助手。这是一个利用 Agent 帮您排 set 的 skill。您将在两轮对话中确认需求，并获得 AI 选歌建议。填写规则为：
-
-1. 可以从例子中复制，也可以自由填写或不填
-2. 不填意味着ai智能判断答案
-
-【第一轮：必要信息】
-场景：
-「表演场景。如：`酒吧` / `俱乐部` / `婚礼` / `艺术展`」
-目标国家 / 地区：
-「如：`中国大陆` / `台湾` / `香港` / `日本` / `英语国际市场`」
-核心声音方向：
-「参考艺人、参考曲目以及参考流派。如：`Skrillex` 的 `Tears`，`现代UK_Bass`流派」
-歌曲数量或 Set 时长：
-「如：`20 首` / `60 分钟`」
-输出版本：
-「`极速版`：快速输出playlist，但是质量会下降」
-「`简要版`：只给一个综合的playlist」
-「`丰富版`：根据您选择的风格、场景、熟悉度与发现感分别提供建议，并最终输出成简要版」
-其他限制：
-「如：`不要口水歌`、`不要人声`、`只要Remix`；可以不填」
-
-```markdown
-场景：
-目标国家 / 地区：
-核心声音方向：
-歌曲数量或 Set 时长：
-输出版本：
-其他限制：
-```
-<!-- INTAKE_TEMPLATE_ROUND_1_ZH_CN_END -->
-
-<!-- INTAKE_TEMPLATE_ROUND_2_ZH_CN_START -->
-【第二轮：需求细化】
-具体风格：
-「如：`House` / `Bass` / `Garage` / `Techno` / `Breakbeat`」
-速度 / BPM：
-「如：`105` / `128` / `140` / `150` / `170`」
-熟悉度与发现感：
-「`热门熟悉`/`平衡`/`小众发现`」
-时代与经典：
-「`当代为主`/`少量经典锚点`/`新旧桥接`/`经典优先`」
-情绪：
-「如：`怀旧` / `阴冷` / `浪漫`」
-SET 能量级或能量走势：
-「如：`低`/`高`；`平稳` / `过山车`」
-平台与链接要求：
-「如：`网易云`/`Apple Music`/`SoundCloud`/`Bandcamp`/`Beatport`/`Spotify`；填写一个平台时只使用该平台，填写多个平台按先后顺序优先」
-其他：
-
-```markdown
-具体风格：
-速度 / BPM：
-熟悉度与发现感：
-时代与经典：
-情绪：
-SET 能量级或能量走势：
-平台与链接要求：
-其他：
-```
-<!-- INTAKE_TEMPLATE_ROUND_2_ZH_CN_END -->
-
-发送问卷前在内部执行一次完整性检查，不向用户展示检查过程。简体中文第一轮必须精确匹配第一轮模板，并包含 20 个行内代码片段；第二轮必须精确匹配第二轮模板，并包含 30 个行内代码片段。第二轮的能量字段必须保留完整文字 `「如：`低`/`高`；`平稳` / `过山车`」`，不能删掉 `如：` 或压缩为只有选项。每轮都必须恰好有一个 `markdown` 填写代码块。若任一固定文本、反引号、字段、顺序或代码块不匹配，丢弃草稿并从对应模板重新生成整段回复，不能只补缺失部分。
+`communication_language` 只控制当前回复语言，不等于 `target_market`。明确填写的国家或地区只覆盖本轮市场语境；留空时只使用该语言对应的宽泛市场，不猜具体国家，不把市场写入长期画像。繁体中文不自动等于台湾或香港，西班牙语不自动等于西班牙，葡萄牙语不自动等于巴西；显式地区始终优先且不改变沟通语言。
 
 第一轮字段映射到需求卡：
 
@@ -141,8 +83,8 @@ SET 能量级或能量走势：
 - 用户明确填写国家或地区时永远优先；它覆盖语言推断，但不改变 `communication_language`
 - 用户明确填写国家或地区时，设置 `target_market_source: user_provided`，并保持 `persist_target_market: false`
 - 留空时只生成本轮临时 `target_market`，设置 `target_market_source: language_inferred`，并保持 `persist_target_market: false`
-- 简体中文默认 `中国大陆`
-- 繁体中文只有在词汇和用字证据足够时才区分 `香港` 或 `台湾`；证据不足时保留宽泛的繁体中文市场
+- 简体中文留空时只使用宽泛的中文市场，不指定 `中国大陆`
+- 繁体中文留空时保留宽泛的繁体中文市场；即使出现繁体字，也不自动指定 `香港` 或 `台湾`
 - 一般英文默认 `英语国际市场`，不默认美国或英国
 
 第二轮字段映射到需求卡：
@@ -206,6 +148,8 @@ SET 能量级或能量走势：
 
 ```yaml
 communication_language: auto
+locale_pack: en  # resolved from communication_language; fallback only when unsupported
+locale_pack_source: detected | fallback
 target_market: unknown
 target_market_source: unknown  # user_provided | language_inferred
 persist_target_market: false
@@ -350,9 +294,9 @@ assumptions: []
 
 ### 7. 输出报告
 
-严格使用 [report-template.md](references/report-template.md) 的结构。默认用“高 / 中高 / 中 / 中低 / 低”等解释性标签。只有用户要求详细分析时，才展示数值权重与分项分数。`fast` 只核对指定三列、首批/最终标题和收尾规则；`composite` 模式核对简要版 12 列综合表格；`four_views` 模式再逐项核对丰富版四个视角的 12 列表格。候选不足只减少曲目数量，不静默改变用户选择。
+严格使用 [report-template.md](references/report-template.md) 的结构，并从已加载语言包的 `report.fast`、`report.brief` 和 `report.rich` 槽位渲染可见文本。默认用解释性标签；只有用户要求详细分析时，才展示数值权重与分项分数。`fast` 只核对指定三列、首批/最终标题和收尾规则；`composite` 模式核对简要版 12 列综合表格；`four_views` 模式再逐项核对丰富版四个视角的 12 列表格。候选不足只减少曲目数量，不静默改变用户选择。
 
-报告的标题、段落标题、表头、状态标签和解释文字跟随 `communication_language`；不要因为模板示例是中文，就在英文请求中保留“需求理解”“来源”等中文固定标题。曲名（包括官方歌名中的 Remix、Edit、Live、Dub、Extended Mix 等限定）、艺人名、平台名以及 `Warm Up / Groove / Peak / Closing` 等约定段落名保留官方或约定写法。
+报告的标题、段落标题、表头、状态标签和解释文字必须取自当前 `locale_pack`；不要因为另一种语言包或示例文件是中文，就在当前回复中保留中文固定标题。曲名（包括官方歌名中的 Remix、Edit、Live、Dub、Extended Mix 等限定）、艺人名、平台名以及 `Warm Up / Groove / Peak / Closing` 等约定段落名保留官方或约定写法。
 
 需求确认摘要必须明确披露 `target_market` 与 `target_market_source`。当 `target_market_source: language_inferred` 时，写明这只是根据当前输入语言得到的本轮临时假设，只用于当前搜索语境、来源选择和地区可用性解释，不能写成用户长期偏好或确定事实；当来源为 `user_provided` 时，也只表述为本轮目标市场，不反向改写 `communication_language`。
 
@@ -360,7 +304,7 @@ assumptions: []
 
 简要版和丰富版主表严格使用以下 12 个栏目，不增加序号、Mix、段落或验证状态列：`歌名 | 艺术家 | 专辑/EP | 风格 | BPM | 调性 | 歌曲时长 | 能量级 | 发行时间 | 简介 | 选择原因 | 链接`。歌名必须保留完整官方歌名，包括官方标题中的 Remix、Edit、Live、Dub、Extended Mix 等限定；不另加 Mix 或 Version 列。同一录音的主平台和备用平台链接合并在“链接”单元格中。调性显示 `标准调名 / Camelot`，例如 `A minor / 8A`；无法可靠验证、来源冲突或非 major/minor Camelot 调式时显示“未知”。正常推荐的行顺序仍为 Warm Up / Groove / Peak / Closing；用户明确肯定五度圈重排后，简要版综合表或丰富版动态综合表改为一张连续 12 列表，未知或冲突调性的曲目全部放在末尾“待试听定位”组。不要用搜索结果页代替曲目链接；禁用平台也不要出现在默认报告中。缺失与不确定信息、核验来源和来源等级继续保留在内部记录中，用户明确追问时再回答，不在默认输出中显示或提示。
 
-完整 `composite` / `four_views` 报告必须按 [report-template.md](references/report-template.md) 输出“选歌碎碎念”，并在其中恰好包含一条接歌建议。`composite` 只引用综合表，`four_views` 只引用动态综合版；英文等其他语言本地化模块标签。`fast` 不输出该模块。
+完整 `composite` / `four_views` 报告必须按 [report-template.md](references/report-template.md) 和当前语言包的 `digging_notes` / `mix_suggestion` 槽位输出选歌碎碎念，并在其中恰好包含一条接歌建议。`composite` 只引用综合表，`four_views` 只引用动态综合版；`fast` 不输出该模块。
 
 ### 8. 条件导出
 
@@ -377,37 +321,11 @@ assumptions: []
 
 完整推荐报告输出后，无论用户是否请求平台歌单，都要进入统一的“下一步”收尾，并先把 `local_export.status` 与 `w4dj_export.status` 设为 `offered`。这个收尾只允许出现在完整推荐报告之后，不得在两轮需求收集期间提前出现，也不是第三轮需求收集。简要版、丰富版和极速版都显示自然语言反馈邀请以及 W4DJ / 文字版歌单导出句；简要版和丰富版另外显示五度圈排序邀请，极速版不显示五度圈邀请。所有语言统一使用 `### **本地化序数词**｜本地化动作名称` 的三级标题格式。默认不展示私人记忆状态、本轮反馈状态、长期画像状态、缺失信息或来源栏目；这些状态仍在后台记录。
 
-```markdown
-## 下一步
+报告后的可见收尾只从当前语言包的 `report.<mode>.next_steps` 渲染：`fast` 恰好显示两个动作，`brief` 与 `rich` 恰好显示三个动作；它们必须使用语言包定义的本地化序数、动作标题、反馈说明、文字歌单/W4DJ 导出说明和五度圈邀请。语言包中的动作短语是动作解析的输入，不得强制用户使用中文命令；旧中文命令只作为兼容别名在内部识别。
 
-### **第一**｜反馈选歌情况
+报告后的动作都是可选的，不构成第三轮需求收集。使用语言包的 `actions` 槽位把用户自然语言映射为统一的 `action_intent`：`share_feedback`、`export_w4dj`、`output_text_playlist`、`harmonic_reorder`、`confirm_long_term_memory`。肯定、否定和模糊表达分别执行、拒绝或只确认一次；不要求用户使用某个固定语言。报告显示后设置导出动作状态为 `offered`；五度圈仅在 `composite` / `four_views` 中提供，肯定后设置为 `requested: true`、`status: confirmed`，重排成功为 `reordered`，否定为 `declined`，模糊为 `needs_clarification`。简要版重排综合表，丰富版只重排动态综合表，三个专项视角保持原样；重排保留曲目集合、完整官方歌名、录音去重、艺人比例和平台链接。五度圈排序以基础 Camelot 兼容相邻数优先，实验性同字母 ±2 仅作兜底，未知或冲突调性曲目放到语言包定义的“待试听定位”组；最多输出 5 组符合基础兼容和归一化 BPM 门槛的 double drop 候选，并说明仍需 DJ 试听。重排后的最终顺序用于 W4DJ 和文字歌单导出。自然语言反馈只更新当前会话；长期档案必须先形成摘要并获得明确确认。
 
-如果愿意，您可以用自然语言回复我选歌情况，这会丰富您的私人选歌偏好，让推荐更准。回复包括但不限于「`skream的歌不错，但我这次因为客群的关系没放`/`我不喜欢跳楼机，以后别再推了`/`我这次打了这些歌（配图/表）`」
-
-### **第二**｜导出或交接歌单
-
-您可以输出文字版歌单或交接给 W4DJ，直接回复 `导出到w4dj` 或者 `输出文字版歌单` 即可
-
-`w4dj`的功能：一键导入歌单，下载后一键转换格式，并一键导入打碟软件，请导出`.w4dj`格式并且下载 [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB)。具体操作教程可以查看 [一键导入Set教程](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)
-
-`输出文字版歌单`的功能：输出可复制文本，可以手动导入网易云，但无法帮您一键把歌曲导入 RKB。
-
-### **第三**｜排列 Set 顺序
-
-需要我根据五度圈原则帮您排列set顺序吗？
-```
-
-这里的自然语言反馈、W4DJ 交接、文字版歌单目录和五度圈排序都是报告后的可选动作。用户可以只反馈、只交接、只请求目录、只请求重排、组合使用，或不回复；不要把它们解释成第三轮需求收集。报告显示后将 `harmonic_order.offered` 设为 `true`（仅 `composite` / `four_views`），将 `w4dj_export.status` 设为 `offered`。用户明确肯定五度圈邀请时设为 `requested: true`、`status: confirmed`，重排成功后设为 `reordered`；否定设为 `declined`，模糊答复设为 `needs_clarification`。五度圈邀请的明确肯定意图包括“是”“需要”“可以”“帮我排”“按五度圈排”等；否定不执行，模糊表达只请求确认。简要版肯定后重排综合版，丰富版肯定后只重排动态综合版，三个专项视角保持原样。执行后保留全部曲目、完整官方歌名、录音去重、艺人比例和平台链接；以 Camelot 基础兼容相邻数优先，实验性同字母 ±2 仅作兜底，未知或冲突调性的曲目放到末尾“待试听定位”组。最多输出 5 组满足基础兼容且半拍 / 双拍归一化后 BPM 差不超过 3% 的 double drop 候选，并明确仍需 DJ 试听。重排后的最终顺序成为后续 W4DJ、文字版歌单和兼容 TXT 导出顺序。不要把反馈解释成事件日志、长期摘要确认或 Beta 画像更新，也不要暗示存在跨会话持久化。收到 `输出文字版歌单` 后，直接基于当前最终结果输出标题“## 网易云歌单目录”，并在标题下方用 Markdown 代码围栏包住每行一条“歌名 - 歌手”的可复制文本，不重新搜索、不改动曲目集合、不追加新需求，也不承诺一键导入 RKB。歌名与歌手之间使用短横线分隔；清单只保留官方歌名和官方艺人，维持当前最终顺序，不加入链接、专辑、版本猜测或未入选曲目；用户表达“需要”“可以”“要”“输出目录”等明确肯定意图时执行，模糊表达只确认一次。旧指令 `导出txt` 作为兼容入口保留，按既有 TXT 规则处理。收到 `导出到w4dj` 后设置 `w4dj_export.status: confirmed`，读取 [export.md](references/export.md) 和 [w4dj.schema.json](references/w4dj.schema.json)，只导出当前最终结果的推荐意图、顺序、完整官方歌名和艺人，以及可选的 `netease_track_id`；生成成功后设为 `generated`，宿主不能写入时设为 `manifest_only`。W4DJ v2 只写 UTF-8 JSON 的最小交接结构：根层 `format`、`format_version: 2`、`export_id`、`playlist.name`、`tracks`；每首只写 `position`、完整官方 `title`、`artist_display`，有网易云身份时写入 JSON 字符串 `netease_track_id`，没有时省略。不要把 BPM、调性、专辑、URL、平台状态、`record_id`、`dedupe_key`、`expected_filename_hint` 或本地路径写入 `.w4dj`；这些信息如果需要仍只在内部推荐记录中保留。旧 v1 文件直接拒绝，必须重新导出 v2，不做迁移。W4DJ 不处理本地音频、不生成占位文件、本地最终文件名、二维码或网易云下载；自然语言反馈只在当前会话自动生效，长期档案仍必须先形成摘要并获得明确确认。
-
-用户明确同意输出网易云目录后，使用以下模板，不再追加问题：
-
-````markdown
-## 网易云歌单目录
-
-```markdown
-Official Title - Official Artist
-```
-````
+用户明确触发 `output_text_playlist` 后，直接使用当前语言包的 `export.text` 与文本歌单结构输出当前最终顺序，不重新搜索、不改动曲目集合、不追加需求，也不承诺一键写入平台。
 
 默认只导出最终交付表：极速版使用最终极速表，简要版使用综合结果，丰富版使用最后的动态综合结果，不把风格、场景、熟悉度与发现感三个视角重复拼接。若宿主只交付极速版首批，用户必须明确确认“导出当前首批”后才可导出当前结果，不能把它表述为完整歌单。TXT 每行一首，包含完整曲名、艺人和首选可用链接；W4DJ 使用 UTF-8 JSON `.w4dj` 文件，按 [w4dj.schema.json](references/w4dj.schema.json) 写入当前最终结果，固定为全新的 `format_version: 2` 最小结构，只保留最终顺序、完整官方歌名、艺人和可选的字符串 `netease_track_id`。它不包含本地音频、绝对路径、URL、平台状态或内部去重键；旧 v1 不兼容且不迁移。极速版的内部元数据可以未知，但不得为了补齐 v2 字段而猜测。
 

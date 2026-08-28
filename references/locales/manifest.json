@@ -1,0 +1,46 @@
+{
+  "schema": "dj-crate-digger-locale-manifest",
+  "manifest_version": 1,
+  "default_locale": "en",
+  "fallback_locale": "en",
+  "routing": {
+    "locale_selection_order": [
+      "explicit_communication_language",
+      "dominant_current_message_language",
+      "current_session_language",
+      "fallback_locale"
+    ],
+    "communication_language_is_independent_from_target_market": true,
+    "explicit_target_market_wins_over_language_inference": true,
+    "blank_target_market_is_broad_and_session_only": true,
+    "unsupported_locale_falls_back_to_en": true
+  },
+  "locales": [
+    {"id": "en", "file": "en.md", "language_name": "English", "native_name": "English", "direction": "ltr"},
+    {"id": "zh-Hans", "file": "zh-Hans.md", "language_name": "Simplified Chinese", "native_name": "简体中文", "direction": "ltr"},
+    {"id": "zh-Hant", "file": "zh-Hant.md", "language_name": "Traditional Chinese", "native_name": "繁體中文", "direction": "ltr"},
+    {"id": "es", "file": "es.md", "language_name": "Spanish", "native_name": "Español", "direction": "ltr"},
+    {"id": "pt", "file": "pt.md", "language_name": "Portuguese", "native_name": "Português", "direction": "ltr"},
+    {"id": "fr", "file": "fr.md", "language_name": "French", "native_name": "Français", "direction": "ltr"},
+    {"id": "de", "file": "de.md", "language_name": "German", "native_name": "Deutsch", "direction": "ltr"},
+    {"id": "ja", "file": "ja.md", "language_name": "Japanese", "native_name": "日本語", "direction": "ltr"},
+    {"id": "ko", "file": "ko.md", "language_name": "Korean", "native_name": "한국어", "direction": "ltr"},
+    {"id": "ar", "file": "ar.md", "language_name": "Arabic", "native_name": "العربية", "direction": "rtl"},
+    {"id": "ru", "file": "ru.md", "language_name": "Russian", "native_name": "Русский", "direction": "ltr"},
+    {"id": "tr", "file": "tr.md", "language_name": "Turkish", "native_name": "Türkçe", "direction": "ltr"},
+    {"id": "hi", "file": "hi.md", "language_name": "Hindi", "native_name": "हिन्दी", "direction": "ltr"},
+    {"id": "id", "file": "id.md", "language_name": "Indonesian", "native_name": "Bahasa Indonesia", "direction": "ltr"},
+    {"id": "vi", "file": "vi.md", "language_name": "Vietnamese", "native_name": "Tiếng Việt", "direction": "ltr"},
+    {"id": "th", "file": "th.md", "language_name": "Thai", "native_name": "ไทย", "direction": "ltr"},
+    {"id": "it", "file": "it.md", "language_name": "Italian", "native_name": "Italiano", "direction": "ltr"},
+    {"id": "nl", "file": "nl.md", "language_name": "Dutch", "native_name": "Nederlands", "direction": "ltr"},
+    {"id": "pl", "file": "pl.md", "language_name": "Polish", "native_name": "Polski", "direction": "ltr"},
+    {"id": "uk", "file": "uk.md", "language_name": "Ukrainian", "native_name": "Українська", "direction": "ltr"},
+    {"id": "fa", "file": "fa.md", "language_name": "Persian", "native_name": "فارسی", "direction": "rtl"},
+    {"id": "bn", "file": "bn.md", "language_name": "Bengali", "native_name": "বাংলা", "direction": "ltr"},
+    {"id": "ur", "file": "ur.md", "language_name": "Urdu", "native_name": "اردو", "direction": "rtl"},
+    {"id": "ms", "file": "ms.md", "language_name": "Malay", "native_name": "Bahasa Melayu", "direction": "ltr"},
+    {"id": "fil", "file": "fil.md", "language_name": "Filipino", "native_name": "Filipino", "direction": "ltr"},
+    {"id": "sw", "file": "sw.md", "language_name": "Swahili", "native_name": "Kiswahili", "direction": "ltr"}
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "schema": "dj-crate-digger-multilingual-evals",
+  "schema_version": 1,
+  "locales": [
+    "en",
+    "zh-Hans",
+    "zh-Hant",
+    "es",
+    "pt",
+    "fr",
+    "de",
+    "ja",
+    "ko",
+    "ar",
+    "ru",
+    "tr",
+    "hi",
+    "id",
+    "vi",
+    "th",
+    "it",
+    "nl",
+    "pl",
+    "uk",
+    "fa",
+    "bn",
+    "ur",
+    "ms",
+    "fil",
+    "sw"
+  ],
+  "static_cases": [
+    {
+      "id": "language-market-separation",
+      "scope": "all-locales",
+      "assertions": [
+        "communication_language selects the visible locale pack",
+        "an explicit target market overrides language inference without changing the visible language",
+        "a blank target market uses a broad language market for this session only and never becomes long-term memory",
+        "Traditional Chinese does not imply Taiwan or Hong Kong; Spanish does not imply Spain; Portuguese does not imply Brazil"
+      ]
+    },
+    {
+      "id": "fixed-intake-template",
+      "scope": "all-locales",
+      "assertions": [
+        "round 1 has exactly six fields",
+        "round 2 has exactly eight fields",
+        "each round has exactly one fenced Markdown fill-in block",
+        "the selected pack is reproduced literally without free translation or compression"
+      ]
+    },
+    {
+      "id": "report-shape",
+      "scope": "all-locales",
+      "assertions": [
+        "Fast has exactly three columns and two next-step items",
+        "Brief and Rich have exactly twelve columns and three next-step items",
+        "Rich has style, scene, familiarity/discovery, and dynamic-combined views",
+        "only Brief and Rich expose the harmonic reorder invitation"
+      ]
+    },
+    {
+      "id": "localized-action-intents",
+      "scope": "all-locales",
+      "assertions": [
+        "share_feedback, export_w4dj, output_text_playlist, harmonic_reorder, and confirm_long_term_memory are present",
+        "each intent has positive, negative, and ambiguous natural-language examples",
+        "ambiguous actions request one confirmation instead of executing",
+        "long-term memory is saved only after explicit confirmation"
+      ]
+    },
+    {
+      "id": "localized-platform-policy",
+      "scope": "all-locales",
+      "assertions": [
+        "one named platform without fallback language is exclusive",
+        "multiple named platforms are preferred in the stated order",
+        "preferred and fallback language never becomes exclusive",
+        "forbidden platforms are hard-filtered from allowed links and sources"
+      ]
+    },
+    {
+      "id": "localized-exports-and-harmonic-order",
+      "scope": "all-locales",
+      "assertions": [
+        "text playlist and .w4dj actions are offered only after the complete report",
+        ".w4dj remains UTF-8 JSON with format=w4dj and format_version=2",
+        "TXT and .w4dj use the current final order after a confirmed harmonic reorder",
+        "track verification, title completeness, version-safe deduplication, key evidence, and safety rules remain unchanged"
+      ]
+    }
+  ],
+  "model_replay": {
+    "required_runs": 312,
+    "matrix": "26 locales × 6 cold-start flows × 2 model profiles",
+    "model_profiles": ["medium", "xhigh"],
+    "status": "not_run",
+    "reason": "The repository test environment does not expose callable GPT-5.6 medium/xhigh replay clients; no model replay is being represented as passed.",
+    "required_review": "Each locale requires native-speaker or professional-translator review before release claims are upgraded."
+  }
+}

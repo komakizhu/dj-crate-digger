@@ -51,5 +51,14 @@
       "input": "只接受网易云",
       "missing_behavior": "target-platform-missing-no-fallback"
     }
+  ],
+  "localized_cases": [
+    {"name": "english-exclusive", "locale": "en", "input": "Spotify only", "mode": "exclusive", "allowed": ["spotify"]},
+    {"name": "english-forbidden-hard-filter", "locale": "en", "input": "do not use Spotify", "mode": "cross-platform", "allowed": [], "forbidden": ["spotify"]},
+    {"name": "spanish-preferred", "locale": "es", "input": "Spotify / SoundCloud", "mode": "preferred", "allowed": ["spotify", "soundcloud"]},
+    {"name": "french-forbidden", "locale": "fr", "input": "ne pas utiliser Spotify", "forbidden": ["spotify"]},
+    {"name": "japanese-exclusive", "locale": "ja", "input": "Spotify のみ", "mode": "exclusive", "allowed": ["spotify"]},
+    {"name": "arabic-exclusive", "locale": "ar", "input": "Spotify فقط", "mode": "exclusive", "allowed": ["spotify"]},
+    {"name": "turkish-forbidden", "locale": "tr", "input": "Spotify kullanma", "forbidden": ["spotify"]}
   ]
 }

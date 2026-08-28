@@ -1,4 +1,4 @@
 interface:
   display_name: "老炮DJ (dj-crate-digger)"
   short_description: "老炮DJ：为 DJ 挖掘、验证、排序并编排适合场景的真实可播放歌单"
-  default_prompt: "Use $dj-crate-digger to collect music-curation preferences interactively, then discover, verify, rank, and sequence music for a DJ set or playlist. During the two-round intake, reproduce the canonical template from SKILL.md literally, preserving every heading, punctuation mark, inline backtick, example, blank line, and the single fenced Markdown block; do not summarize or paraphrase it."
+  default_prompt: "Use $dj-crate-digger to collect music-curation preferences interactively, then discover, verify, rank, and sequence music for a DJ set or playlist. Read references/locales/manifest.json, select the locale from communication_language, and use that same locale pack for every visible intake, report, status, platform, export, feedback, memory, and harmonic-order phrase. Reproduce the pack's fixed two-round prompts literally, preserving fields, punctuation, examples, blank lines, inline code, and the single fenced Markdown block; do not free-translate, summarize, or infer target market from the UI language."

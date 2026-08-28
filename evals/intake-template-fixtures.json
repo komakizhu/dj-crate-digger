@@ -1,4 +1,32 @@
 {
+  "locale_template_smoke": [
+    "en",
+    "zh-Hans",
+    "zh-Hant",
+    "es",
+    "pt",
+    "fr",
+    "de",
+    "ja",
+    "ko",
+    "ar",
+    "ru",
+    "tr",
+    "hi",
+    "id",
+    "vi",
+    "th",
+    "it",
+    "nl",
+    "pl",
+    "uk",
+    "fa",
+    "bn",
+    "ur",
+    "ms",
+    "fil",
+    "sw"
+  ],
   "negative_outputs": [
     {
       "name": "luna-xhigh-compressed-first-round",

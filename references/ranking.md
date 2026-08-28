@@ -1,5 +1,9 @@
 # 输出视角排序与动态权重
 
+## 语言包与动作路由
+
+读取 [locales/manifest.json](locales/manifest.json) 并加载当前 `communication_language` 的语言包。排序理由、未知状态、接歌建议和报告后的五度圈邀请使用语言包的 `report` 与 `export` 文本；不要把中文或英语标签写死在排序器里。将用户回复先映射为语言包声明的 `action_intent`，再执行 `harmonic_reorder`，不要求用户使用某一种语言。
+
 ## 评分维度
 
 每首候选按证据评估以下维度：

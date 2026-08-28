@@ -100,27 +100,27 @@ Enter platform names in the second round. For example, “NetEase Cloud Music”
 
 #### 2.3.1 What You Can Do After the Recommendation
 
-After the recommendation is complete, you can use natural language to say which tracks you like, dislike, or would use; the system first updates the current session. In Brief and Rich modes, you can also reply “需要” or “按五度圈排” to have the system reorder the set using the known keys. You can also reply with `输出文字版歌单` or `导出到w4dj`.
+After the recommendation is complete, you can use natural language to say which tracks you like, dislike, or would use; the system first updates the current session. In Brief and Rich modes, you can also reply “Arrange it by the Camelot wheel” to have the system reorder the set using the known keys. You can also use the localized action phrases from the selected pack, such as `output text playlist` or `export to w4dj`.
 
 #### 2.3.2 Output a Text Playlist or W4DJ
 
-After the recommendation is complete, reply with:
+After the recommendation is complete, reply with the localized phrase for the action you want. In English, for example:
 
 ```text
-输出文字版歌单
+output text playlist
 ```
 
 Or:
 
 ```text
-导出到w4dj
+export to w4dj
 ```
 
 Both outputs use the final delivered result: Fast mode uses the final Fast table, Brief mode uses the combined table, and Rich mode uses the dynamic combined table. If the playlist has already been reordered using the circle of fifths, the reordered sequence is used.
 
 ##### Text Playlist
 
-`输出文字版歌单` outputs copyable text that can be imported manually into NetEase Cloud Music, but it cannot import tracks into RKB with one click.
+The localized text-playlist action outputs copyable text that can be imported manually into NetEase Cloud Music, but it cannot import tracks into RKB with one click.
 
 ##### W4DJ
 
@@ -153,6 +153,12 @@ No. It discovers, filters, ranks, and arranges DJ playlists; it is not a music-i
 This repository uses the standard `SKILL.md` as its universal entry point, while `references/` contains supplementary resources loaded as needed. Clients that support the Agent Skills standard can discover and load it according to their own conventions. Claude Code, VS Code Agent, and other clients that support the standard can reuse the core content, but their discovery directories, permission confirmations, and tool names may differ.
 
 This version adapts the Codex `dj-crate-digger` Skill to the general Agent Skills format. Its Chinese name is 「老炮DJ」. `agents/openai.yaml` is an optional Codex UI and invocation adapter; it does not contain a proprietary recommendation algorithm. Other Agents can ignore that directory and use `SKILL.md` and `references/` directly. Clients that do not support Agent Skills must load `SKILL.md` manually and map search, page verification, file writing, and background continuation to their own capabilities.
+
+### 4.1 Locale Packs and Target Markets
+
+The repository ships 26 fixed locale packs, listed in [`references/locales/manifest.json`](references/locales/manifest.json): English, Simplified Chinese, Traditional Chinese, Spanish, Portuguese, French, German, Japanese, Korean, Arabic, Russian, Turkish, Hindi, Indonesian, Vietnamese, Thai, Italian, Dutch, Polish, Ukrainian, Persian, Bengali, Urdu, Malay, Filipino, and Swahili. Chinese and English are covered by repository regressions; the other packs have the fixed structure but still require native-speaker review and the planned 312 medium/xhigh cold-start replays before they can be advertised as fully reviewed language support.
+
+The fixed intake prompts, Fast/Brief/Rich headers, statuses, action intents, and platform-policy expressions are read from the selected pack. The Skill does not free-translate or compress a template. `communication_language` controls the response language; `target_market` independently controls the current search and cultural context. An explicit market overrides language inference without changing the response language. A blank market uses only the pack's broad-language fallback for the current session and is never persisted. Unsupported languages fall back to English.
 
 ## V. License
 

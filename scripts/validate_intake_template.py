@@ -79,12 +79,16 @@ def audit_shape(text: str, round_number: int, locale: str = DEFAULT_LOCALE) -> l
             errors.append("zh-Hans round 1: output version must appear in prompt and fill-in block")
         if "填写规则为：" not in text:
             errors.append("zh-Hans round 1: missing exact literal '填写规则为：'")
-        if "「`极速版`：快速输出playlist，但是质量会下降」" not in text:
-            errors.append("zh-Hans round 1: missing fast output-version definition")
-        if "「`综合版`：只给一个综合的playlist」" not in text:
-            errors.append("zh-Hans round 1: missing composite output-version definition")
-        if "「`完整版`：根据您选择的风格、场景、熟悉度与发现感分别提供建议，并最终输出成综合版」" not in text:
-            errors.append("zh-Hans round 1: missing full output-version definition")
+        mode_lines = (
+            "「`综合版`（默认）：只给一个综合的playlist」",
+            "「`完整版`：根据您选择的风格、场景、熟悉度与发现感分别提供建议，并最终输出成综合版」",
+            "「`极速版`：快速输出playlist，但是质量会下降」",
+        )
+        mode_positions = [text.find(line) for line in mode_lines]
+        if any(position < 0 for position in mode_positions):
+            errors.append("zh-Hans round 1: missing or renamed output-version definition")
+        elif mode_positions != sorted(mode_positions):
+            errors.append("zh-Hans round 1: output versions must be composite-default, full, fast")
         if "简要版" in text or "丰富版" in text:
             errors.append("zh-Hans round 1: legacy output labels must not appear in the new prompt")
     elif round_number == 2 and locale == DEFAULT_LOCALE and "输出版本" in text:

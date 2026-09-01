@@ -265,6 +265,21 @@ def validate_report(pack: dict[str, Any]) -> list[str]:
             for step in next_steps
         ):
             errors.append(f"report.{mode}.next_steps: malformed step")
+        else:
+            handoff_body = next_steps[1]["body"]
+            if "W4DJ" not in handoff_body:
+                errors.append(
+                    f"report.{mode}.next_steps[1].body: must retain the W4DJ handoff"
+                )
+            if pack.get("locale") == "zh-Hans":
+                if "输出文字版歌单" not in handoff_body:
+                    errors.append(
+                        f"report.{mode}.next_steps[1].body: must retain the text-playlist action"
+                    )
+                if mode != "fast" and "五度圈" not in next_steps[2]["body"]:
+                    errors.append(
+                        f"report.{mode}.next_steps[2].body: must retain the harmonic-order action"
+                    )
         for label_key in (
             "digging_notes",
             "mix_suggestion",

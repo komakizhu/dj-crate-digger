@@ -4,4 +4,6 @@ The Markdown files one level above remain the complete, fixed locale-pack record
 
 Each stage file is a generated projection of the same locale contract. It contains the literal localized text required for that stage; it is not a runtime translation layer and it does not define a second algorithm.
 
+For `report_*` stage files, mode and view titles, columns, and every `next_steps` label and body are protected template text. Runtime may fill only real track data, playlist names, digging-notes content, and the creative mix suggestion; it must not summarize, translate, reorder, or omit protected report text.
+
 Before loading any stage file, the Agent must load `references/language-routing.json`, resolve and lock the communication language, and then select the matching locale path from `../manifest.json`. The stage files cannot override that routing decision.

@@ -26,6 +26,8 @@ On a new chat started with a slash entry such as `/dj`, the Skill first reads re
 
 Brief and Rich use exactly: `title | artist | album/EP | style | BPM | key | duration | energy | release date | notes | selection reason | link`. All modes preserve complete official titles, platform policy, track-level evidence, and recording-level deduplication.
 
+The final report also has protected and dynamic regions. Mode/view titles, column labels and order, the count/order/labels/bodies of `next_steps`, action phrases, tutorial links, and Markdown shape must be copied exactly; they may not be paraphrased, shortened, merged, reordered, or omitted. Brief and Rich must retain all three next steps, including both the text-playlist and W4DJ actions in the second item; Fast must retain both of its next steps. Track data, playlist names, digging-notes content, and the creative mix suggestion are the dynamic regions.
+
 ### 1.3 Search, cultural context, and ranking
 
 Official artists, labels, distributors, and authorized DJ stores verify identity, complete titles, BPM, keys, and release facts. 1001Tracklists, Resident Advisor, Pitchfork, Mixmag, DJ Mag, and The Quietus may improve candidate recall, cultural context, and DJ-use signals, but they never replace the final track link. A user-specified platform controls allowed search and playback links; the Skill never silently falls back to another platform.

@@ -1,5 +1,5 @@
 {
-  "description": "Structured behavior cases for the adaptive intake boundary and global composite default. Signals represent semantic parsing of the initial user message; the validator checks the routing decision independently of localized wording.",
+  "description": "Structured behavior cases for the adaptive intake boundary, one-step route choice, and global composite default. Signals represent semantic parsing of the initial user message; the validator checks the routing decision independently of localized wording.",
   "cases": [
     {
       "id": "zh-complete-default-composite",
@@ -50,6 +50,72 @@
       "expected": {"route": "direct_ready", "output_mode": "four_views"}
     },
     {
+      "id": "partial-brief-offers-route-choice",
+      "signals": {
+        "language_locked": true,
+        "web_search": true,
+        "open_page": true,
+        "clear_dj_context": true,
+        "initial_message": true,
+        "scene_or_purpose": true,
+        "core_sound_or_reference": true,
+        "count_or_duration": false,
+        "explicit_delegation": false,
+        "explicit_output_mode": null
+      },
+      "expected": {"route": "route_choice_pending", "output_mode": "composite"}
+    },
+    {
+      "id": "route-choice-direct-skips-intake",
+      "signals": {
+        "language_locked": true,
+        "web_search": true,
+        "open_page": true,
+        "clear_dj_context": true,
+        "initial_message": true,
+        "scene_or_purpose": true,
+        "core_sound_or_reference": true,
+        "count_or_duration": false,
+        "explicit_delegation": false,
+        "explicit_output_mode": null,
+        "intake_choice": "direct"
+      },
+      "expected": {"route": "direct_ready", "output_mode": "composite"}
+    },
+    {
+      "id": "route-choice-questionnaire-enters-round-one",
+      "signals": {
+        "language_locked": true,
+        "web_search": true,
+        "open_page": true,
+        "clear_dj_context": true,
+        "initial_message": true,
+        "scene_or_purpose": true,
+        "core_sound_or_reference": true,
+        "count_or_duration": false,
+        "explicit_delegation": false,
+        "explicit_output_mode": null,
+        "intake_choice": "questionnaire"
+      },
+      "expected": {"route": "round_1", "output_mode": "composite"}
+    },
+    {
+      "id": "partial-brief-with-explicit-mode-preserves-choice",
+      "signals": {
+        "language_locked": true,
+        "web_search": true,
+        "open_page": true,
+        "clear_dj_context": true,
+        "initial_message": true,
+        "scene_or_purpose": true,
+        "core_sound_or_reference": true,
+        "count_or_duration": false,
+        "explicit_delegation": false,
+        "explicit_output_mode": "composite"
+      },
+      "expected": {"route": "route_choice_pending", "output_mode": "composite"}
+    },
+    {
       "id": "underspecified-still-asks",
       "signals": {
         "language_locked": true,
@@ -96,6 +162,23 @@
         "explicit_output_mode": "fast"
       },
       "expected": {"route": "round_1", "output_mode": "fast"}
+    },
+    {
+      "id": "round-one-explicit-direct-escape",
+      "signals": {
+        "language_locked": true,
+        "web_search": true,
+        "open_page": true,
+        "clear_dj_context": true,
+        "initial_message": false,
+        "scene_or_purpose": true,
+        "core_sound_or_reference": true,
+        "count_or_duration": false,
+        "explicit_delegation": true,
+        "explicit_output_mode": "composite",
+        "questionnaire_started": true
+      },
+      "expected": {"route": "direct_ready", "output_mode": "composite"}
     },
     {
       "id": "language-before-readiness",

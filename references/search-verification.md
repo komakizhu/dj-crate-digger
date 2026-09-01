@@ -149,7 +149,7 @@ musical_key:
 
 ## 自适应候选池与验证预算
 
-简要版以综合版目标数 `final_target` 作为共享候选池基准。丰富版先计算所有视角的实际目标数之和 `rich_total_slots`。重复是严格例外而不是容量假设，因此候选池默认按完全零重复准备，令 `required_unique = rich_total_slots`。候选池目标为：
+综合版以 `final_target` 作为共享候选池基准。完整版先计算所有视角的实际目标数之和 `rich_total_slots`。重复是严格例外而不是容量假设，因此候选池默认按完全零重复准备，令 `required_unique = rich_total_slots`。候选池目标为：
 
 ```text
 fast: fast_pool_goal = min(max(2 × first_batch_target, first_batch_target + 5), 40)
@@ -190,6 +190,6 @@ four_views: pool_goal = min(max(2 × final_target, final_target + 8, required_un
 4. Remix、Edit、Dub、Instrumental、Live、Radio Edit 与 Extended Mix 等限定保留在完整官方歌名中；同一完整歌名的跨平台记录合并，不同完整歌名不得误合并。
 5. 同一艺人连续占据过多位置时，在排序阶段处理，不要在去重阶段误删有效曲目。
 
-去重发生在四种排序和播放编排之前。极速版交付前按单表检查 `dedupe_key`，必须全部唯一；其艺人上限为 `artist_cap = max(1, floor(0.15 × actual_target))`，其中 `actual_target` 是当前表的有效目标：首批取 `min(first_batch_target, 首批已验证可交付行数)`，最终取 `min(final_target, 最终已验证可交付行数)`。参考艺人不豁免，只有用户明确请求艺人专题时才可豁免。综合版在分配 Warm Up、Groove、Peak、Closing 后再做一次全局录音键检查，确保同一录音不会跨段重复；丰富版完成四个视角后再按整份报告检查 `dedupe_key`，只允许至多一个高质量录音出现两次，其余录音只出现一次。参考艺人和参考曲目不豁免。多个平台链接仍合并在同一条记录中。
+去重发生在四种排序和播放编排之前。极速版交付前按单表检查 `dedupe_key`，必须全部唯一；其艺人上限为 `artist_cap = max(1, floor(0.15 × actual_target))`，其中 `actual_target` 是当前表的有效目标：首批取 `min(first_batch_target, 首批已验证可交付行数)`，最终取 `min(final_target, 最终已验证可交付行数)`。参考艺人不豁免，只有用户明确请求艺人专题时才可豁免。综合版在分配 Warm Up、Groove、Peak、Closing 后再做一次全局录音键检查，确保同一录音不会跨段重复；完整版完成四个视角后再按整份报告检查 `dedupe_key`，只允许至多一个高质量录音出现两次，其余录音只出现一次。参考艺人和参考曲目不豁免。多个平台链接仍合并在同一条记录中。
 
 候选不足时透明报告，不降低验证门槛。

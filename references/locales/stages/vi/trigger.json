@@ -2,6 +2,7 @@
   "locale": "vi",
   "stage": "trigger",
   "ambiguous_confirmation": "Bạn muốn tôi tìm nhạc hay xây dựng một DJ set?",
+  "readiness_choice": "Thông tin hiện tại đã đủ để xác định hướng chính. Bạn muốn:\n1. nhận kết quả ngay (tôi sẽ tự quyết định các chi tiết còn thiếu)\n2. điền bảng hỏi hai vòng (tinh chỉnh yêu cầu trước)\nHãy trả lời `1` hoặc `2`.",
   "direct": [
     "/dj-crate-digger",
     "/crate-digger",

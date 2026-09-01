@@ -12,6 +12,12 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "evals" / "intake-routing-fixtures.json"
 VALID_MODES = {"fast", "composite", "four_views"}
+VALID_INTAKE_CHOICES = {"direct", "questionnaire"}
+PARTIAL_BRIEF_SIGNALS = (
+    "scene_or_purpose",
+    "core_sound_or_reference",
+    "count_or_duration",
+)
 
 
 def route(signals: dict[str, Any]) -> dict[str, str | None]:
@@ -27,16 +33,29 @@ def route(signals: dict[str, Any]) -> dict[str, str | None]:
         raise ValueError(f"unsupported explicit_output_mode: {explicit_mode!r}")
     default_mode = explicit_mode or "composite"
 
+    intake_choice = signals.get("intake_choice")
+    if intake_choice is not None and intake_choice not in VALID_INTAKE_CHOICES:
+        raise ValueError(f"unsupported intake_choice: {intake_choice!r}")
+    if intake_choice == "direct":
+        return {"route": "direct_ready", "output_mode": default_mode}
+    if intake_choice == "questionnaire":
+        return {"route": "round_1", "output_mode": default_mode}
+
     minimum_brief = all(
         signals.get(field)
         for field in ("scene_or_purpose", "core_sound_or_reference", "count_or_duration")
     )
-    direct_ready = bool(signals.get("initial_message")) and (
-        minimum_brief or bool(signals.get("explicit_delegation"))
+    if bool(signals.get("explicit_delegation")) or (
+        bool(signals.get("initial_message")) and minimum_brief
+    ):
+        return {"route": "direct_ready", "output_mode": default_mode}
+
+    partial_signal_count = sum(
+        bool(signals.get(field)) for field in PARTIAL_BRIEF_SIGNALS
     )
-    if not direct_ready:
-        return {"route": "round_1", "output_mode": default_mode}
-    return {"route": "direct_ready", "output_mode": default_mode}
+    if bool(signals.get("initial_message")) and partial_signal_count >= 2:
+        return {"route": "route_choice_pending", "output_mode": default_mode}
+    return {"route": "round_1", "output_mode": default_mode}
 
 
 def main() -> int:

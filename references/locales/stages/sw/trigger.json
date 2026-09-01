@@ -2,6 +2,7 @@
   "locale": "sw",
   "stage": "trigger",
   "ambiguous_confirmation": "Unataka nitafute muziki au niandae DJ set?",
+  "readiness_choice": "Taarifa zilizopo zinatosha kubainisha mwelekeo wa jumla. Ungependa:\n1. kupata matokeo moja kwa moja (nitaamua maelezo yanayokosekana)\n2. kutumia dodoso la raundi mbili (kufafanua ombi kwanza)\nJibu `1` au `2`.",
   "direct": [
     "/dj-crate-digger",
     "/crate-digger",

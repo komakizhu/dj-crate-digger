@@ -452,6 +452,11 @@ def validate_manifest() -> tuple[dict[str, Any] | None, list[str]]:
                 if stage == "trigger":
                     if not isinstance(payload.get("ambiguous_confirmation"), str):
                         errors.append(f"{resource}: missing ambiguous confirmation")
+                    readiness_choice = payload.get("readiness_choice")
+                    if not isinstance(readiness_choice, str) or not readiness_choice.strip():
+                        errors.append(f"{resource}: missing readiness choice")
+                    elif "1" not in readiness_choice or "2" not in readiness_choice:
+                        errors.append(f"{resource}: readiness choice must expose options 1 and 2")
                     for trigger_kind in ("direct", "ambiguous", "non_trigger"):
                         require_string_list(
                             payload.get(trigger_kind),

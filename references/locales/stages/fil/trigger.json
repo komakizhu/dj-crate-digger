@@ -2,6 +2,7 @@
   "locale": "fil",
   "stage": "trigger",
   "ambiguous_confirmation": "Gusto mo bang maghanap ako ng musika o gumawa ng DJ set?",
+  "readiness_choice": "Sapat na ang impormasyon para matukoy ang pangunahing direksyon. Gusto mo bang:\n1. direktang ibigay ang resulta (ako ang magpapasya sa kulang na detalye)\n2. dumaan sa dalawang-round na questionnaire (linawin muna ang request)\nSumagot ng `1` o `2`.",
   "direct": [
     "/dj-crate-digger",
     "/crate-digger",

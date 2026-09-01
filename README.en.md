@@ -10,7 +10,7 @@ This is a native, portable Agent Skill package for DJs, producers, and electroni
 
 ### 1.1 Adaptive intake and personalization
 
-The composite report is the default for every activated DJ request, regardless of message length or intake path; only an explicitly selected alternative mode changes it. When one message supplies the scene, sound direction, and track count or set duration—or simply delegates the remaining choices and asks the Skill to proceed—the Skill skips both questionnaires and runs the composite path directly. Requests that are incomplete and do not delegate the remaining choices use the fixed two-round intake: round one collects the scene, target country/region, core sound direction, track count or set duration, output mode, and other constraints; round two collects specific style, BPM, familiarity/discovery, era/classics, mood, energy curve, platform/link requirements, and anything else. A blank mode still produces the composite report. There is no third ordinary requirements round.
+The composite report is the default for every activated DJ request; only an explicitly selected alternative mode changes it. When one message supplies the scene, sound direction, and track count or set duration—or simply delegates the remaining choices and asks the Skill to proceed—the Skill skips both questionnaires and runs the composite path directly. When a request contains at least two substantive brief signals but is missing a low-impact detail such as duration, the Skill asks once whether to give the result directly or use the two-round questionnaire. A direct choice lets the Skill infer low-impact omissions; a questionnaire choice enters round one. A vague or nearly empty request goes straight to round one, and an explicit “give me the result directly” can escape an already-started first round. Round one collects the scene, target country/region, core sound direction, track count or set duration, output mode, and other constraints; round two collects specific style, BPM, familiarity/discovery, era/classics, mood, energy curve, platform/link requirements, and anything else. A blank mode still produces the composite report. There is no third ordinary requirements round.
 
 Communication language and target market are separate. Language controls visible text, while the market controls only current search context, cultural context, and availability. An explicit market never changes response language; a blank market stays broad and temporary and is never written to long-term taste memory.
 
@@ -56,7 +56,7 @@ Natural language works too:
 Build a 60-minute UK Bass set for an underground club in Guangzhou, using Skream and Nikita, the Wicked as references.
 ```
 
-The flow is: request → search immediately when the brief is ready or delegated, otherwise complete the two fixed rounds → track-level verification → composite report or the explicitly selected mode → optional feedback, text playlist, W4DJ, or harmonic reorder.
+The flow is: request → search immediately when the brief is ready or delegated; choose direct execution or two-round refinement when the brief is partially specified; use the two fixed rounds when it is vague → track-level verification → composite report or the explicitly selected mode → optional feedback, text playlist, W4DJ, or harmonic reorder.
 
 ## III. Export and handoff
 

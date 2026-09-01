@@ -2,6 +2,7 @@
   "locale": "ja",
   "stage": "trigger",
   "ambiguous_confirmation": "曲を探すか、DJセットを作成しましょうか？",
+  "readiness_choice": "現在の情報で大まかな方向を決められます。どちらにしますか？\n1. そのまま結果を出す（不足する細部はこちらで判断）\n2. 2回の質問で詳しく決める（先に要望を具体化）\n`1` または `2` と返信してください。",
   "direct": [
     "/dj-crate-digger",
     "/crate-digger",

@@ -2,6 +2,7 @@
   "locale": "zh-Hant",
   "stage": "trigger",
   "ambiguous_confirmation": "需要我幫您挖歌或排一個 DJ set 嗎？",
+  "readiness_choice": "目前的資訊已足以確定大致方向。你想要：\n1. 直接出結果（由我判斷缺少的細節）\n2. 先走兩輪問卷（先細化需求）\n請回覆 `1` 或 `2`。",
   "direct": [
     "/dj-crate-digger",
     "/crate-digger",

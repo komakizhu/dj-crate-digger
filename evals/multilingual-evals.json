@@ -65,6 +65,8 @@
       "assertions": [
         "a sufficiently specified one-message DJ brief skips both questionnaires",
         "explicit delegation to decide missing details also skips both questionnaires",
+        "a partially specified brief receives one direct-versus-questionnaire choice before any fixed questionnaire",
+        "choosing direct on that one choice skips both questionnaires",
         "every activated DJ request defaults to composite unless the user explicitly selected another mode",
         "an underspecified request without delegation still enters the fixed two-round intake and keeps composite when the mode field is blank"
       ]

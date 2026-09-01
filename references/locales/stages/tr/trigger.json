@@ -2,6 +2,7 @@
   "locale": "tr",
   "stage": "trigger",
   "ambiguous_confirmation": "Müzik aramamı veya bir DJ seti hazırlamamı ister misiniz?",
+  "readiness_choice": "Mevcut bilgiler genel yönü belirlemek için yeterli. İster misiniz:\n1. Sonucu doğrudan vereyim (eksik ayrıntılara ben karar vereyim)\n2. İki turlu anketi kullanalım (önce isteği netleştirelim)\n`1` veya `2` diye yanıtlayın.",
   "direct": [
     "/dj-crate-digger",
     "/crate-digger",

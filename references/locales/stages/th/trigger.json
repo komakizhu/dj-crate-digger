@@ -1,0 +1,38 @@
+{
+  "locale": "th",
+  "stage": "trigger",
+  "ambiguous_confirmation": "ต้องการให้ฉันค้นหาเพลงหรือจัด DJ set ให้ไหม",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "DJ set",
+    "สร้าง DJ set",
+    "ค้นหาเพลงสำหรับ DJ",
+    "เตรียมเซ็ต",
+    "จัดลำดับเซ็ต"
+  ],
+  "ambiguous": [
+    "เพลย์ลิสต์",
+    "หาเพลง",
+    "รายการเพลง",
+    "ค้นหาเพลง",
+    "DJ",
+    "หาแทร็ก",
+    "จัดเซ็ต"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "DJ set",
+    "เพลย์ลิสต์",
+    "ค้นหาเพลง",
+    "หาแทร็ก",
+    "จัดเซ็ต"
+  ]
+}

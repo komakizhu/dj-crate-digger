@@ -1,0 +1,38 @@
+{
+  "locale": "sw",
+  "stage": "trigger",
+  "ambiguous_confirmation": "Unataka nitafute muziki au niandae DJ set?",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "seti ya DJ",
+    "kuunda DJ set",
+    "kutafuta muziki wa DJ",
+    "kuandaa set",
+    "kupanga set"
+  ],
+  "ambiguous": [
+    "playlist",
+    "tafuta nyimbo",
+    "orodha ya nyimbo",
+    "tafuta muziki",
+    "DJ",
+    "orodha ya kucheza",
+    "panga seti"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "seti ya DJ",
+    "orodha ya kucheza",
+    "tafuta muziki",
+    "tafuta nyimbo",
+    "panga seti"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "locale": "vi",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "Nếu để trống khu vực, chỉ dùng một thị trường tiếng Việt rộng cho phiên này.",
+    "explicit_region": "Quốc gia hoặc khu vực được nêu rõ được ưu tiên hơn suy luận ngôn ngữ nhưng không đổi ngôn ngữ giao tiếp.",
+    "persistence": "Không lưu thị trường mục tiêu thành sở thích dài hạn."
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "chỉ",
+      "duy nhất",
+      "chỉ sử dụng"
+    ],
+    "preferred_markers": [
+      "ưu tiên",
+      "thích hơn",
+      "ưu tiên cao"
+    ],
+    "fallback_markers": [
+      "dự phòng",
+      "thay thế",
+      "nếu không có"
+    ],
+    "forbidden_markers": [
+      "không dùng",
+      "loại trừ",
+      "không có"
+    ]
+  },
+  "status": {
+    "unknown": "Chưa biết",
+    "verified": "Đã xác minh",
+    "target_platform_missing": "Nền tảng mục tiêu không khả dụng"
+  }
+}

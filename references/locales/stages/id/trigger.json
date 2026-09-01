@@ -1,0 +1,38 @@
+{
+  "locale": "id",
+  "stage": "trigger",
+  "ambiguous_confirmation": "Apakah Anda ingin saya mencari musik atau menyusun DJ set?",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "set DJ",
+    "membuat DJ set",
+    "mencari musik untuk DJ",
+    "menyiapkan set",
+    "menyusun set"
+  ],
+  "ambiguous": [
+    "playlist",
+    "cari track",
+    "daftar putar",
+    "cari musik",
+    "DJ",
+    "mencari musik",
+    "mencari track"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "set DJ",
+    "playlist",
+    "mencari musik",
+    "mencari track",
+    "menyusun set"
+  ]
+}

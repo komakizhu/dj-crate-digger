@@ -1,0 +1,29 @@
+{
+  "locale": "id",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Mode Fast",
+    "first_batch_title": "# Batch pertama Fast",
+    "final_title": "# Mode Fast",
+    "columns": [
+      "Track",
+      "Artis",
+      "Tautan"
+    ],
+    "next_steps": [
+      {
+        "label": "Pertama | Bagikan masukan pilihan",
+        "body": "Jika mau, balas dengan bahasa alami tentang hasil pilihan. Ini membantu memperbaiki preferensi pilihan pribadi dan rekomendasi berikutnya."
+      },
+      {
+        "label": "Kedua | Ekspor atau serahkan playlist",
+        "body": "Anda dapat membuat playlist teks atau menyerahkannya ke W4DJ. Balas `output text playlist` atau `export to w4dj`."
+      }
+    ],
+    "digging_notes": "Catatan digging",
+    "mix_suggestion": "Saran mixing",
+    "unknown": "Tidak diketahui",
+    "verified": "Terverifikasi",
+    "target_platform_missing": "Platform target tidak tersedia"
+  }
+}

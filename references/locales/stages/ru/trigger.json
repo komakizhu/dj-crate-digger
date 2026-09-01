@@ -1,0 +1,37 @@
+{
+  "locale": "ru",
+  "stage": "trigger",
+  "ambiguous_confirmation": "Найти музыку или собрать для вас DJ-сет?",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "DJ-сет",
+    "собрать DJ-сет",
+    "найти музыку для DJ",
+    "подготовить сет",
+    "выстроить сет"
+  ],
+  "ambiguous": [
+    "плейлист",
+    "найти треки",
+    "список музыки",
+    "искать музыку",
+    "DJ",
+    "собрать сет"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "DJ-сет",
+    "плейлист",
+    "искать музыку",
+    "найти треки",
+    "собрать сет"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "locale": "vi",
+  "stage": "report_rich",
+  "report": {
+    "title": "# Chế độ Rich",
+    "first_batch_title": "# Chế độ Rich",
+    "final_title": "# Chế độ Rich",
+    "columns": [
+      "Track",
+      "Nghệ sĩ",
+      "Album / EP",
+      "Phong cách",
+      "BPM",
+      "Tông",
+      "Thời lượng",
+      "Năng lượng",
+      "Ngày phát hành",
+      "Ghi chú",
+      "Lý do chọn",
+      "Liên kết"
+    ],
+    "next_steps": [
+      {
+        "label": "Thứ nhất | Gửi phản hồi chọn nhạc",
+        "body": "Nếu muốn, hãy trả lời bằng ngôn ngữ tự nhiên về cách các lựa chọn hoạt động. Điều này giúp cải thiện sở thích riêng và gợi ý sau."
+      },
+      {
+        "label": "Thứ hai | Xuất hoặc chuyển playlist",
+        "body": "Bạn có thể xuất playlist dạng văn bản hoặc chuyển cho W4DJ. Hãy trả lời `output text playlist` hoặc `export to w4dj`."
+      },
+      {
+        "label": "Thứ ba | Thứ tự hòa âm của set",
+        "body": "Bạn có muốn tôi sắp xếp set theo vòng Camelot không?"
+      }
+    ],
+    "digging_notes": "Ghi chú digging",
+    "mix_suggestion": "Gợi ý mix",
+    "unknown": "Chưa biết",
+    "verified": "Đã xác minh",
+    "target_platform_missing": "Nền tảng mục tiêu không khả dụng",
+    "view_titles": [
+      "Góc nhìn phong cách",
+      "Góc nhìn bối cảnh",
+      "Góc nhìn quen thuộc / khám phá",
+      "Góc nhìn tổng hợp động"
+    ]
+  }
+}

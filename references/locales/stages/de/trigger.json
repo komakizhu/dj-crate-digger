@@ -1,0 +1,37 @@
+{
+  "locale": "de",
+  "stage": "trigger",
+  "ambiguous_confirmation": "Soll ich Musik für Sie suchen oder ein DJ-Set zusammenstellen?",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "DJ-Set",
+    "ein DJ-Set erstellen",
+    "Musik für ein DJ-Set suchen",
+    "ein Set vorbereiten",
+    "ein Set arrangieren"
+  ],
+  "ambiguous": [
+    "Playlist",
+    "Tracks finden",
+    "Wiedergabeliste",
+    "Musik suchen",
+    "DJ",
+    "Set zusammenstellen"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "DJ-Set",
+    "Playlist",
+    "Musik suchen",
+    "Tracks finden",
+    "Set zusammenstellen"
+  ]
+}

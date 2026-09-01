@@ -1,0 +1,49 @@
+{
+  "locale": "zh-Hant",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "歡迎來到 DJ 選歌助手。這是一個利用 Agent 幫您排 set 的 skill。您將在兩輪對話中確認需求，並取得 AI 選歌建議。填寫規則為：",
+    "tutorial_label": "一鍵導入 Set 教程",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md"
+  },
+  "round": {
+    "title": "【第一輪：必要資訊】",
+    "rules": [
+      "1. 可以從例子中複製，也可以自由填寫或不填",
+      "2. 不填表示由 AI 智能判斷答案"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "場景",
+        "example": "表演場景。如：`酒吧` / `俱樂部` / `婚禮` / `藝術展`"
+      },
+      {
+        "key": "target_market",
+        "label": "目標國家 / 地區",
+        "example": "如：`中國大陸` / `台灣` / `香港` / `日本` / `英語國際市場`"
+      },
+      {
+        "key": "core_sound",
+        "label": "核心聲音方向",
+        "example": "參考藝人、參考曲目以及參考流派。如：`Skrillex` 的 `Tears`，`現代 UK Bass` 流派"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "歌曲數量或 Set 時長",
+        "example": "如：`20 首` / `60 分鐘`"
+      },
+      {
+        "key": "output_mode",
+        "label": "輸出版本",
+        "example": "極速版 / 簡要版 / 豐富版"
+      },
+      {
+        "key": "other",
+        "label": "其他限制",
+        "example": "如：`不要口水歌`、`不要人聲`、`只要 Remix`；可以不填"
+      }
+    ],
+    "prompt": "歡迎來到 DJ 選歌助手。這是一個利用 Agent 幫您排 set 的 skill。您將在兩輪對話中確認需求，並取得 AI 選歌建議。填寫規則為：\n\n1. 可以從例子中複製，也可以自由填寫或不填\n2. 不填表示由 AI 智能判斷答案\n\n【第一輪：必要資訊】\n\n場景:\n“表演場景。如：`酒吧` / `俱樂部` / `婚禮` / `藝術展`”\n目標國家 / 地區:\n“如：`中國大陸` / `台灣` / `香港` / `日本` / `英語國際市場`”\n核心聲音方向:\n“參考藝人、參考曲目以及參考流派。如：`Skrillex` 的 `Tears`，`現代 UK Bass` 流派”\n歌曲數量或 Set 時長:\n“如：`20 首` / `60 分鐘`”\n輸出版本:\n“「`極速版`：快速輸出 playlist，但是品質會下降」”\n“「`簡要版`：只給一個綜合的 playlist」”\n“「`豐富版`：根據您選擇的風格、場景、熟悉度與發現感分別提供建議，並最終輸出成簡要版」”\n其他限制:\n“如：`不要口水歌`、`不要人聲`、`只要 Remix`；可以不填”\n\n```markdown\n場景:\n目標國家 / 地區:\n核心聲音方向:\n歌曲數量或 Set 時長:\n輸出版本:\n其他限制:\n```"
+  }
+}

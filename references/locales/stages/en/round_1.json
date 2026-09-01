@@ -1,0 +1,49 @@
+{
+  "locale": "en",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "Welcome to DJ Selection Assistant. This Agent Skill helps you build a DJ set. You will confirm your request in two rounds and receive AI track recommendations. Fill-in rules:",
+    "tutorial_label": "One-Click Set Import Tutorial",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md"
+  },
+  "round": {
+    "title": "[Round 1: Essentials]",
+    "rules": [
+      "1. You can copy from an example, fill freely, or leave blank",
+      "2. Leaving a field blank means the AI will judge the answer intelligently"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "Scene",
+        "example": "Performance setting. Examples: `bar` / `club` / `wedding` / `art exhibition`"
+      },
+      {
+        "key": "target_market",
+        "label": "Target country / region",
+        "example": "Examples: `Mainland China` / `Taiwan` / `Hong Kong` / `Japan` / `international English-language market`"
+      },
+      {
+        "key": "core_sound",
+        "label": "Core sound direction",
+        "example": "Reference artist, track, and genre. Example: `Tears` by `Skrillex`, `modern UK Bass` genre"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "Track count or set duration",
+        "example": "Examples: `20 tracks` / `60 minutes`"
+      },
+      {
+        "key": "output_mode",
+        "label": "Output version",
+        "example": "Fast / Brief / Rich output choices"
+      },
+      {
+        "key": "other",
+        "label": "Other constraints",
+        "example": "Examples: `avoid overplayed tracks`, `no vocals`, `Remix only`; optional"
+      }
+    ],
+    "prompt": "Welcome to DJ Selection Assistant. This Agent Skill helps you build a DJ set. You will confirm your request in two rounds and receive AI track recommendations. Fill-in rules:\n\n1. You can copy from an example, fill freely, or leave blank\n2. Leaving a field blank means the AI will judge the answer intelligently\n\n[Round 1: Essentials]\n\nScene:\n“Performance setting. Examples: `bar` / `club` / `wedding` / `art exhibition`”\nTarget country / region:\n“Examples: `Mainland China` / `Taiwan` / `Hong Kong` / `Japan` / `international English-language market`”\nCore sound direction:\n“Reference artist, track, and genre. Example: `Tears` by `Skrillex`, `modern UK Bass` genre”\nTrack count or set duration:\n“Examples: `20 tracks` / `60 minutes`”\nOutput version:\n“`Fast`: quick playlist output; quality may be lower”\n“`Brief`: one combined playlist only”\n“`Rich`: separate style, scene, familiarity/discovery views, followed by a final combined playlist”\nOther constraints:\n“Examples: `avoid overplayed tracks`, `no vocals`, `Remix only`; optional”\n\n```markdown\nScene:\nTarget country / region:\nCore sound direction:\nTrack count or set duration:\nOutput version:\nOther constraints:\n```"
+  }
+}

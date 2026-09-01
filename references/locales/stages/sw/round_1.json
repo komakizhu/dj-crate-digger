@@ -1,0 +1,49 @@
+{
+  "locale": "sw",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "Karibu kwenye Msaidizi wa Uchaguzi wa DJ. Agent Skill hii hukusaidia kuandaa set ya DJ. Utathibitisha mahitaji katika raundi mbili na kupata mapendekezo ya nyimbo. Kanuni za kujaza:",
+    "tutorial_label": "Mwongozo wa kuingiza Set kwa kubofya mara moja",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md"
+  },
+  "round": {
+    "title": "[Raundi ya kwanza: taarifa muhimu]",
+    "rules": [
+      "1. Unaweza kunakili mfano, kujaza kwa uhuru, au kuacha tupu",
+      "2. Kuacha tupu kunamaanisha AI itatathmini jibu kwa akili"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "Muktadha",
+        "example": "Muktadha wa onyesho. Mfano: `bar` / `club` / `wedding` / `art exhibition`"
+      },
+      {
+        "key": "target_market",
+        "label": "Nchi / eneo lengwa",
+        "example": "Mfano: `Mainland China` / `Taiwan` / `Hong Kong` / `Japan` / `international English market`"
+      },
+      {
+        "key": "core_sound",
+        "label": "Mwelekeo mkuu wa sauti",
+        "example": "Msanii, wimbo na aina ya rejea. Mfano: `Tears` ya `Skrillex`, `UK Bass` ya kisasa"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "Idadi ya nyimbo au muda wa set",
+        "example": "Mfano: `20 tracks` / `60 minutes`"
+      },
+      {
+        "key": "output_mode",
+        "label": "Toleo la matokeo",
+        "example": "Chagua Fast / Brief / Rich"
+      },
+      {
+        "key": "other",
+        "label": "Vikwazo vingine",
+        "example": "Mfano: `epuka nyimbo zilizochezwa sana`, `bila sauti`, `Remix pekee`; hiari"
+      }
+    ],
+    "prompt": "Karibu kwenye Msaidizi wa Uchaguzi wa DJ. Agent Skill hii hukusaidia kuandaa set ya DJ. Utathibitisha mahitaji katika raundi mbili na kupata mapendekezo ya nyimbo. Kanuni za kujaza:\n\n1. Unaweza kunakili mfano, kujaza kwa uhuru, au kuacha tupu\n2. Kuacha tupu kunamaanisha AI itatathmini jibu kwa akili\n\n[Raundi ya kwanza: taarifa muhimu]\n\nMuktadha:\n“Muktadha wa onyesho. Mfano: `bar` / `club` / `wedding` / `art exhibition`”\nNchi / eneo lengwa:\n“Mfano: `Mainland China` / `Taiwan` / `Hong Kong` / `Japan` / `international English market`”\nMwelekeo mkuu wa sauti:\n“Msanii, wimbo na aina ya rejea. Mfano: `Tears` ya `Skrillex`, `UK Bass` ya kisasa”\nIdadi ya nyimbo au muda wa set:\n“Mfano: `20 tracks` / `60 minutes`”\nToleo la matokeo:\n“`Fast`: playlist ya haraka; ubora unaweza kuwa chini”\n“`Brief`: playlist moja iliyounganishwa pekee”\n“`Rich`: mitazamo tofauti ya mtindo, muktadha na ugunduzi, kisha playlist iliyounganishwa”\nVikwazo vingine:\n“Mfano: `epuka nyimbo zilizochezwa sana`, `bila sauti`, `Remix pekee`; hiari”\n\n```markdown\nMuktadha:\nNchi / eneo lengwa:\nMwelekeo mkuu wa sauti:\nIdadi ya nyimbo au muda wa set:\nToleo la matokeo:\nVikwazo vingine:\n```"
+  }
+}

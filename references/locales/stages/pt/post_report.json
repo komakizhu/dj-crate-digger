@@ -1,0 +1,78 @@
+{
+  "locale": "pt",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "Compartilhar feedback",
+      "positive": [
+        "Gosto desta faixa"
+      ],
+      "negative": [
+        "Não gosto desta faixa"
+      ],
+      "ambiguous": [
+        "Não tenho certeza sobre esta faixa"
+      ]
+    },
+    "export_w4dj": {
+      "label": "Exportar para W4DJ",
+      "positive": [
+        "Exportar para W4DJ"
+      ],
+      "negative": [
+        "Não exportar para W4DJ"
+      ],
+      "ambiguous": [
+        "Talvez exportar para W4DJ"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Gerar playlist de texto",
+      "positive": [
+        "Gerar a playlist de texto"
+      ],
+      "negative": [
+        "Não gerar a playlist de texto"
+      ],
+      "ambiguous": [
+        "Talvez gerar a playlist de texto"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Reordenar harmonicamente",
+      "positive": [
+        "Organizar pela roda de Camelot"
+      ],
+      "negative": [
+        "Não reordenar"
+      ],
+      "ambiguous": [
+        "Talvez organizar pela roda de Camelot"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "Confirmar memória de longo prazo",
+      "positive": [
+        "Lembrar esta preferência"
+      ],
+      "negative": [
+        "Não salvar esta preferência"
+      ],
+      "ambiguous": [
+        "Talvez lembrar esta preferência"
+      ]
+    }
+  },
+  "export": {
+    "text": "Gerar uma playlist de texto copiável na ordem atual.",
+    "w4dj": "Criar um arquivo `.w4dj` UTF-8 para o W4DJ.",
+    "harmonic": "Solicitar ordem pela roda de Camelot usando as tonalidades conhecidas.",
+    "feedback": "O feedback em linguagem natural atualiza apenas a sessão; o armazenamento de longo prazo exige confirmação.",
+    "memory_confirmation": "Entendi isto como um resumo curto da mudança de gosto. Salvar no perfil privado de longo prazo?"
+  },
+  "status": {
+    "unknown": "Desconhecido",
+    "verified": "Verificado",
+    "target_platform_missing": "Plataforma de destino indisponível"
+  }
+}

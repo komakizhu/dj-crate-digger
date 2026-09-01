@@ -1,0 +1,46 @@
+{
+  "locale": "id",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "Jika wilayah kosong, gunakan pasar berbahasa Indonesia yang luas hanya untuk sesi ini.",
+    "explicit_region": "Negara atau wilayah yang disebutkan secara eksplisit mengalahkan inferensi bahasa tanpa mengubah bahasa komunikasi.",
+    "persistence": "Jangan simpan pasar target sebagai preferensi jangka panjang."
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "hanya",
+      "saja",
+      "gunakan hanya"
+    ],
+    "preferred_markers": [
+      "prioritas",
+      "lebih suka",
+      "pilihan utama"
+    ],
+    "fallback_markers": [
+      "cadangan",
+      "alternatif",
+      "jika tidak tersedia"
+    ],
+    "forbidden_markers": [
+      "jangan gunakan",
+      "kecualikan",
+      "tanpa"
+    ]
+  },
+  "status": {
+    "unknown": "Tidak diketahui",
+    "verified": "Terverifikasi",
+    "target_platform_missing": "Platform target tidak tersedia"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "locale": "sw",
+  "stage": "round_2",
+  "round": {
+    "title": "[Raundi ya pili: fafanua ombi]",
+    "rules": [
+      "1. Unaweza kunakili mfano, kujaza kwa uhuru, au kuacha tupu"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "Mtindo mahususi",
+        "example": "Mfano: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "Kasi / BPM",
+        "example": "Mfano: `105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "Uzoefu na ugunduzi",
+        "example": "`Inayojulikana` / `Mizani` / `Ugunduzi`"
+      },
+      {
+        "key": "era_classic",
+        "label": "Enzi na classics",
+        "example": "`Ya sasa` / `Nanga chache za classics` / `Daraja la mpya na ya zamani` / `Classics kwanza`"
+      },
+      {
+        "key": "mood",
+        "label": "Hisia",
+        "example": "Mfano: `ya kumbukumbu` / `baridi` / `ya kimapenzi`"
+      },
+      {
+        "key": "energy",
+        "label": "Kiwango au mkondo wa nishati wa SET",
+        "example": "Mfano: `chini` / `juu`; `thabiti` / `roller coaster`"
+      },
+      {
+        "key": "platform",
+        "label": "Jukwaa na mahitaji ya viungo",
+        "example": "Mfano: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; jukwaa moja litumie hilo pekee, mengi yafuate kipaumbele"
+      },
+      {
+        "key": "other",
+        "label": "Mengine",
+        "example": ""
+      }
+    ],
+    "prompt": "[Raundi ya pili: fafanua ombi]\n\nMtindo mahususi:\n“Mfano: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`”\nKasi / BPM:\n“Mfano: `105` / `128` / `140` / `150` / `170`”\nUzoefu na ugunduzi:\n“`Inayojulikana` / `Mizani` / `Ugunduzi`”\nEnzi na classics:\n“`Ya sasa` / `Nanga chache za classics` / `Daraja la mpya na ya zamani` / `Classics kwanza`”\nHisia:\n“Mfano: `ya kumbukumbu` / `baridi` / `ya kimapenzi`”\nKiwango au mkondo wa nishati wa SET:\n“Mfano: `chini` / `juu`; `thabiti` / `roller coaster`”\nJukwaa na mahitaji ya viungo:\n“Mfano: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; jukwaa moja litumie hilo pekee, mengi yafuate kipaumbele”\nMengine:\n\n```markdown\nMtindo mahususi:\nKasi / BPM:\nUzoefu na ugunduzi:\nEnzi na classics:\nHisia:\nKiwango au mkondo wa nishati wa SET:\nJukwaa na mahitaji ya viungo:\nMengine:\n```"
+  }
+}

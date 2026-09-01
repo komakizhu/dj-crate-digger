@@ -1,0 +1,78 @@
+{
+  "locale": "vi",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "Gửi phản hồi",
+      "positive": [
+        "Tôi thích track này"
+      ],
+      "negative": [
+        "Tôi không thích track này"
+      ],
+      "ambiguous": [
+        "Tôi chưa chắc về track này"
+      ]
+    },
+    "export_w4dj": {
+      "label": "Xuất sang W4DJ",
+      "positive": [
+        "Xuất sang W4DJ"
+      ],
+      "negative": [
+        "Không xuất sang W4DJ"
+      ],
+      "ambiguous": [
+        "Có thể xuất sang W4DJ"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Xuất playlist văn bản",
+      "positive": [
+        "Xuất playlist văn bản"
+      ],
+      "negative": [
+        "Không xuất playlist văn bản"
+      ],
+      "ambiguous": [
+        "Có thể xuất playlist văn bản"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Sắp xếp hòa âm",
+      "positive": [
+        "Sắp xếp theo vòng Camelot"
+      ],
+      "negative": [
+        "Không sắp xếp lại"
+      ],
+      "ambiguous": [
+        "Có thể sắp xếp theo vòng Camelot"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "Xác nhận ghi nhớ dài hạn",
+      "positive": [
+        "Ghi nhớ sở thích này"
+      ],
+      "negative": [
+        "Không lưu sở thích này"
+      ],
+      "ambiguous": [
+        "Có thể ghi nhớ sở thích này"
+      ]
+    }
+  },
+  "export": {
+    "text": "Xuất playlist văn bản có thể sao chép theo thứ tự hiện tại.",
+    "w4dj": "Tạo tệp bàn giao UTF-8 `.w4dj` cho W4DJ.",
+    "harmonic": "Yêu cầu sắp xếp theo vòng Camelot với các tông đã biết.",
+    "feedback": "Phản hồi tự nhiên chỉ cập nhật phiên hiện tại; lưu dài hạn cần xác nhận.",
+    "memory_confirmation": "Tôi hiểu đây là tóm tắt ngắn về thay đổi gu nhạc. Lưu vào hồ sơ riêng dài hạn chứ?"
+  },
+  "status": {
+    "unknown": "Chưa biết",
+    "verified": "Đã xác minh",
+    "target_platform_missing": "Nền tảng mục tiêu không khả dụng"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "locale": "hi",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "चयन प्रतिक्रिया",
+      "positive": [
+        "मुझे यह ट्रैक पसंद है"
+      ],
+      "negative": [
+        "मुझे यह ट्रैक पसंद नहीं है"
+      ],
+      "ambiguous": [
+        "मैं इस ट्रैक को लेकर निश्चित नहीं हूँ"
+      ]
+    },
+    "export_w4dj": {
+      "label": "W4DJ में निर्यात",
+      "positive": [
+        "W4DJ में निर्यात करें"
+      ],
+      "negative": [
+        "W4DJ में निर्यात न करें"
+      ],
+      "ambiguous": [
+        "शायद W4DJ में निर्यात करें"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "टेक्स्ट playlist निकालें",
+      "positive": [
+        "टेक्स्ट playlist निकालें"
+      ],
+      "negative": [
+        "टेक्स्ट playlist न निकालें"
+      ],
+      "ambiguous": [
+        "शायद टेक्स्ट playlist निकालें"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "हार्मोनिक पुनर्क्रम",
+      "positive": [
+        "Camelot wheel के अनुसार क्रम दें"
+      ],
+      "negative": [
+        "पुनर्क्रम न करें"
+      ],
+      "ambiguous": [
+        "शायद Camelot wheel के अनुसार क्रम दें"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "दीर्घकालिक स्मृति की पुष्टि",
+      "positive": [
+        "इस पसंद को याद रखें"
+      ],
+      "negative": [
+        "इस पसंद को सहेजें नहीं"
+      ],
+      "ambiguous": [
+        "शायद इस पसंद को याद रखें"
+      ]
+    }
+  },
+  "export": {
+    "text": "वर्तमान क्रम में कॉपी करने योग्य टेक्स्ट playlist निकालें।",
+    "w4dj": "W4DJ के लिए UTF-8 `.w4dj` हस्तांतरण फ़ाइल बनाएँ।",
+    "harmonic": "ज्ञात keys के साथ Camelot wheel क्रम का अनुरोध करें।",
+    "feedback": "प्राकृतिक भाषा प्रतिक्रिया केवल वर्तमान सत्र अपडेट करती है; दीर्घकालिक संग्रह के लिए पुष्टि चाहिए।",
+    "memory_confirmation": "मैंने इसे पसंद में बदलाव के संक्षिप्त सार के रूप में समझा। क्या इसे निजी दीर्घकालिक प्रोफ़ाइल में सहेजें?"
+  },
+  "status": {
+    "unknown": "अज्ञात",
+    "verified": "सत्यापित",
+    "target_platform_missing": "लक्षित प्लेटफ़ॉर्म उपलब्ध नहीं"
+  }
+}

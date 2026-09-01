@@ -1,0 +1,78 @@
+{
+  "locale": "pl",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "Podziel się opinią",
+      "positive": [
+        "Podoba mi się ten utwór"
+      ],
+      "negative": [
+        "Nie podoba mi się ten utwór"
+      ],
+      "ambiguous": [
+        "Nie mam pewności co do tego utworu"
+      ]
+    },
+    "export_w4dj": {
+      "label": "Eksportuj do W4DJ",
+      "positive": [
+        "Eksportuj do W4DJ"
+      ],
+      "negative": [
+        "Nie eksportuj do W4DJ"
+      ],
+      "ambiguous": [
+        "Może eksportuj do W4DJ"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Wyprowadź playlistę tekstową",
+      "positive": [
+        "Wyprowadź playlistę tekstową"
+      ],
+      "negative": [
+        "Nie wyprowadzaj playlisty tekstowej"
+      ],
+      "ambiguous": [
+        "Może wyprowadź playlistę tekstową"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Przestaw harmonicznie",
+      "positive": [
+        "Ułóż według koła Camelota"
+      ],
+      "negative": [
+        "Nie przestawiaj"
+      ],
+      "ambiguous": [
+        "Może ułóż według koła Camelota"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "Potwierdź pamięć długoterminową",
+      "positive": [
+        "Zapamiętaj tę preferencję"
+      ],
+      "negative": [
+        "Nie zapisuj tej preferencji"
+      ],
+      "ambiguous": [
+        "Może zapamiętaj tę preferencję"
+      ]
+    }
+  },
+  "export": {
+    "text": "Wyprowadź kopiowalną playlistę tekstową w bieżącej kolejności.",
+    "w4dj": "Utwórz plik przekazania UTF-8 `.w4dj` dla W4DJ.",
+    "harmonic": "Poproś o kolejność według koła Camelota z użyciem znanych tonacji.",
+    "feedback": "Opinia w języku naturalnym aktualizuje tylko sesję; zapis długoterminowy wymaga potwierdzenia.",
+    "memory_confirmation": "Rozumiem to jako krótkie podsumowanie zmiany gustu. Zapisać je w prywatnym profilu długoterminowym?"
+  },
+  "status": {
+    "unknown": "Nieznane",
+    "verified": "Zweryfikowane",
+    "target_platform_missing": "Platforma docelowa niedostępna"
+  }
+}

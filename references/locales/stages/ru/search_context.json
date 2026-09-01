@@ -1,0 +1,46 @@
+{
+  "locale": "ru",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "Если регион не указан, используйте только широкий русскоязычный рынок в этой сессии.",
+    "explicit_region": "Явно указанная страна или регион важнее языкового вывода, но не меняет язык общения.",
+    "persistence": "Целевой рынок не сохраняется как долгосрочное предпочтение."
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "только",
+      "исключительно",
+      "использовать только"
+    ],
+    "preferred_markers": [
+      "предпочтительно",
+      "приоритет",
+      "желательно"
+    ],
+    "fallback_markers": [
+      "запасной",
+      "альтернатива",
+      "если недоступно"
+    ],
+    "forbidden_markers": [
+      "не использовать",
+      "исключить",
+      "без"
+    ]
+  },
+  "status": {
+    "unknown": "Неизвестно",
+    "verified": "Проверено",
+    "target_platform_missing": "Целевая платформа недоступна"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "locale": "de",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "Die Websuche ist nicht verfügbar; daher kann ich keine Empfehlung verifizieren.",
+    "open_page": "Der Zugriff auf konkrete Seiten ist nicht verfügbar; daher kann ich keine Empfehlung verifizieren.",
+    "file_write": "Dateischreiben ist nicht verfügbar; daher kann ich keine `.w4dj`-Datei erstellen.",
+    "progress": "Die automatische Fortsetzung ist nicht verfügbar; ich kann nur die verifizierte erste Gruppe liefern."
+  }
+}

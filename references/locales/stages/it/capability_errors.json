@@ -1,0 +1,10 @@
+{
+  "locale": "it",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "La ricerca web non è disponibile, quindi non posso verificare una raccomandazione.",
+    "open_page": "Non posso aprire pagine concrete, quindi non posso verificare una raccomandazione.",
+    "file_write": "La scrittura di file non è disponibile, quindi non posso creare un file `.w4dj`.",
+    "progress": "La continuazione automatica non è disponibile; posso consegnare solo il primo blocco verificato."
+  }
+}

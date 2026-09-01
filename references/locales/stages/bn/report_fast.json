@@ -1,0 +1,29 @@
+{
+  "locale": "bn",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Fast mode",
+    "first_batch_title": "# Fast-এর প্রথম batch",
+    "final_title": "# Fast mode",
+    "columns": [
+      "Track",
+      "শিল্পী",
+      "Link"
+    ],
+    "next_steps": [
+      {
+        "label": "প্রথম | নির্বাচন সম্পর্কে মতামত",
+        "body": "ইচ্ছা হলে স্বাভাবিক ভাষায় বলুন নির্বাচিত track কেমন কাজ করেছে। এতে ব্যক্তিগত পছন্দ ও পরের পরামর্শ উন্নত হবে।"
+      },
+      {
+        "label": "দ্বিতীয় | playlist export বা হস্তান্তর",
+        "body": "Text playlist তৈরি করতে বা W4DJ-তে দিতে পারেন। `output text playlist` অথবা `export to w4dj` লিখুন।"
+      }
+    ],
+    "digging_notes": "Digging নোট",
+    "mix_suggestion": "Mix পরামর্শ",
+    "unknown": "অজানা",
+    "verified": "যাচাই করা",
+    "target_platform_missing": "লক্ষ্য platform পাওয়া যায়নি"
+  }
+}

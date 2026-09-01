@@ -1,0 +1,46 @@
+{
+  "locale": "ja",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "地域が空欄なら、このセッションでは広い日本語圏市場だけを仮定します。",
+    "explicit_region": "明示された国や地域は言語推定より優先しますが、会話言語は変えません。",
+    "persistence": "対象市場は長期の好みとして保存しません。"
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "のみ",
+      "だけ",
+      "のみ使用"
+    ],
+    "preferred_markers": [
+      "優先",
+      "希望",
+      "優先順位"
+    ],
+    "fallback_markers": [
+      "代替",
+      "予備",
+      "利用できない場合"
+    ],
+    "forbidden_markers": [
+      "使わない",
+      "除外",
+      "なし"
+    ]
+  },
+  "status": {
+    "unknown": "不明",
+    "verified": "検証済み",
+    "target_platform_missing": "対象プラットフォームなし"
+  }
+}

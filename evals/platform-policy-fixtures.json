@@ -1,0 +1,64 @@
+{
+  "description": "Platform-language regression fixtures for the DJ Crate Digger natural-language platform policy.",
+  "exclusive_cases": [
+    {
+      "name": "single-platform-default",
+      "input": "网易云",
+      "mode": "exclusive",
+      "allowed": ["netease_cloud_music"]
+    },
+    {
+      "name": "unique-platform-phrase",
+      "input": "网易云作为唯一平台",
+      "mode": "exclusive",
+      "allowed": ["netease_cloud_music"]
+    },
+    {
+      "name": "only-platform-synonyms",
+      "input": "仅限网易云；只使用网易云；只在网易云",
+      "mode": "exclusive",
+      "allowed": ["netease_cloud_music"]
+    },
+    {
+      "name": "only-accept-synonyms",
+      "input": "只要 Spotify，其他平台不要",
+      "mode": "exclusive",
+      "allowed": ["spotify"]
+    }
+  ],
+  "preferred_cases": [
+    {
+      "name": "explicit-priority-and-fallback",
+      "input": "网易云优先，Spotify备用",
+      "mode": "preferred",
+      "allowed": ["netease_cloud_music", "spotify"]
+    },
+    {
+      "name": "ordered-platform-list",
+      "input": "网易云 / Apple Music / SoundCloud",
+      "mode": "preferred",
+      "allowed": ["netease_cloud_music", "apple_music", "soundcloud"]
+    }
+  ],
+  "hard_filter_cases": [
+    {
+      "name": "forbidden-platform",
+      "input": "网易云优先，Spotify备用，但不要 Apple Music",
+      "forbidden": ["apple_music"]
+    },
+    {
+      "name": "exclusive-platform-missing",
+      "input": "只接受网易云",
+      "missing_behavior": "target-platform-missing-no-fallback"
+    }
+  ],
+  "localized_cases": [
+    {"name": "english-exclusive", "locale": "en", "input": "Spotify only", "mode": "exclusive", "allowed": ["spotify"]},
+    {"name": "english-forbidden-hard-filter", "locale": "en", "input": "do not use Spotify", "mode": "cross-platform", "allowed": [], "forbidden": ["spotify"]},
+    {"name": "spanish-preferred", "locale": "es", "input": "Spotify / SoundCloud", "mode": "preferred", "allowed": ["spotify", "soundcloud"]},
+    {"name": "french-forbidden", "locale": "fr", "input": "ne pas utiliser Spotify", "forbidden": ["spotify"]},
+    {"name": "japanese-exclusive", "locale": "ja", "input": "Spotify のみ", "mode": "exclusive", "allowed": ["spotify"]},
+    {"name": "arabic-exclusive", "locale": "ar", "input": "Spotify فقط", "mode": "exclusive", "allowed": ["spotify"]},
+    {"name": "turkish-forbidden", "locale": "tr", "input": "Spotify kullanma", "forbidden": ["spotify"]}
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "locale": "fil",
+  "stage": "trigger",
+  "ambiguous_confirmation": "Gusto mo bang maghanap ako ng musika o gumawa ng DJ set?",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "DJ set",
+    "gumawa ng DJ set",
+    "maghanap ng musika para sa DJ",
+    "maghanda ng set",
+    "mag-ayos ng set"
+  ],
+  "ambiguous": [
+    "playlist",
+    "maghanap ng track",
+    "listahan ng tugtog",
+    "maghanap ng musika",
+    "DJ",
+    "bumuo ng set"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "DJ set",
+    "playlist",
+    "maghanap ng musika",
+    "maghanap ng track",
+    "bumuo ng set"
+  ]
+}

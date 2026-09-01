@@ -1,0 +1,49 @@
+{
+  "locale": "ur",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "DJ انتخاب معاون میں خوش آمدید۔ یہ Agent Skill آپ کو DJ set تیار کرنے میں مدد دیتا ہے۔ آپ دو مرحلوں میں اپنی ضرورت کی تصدیق کریں گے اور tracks کی تجاویز پائیں گے۔ پُر کرنے کے اصول:",
+    "tutorial_label": "ایک کلک سے Set import کرنے کی رہنما",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md"
+  },
+  "round": {
+    "title": "[پہلا مرحلہ: ضروری معلومات]",
+    "rules": [
+      "1. آپ مثال نقل کر سکتے ہیں، آزادانہ لکھ سکتے ہیں یا خانہ خالی چھوڑ سکتے ہیں",
+      "2. خانہ خالی چھوڑنے کا مطلب ہے کہ AI اشاروں سے جواب سمجھ لے گا"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "پس منظر",
+        "example": "پرفارمنس کا context۔ مثال: `bar` / `club` / `wedding` / `art exhibition`"
+      },
+      {
+        "key": "target_market",
+        "label": "ہدف ملک / خطہ",
+        "example": "مثال: `Mainland China` / `Taiwan` / `Hong Kong` / `Japan` / `international English market`"
+      },
+      {
+        "key": "core_sound",
+        "label": "بنیادی صوتی سمت",
+        "example": "حوالہ فنکار، track اور genre۔ مثال: `Skrillex` کا `Tears`، جدید `UK Bass`"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "tracks کی تعداد یا set کا دورانیہ",
+        "example": "مثال: `20 tracks` / `60 minutes`"
+      },
+      {
+        "key": "output_mode",
+        "label": "آؤٹ پٹ ورژن",
+        "example": "Fast / Brief / Rich کا انتخاب"
+      },
+      {
+        "key": "other",
+        "label": "دیگر پابندیاں",
+        "example": "مثال: `بہت زیادہ بجے tracks نہیں`، `vocal نہیں`، `صرف Remix`؛ اختیاری"
+      }
+    ],
+    "prompt": "DJ انتخاب معاون میں خوش آمدید۔ یہ Agent Skill آپ کو DJ set تیار کرنے میں مدد دیتا ہے۔ آپ دو مرحلوں میں اپنی ضرورت کی تصدیق کریں گے اور tracks کی تجاویز پائیں گے۔ پُر کرنے کے اصول:\n\n1. آپ مثال نقل کر سکتے ہیں، آزادانہ لکھ سکتے ہیں یا خانہ خالی چھوڑ سکتے ہیں\n2. خانہ خالی چھوڑنے کا مطلب ہے کہ AI اشاروں سے جواب سمجھ لے گا\n\n[پہلا مرحلہ: ضروری معلومات]\n\nپس منظر:\n«پرفارمنس کا context۔ مثال: `bar` / `club` / `wedding` / `art exhibition`»\nہدف ملک / خطہ:\n«مثال: `Mainland China` / `Taiwan` / `Hong Kong` / `Japan` / `international English market`»\nبنیادی صوتی سمت:\n«حوالہ فنکار، track اور genre۔ مثال: `Skrillex` کا `Tears`، جدید `UK Bass`»\ntracks کی تعداد یا set کا دورانیہ:\n«مثال: `20 tracks` / `60 minutes`»\nآؤٹ پٹ ورژن:\n«`Fast`: تیز playlist؛ معیار کم ہو سکتا ہے»\n«`Brief`: صرف ایک مشترکہ playlist»\n«`Rich`: style، context اور discovery کے الگ زاویے، پھر آخری مشترکہ playlist»\nدیگر پابندیاں:\n«مثال: `بہت زیادہ بجے tracks نہیں`، `vocal نہیں`، `صرف Remix`؛ اختیاری»\n\n```markdown\nپس منظر:\nہدف ملک / خطہ:\nبنیادی صوتی سمت:\ntracks کی تعداد یا set کا دورانیہ:\nآؤٹ پٹ ورژن:\nدیگر پابندیاں:\n```"
+  }
+}

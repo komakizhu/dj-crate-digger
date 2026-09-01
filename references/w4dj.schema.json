@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/komakizhu/dj-crate-digger/blob/main/references/w4dj.schema.json",
+  "title": "DJ Crate Digger W4DJ handoff",
+  "description": "Minimal UTF-8 recommendation handoff. The fixed format_version value 2 is required for W4DJ compatibility; unknown legacy fields are rejected and no migration is performed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "format_version",
+    "export_id",
+    "playlist",
+    "tracks"
+  ],
+  "properties": {
+    "format": {
+      "const": "w4dj"
+    },
+    "format_version": {
+      "type": "integer",
+      "const": 2
+    },
+    "export_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "playlist": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "tracks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/track"
+      }
+    }
+  },
+  "$defs": {
+    "track": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "position",
+        "title",
+        "artist_display"
+      ],
+      "properties": {
+        "position": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Complete official track title; official qualifiers remain embedded here."
+        },
+        "artist_display": {
+          "type": "string",
+          "minLength": 1
+        },
+        "netease_track_id": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "enum": [
+              "unknown",
+              "null",
+              "none",
+              "undefined"
+            ]
+          },
+          "description": "Optional NetEase Cloud Music identity; it remains a JSON string."
+        }
+      }
+    }
+  }
+}

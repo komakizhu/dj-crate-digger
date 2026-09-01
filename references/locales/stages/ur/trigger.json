@@ -1,0 +1,39 @@
+{
+  "locale": "ur",
+  "stage": "trigger",
+  "ambiguous_confirmation": "کیا آپ چاہتے ہیں کہ میں موسیقی تلاش کروں یا DJ سیٹ بناؤں؟",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "DJ سیٹ",
+    "DJ سیٹ بنانا",
+    "DJ کے لیے موسیقی تلاش کرنا",
+    "سیٹ تیار کرنا",
+    "سیٹ ترتیب دینا"
+  ],
+  "ambiguous": [
+    "پلے لسٹ",
+    "گانے تلاش کرنا",
+    "موسیقی کی فہرست",
+    "موسیقی تلاش کرنا",
+    "DJ",
+    "موسیقی تلاش",
+    "ٹریک تلاش",
+    "سیٹ ترتیب"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "DJ سیٹ",
+    "پلے لسٹ",
+    "موسیقی تلاش",
+    "ٹریک تلاش",
+    "سیٹ ترتیب"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "locale": "ko",
+  "stage": "round_2",
+  "round": {
+    "title": "[2라운드: 요구 구체화]",
+    "rules": [
+      "1. 예시를 복사하거나 자유롭게 입력하거나 비워 둘 수 있습니다"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "구체적인 스타일",
+        "example": "예: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "속도 / BPM",
+        "example": "예: `105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "친숙함과 발견",
+        "example": "`익숙한 곡` / `균형` / `발견`"
+      },
+      {
+        "key": "era_classic",
+        "label": "시대와 클래식",
+        "example": "`현대 중심` / `소수의 클래식 앵커` / `신구 연결` / `클래식 우선`"
+      },
+      {
+        "key": "mood",
+        "label": "분위기",
+        "example": "예: `향수 어린` / `차가운` / `로맨틱한`"
+      },
+      {
+        "key": "energy",
+        "label": "SET 에너지 수준 또는 흐름",
+        "example": "예: `낮음` / `높음`; `일정` / `롤러코스터`"
+      },
+      {
+        "key": "platform",
+        "label": "플랫폼 및 링크 요구",
+        "example": "예: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; 하나면 그것만, 여러 개면 적은 순서 우선"
+      },
+      {
+        "key": "other",
+        "label": "기타",
+        "example": ""
+      }
+    ],
+    "prompt": "[2라운드: 요구 구체화]\n\n구체적인 스타일:\n“예: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`”\n속도 / BPM:\n“예: `105` / `128` / `140` / `150` / `170`”\n친숙함과 발견:\n“`익숙한 곡` / `균형` / `발견`”\n시대와 클래식:\n“`현대 중심` / `소수의 클래식 앵커` / `신구 연결` / `클래식 우선`”\n분위기:\n“예: `향수 어린` / `차가운` / `로맨틱한`”\nSET 에너지 수준 또는 흐름:\n“예: `낮음` / `높음`; `일정` / `롤러코스터`”\n플랫폼 및 링크 요구:\n“예: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; 하나면 그것만, 여러 개면 적은 순서 우선”\n기타:\n\n```markdown\n구체적인 스타일:\n속도 / BPM:\n친숙함과 발견:\n시대와 클래식:\n분위기:\nSET 에너지 수준 또는 흐름:\n플랫폼 및 링크 요구:\n기타:\n```"
+  }
+}

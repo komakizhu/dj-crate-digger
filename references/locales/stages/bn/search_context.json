@@ -1,0 +1,46 @@
+{
+  "locale": "bn",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "অঞ্চল ফাঁকা থাকলে এই session-এ কেবল বিস্তৃত বাংলা ভাষার বাজার ব্যবহার করুন।",
+    "explicit_region": "স্পষ্ট দেশ বা অঞ্চল ভাষা থেকে অনুমানের চেয়ে অগ্রাধিকার পায়, যোগাযোগের ভাষা বদলায় না।",
+    "persistence": "লক্ষ্য বাজারকে দীর্ঘমেয়াদি পছন্দ হিসেবে সংরক্ষণ করবেন না।"
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "শুধু",
+      "একমাত্র",
+      "শুধু ব্যবহার"
+    ],
+    "preferred_markers": [
+      "অগ্রাধিকার",
+      "পছন্দ",
+      "আগে"
+    ],
+    "fallback_markers": [
+      "বিকল্প",
+      "backup",
+      "না পাওয়া গেলে"
+    ],
+    "forbidden_markers": [
+      "ব্যবহার করবেন না",
+      "বাদ দিন",
+      "ছাড়া"
+    ]
+  },
+  "status": {
+    "unknown": "অজানা",
+    "verified": "যাচাই করা",
+    "target_platform_missing": "লক্ষ্য platform পাওয়া যায়নি"
+  }
+}

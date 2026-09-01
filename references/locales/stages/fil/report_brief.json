@@ -1,0 +1,42 @@
+{
+  "locale": "fil",
+  "stage": "report_brief",
+  "report": {
+    "title": "# Brief mode",
+    "first_batch_title": "# Brief mode",
+    "final_title": "# Brief mode",
+    "columns": [
+      "Track",
+      "Artist",
+      "Album / EP",
+      "Style",
+      "BPM",
+      "Key",
+      "Tagal",
+      "Energy",
+      "Petsa ng release",
+      "Notes",
+      "Dahilan ng pagpili",
+      "Link"
+    ],
+    "next_steps": [
+      {
+        "label": "Una | Magbahagi ng feedback sa pagpili",
+        "body": "Kung gusto, tumugon sa natural na wika tungkol sa naging gamit ng mga napili. Pinapahusay nito ang pribadong preference at susunod na recommendation."
+      },
+      {
+        "label": "Ikalawa | I-export o ipasa ang playlist",
+        "body": "Maaari kang maglabas ng text playlist o ipasa ito sa W4DJ. Tumugon ng `output text playlist` o `export to w4dj`."
+      },
+      {
+        "label": "Ikatlo | Harmonic set order",
+        "body": "Gusto mo bang ayusin ko ang set gamit ang Camelot wheel?"
+      }
+    ],
+    "digging_notes": "Digging notes",
+    "mix_suggestion": "Mix suggestion",
+    "unknown": "Hindi alam",
+    "verified": "Na-verify",
+    "target_platform_missing": "Hindi available ang target platform"
+  }
+}

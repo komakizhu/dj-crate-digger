@@ -1,0 +1,36 @@
+{
+  "locale": "fa",
+  "stage": "trigger",
+  "ambiguous_confirmation": "می‌خواهید موسیقی پیدا کنم یا یک ست DJ آماده کنم؟",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "ست دی‌جی",
+    "ساختن ست DJ",
+    "پیدا کردن موسیقی برای DJ",
+    "آماده‌کردن ست",
+    "چیدن ست"
+  ],
+  "ambiguous": [
+    "پلی‌لیست",
+    "پیدا کردن ترک",
+    "فهرست موسیقی",
+    "جست‌وجوی موسیقی",
+    "DJ"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "ست دی‌جی",
+    "پلی‌لیست",
+    "جست‌وجوی موسیقی",
+    "پیدا کردن ترک",
+    "چیدن ست"
+  ]
+}

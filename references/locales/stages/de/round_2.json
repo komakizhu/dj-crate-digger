@@ -1,0 +1,53 @@
+{
+  "locale": "de",
+  "stage": "round_2",
+  "round": {
+    "title": "[Runde 2: Anfrage verfeinern]",
+    "rules": [
+      "1. Du kannst ein Beispiel kopieren, frei ausfüllen oder das Feld leer lassen"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "Konkreter Stil",
+        "example": "Beispiele: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "Geschwindigkeit / BPM",
+        "example": "Beispiele: `105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "Vertrautheit und Entdeckung",
+        "example": "`Vertraut` / `Ausgewogen` / `Entdeckung`"
+      },
+      {
+        "key": "era_classic",
+        "label": "Epoche und Klassiker",
+        "example": "`Zeitgenössisch` / `Wenige klassische Anker` / `Brücke zwischen neu und alt` / `Klassiker zuerst`"
+      },
+      {
+        "key": "mood",
+        "label": "Stimmung",
+        "example": "Beispiele: `nostalgisch` / `kalt` / `romantisch`"
+      },
+      {
+        "key": "energy",
+        "label": "SET-Energie oder Energieverlauf",
+        "example": "Beispiele: `niedrig` / `hoch`; `gleichmäßig` / `Achterbahn`"
+      },
+      {
+        "key": "platform",
+        "label": "Plattform und Link-Anforderungen",
+        "example": "Beispiele: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; eine Plattform bedeutet nur diese; mehrere folgen der angegebenen Priorität"
+      },
+      {
+        "key": "other",
+        "label": "Sonstiges",
+        "example": ""
+      }
+    ],
+    "prompt": "[Runde 2: Anfrage verfeinern]\n\nKonkreter Stil:\n“Beispiele: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`”\nGeschwindigkeit / BPM:\n“Beispiele: `105` / `128` / `140` / `150` / `170`”\nVertrautheit und Entdeckung:\n“`Vertraut` / `Ausgewogen` / `Entdeckung`”\nEpoche und Klassiker:\n“`Zeitgenössisch` / `Wenige klassische Anker` / `Brücke zwischen neu und alt` / `Klassiker zuerst`”\nStimmung:\n“Beispiele: `nostalgisch` / `kalt` / `romantisch`”\nSET-Energie oder Energieverlauf:\n“Beispiele: `niedrig` / `hoch`; `gleichmäßig` / `Achterbahn`”\nPlattform und Link-Anforderungen:\n“Beispiele: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; eine Plattform bedeutet nur diese; mehrere folgen der angegebenen Priorität”\nSonstiges:\n\n```markdown\nKonkreter Stil:\nGeschwindigkeit / BPM:\nVertrautheit und Entdeckung:\nEpoche und Klassiker:\nStimmung:\nSET-Energie oder Energieverlauf:\nPlattform und Link-Anforderungen:\nSonstiges:\n```"
+  }
+}

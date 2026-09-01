@@ -1,0 +1,46 @@
+{
+  "locale": "en",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "Use a broad English-language market for this session only when the user leaves the region blank.",
+    "explicit_region": "An explicitly named country or region overrides language inference without changing the communication language.",
+    "persistence": "Never persist the inferred or user-provided target market as a long-term preference."
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "only",
+      "Spotify only",
+      "use only"
+    ],
+    "preferred_markers": [
+      "prefer",
+      "preferred",
+      "priority"
+    ],
+    "fallback_markers": [
+      "fallback",
+      "backup",
+      "if unavailable"
+    ],
+    "forbidden_markers": [
+      "do not use",
+      "exclude",
+      "no"
+    ]
+  },
+  "status": {
+    "unknown": "Unknown",
+    "verified": "Verified",
+    "target_platform_missing": "Target platform unavailable"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "locale": "zh-Hant",
+  "stage": "trigger",
+  "ambiguous_confirmation": "需要我幫您挖歌或排一個 DJ set 嗎？",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "挖歌",
+    "排個 set",
+    "排個 DJ set",
+    "排一套 set"
+  ],
+  "ambiguous": [
+    "找歌",
+    "歌單",
+    "排歌",
+    "做個 playlist",
+    "DJ",
+    "找歌單",
+    "排set",
+    "排一套set"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "挖歌",
+    "排set",
+    "排一套set",
+    "找歌單",
+    "排歌"
+  ]
+}

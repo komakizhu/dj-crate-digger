@@ -1,0 +1,37 @@
+{
+  "locale": "vi",
+  "stage": "trigger",
+  "ambiguous_confirmation": "Bạn muốn tôi tìm nhạc hay xây dựng một DJ set?",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "set DJ",
+    "tạo DJ set",
+    "tìm nhạc cho DJ",
+    "chuẩn bị set",
+    "xếp thứ tự set"
+  ],
+  "ambiguous": [
+    "playlist",
+    "tìm track",
+    "danh sách phát",
+    "tìm nhạc",
+    "DJ",
+    "xếp set"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "set DJ",
+    "playlist",
+    "tìm nhạc",
+    "tìm track",
+    "xếp set"
+  ]
+}

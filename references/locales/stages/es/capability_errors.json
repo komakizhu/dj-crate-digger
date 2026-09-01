@@ -1,0 +1,10 @@
+{
+  "locale": "es",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "La búsqueda web no está disponible, así que no puedo verificar una recomendación.",
+    "open_page": "No puedo abrir páginas concretas, así que no puedo verificar una recomendación.",
+    "file_write": "No puedo escribir archivos, así que no puedo crear un archivo `.w4dj`.",
+    "progress": "La continuación automática no está disponible; solo puedo entregar el primer lote verificado."
+  }
+}

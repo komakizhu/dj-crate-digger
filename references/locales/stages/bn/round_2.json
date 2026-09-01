@@ -1,0 +1,53 @@
+{
+  "locale": "bn",
+  "stage": "round_2",
+  "round": {
+    "title": "[দ্বিতীয় ধাপ: অনুরোধ বিস্তারিত করা]",
+    "rules": [
+      "1. উদাহরণ কপি করতে, নিজের মতো লিখতে বা ফাঁকা রাখতে পারেন"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "নির্দিষ্ট style",
+        "example": "উদাহরণ: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "গতি / BPM",
+        "example": "উদাহরণ: `105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "পরিচিতি ও discovery",
+        "example": "`পরিচিত` / `ভারসাম্যপূর্ণ` / `আবিষ্কার`"
+      },
+      {
+        "key": "era_classic",
+        "label": "যুগ ও classics",
+        "example": "`সমকালীন` / `কয়েকটি classic anchor` / `নতুন-পুরোনোর সেতু` / `আগে classics`"
+      },
+      {
+        "key": "mood",
+        "label": "মেজাজ",
+        "example": "উদাহরণ: `nostalgic` / `ঠান্ডা` / `romantic`"
+      },
+      {
+        "key": "energy",
+        "label": "SET-এর energy level বা curve",
+        "example": "উদাহরণ: `কম` / `বেশি`; `স্থির` / `roller coaster`"
+      },
+      {
+        "key": "platform",
+        "label": "platform ও link-এর প্রয়োজন",
+        "example": "উদাহরণ: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; একটি হলে শুধু সেটি, একাধিক হলে দেওয়া অগ্রাধিকার"
+      },
+      {
+        "key": "other",
+        "label": "অন্যান্য",
+        "example": ""
+      }
+    ],
+    "prompt": "[দ্বিতীয় ধাপ: অনুরোধ বিস্তারিত করা]\n\nনির্দিষ্ট style:\n“উদাহরণ: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`”\nগতি / BPM:\n“উদাহরণ: `105` / `128` / `140` / `150` / `170`”\nপরিচিতি ও discovery:\n“`পরিচিত` / `ভারসাম্যপূর্ণ` / `আবিষ্কার`”\nযুগ ও classics:\n“`সমকালীন` / `কয়েকটি classic anchor` / `নতুন-পুরোনোর সেতু` / `আগে classics`”\nমেজাজ:\n“উদাহরণ: `nostalgic` / `ঠান্ডা` / `romantic`”\nSET-এর energy level বা curve:\n“উদাহরণ: `কম` / `বেশি`; `স্থির` / `roller coaster`”\nplatform ও link-এর প্রয়োজন:\n“উদাহরণ: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; একটি হলে শুধু সেটি, একাধিক হলে দেওয়া অগ্রাধিকার”\nঅন্যান্য:\n\n```markdown\nনির্দিষ্ট style:\nগতি / BPM:\nপরিচিতি ও discovery:\nযুগ ও classics:\nমেজাজ:\nSET-এর energy level বা curve:\nplatform ও link-এর প্রয়োজন:\nঅন্যান্য:\n```"
+  }
+}

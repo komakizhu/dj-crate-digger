@@ -1,0 +1,46 @@
+{
+  "locale": "fa",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "اگر منطقه خالی باشد، فقط یک بازار گسترده فارسی‌زبان را برای همین جلسه در نظر بگیر.",
+    "explicit_region": "کشور یا منطقه صریح بر استنباط زبانی مقدم است، اما زبان ارتباط را تغییر نمی‌دهد.",
+    "persistence": "بازار هدف را به‌عنوان ترجیح بلندمدت ذخیره نکن."
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "فقط",
+      "تنها",
+      "فقط استفاده کن"
+    ],
+    "preferred_markers": [
+      "ترجیح",
+      "اولویت",
+      "ترجیحاً"
+    ],
+    "fallback_markers": [
+      "جایگزین",
+      "پشتیبان",
+      "اگر در دسترس نبود"
+    ],
+    "forbidden_markers": [
+      "استفاده نکن",
+      "حذف کن",
+      "بدون"
+    ]
+  },
+  "status": {
+    "unknown": "نامشخص",
+    "verified": "تأییدشده",
+    "target_platform_missing": "پلتفرم هدف در دسترس نیست"
+  }
+}

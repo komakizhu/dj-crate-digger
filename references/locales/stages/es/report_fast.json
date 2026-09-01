@@ -1,0 +1,29 @@
+{
+  "locale": "es",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Modo Fast",
+    "first_batch_title": "# Primera tanda Fast",
+    "final_title": "# Modo Fast",
+    "columns": [
+      "Tema",
+      "Artista",
+      "Enlace"
+    ],
+    "next_steps": [
+      {
+        "label": "Primero | Compartir comentarios",
+        "body": "Si quiere, responda en lenguaje natural sobre cómo funcionaron las selecciones. Esto mejora sus preferencias privadas y futuras recomendaciones."
+      },
+      {
+        "label": "Segundo | Exportar o entregar la playlist",
+        "body": "Puede sacar una playlist de texto o entregarla a W4DJ. Responda `output text playlist` o `export to w4dj`."
+      }
+    ],
+    "digging_notes": "Notas de digging",
+    "mix_suggestion": "Sugerencia de mezcla",
+    "unknown": "Desconocido",
+    "verified": "Verificado",
+    "target_platform_missing": "Plataforma objetivo no disponible"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "locale": "ms",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "Selamat datang ke Pembantu Pemilihan DJ. Agent Skill ini membantu anda menyediakan set DJ. Anda akan mengesahkan keperluan dalam dua pusingan dan menerima cadangan trek. Peraturan pengisian:",
+    "tutorial_label": "Panduan import Set satu klik",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md"
+  },
+  "round": {
+    "title": "[Pusingan 1: maklumat penting]",
+    "rules": [
+      "1. Anda boleh menyalin contoh, mengisi secara bebas atau membiarkannya kosong",
+      "2. Ruang kosong bermaksud AI akan menilai jawapan dengan bijak"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "Situasi",
+        "example": "Konteks persembahan. Contoh: `bar` / `kelab` / `perkahwinan` / `pameran seni`"
+      },
+      {
+        "key": "target_market",
+        "label": "Negara / wilayah sasaran",
+        "example": "Contoh: `China tanah besar` / `Taiwan` / `Hong Kong` / `Jepun` / `pasaran antarabangsa berbahasa Inggeris`"
+      },
+      {
+        "key": "core_sound",
+        "label": "Arah bunyi utama",
+        "example": "Artis, trek dan genre rujukan. Contoh: `Tears` oleh `Skrillex`, genre `UK Bass` moden"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "Bilangan trek atau tempoh set",
+        "example": "Contoh: `20 trek` / `60 minit`"
+      },
+      {
+        "key": "output_mode",
+        "label": "Versi output",
+        "example": "Pilihan Fast / Brief / Rich"
+      },
+      {
+        "key": "other",
+        "label": "Batasan lain",
+        "example": "Contoh: `elakkan trek yang terlalu kerap dimainkan`, `tanpa vokal`, `Remix sahaja`; pilihan"
+      }
+    ],
+    "prompt": "Selamat datang ke Pembantu Pemilihan DJ. Agent Skill ini membantu anda menyediakan set DJ. Anda akan mengesahkan keperluan dalam dua pusingan dan menerima cadangan trek. Peraturan pengisian:\n\n1. Anda boleh menyalin contoh, mengisi secara bebas atau membiarkannya kosong\n2. Ruang kosong bermaksud AI akan menilai jawapan dengan bijak\n\n[Pusingan 1: maklumat penting]\n\nSituasi:\n“Konteks persembahan. Contoh: `bar` / `kelab` / `perkahwinan` / `pameran seni`”\nNegara / wilayah sasaran:\n“Contoh: `China tanah besar` / `Taiwan` / `Hong Kong` / `Jepun` / `pasaran antarabangsa berbahasa Inggeris`”\nArah bunyi utama:\n“Artis, trek dan genre rujukan. Contoh: `Tears` oleh `Skrillex`, genre `UK Bass` moden”\nBilangan trek atau tempoh set:\n“Contoh: `20 trek` / `60 minit`”\nVersi output:\n“`Fast`: playlist pantas; kualiti mungkin lebih rendah”\n“`Brief`: satu playlist gabungan sahaja”\n“`Rich`: paparan gaya, situasi dan penemuan secara berasingan, kemudian playlist gabungan akhir”\nBatasan lain:\n“Contoh: `elakkan trek yang terlalu kerap dimainkan`, `tanpa vokal`, `Remix sahaja`; pilihan”\n\n```markdown\nSituasi:\nNegara / wilayah sasaran:\nArah bunyi utama:\nBilangan trek atau tempoh set:\nVersi output:\nBatasan lain:\n```"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "locale": "pl",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Tryb Fast",
+    "first_batch_title": "# Pierwsza partia Fast",
+    "final_title": "# Tryb Fast",
+    "columns": [
+      "Utwór",
+      "Artysta",
+      "Link"
+    ],
+    "next_steps": [
+      {
+        "label": "Po pierwsze | Podziel się opinią",
+        "body": "Jeśli chcesz, opisz naturalnym językiem, jak sprawdziły się wybory. To poprawia prywatne preferencje i kolejne rekomendacje."
+      },
+      {
+        "label": "Po drugie | Eksportuj lub przekaż playlistę",
+        "body": "Możesz wyprowadzić playlistę tekstową albo przekazać ją do W4DJ. Odpowiedz `output text playlist` lub `export to w4dj`."
+      }
+    ],
+    "digging_notes": "Notatki z diggingu",
+    "mix_suggestion": "Sugestia miksu",
+    "unknown": "Nieznane",
+    "verified": "Zweryfikowane",
+    "target_platform_missing": "Platforma docelowa niedostępna"
+  }
+}

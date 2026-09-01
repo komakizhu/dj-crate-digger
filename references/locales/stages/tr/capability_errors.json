@@ -1,0 +1,10 @@
+{
+  "locale": "tr",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "Web araması kullanılamıyor; bu nedenle öneriyi doğrulayamam.",
+    "open_page": "Somut sayfalara erişim kullanılamıyor; bu nedenle öneriyi doğrulayamam.",
+    "file_write": "Dosya yazma kullanılamıyor; bu nedenle `.w4dj` dosyası oluşturamam.",
+    "progress": "Otomatik devam kullanılamıyor; yalnızca doğrulanmış ilk grubu sunabilirim."
+  }
+}

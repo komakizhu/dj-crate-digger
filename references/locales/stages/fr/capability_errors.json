@@ -1,0 +1,10 @@
+{
+  "locale": "fr",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "La recherche web est indisponible ; je ne peux donc pas vérifier une recommandation.",
+    "open_page": "L’accès aux pages concrètes est indisponible ; je ne peux donc pas vérifier une recommandation.",
+    "file_write": "L’écriture de fichiers est indisponible ; je ne peux pas créer de fichier `.w4dj`.",
+    "progress": "La continuation automatique est indisponible ; je peux seulement livrer le premier lot vérifié."
+  }
+}

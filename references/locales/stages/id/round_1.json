@@ -1,0 +1,49 @@
+{
+  "locale": "id",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "Selamat datang di Asisten Pemilihan DJ. Skill Agent ini membantu Anda menyiapkan set DJ. Anda akan mengonfirmasi kebutuhan dalam dua putaran dan menerima rekomendasi track. Aturan pengisian:",
+    "tutorial_label": "Panduan impor Set sekali klik",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md"
+  },
+  "round": {
+    "title": "[Putaran 1: informasi penting]",
+    "rules": [
+      "1. Anda dapat menyalin contoh, mengisi dengan bebas, atau membiarkannya kosong",
+      "2. Kolom kosong berarti AI akan menilai jawabannya secara cerdas"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "Situasi",
+        "example": "Konteks pertunjukan. Contoh: `bar` / `klub` / `pernikahan` / `pameran seni`"
+      },
+      {
+        "key": "target_market",
+        "label": "Negara / wilayah target",
+        "example": "Contoh: `Tiongkok daratan` / `Taiwan` / `Hong Kong` / `Jepang` / `pasar internasional berbahasa Inggris`"
+      },
+      {
+        "key": "core_sound",
+        "label": "Arah suara utama",
+        "example": "Artis, track, dan genre referensi. Contoh: `Tears` oleh `Skrillex`, genre `UK Bass` modern"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "Jumlah track atau durasi set",
+        "example": "Contoh: `20 track` / `60 menit`"
+      },
+      {
+        "key": "output_mode",
+        "label": "Versi keluaran",
+        "example": "Pilihan Fast / Brief / Rich"
+      },
+      {
+        "key": "other",
+        "label": "Batasan lain",
+        "example": "Contoh: `hindari track yang terlalu sering diputar`, `tanpa vokal`, `hanya Remix`; opsional"
+      }
+    ],
+    "prompt": "Selamat datang di Asisten Pemilihan DJ. Skill Agent ini membantu Anda menyiapkan set DJ. Anda akan mengonfirmasi kebutuhan dalam dua putaran dan menerima rekomendasi track. Aturan pengisian:\n\n1. Anda dapat menyalin contoh, mengisi dengan bebas, atau membiarkannya kosong\n2. Kolom kosong berarti AI akan menilai jawabannya secara cerdas\n\n[Putaran 1: informasi penting]\n\nSituasi:\n“Konteks pertunjukan. Contoh: `bar` / `klub` / `pernikahan` / `pameran seni`”\nNegara / wilayah target:\n“Contoh: `Tiongkok daratan` / `Taiwan` / `Hong Kong` / `Jepang` / `pasar internasional berbahasa Inggris`”\nArah suara utama:\n“Artis, track, dan genre referensi. Contoh: `Tears` oleh `Skrillex`, genre `UK Bass` modern”\nJumlah track atau durasi set:\n“Contoh: `20 track` / `60 menit`”\nVersi keluaran:\n“`Fast`: playlist cepat; kualitas mungkin lebih rendah”\n“`Brief`: hanya satu playlist gabungan”\n“`Rich`: tampilan gaya, situasi, dan penemuan terpisah, lalu playlist gabungan akhir”\nBatasan lain:\n“Contoh: `hindari track yang terlalu sering diputar`, `tanpa vokal`, `hanya Remix`; opsional”\n\n```markdown\nSituasi:\nNegara / wilayah target:\nArah suara utama:\nJumlah track atau durasi set:\nVersi keluaran:\nBatasan lain:\n```"
+  }
+}

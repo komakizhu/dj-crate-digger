@@ -1,0 +1,192 @@
+{
+  "skill_name": "dj-crate-digger",
+  "contract": "universal-agent-skill",
+  "evals": [
+    {
+      "id": "01-direct-dj-trigger",
+      "prompt": "为广州周末地下俱乐部排一套 60 分钟 UK Bass DJ set，参考 Skream，其他细节你判断，直接出结果。",
+      "expected_output": "跳过问卷，默认进入综合版搜索、逐曲核验和报告。",
+      "expectations": ["触发 DJ 选歌流程", "intake_status 为 direct_ready", "默认 output_mode 为 composite", "不显示第一轮或第二轮"]
+    },
+    {
+      "id": "02-ambiguous-playlist-trigger",
+      "prompt": "帮我做一个 playlist。",
+      "expected_output": "只询问一次是否需要挖歌或排一个 DJ set；不直接进入推荐。",
+      "expectations": ["不把普通 playlist 当作直接 DJ 触发", "使用当前沟通语言", "肯定后才进入第一轮"]
+    },
+    {
+      "id": "03-no-trigger-song-identification",
+      "prompt": "这是什么歌？",
+      "expected_output": "不激活 DJ Crate Digger。",
+      "expectations": ["不发送两轮问卷", "不执行 DJ 搜索流程"]
+    },
+    {
+      "id": "04-capability-preflight",
+      "prompt": "我想排一个 DJ set，但当前 Agent 不能搜索网页或打开网页。",
+      "expected_output": "在第一轮前说明无法完成逐曲实时核验，不输出伪验证歌单。",
+      "expectations": ["检查 web_search 与 open_page", "不以模型记忆补歌", "不增加无关问卷"]
+    },
+    {
+      "id": "05-fixed-two-round-intake",
+      "prompt": "请开始 DJ 选歌流程。",
+      "expected_output": "严格发送第一轮，再发送第二轮；第二轮结束后直接进入搜索，没有明确选择模式时默认输出综合版。",
+      "expectations": ["每轮一个可复制 Markdown 块", "第一轮六字段", "第二轮八字段", "空白输出版本默认为 composite", "没有第三轮普通需求收集"]
+    },
+    {
+      "id": "06-language-market-separation",
+      "prompt": "用英文沟通，为日本市场做一套 set；地区留空时也不要猜具体国家。",
+      "expected_output": "visible language is English; explicit Japan is a session market; blank market is broad and temporary.",
+      "expectations": ["communication_language 与 target_market 分开", "明确地区不改变语言", "市场不进入长期画像"]
+    },
+    {
+      "id": "07-platform-exclusive-netease",
+      "prompt": "平台只填写网易云。",
+      "expected_output": "平台策略为 exclusive，只交付逐曲核验的网易云页面。",
+      "expectations": ["不加入 Spotify 或默认平台", "网易云缺失时减少数量", "不以其他平台补位"]
+    },
+    {
+      "id": "08-platform-preferred-order",
+      "prompt": "网易云优先，Spotify 备用。",
+      "expected_output": "平台策略为 preferred，只允许按声明顺序使用网易云和 Spotify。",
+      "expectations": ["网易云优先", "Spotify 只在必要时回退", "不加入未声明平台"]
+    },
+    {
+      "id": "09-platform-forbidden-hard-filter",
+      "prompt": "不要使用 Spotify，其他平台可以。",
+      "expected_output": "Spotify 从搜索、证据和用户可见链接中硬过滤。",
+      "expectations": ["forbidden 平台不出现在来源汇总", "其他允许平台仍可验证", "不把禁用平台当作候选"]
+    },
+    {
+      "id": "10-fast-independent-path",
+      "prompt": "选择极速版，找 15 首 Breakbeat。",
+      "expected_output": "独立 fast 路径，输出严格三列表格并执行单主导向和时间预算。",
+      "expectations": ["表格只有歌名、歌手、链接", "不显示调性或选歌碎碎念", "不借用 Brief/Rich 输出路径"]
+    },
+    {
+      "id": "11-fast-continuation",
+      "prompt": "极速版需要 40 首，宿主支持中间消息和持续执行。",
+      "expected_output": "先交付约 15 首首批，再从同一查询结果继续补齐，不重新解释需求。",
+      "expectations": ["首批 10–20 首", "最终最多 50 首", "首批曲目全部保留", "无能力时不声称后台续跑"]
+    },
+    {
+      "id": "12-brief-twelve-columns",
+      "prompt": "选择简要版，做一份带调性的 DJ 歌单。",
+      "expected_output": "一张综合表，严格十二列，BPM 后紧接调性。",
+      "expectations": ["不添加序号、Mix、来源或验证状态列", "逐曲核验", "未知调性显示未知而不换曲"]
+    },
+    {
+      "id": "13-rich-shared-pool",
+      "prompt": "选择丰富版，分别看看风格、场景和熟悉度/发现感，再给综合版。",
+      "expected_output": "共享一个候选池，输出三个专项视角和一个动态综合视角。",
+      "expectations": ["每个视角严格十二列", "默认不跨视角重复录音", "导出与重排只用动态综合视角"]
+    },
+    {
+      "id": "14-complete-title",
+      "prompt": "请保留官方的 Extended Mix、Live、Dub 等完整限定。",
+      "expected_output": "限定保留在完整 title 中，不增加独立版本字段。",
+      "expectations": ["官方标题原样保留", "不同标题变体不误合并", "平台页面与最终标题逐曲对应"]
+    },
+    {
+      "id": "15-recording-deduplication",
+      "prompt": "同一录音在多个平台出现时只要一行，但不同 Remix 要分开。",
+      "expected_output": "按 ISRC 或艺人加完整标题去重，跨平台链接合并到同一记录。",
+      "expectations": ["单表录音零重复", "不同官方变体不误合并", "不靠 URL slug 判断身份"]
+    },
+    {
+      "id": "16-key-evidence",
+      "prompt": "简要版中请可靠核验调性；如果来源冲突就显示未知。",
+      "expected_output": "只使用同一完整标题的授权 DJ 商店或官方元数据；冲突不生成 Camelot。",
+      "expectations": ["不使用搜索摘要或模型记忆", "不跨版本借用调性", "非 major/minor 不参加五度圈排序"]
+    },
+    {
+      "id": "17-harmonic-positive",
+      "prompt": "简要版完成后，按五度圈原则帮我排顺序。",
+      "expected_output": "只重排简要版综合表，保留曲目集合、标题、链接、去重和艺人比例。",
+      "expectations": ["基础 Camelot 兼容优先", "实验性 ±2 只作兜底并标明", "未知调性曲目保留在末尾"]
+    },
+    {
+      "id": "18-harmonic-ambiguous",
+      "prompt": "也许可以按五度圈排一下。",
+      "expected_output": "只追问一句是否确认重排，不立即改变顺序。",
+      "expectations": ["识别为 ambiguous action", "不是第三轮问卷", "确认前不导出新顺序"]
+    },
+    {
+      "id": "19-double-drop-gate",
+      "prompt": "给我两个可以 double drop 的组合，但其中一首调性未知。",
+      "expected_output": "不称为 double drop；改为更宽泛的叠歌尝试，并说明需要 DJ 试听。",
+      "expectations": ["调性、基础兼容和 BPM 门槛同时满足才可用 double drop", "不伪造试听或 beatmatch"]
+    },
+    {
+      "id": "20-creative-transition-fallback",
+      "prompt": "简要版必须给我一句有创意的接歌建议，但没有可靠波形资料。",
+      "expected_output": "选歌碎碎念中恰好一条可尝试的行动建议，不编造精确结构。",
+      "expectations": ["最多两种核心技巧", "可以使用 EQ、loop、filter、echo、reverb 或飞歌思路", "使用条件语气"]
+    },
+    {
+      "id": "21-feedback-session-only",
+      "prompt": "我喜欢 Skream，但这次婚礼不会用；当前会话按这个调整。",
+      "expected_output": "更新当前会话中的 taste 与 wedding utility，不直接写入长期档案。",
+      "expectations": ["自然语言反馈低负担", "个人喜欢与场景会用分离", "长期保存需要摘要确认"]
+    },
+    {
+      "id": "22-feedback-low-confidence",
+      "prompt": "这几首感觉不太对，也许吧。",
+      "expected_output": "低置信度时默认不更新，保留待后续摘要纠正。",
+      "expectations": ["不强行猜标签", "不把一次模糊反馈泛化成流派偏好"]
+    },
+    {
+      "id": "23-private-memory-summary",
+      "prompt": "把这一轮反馈整理成摘要，问我是否保存。",
+      "expected_output": "展示一段简短品味变化摘要，统一请求明确确认；拒绝或模糊不保存。",
+      "expectations": ["事件日志与可重建画像双层存储", "不逐曲轰炸确认", "长期记忆权重不超过 10%"]
+    },
+    {
+      "id": "24-report-actions-after-only",
+      "prompt": "用户刚回答第一轮，要求马上导出或按五度圈排列。",
+      "expected_output": "拒绝提前执行，完成两轮和完整报告后才显示可选后续动作。",
+      "expectations": ["导出与重排不是需求收集字段", "不提前创建文件", "不增加第三轮"]
+    },
+    {
+      "id": "25-text-playlist-chat-only",
+      "prompt": "报告完成后输出文字版歌单。",
+      "expected_output": "在聊天中返回当前最终顺序的可复制文本，不创建文本文件。",
+      "expectations": ["不重新搜索", "保留完整标题和顺序", "不声称一键写入 DJ 软件"]
+    },
+    {
+      "id": "26-w4dj-file-contract",
+      "prompt": "报告完成后导出到w4dj。",
+      "expected_output": "有文件写入能力时创建 UTF-8 `.w4dj`，根字段和曲目字段严格符合当前合同。",
+      "expectations": ["根字段只有 format、format_version、export_id、playlist、tracks", "format_version 固定为整数 2 且不询问用户", "playlist 只有 name", "tracks 只有 position、title、artist_display 和可选字符串 netease_track_id", "不写本地音频、路径或内部元数据"]
+    },
+    {
+      "id": "27-w4dj-no-file-capability",
+      "prompt": "报告完成后导出到w4dj，但宿主不能写文件。",
+      "expected_output": "拒绝声称已生成文件，说明需要文件写入能力。",
+      "expectations": ["不返回伪造文件路径", "不以聊天 JSON 冒充文件", "不触发下载或本地音频处理"]
+    },
+    {
+      "id": "28-w4dj-unknown-legacy-fields",
+      "prompt": "用户提供一个含未知旧字段的 w4dj 文件，要求直接导入。",
+      "expected_output": "拒绝未知旧合同，不读取旧字段，不自动迁移；请用户从当前 Skill 重新导出。",
+      "expectations": ["当前格式不接受未知字段", "不从旧字段重建文件", "不声称兼容"]
+    },
+    {
+      "id": "29-all-locale-structure",
+      "prompt": "用 26 种支持语言分别运行两轮 DJ 选歌流程。",
+      "expected_output": "每种语言从固定语言包读取问卷、报告、动作、平台和状态文本。",
+      "expectations": ["manifest 包含 26 个语言包", "不临场整套翻译", "固定结构一致"]
+    },
+    {
+      "id": "30-host-neutral-runtime",
+      "prompt": "在另一个支持标准 Agent Skill 的客户端加载这个 Skill。",
+      "expected_output": "使用同一 SKILL.md 和 references；按客户端实际能力映射语义能力，不切换宿主专属算法。",
+      "expectations": ["不检查模型品牌或 reasoning 档位", "不要求固定 SDK/MCP/命令", "缺能力时按统一降级规则处理"]
+    },
+    {
+      "id": "31-adaptive-intake-boundary",
+      "prompt": "帮我排个俱乐部 set。",
+      "expected_output": "需求未达到直接执行门槛且没有授权补全，因此显示第一轮固定问卷；如果没有明确选其他模式，最终默认输出综合版。",
+      "expectations": ["不把一个场景词当作完整 brief", "intake_status 进入 round_1", "output_mode 默认为 composite", "问卷开始后仍完成固定两轮"]
+    }
+  ]
+}

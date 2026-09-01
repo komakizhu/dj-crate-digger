@@ -1,0 +1,49 @@
+{
+  "locale": "bn",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "DJ নির্বাচন সহায়কে স্বাগতম। এই Agent Skill আপনাকে একটি DJ set তৈরি করতে সাহায্য করে। দুই ধাপে আপনার প্রয়োজন নিশ্চিত করে track-এর পরামর্শ পাবেন। পূরণের নিয়ম:",
+    "tutorial_label": "এক ক্লিকে Set import নির্দেশিকা",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md"
+  },
+  "round": {
+    "title": "[প্রথম ধাপ: প্রয়োজনীয় তথ্য]",
+    "rules": [
+      "1. উদাহরণ কপি করতে, নিজের মতো লিখতে বা ফাঁকা রাখতে পারেন",
+      "2. ফাঁকা রাখলে AI ইঙ্গিত থেকে উত্তরটি বুদ্ধিমত্তার সঙ্গে নির্ধারণ করবে"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "পরিস্থিতি",
+        "example": "পারফরম্যান্সের পরিবেশ। উদাহরণ: `bar` / `club` / `wedding` / `art exhibition`"
+      },
+      {
+        "key": "target_market",
+        "label": "লক্ষ্য দেশ / অঞ্চল",
+        "example": "উদাহরণ: `Mainland China` / `Taiwan` / `Hong Kong` / `Japan` / `international English market`"
+      },
+      {
+        "key": "core_sound",
+        "label": "মূল সাউন্ডের দিক",
+        "example": "রেফারেন্স শিল্পী, track ও genre। উদাহরণ: `Skrillex`-এর `Tears`, আধুনিক `UK Bass`"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "track সংখ্যা বা set-এর সময়",
+        "example": "উদাহরণ: `20 tracks` / `60 minutes`"
+      },
+      {
+        "key": "output_mode",
+        "label": "আউটপুট সংস্করণ",
+        "example": "Fast / Brief / Rich বেছে নিন"
+      },
+      {
+        "key": "other",
+        "label": "অন্যান্য সীমা",
+        "example": "উদাহরণ: `খুব বেশি বাজানো track এড়ান`, `vocal নয়`, `শুধু Remix`; ঐচ্ছিক"
+      }
+    ],
+    "prompt": "DJ নির্বাচন সহায়কে স্বাগতম। এই Agent Skill আপনাকে একটি DJ set তৈরি করতে সাহায্য করে। দুই ধাপে আপনার প্রয়োজন নিশ্চিত করে track-এর পরামর্শ পাবেন। পূরণের নিয়ম:\n\n1. উদাহরণ কপি করতে, নিজের মতো লিখতে বা ফাঁকা রাখতে পারেন\n2. ফাঁকা রাখলে AI ইঙ্গিত থেকে উত্তরটি বুদ্ধিমত্তার সঙ্গে নির্ধারণ করবে\n\n[প্রথম ধাপ: প্রয়োজনীয় তথ্য]\n\nপরিস্থিতি:\n“পারফরম্যান্সের পরিবেশ। উদাহরণ: `bar` / `club` / `wedding` / `art exhibition`”\nলক্ষ্য দেশ / অঞ্চল:\n“উদাহরণ: `Mainland China` / `Taiwan` / `Hong Kong` / `Japan` / `international English market`”\nমূল সাউন্ডের দিক:\n“রেফারেন্স শিল্পী, track ও genre। উদাহরণ: `Skrillex`-এর `Tears`, আধুনিক `UK Bass`”\ntrack সংখ্যা বা set-এর সময়:\n“উদাহরণ: `20 tracks` / `60 minutes`”\nআউটপুট সংস্করণ:\n“`Fast`: দ্রুত playlist; মান কম হতে পারে”\n“`Brief`: শুধু একটি সম্মিলিত playlist”\n“`Rich`: style, পরিস্থিতি ও discovery-এর আলাদা দৃষ্টিভঙ্গি, শেষে সম্মিলিত playlist”\nঅন্যান্য সীমা:\n“উদাহরণ: `খুব বেশি বাজানো track এড়ান`, `vocal নয়`, `শুধু Remix`; ঐচ্ছিক”\n\n```markdown\nপরিস্থিতি:\nলক্ষ্য দেশ / অঞ্চল:\nমূল সাউন্ডের দিক:\ntrack সংখ্যা বা set-এর সময়:\nআউটপুট সংস্করণ:\nঅন্যান্য সীমা:\n```"
+  }
+}

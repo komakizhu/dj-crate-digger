@@ -1,0 +1,48 @@
+{
+  "locale": "id",
+  "stage": "report_rich",
+  "report": {
+    "title": "# Mode Rich",
+    "first_batch_title": "# Mode Rich",
+    "final_title": "# Mode Rich",
+    "columns": [
+      "Track",
+      "Artis",
+      "Album / EP",
+      "Gaya",
+      "BPM",
+      "Nada",
+      "Durasi",
+      "Energi",
+      "Tanggal rilis",
+      "Catatan",
+      "Alasan dipilih",
+      "Tautan"
+    ],
+    "next_steps": [
+      {
+        "label": "Pertama | Bagikan masukan pilihan",
+        "body": "Jika mau, balas dengan bahasa alami tentang hasil pilihan. Ini membantu memperbaiki preferensi pilihan pribadi dan rekomendasi berikutnya."
+      },
+      {
+        "label": "Kedua | Ekspor atau serahkan playlist",
+        "body": "Anda dapat membuat playlist teks atau menyerahkannya ke W4DJ. Balas `output text playlist` atau `export to w4dj`."
+      },
+      {
+        "label": "Ketiga | Urutan harmonis set",
+        "body": "Ingin saya mengurutkan set menggunakan roda Camelot?"
+      }
+    ],
+    "digging_notes": "Catatan digging",
+    "mix_suggestion": "Saran mixing",
+    "unknown": "Tidak diketahui",
+    "verified": "Terverifikasi",
+    "target_platform_missing": "Platform target tidak tersedia",
+    "view_titles": [
+      "Tampilan gaya",
+      "Tampilan situasi",
+      "Tampilan keakraban / penemuan",
+      "Tampilan gabungan dinamis"
+    ]
+  }
+}

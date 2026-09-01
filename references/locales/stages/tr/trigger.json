@@ -1,0 +1,38 @@
+{
+  "locale": "tr",
+  "stage": "trigger",
+  "ambiguous_confirmation": "Müzik aramamı veya bir DJ seti hazırlamamı ister misiniz?",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "DJ seti",
+    "DJ seti oluştur",
+    "DJ için müzik ara",
+    "bir set hazırla",
+    "seti sırala"
+  ],
+  "ambiguous": [
+    "playlist",
+    "parça bul",
+    "çalma listesi",
+    "müzik ara",
+    "DJ",
+    "müzik keşfi",
+    "set oluştur"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "DJ seti",
+    "çalma listesi",
+    "müzik keşfi",
+    "parça bul",
+    "set oluştur"
+  ]
+}

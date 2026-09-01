@@ -1,0 +1,10 @@
+{
+  "locale": "zh-Hans",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "当前无法搜索网页，因此无法可靠核验推荐。",
+    "open_page": "当前无法打开具体网页，因此无法可靠核验推荐。",
+    "file_write": "当前没有文件写入能力，因此无法创建 `.w4dj` 文件。",
+    "progress": "当前不支持自动续跑；只能交付已核验的首批。"
+  }
+}

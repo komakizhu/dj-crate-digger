@@ -1,0 +1,78 @@
+{
+  "locale": "it",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "Condividi feedback",
+      "positive": [
+        "Mi piace questo brano"
+      ],
+      "negative": [
+        "Non mi piace questo brano"
+      ],
+      "ambiguous": [
+        "Non sono sicuro di questo brano"
+      ]
+    },
+    "export_w4dj": {
+      "label": "Esporta in W4DJ",
+      "positive": [
+        "Esporta in W4DJ"
+      ],
+      "negative": [
+        "Non esportare in W4DJ"
+      ],
+      "ambiguous": [
+        "Forse esporta in W4DJ"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Produci playlist testuale",
+      "positive": [
+        "Produci la playlist testuale"
+      ],
+      "negative": [
+        "Non produrre la playlist testuale"
+      ],
+      "ambiguous": [
+        "Forse produci la playlist testuale"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Riordina armonicamente",
+      "positive": [
+        "Ordina con la ruota di Camelot"
+      ],
+      "negative": [
+        "Non riordinare"
+      ],
+      "ambiguous": [
+        "Forse ordina con la ruota di Camelot"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "Conferma memoria a lungo termine",
+      "positive": [
+        "Ricorda questa preferenza"
+      ],
+      "negative": [
+        "Non salvare questa preferenza"
+      ],
+      "ambiguous": [
+        "Forse ricorda questa preferenza"
+      ]
+    }
+  },
+  "export": {
+    "text": "Produci una playlist testuale copiabile nell’ordine attuale.",
+    "w4dj": "Crea un file di consegna UTF-8 `.w4dj` per W4DJ.",
+    "harmonic": "Richiedi l’ordine secondo la ruota di Camelot usando le tonalità note.",
+    "feedback": "Il feedback naturale aggiorna solo la sessione; la memoria a lungo termine richiede conferma.",
+    "memory_confirmation": "Ho interpretato questo come un breve riepilogo di un cambiamento di gusto. Salvarlo nel profilo privato a lungo termine?"
+  },
+  "status": {
+    "unknown": "Sconosciuto",
+    "verified": "Verificato",
+    "target_platform_missing": "Piattaforma target non disponibile"
+  }
+}

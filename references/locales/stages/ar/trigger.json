@@ -1,0 +1,38 @@
+{
+  "locale": "ar",
+  "stage": "trigger",
+  "ambiguous_confirmation": "هل تريدني أن أبحث عن موسيقى أو أعدّ مجموعة DJ؟",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "مجموعة DJ",
+    "إنشاء مجموعة DJ",
+    "البحث عن موسيقى للـDJ",
+    "إعداد مجموعة",
+    "ترتيب مجموعة DJ"
+  ],
+  "ambiguous": [
+    "قائمة تشغيل",
+    "البحث عن مقاطع",
+    "قائمة موسيقى",
+    "البحث عن موسيقى",
+    "DJ",
+    "العثور على مقاطع",
+    "ترتيب مجموعة"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "مجموعة DJ",
+    "قائمة تشغيل",
+    "البحث عن موسيقى",
+    "العثور على مقاطع",
+    "ترتيب مجموعة"
+  ]
+}

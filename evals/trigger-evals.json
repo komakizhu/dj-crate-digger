@@ -1,0 +1,277 @@
+[
+  {
+    "query": "/dj-crate-digger I need 25 tracks for a rooftop sunset set, starting organic and ending with deeper house. Prioritize SoundCloud links.",
+    "should_trigger": true
+  },
+  {
+    "query": "/迪歌 下个月在海边咖啡馆放歌，帮我挖一套温暖但不俗的 Organic House，30 首。",
+    "should_trigger": true
+  },
+  {
+    "query": "周五小酒吧暖场，大家要有反应，但不要全是抖音神曲，House 为主，给我做一套打碟歌单。",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我挖歌：想找一些像 DJ Koze 某些迷幻作品的曲子，适合凌晨两点后的地下室。",
+    "should_trigger": true
+  },
+  {
+    "query": "Build me four different playlist views for a tense left-field techno night and explain why the rankings differ.",
+    "should_trigger": true
+  },
+  {
+    "query": "找一套适合从 Warm Up 慢慢推到 Peak 的 Deep House，最好能导出到 Apple Music。",
+    "should_trigger": true
+  },
+  {
+    "query": "I have one reference track: Bicep — Glue. Dig outward from it for a 90-minute closing set, avoiding obvious duplicates.",
+    "should_trigger": true
+  },
+  {
+    "query": "给我做一张凌晨公路电子乐歌单，氛围第一，风格你来推断，但所有歌都要能验证。",
+    "should_trigger": true
+  },
+  {
+    "query": "Find current Bandcamp and SoundCloud tracks for a dub techno crate, sequence them, then give me an import-ready list.",
+    "should_trigger": true
+  },
+  {
+    "query": "我需要一套婚礼 afterparty 的电子歌单，先放熟歌，再逐渐转向更地下的声音。",
+    "should_trigger": true
+  },
+  {
+    "query": "/迪歌 周五午夜左场小酒吧，先用大家熟的土味采样暖场，再推到怪一点的中国地下俱乐部声响。",
+    "should_trigger": true
+  },
+  {
+    "query": "I’m digging for deep house tracks for a warm-up set, with a few less obvious choices.",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我做一个暖场 playlist，House 为主，适合周五小酒吧开场。",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我找 Deep House，适合凌晨两点后的地下 DJ set。",
+    "should_trigger": true
+  },
+  {
+    "query": "排set：周六地下俱乐部，从熟悉素材慢慢推到 left-field techno。",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我排一个 set，从 Warm Up 到 Peak，Deep House 为主。",
+    "should_trigger": true
+  },
+  {
+    "query": "给我做一个凌晨两点后的 closing setlist，想要紧张但不俗。",
+    "should_trigger": true
+  },
+  {
+    "query": "Arrange a DJ set from warm-up to peak, with deep house and a few left-field turns.",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我用 FastAPI 和 LangGraph 开发一个 Spotify 推荐系统，并写好 OAuth 回调代码。",
+    "should_trigger": false
+  },
+  {
+    "query": "Spotify Web API 创建 playlist 一直返回 403，帮我诊断 scope 配置。",
+    "should_trigger": false
+  },
+  {
+    "query": "这段歌词是哪首歌：I remember when...？",
+    "should_trigger": false
+  },
+  {
+    "query": "请写一篇介绍 Deep House 历史的公众号文章。",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我批量下载 SoundCloud 歌曲并转换成 320kbps MP3。",
+    "should_trigger": false
+  },
+  {
+    "query": "教我在 Ableton 里给 kick 和 bass 做 sidechain compression。",
+    "should_trigger": false
+  },
+  {
+    "query": "给我的 DJ 播客生成一张霓虹风封面图。",
+    "should_trigger": false
+  },
+  {
+    "query": "分析这两个音频文件的调性、LUFS 和动态范围。",
+    "should_trigger": false
+  },
+  {
+    "query": "把我硬盘里的音乐文件按艺人和专辑重命名并移动文件夹。",
+    "should_trigger": false
+  },
+  {
+    "query": "Deep House 和 Organic House 有什么区别？给我一个简短定义。",
+    "should_trigger": false
+  },
+  {
+    "query": "做个 playlist",
+    "should_trigger": false,
+    "expected_route": "ambiguous_confirmation"
+  },
+  {
+    "query": "帮我做一张歌单",
+    "should_trigger": false,
+    "expected_route": "ambiguous_confirmation"
+  },
+  {
+    "query": "/DJ",
+    "should_trigger": false,
+    "expected_route": "ambiguous_confirmation"
+  },
+  {
+    "query": "DJ",
+    "should_trigger": false,
+    "expected_route": "ambiguous_confirmation"
+  },
+  {
+    "query": "挖歌",
+    "should_trigger": true,
+    "expected_route": "direct"
+  },
+  {
+    "query": "帮我找一首歌的歌名，这段旋律是什么？",
+    "should_trigger": false
+  },
+  {
+    "query": "I’m digging into this API and need help with pagination.",
+    "should_trigger": false
+  },
+  {
+    "locale": "en",
+    "query": "Build a verified 20-track UK Bass DJ set for a club, with direct links.",
+    "should_trigger": true
+  },
+  {
+    "locale": "zh-Hans",
+    "query": "帮我为周末俱乐部挖一套 20 首 UK Bass，逐曲核验链接。",
+    "should_trigger": true
+  },
+  {
+    "locale": "zh-Hant",
+    "query": "請幫我為週末俱樂部挖一套 20 首 UK Bass，逐曲核驗連結。",
+    "should_trigger": true
+  },
+  {
+    "locale": "es",
+    "query": "Encuentra 20 temas de UK Bass para un set de club y verifica cada enlace directo.",
+    "should_trigger": true
+  },
+  {
+    "locale": "pt",
+    "query": "Encontre 20 faixas de UK Bass para um set de clube e verifique cada link direto.",
+    "should_trigger": true
+  },
+  {
+    "locale": "fr",
+    "query": "Trouve 20 morceaux de UK Bass pour un set en club et vérifie chaque lien direct.",
+    "should_trigger": true
+  },
+  {
+    "locale": "de",
+    "query": "Finde 20 UK-Bass-Tracks für ein Club-Set und prüfe jeden direkten Link.",
+    "should_trigger": true
+  },
+  {
+    "locale": "ja",
+    "query": "クラブ用のUK Bass DJセットを20曲探し、各曲の直接リンクを確認してください。",
+    "should_trigger": true
+  },
+  {
+    "locale": "ko",
+    "query": "클럽용 UK Bass DJ 세트 20곡을 찾고 각 곡의 직접 링크를 확인해 주세요.",
+    "should_trigger": true
+  },
+  {
+    "locale": "ar",
+    "query": "ابحث عن 20 مقطع UK Bass لمجموعة DJ في نادٍ وتحقق من الرابط المباشر لكل مقطع.",
+    "should_trigger": true
+  },
+  {
+    "locale": "ru",
+    "query": "Найди 20 треков UK Bass для клубного DJ-сета и проверь прямую ссылку на каждый.",
+    "should_trigger": true
+  },
+  {
+    "locale": "tr",
+    "query": "Bir kulüp DJ seti için 20 UK Bass parçası bul ve her doğrudan bağlantıyı doğrula.",
+    "should_trigger": true
+  },
+  {
+    "locale": "hi",
+    "query": "क्लब DJ सेट के लिए 20 UK Bass ट्रैक खोजें और हर सीधे लिंक की पुष्टि करें।",
+    "should_trigger": true
+  },
+  {
+    "locale": "id",
+    "query": "Cari 20 track UK Bass untuk set DJ di klub dan verifikasi tautan langsung tiap track.",
+    "should_trigger": true
+  },
+  {
+    "locale": "vi",
+    "query": "Tìm 20 track UK Bass cho một DJ set ở club và xác minh liên kết trực tiếp của từng track.",
+    "should_trigger": true
+  },
+  {
+    "locale": "th",
+    "query": "ค้นหาเพลง UK Bass 20 เพลงสำหรับ DJ set ในคลับ และตรวจสอบลิงก์ตรงของทุกเพลง",
+    "should_trigger": true
+  },
+  {
+    "locale": "it",
+    "query": "Trova 20 tracce UK Bass per un set DJ in club e verifica il link diretto di ogni traccia.",
+    "should_trigger": true
+  },
+  {
+    "locale": "nl",
+    "query": "Zoek 20 UK-Bass-tracks voor een dj-set in een club en controleer elke directe link.",
+    "should_trigger": true
+  },
+  {
+    "locale": "pl",
+    "query": "Znajdź 20 utworów UK Bass do klubowego seta DJ i zweryfikuj bezpośredni link każdego.",
+    "should_trigger": true
+  },
+  {
+    "locale": "uk",
+    "query": "Знайди 20 треків UK Bass для клубного DJ-сету й перевір пряме посилання на кожен.",
+    "should_trigger": true
+  },
+  {
+    "locale": "fa",
+    "query": "برای یک ست DJ در کلاب ۲۰ ترک UK Bass پیدا کن و لینک مستقیم هر ترک را بررسی کن.",
+    "should_trigger": true
+  },
+  {
+    "locale": "bn",
+    "query": "ক্লাবের DJ সেটের জন্য ২০টি UK Bass ট্র্যাক খুঁজে প্রতিটির সরাসরি লিংক যাচাই করুন।",
+    "should_trigger": true
+  },
+  {
+    "locale": "ur",
+    "query": "کلب DJ سیٹ کے لیے 20 UK Bass ٹریک تلاش کریں اور ہر ٹریک کا براہ راست لنک جانچیں۔",
+    "should_trigger": true
+  },
+  {
+    "locale": "ms",
+    "query": "Cari 20 trek UK Bass untuk set DJ di kelab dan sahkan pautan terus setiap trek.",
+    "should_trigger": true
+  },
+  {
+    "locale": "fil",
+    "query": "Maghanap ng 20 UK Bass track para sa club DJ set at i-verify ang direktang link ng bawat isa.",
+    "should_trigger": true
+  },
+  {
+    "locale": "sw",
+    "query": "Tafuta nyimbo 20 za UK Bass kwa seti ya DJ klabuni na thibitisha kiungo cha moja kwa moja cha kila wimbo.",
+    "should_trigger": true
+  }
+]

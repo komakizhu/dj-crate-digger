@@ -1,0 +1,48 @@
+{
+  "locale": "en",
+  "stage": "report_rich",
+  "report": {
+    "title": "# Rich Mode",
+    "first_batch_title": "# Rich Mode",
+    "final_title": "# Rich Mode",
+    "columns": [
+      "Track",
+      "Artist",
+      "Album / EP",
+      "Style",
+      "BPM",
+      "Key",
+      "Duration",
+      "Energy",
+      "Release date",
+      "Notes",
+      "Why selected",
+      "Link"
+    ],
+    "next_steps": [
+      {
+        "label": "First | Share selection feedback",
+        "body": "If you want, reply in natural language with how the selections worked for you. This improves your private selection preferences and future recommendations. For example: “I like Skream, but I did not play it for this crowd” / “I do not like Jumping Machine; do not recommend it again” / “These are the tracks I played (image/list).”"
+      },
+      {
+        "label": "Second | Export or hand off the playlist",
+        "body": "You can output a text playlist or hand it to W4DJ. Reply `export to w4dj` or `output text playlist`.\n\nW4DJ provides one-click playlist import, converts formats after download, and imports into DJ software. Export the `.w4dj` format and download [w4dj-rkb](https://github.com/komakizhu/W4DJ-RKB). For detailed instructions, see [One-Click Set Import Tutorial](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md).\n\nThe text-playlist action outputs copyable text that can be imported manually into NetEase Cloud Music, but it cannot import tracks into RKB with one click."
+      },
+      {
+        "label": "Third | Harmonic set order",
+        "body": "Would you like me to arrange the set using the Camelot wheel?"
+      }
+    ],
+    "digging_notes": "Digging notes",
+    "mix_suggestion": "Mix suggestion",
+    "unknown": "Unknown",
+    "verified": "Verified",
+    "target_platform_missing": "Target platform unavailable",
+    "view_titles": [
+      "Style view",
+      "Scene view",
+      "Familiarity / discovery view",
+      "Dynamic combined view"
+    ]
+  }
+}

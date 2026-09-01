@@ -1,0 +1,53 @@
+{
+  "locale": "nl",
+  "stage": "round_2",
+  "round": {
+    "title": "[Ronde 2: verzoek verfijnen]",
+    "rules": [
+      "1. Je kunt een voorbeeld kopiëren, vrij invullen of het veld leeg laten"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "Specifieke stijl",
+        "example": "Voorbeelden: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "Snelheid / BPM",
+        "example": "Voorbeelden: `105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "Vertrouwdheid en ontdekking",
+        "example": "`Vertrouwd` / `Gebalanceerd` / `Ontdekking`"
+      },
+      {
+        "key": "era_classic",
+        "label": "Tijdperk en klassiekers",
+        "example": "`Hedendaags` / `Enkele klassieke ankers` / `Brug tussen nieuw en oud` / `Klassiekers eerst`"
+      },
+      {
+        "key": "mood",
+        "label": "Sfeer",
+        "example": "Voorbeelden: `nostalgisch` / `koud` / `romantisch`"
+      },
+      {
+        "key": "energy",
+        "label": "SET-energieniveau of energiecurve",
+        "example": "Voorbeelden: `laag` / `hoog`; `gelijkmatig` / `achtbaan`"
+      },
+      {
+        "key": "platform",
+        "label": "Platform en linkvereisten",
+        "example": "Voorbeelden: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; één platform betekent alleen dat platform, meerdere volgen de opgegeven volgorde"
+      },
+      {
+        "key": "other",
+        "label": "Overig",
+        "example": ""
+      }
+    ],
+    "prompt": "[Ronde 2: verzoek verfijnen]\n\nSpecifieke stijl:\n“Voorbeelden: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`”\nSnelheid / BPM:\n“Voorbeelden: `105` / `128` / `140` / `150` / `170`”\nVertrouwdheid en ontdekking:\n“`Vertrouwd` / `Gebalanceerd` / `Ontdekking`”\nTijdperk en klassiekers:\n“`Hedendaags` / `Enkele klassieke ankers` / `Brug tussen nieuw en oud` / `Klassiekers eerst`”\nSfeer:\n“Voorbeelden: `nostalgisch` / `koud` / `romantisch`”\nSET-energieniveau of energiecurve:\n“Voorbeelden: `laag` / `hoog`; `gelijkmatig` / `achtbaan`”\nPlatform en linkvereisten:\n“Voorbeelden: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; één platform betekent alleen dat platform, meerdere volgen de opgegeven volgorde”\nOverig:\n\n```markdown\nSpecifieke stijl:\nSnelheid / BPM:\nVertrouwdheid en ontdekking:\nTijdperk en klassiekers:\nSfeer:\nSET-energieniveau of energiecurve:\nPlatform en linkvereisten:\nOverig:\n```"
+  }
+}

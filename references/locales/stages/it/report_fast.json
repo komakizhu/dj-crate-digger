@@ -1,0 +1,29 @@
+{
+  "locale": "it",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Modalità Fast",
+    "first_batch_title": "# Prima selezione Fast",
+    "final_title": "# Modalità Fast",
+    "columns": [
+      "Brano",
+      "Artista",
+      "Link"
+    ],
+    "next_steps": [
+      {
+        "label": "Primo | Condividi il feedback",
+        "body": "Se vuoi, descrivi in linguaggio naturale come hanno funzionato le selezioni. Questo migliora le tue preferenze private e i prossimi consigli."
+      },
+      {
+        "label": "Secondo | Esporta o consegna la playlist",
+        "body": "Puoi produrre una playlist testuale o consegnarla a W4DJ. Rispondi `output text playlist` o `export to w4dj`."
+      }
+    ],
+    "digging_notes": "Note di digging",
+    "mix_suggestion": "Suggerimento di mix",
+    "unknown": "Sconosciuto",
+    "verified": "Verificato",
+    "target_platform_missing": "Piattaforma target non disponibile"
+  }
+}

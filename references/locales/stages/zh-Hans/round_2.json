@@ -1,0 +1,53 @@
+{
+  "locale": "zh-Hans",
+  "stage": "round_2",
+  "round": {
+    "title": "【第二轮：需求细化】",
+    "rules": [
+      "1. 可以从例子中复制，也可以自由填写或不填"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "具体风格",
+        "example": "如：`House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "速度 / BPM",
+        "example": "如：`105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "熟悉度与发现感",
+        "example": "`热门熟悉`/`平衡`/`小众发现`"
+      },
+      {
+        "key": "era_classic",
+        "label": "时代与经典",
+        "example": "`当代为主`/`少量经典锚点`/`新旧桥接`/`经典优先`"
+      },
+      {
+        "key": "mood",
+        "label": "情绪",
+        "example": "如：`怀旧` / `阴冷` / `浪漫`"
+      },
+      {
+        "key": "energy",
+        "label": "SET 能量级或能量走势",
+        "example": "如：`低`/`高`；`平稳` / `过山车`"
+      },
+      {
+        "key": "platform",
+        "label": "平台与链接要求",
+        "example": "如：`网易云`/`Apple Music`/`SoundCloud`/`Bandcamp`/`Beatport`/`Spotify`；填写一个平台时只使用该平台，填写多个平台按先后顺序优先"
+      },
+      {
+        "key": "other",
+        "label": "其他",
+        "example": ""
+      }
+    ],
+    "prompt": "【第二轮：需求细化】\n具体风格：\n「如：`House` / `Bass` / `Garage` / `Techno` / `Breakbeat`」\n速度 / BPM：\n「如：`105` / `128` / `140` / `150` / `170`」\n熟悉度与发现感：\n「`热门熟悉`/`平衡`/`小众发现`」\n时代与经典：\n「`当代为主`/`少量经典锚点`/`新旧桥接`/`经典优先`」\n情绪：\n「如：`怀旧` / `阴冷` / `浪漫`」\nSET 能量级或能量走势：\n「如：`低`/`高`；`平稳` / `过山车`」\n平台与链接要求：\n「如：`网易云`/`Apple Music`/`SoundCloud`/`Bandcamp`/`Beatport`/`Spotify`；填写一个平台时只使用该平台，填写多个平台按先后顺序优先」\n其他：\n\n```markdown\n具体风格：\n速度 / BPM：\n熟悉度与发现感：\n时代与经典：\n情绪：\nSET 能量级或能量走势：\n平台与链接要求：\n其他：\n```"
+  }
+}

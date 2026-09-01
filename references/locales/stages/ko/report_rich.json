@@ -1,0 +1,48 @@
+{
+  "locale": "ko",
+  "stage": "report_rich",
+  "report": {
+    "title": "# Rich 모드",
+    "first_batch_title": "# Rich 모드",
+    "final_title": "# Rich 모드",
+    "columns": [
+      "곡명",
+      "아티스트",
+      "앨범 / EP",
+      "스타일",
+      "BPM",
+      "키",
+      "길이",
+      "에너지",
+      "발매일",
+      "메모",
+      "선정 이유",
+      "링크"
+    ],
+    "next_steps": [
+      {
+        "label": "첫째 | 선곡 피드백",
+        "body": "원한다면 선곡이 어떻게 느껴졌는지 자연어로 답해 주세요. 개인 취향과 다음 추천이 더 정확해집니다."
+      },
+      {
+        "label": "둘째 | playlist 내보내기 또는 W4DJ 전달",
+        "body": "텍스트 playlist를 출력하거나 W4DJ로 넘길 수 있습니다. `output text playlist` 또는 `export to w4dj`라고 답하세요."
+      },
+      {
+        "label": "셋째 | 하모닉 세트 순서",
+        "body": "Camelot 휠을 사용해 세트를 정렬할까요?"
+      }
+    ],
+    "digging_notes": "Digging 메모",
+    "mix_suggestion": "믹스 제안",
+    "unknown": "알 수 없음",
+    "verified": "검증됨",
+    "target_platform_missing": "대상 플랫폼 없음",
+    "view_titles": [
+      "스타일 관점",
+      "상황 관점",
+      "친숙함／발견 관점",
+      "동적 통합 관점"
+    ]
+  }
+}

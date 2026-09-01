@@ -1,0 +1,78 @@
+{
+  "locale": "sw",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "Shiriki maoni",
+      "positive": [
+        "Napenda wimbo huu"
+      ],
+      "negative": [
+        "Sipendi wimbo huu"
+      ],
+      "ambiguous": [
+        "Sina uhakika kuhusu wimbo huu"
+      ]
+    },
+    "export_w4dj": {
+      "label": "Hamisha kwa W4DJ",
+      "positive": [
+        "Hamisha kwa W4DJ"
+      ],
+      "negative": [
+        "Usihamishe kwa W4DJ"
+      ],
+      "ambiguous": [
+        "Labda hamisha kwa W4DJ"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Toa playlist ya maandishi",
+      "positive": [
+        "Toa playlist ya maandishi"
+      ],
+      "negative": [
+        "Usitoe playlist ya maandishi"
+      ],
+      "ambiguous": [
+        "Labda toa playlist ya maandishi"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Panga upya kwa harmoniki",
+      "positive": [
+        "Panga kwa gurudumu la Camelot"
+      ],
+      "negative": [
+        "Usipange upya"
+      ],
+      "ambiguous": [
+        "Labda panga kwa gurudumu la Camelot"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "Thibitisha kumbukumbu ya muda mrefu",
+      "positive": [
+        "Kumbuka upendeleo huu"
+      ],
+      "negative": [
+        "Usihifadhi upendeleo huu"
+      ],
+      "ambiguous": [
+        "Labda kumbuka upendeleo huu"
+      ]
+    }
+  },
+  "export": {
+    "text": "Toa playlist ya maandishi inayoweza kunakiliwa kwa mpangilio wa sasa.",
+    "w4dj": "Unda faili ya UTF-8 `.w4dj` ya kukabidhi kwa W4DJ.",
+    "harmonic": "Omba mpangilio wa gurudumu la Camelot ukitumia keys zinazojulikana.",
+    "feedback": "Maoni ya lugha ya kawaida husasisha kipindi pekee; kuhifadhi muda mrefu kunahitaji uthibitisho.",
+    "memory_confirmation": "Nimeelewa hili kama muhtasari mfupi wa mabadiliko ya ladha. Ihifadhi kwenye wasifu binafsi wa muda mrefu?"
+  },
+  "status": {
+    "unknown": "Haijulikani",
+    "verified": "Imethibitishwa",
+    "target_platform_missing": "Jukwaa lengwa halipatikani"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "locale": "fil",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "Magbahagi ng feedback",
+      "positive": [
+        "Gusto ko ang track na ito"
+      ],
+      "negative": [
+        "Hindi ko gusto ang track na ito"
+      ],
+      "ambiguous": [
+        "Hindi ako sigurado sa track na ito"
+      ]
+    },
+    "export_w4dj": {
+      "label": "I-export sa W4DJ",
+      "positive": [
+        "I-export sa W4DJ"
+      ],
+      "negative": [
+        "Huwag i-export sa W4DJ"
+      ],
+      "ambiguous": [
+        "Baka i-export sa W4DJ"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Maglabas ng text playlist",
+      "positive": [
+        "Maglabas ng text playlist"
+      ],
+      "negative": [
+        "Huwag maglabas ng text playlist"
+      ],
+      "ambiguous": [
+        "Baka maglabas ng text playlist"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Harmonic reorder",
+      "positive": [
+        "Ayusin gamit ang Camelot wheel"
+      ],
+      "negative": [
+        "Huwag i-reorder"
+      ],
+      "ambiguous": [
+        "Baka ayusin gamit ang Camelot wheel"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "Kumpirmahin ang long-term memory",
+      "positive": [
+        "Tandaan ang preference na ito"
+      ],
+      "negative": [
+        "Huwag i-save ang preference na ito"
+      ],
+      "ambiguous": [
+        "Baka tandaan ang preference na ito"
+      ]
+    }
+  },
+  "export": {
+    "text": "Maglabas ng makokopyang text playlist sa kasalukuyang ayos.",
+    "w4dj": "Gumawa ng UTF-8 `.w4dj` handoff file para sa W4DJ.",
+    "harmonic": "Humiling ng ayos ayon sa Camelot wheel gamit ang mga kilalang key.",
+    "feedback": "Ang natural-language feedback ay nag-a-update lang ng session; kailangan ng kumpirmasyon para sa long-term storage.",
+    "memory_confirmation": "Naiintindihan ko ito bilang maikling buod ng pagbabago sa panlasa. I-save sa pribadong long-term profile?"
+  },
+  "status": {
+    "unknown": "Hindi alam",
+    "verified": "Na-verify",
+    "target_platform_missing": "Hindi available ang target platform"
+  }
+}

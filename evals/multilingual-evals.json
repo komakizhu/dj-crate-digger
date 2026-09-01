@@ -1,0 +1,179 @@
+{
+  "schema": "dj-crate-digger-multilingual-evals",
+  "schema_version": 1,
+  "locales": [
+    "en",
+    "zh-Hans",
+    "zh-Hant",
+    "es",
+    "pt",
+    "fr",
+    "de",
+    "ja",
+    "ko",
+    "ar",
+    "ru",
+    "tr",
+    "hi",
+    "id",
+    "vi",
+    "th",
+    "it",
+    "nl",
+    "pl",
+    "uk",
+    "fa",
+    "bn",
+    "ur",
+    "ms",
+    "fil",
+    "sw"
+  ],
+  "static_cases": [
+    {
+      "id": "slash-cold-start-language",
+      "assertions": [
+        "a slash-only invocation resolves recent user-language signals and identity language before host locale or fallback",
+        "recent session language wins when it conflicts with identity language",
+        "four of five matching eligible sessions may update communication-language preference",
+        "no usable signal renders one bilingual language confirmation and does not emit the English intake template"
+      ]
+    },
+    {
+      "id": "language-market-separation",
+      "scope": "all-locales",
+      "assertions": [
+        "communication_language selects the visible locale pack",
+        "an explicit target market overrides language inference without changing the visible language",
+        "a blank target market uses a broad language market for this session only and never becomes long-term memory",
+        "Traditional Chinese does not imply Taiwan or Hong Kong; Spanish does not imply Spain; Portuguese does not imply Brazil"
+      ]
+    },
+    {
+      "id": "fixed-intake-template",
+      "scope": "all-locales",
+      "assertions": [
+        "round 1 has exactly six fields",
+        "round 2 has exactly eight fields",
+        "each round has exactly one fenced Markdown fill-in block",
+        "the selected pack is reproduced literally without free translation or compression"
+      ]
+    },
+    {
+      "id": "adaptive-intake-routing",
+      "scope": "all-locales",
+      "assertions": [
+        "a sufficiently specified one-message DJ brief skips both questionnaires",
+        "explicit delegation to decide missing details also skips both questionnaires",
+        "every activated DJ request defaults to composite unless the user explicitly selected another mode",
+        "an underspecified request without delegation still enters the fixed two-round intake and keeps composite when the mode field is blank"
+      ]
+    },
+    {
+      "id": "report-shape",
+      "scope": "all-locales",
+      "assertions": [
+        "Fast has exactly three columns and two next-step items",
+        "Brief and Rich have exactly twelve columns and three next-step items",
+        "Rich has style, scene, familiarity/discovery, and dynamic-combined views",
+        "only Brief and Rich expose the harmonic reorder invitation"
+      ]
+    },
+    {
+      "id": "localized-action-intents",
+      "scope": "all-locales",
+      "assertions": [
+        "share_feedback, export_w4dj, output_text_playlist, harmonic_reorder, and confirm_long_term_memory are present",
+        "each intent has positive, negative, and ambiguous natural-language examples",
+        "ambiguous actions request one confirmation instead of executing",
+        "long-term memory is saved only after explicit confirmation"
+      ]
+    },
+    {
+      "id": "localized-platform-policy",
+      "scope": "all-locales",
+      "assertions": [
+        "one named platform without fallback language is exclusive",
+        "multiple named platforms are preferred in the stated order",
+        "preferred and fallback language never becomes exclusive",
+        "forbidden platforms are hard-filtered from allowed links and sources"
+      ]
+    },
+    {
+      "id": "localized-exports-and-harmonic-order",
+      "scope": "all-locales",
+      "assertions": [
+        "text playlist and .w4dj actions are offered only after the complete report",
+        ".w4dj remains UTF-8 JSON with format=w4dj, fixed integer format_version=2, and the current minimal field set",
+        "Text playlists and .w4dj use the current final order after a confirmed harmonic reorder",
+        "track verification, title completeness, version-safe deduplication, key evidence, and safety rules remain unchanged"
+      ]
+    }
+  ],
+  "global_market_cases": [
+    {
+      "id": "mainland-china",
+      "locale": "zh-Hans",
+      "target_market": "Mainland China",
+      "platforms": "NetEase Cloud Music",
+      "required_query_layers": ["target-market-main-language", "English", "original-artist-title"],
+      "status": "not_run",
+      "reason": "Prepared for live replay; no callable model/web replay client is exposed in the repository test environment."
+    },
+    {
+      "id": "united-kingdom",
+      "locale": "en",
+      "target_market": "United Kingdom",
+      "platforms": "SoundCloud, Bandcamp, Beatport",
+      "required_query_layers": ["target-market-main-language", "English", "original-artist-title"],
+      "status": "not_run",
+      "reason": "Prepared for live replay; no callable model/web replay client is exposed in the repository test environment."
+    },
+    {
+      "id": "japan",
+      "locale": "ja",
+      "target_market": "Japan",
+      "platforms": "Apple Music",
+      "required_query_layers": ["target-market-main-language", "English", "original-artist-title"],
+      "status": "not_run",
+      "reason": "Prepared for live replay; no callable model/web replay client is exposed in the repository test environment."
+    },
+    {
+      "id": "germany",
+      "locale": "de",
+      "target_market": "Germany",
+      "platforms": "Spotify",
+      "required_query_layers": ["target-market-main-language", "English", "original-artist-title"],
+      "status": "not_run",
+      "reason": "Prepared for live replay; no callable model/web replay client is exposed in the repository test environment."
+    },
+    {
+      "id": "brazil",
+      "locale": "pt",
+      "target_market": "Brazil",
+      "platforms": "Spotify, SoundCloud",
+      "required_query_layers": ["target-market-main-language", "English", "original-artist-title"],
+      "status": "not_run",
+      "reason": "Prepared for live replay; no callable model/web replay client is exposed in the repository test environment."
+    },
+    {
+      "id": "south-korea",
+      "locale": "ko",
+      "target_market": "South Korea",
+      "platforms": "Apple Music, Spotify",
+      "required_query_layers": ["target-market-main-language", "English", "original-artist-title"],
+      "status": "not_run",
+      "reason": "Prepared for live replay; no callable model/web replay client is exposed in the repository test environment."
+    }
+  ],
+  "model_replay": {
+    "required_runs": 312,
+    "matrix": "26 locales × 6 cold-start flows × 2 model profiles",
+    "flows": ["complete-one-message", "delegated-one-message", "underspecified-intake", "slash-language-cold-start", "explicit-fast", "explicit-rich"],
+    "model_profiles": ["medium", "xhigh"],
+    "required_model_families": ["international-mainstream", "DeepSeek", "Qwen", "local-model"],
+    "status": "not_run",
+    "reason": "The repository test environment does not expose callable GPT-5.6 medium/xhigh replay clients; no model replay is being represented as passed.",
+    "required_review": "Each locale requires native-speaker or professional-translator review before release claims are upgraded."
+  }
+}

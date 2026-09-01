@@ -1,0 +1,53 @@
+{
+  "locale": "ms",
+  "stage": "round_2",
+  "round": {
+    "title": "[Pusingan 2: perincikan permintaan]",
+    "rules": [
+      "1. Anda boleh menyalin contoh, mengisi secara bebas atau membiarkannya kosong"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "Gaya khusus",
+        "example": "Contoh: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "Kelajuan / BPM",
+        "example": "Contoh: `105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "Keakraban dan penemuan",
+        "example": "`Akrab` / `Seimbang` / `Penemuan`"
+      },
+      {
+        "key": "era_classic",
+        "label": "Era dan klasik",
+        "example": "`Kontemporari` / `Beberapa sauh klasik` / `Jambatan baharu-lama` / `Klasik dahulu`"
+      },
+      {
+        "key": "mood",
+        "label": "Suasana",
+        "example": "Contoh: `nostalgia` / `sejuk` / `romantik`"
+      },
+      {
+        "key": "energy",
+        "label": "Tahap atau lengkung tenaga SET",
+        "example": "Contoh: `rendah` / `tinggi`; `stabil` / `roller coaster`"
+      },
+      {
+        "key": "platform",
+        "label": "Platform dan keperluan pautan",
+        "example": "Contoh: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; satu platform bermaksud hanya itu, beberapa mengikut keutamaan"
+      },
+      {
+        "key": "other",
+        "label": "Lain-lain",
+        "example": ""
+      }
+    ],
+    "prompt": "[Pusingan 2: perincikan permintaan]\n\nGaya khusus:\n“Contoh: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`”\nKelajuan / BPM:\n“Contoh: `105` / `128` / `140` / `150` / `170`”\nKeakraban dan penemuan:\n“`Akrab` / `Seimbang` / `Penemuan`”\nEra dan klasik:\n“`Kontemporari` / `Beberapa sauh klasik` / `Jambatan baharu-lama` / `Klasik dahulu`”\nSuasana:\n“Contoh: `nostalgia` / `sejuk` / `romantik`”\nTahap atau lengkung tenaga SET:\n“Contoh: `rendah` / `tinggi`; `stabil` / `roller coaster`”\nPlatform dan keperluan pautan:\n“Contoh: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; satu platform bermaksud hanya itu, beberapa mengikut keutamaan”\nLain-lain:\n\n```markdown\nGaya khusus:\nKelajuan / BPM:\nKeakraban dan penemuan:\nEra dan klasik:\nSuasana:\nTahap atau lengkung tenaga SET:\nPlatform dan keperluan pautan:\nLain-lain:\n```"
+  }
+}

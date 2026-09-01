@@ -1,0 +1,39 @@
+{
+  "locale": "ja",
+  "stage": "trigger",
+  "ambiguous_confirmation": "曲を探すか、DJセットを作成しましょうか？",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "DJセット",
+    "DJセットを作る",
+    "DJ用の曲を探す",
+    "セットを準備する",
+    "セットを構成する"
+  ],
+  "ambiguous": [
+    "プレイリスト",
+    "曲を探す",
+    "音楽リスト",
+    "音楽を探す",
+    "DJ",
+    "曲探し",
+    "トラックを探す",
+    "セットを組む"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "DJセット",
+    "プレイリスト",
+    "曲探し",
+    "トラックを探す",
+    "セットを組む"
+  ]
+}

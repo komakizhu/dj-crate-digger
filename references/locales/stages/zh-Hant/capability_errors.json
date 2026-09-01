@@ -1,0 +1,10 @@
+{
+  "locale": "zh-Hant",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "目前無法搜尋網頁，因此無法可靠核驗推薦。",
+    "open_page": "目前無法開啟具體網頁，因此無法可靠核驗推薦。",
+    "file_write": "目前沒有檔案寫入能力，因此無法建立 `.w4dj` 檔案。",
+    "progress": "目前不支援自動續跑；只能交付已核驗的首批。"
+  }
+}

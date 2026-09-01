@@ -1,0 +1,78 @@
+{
+  "locale": "es",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "Compartir comentarios",
+      "positive": [
+        "Me gusta este tema"
+      ],
+      "negative": [
+        "No me gusta este tema"
+      ],
+      "ambiguous": [
+        "No estoy seguro sobre este tema"
+      ]
+    },
+    "export_w4dj": {
+      "label": "Exportar a W4DJ",
+      "positive": [
+        "Exportar a W4DJ"
+      ],
+      "negative": [
+        "No exportar a W4DJ"
+      ],
+      "ambiguous": [
+        "Quizá exportar a W4DJ"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Sacar playlist de texto",
+      "positive": [
+        "Sacar la playlist de texto"
+      ],
+      "negative": [
+        "No sacar la playlist de texto"
+      ],
+      "ambiguous": [
+        "Quizá sacar la playlist de texto"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Reordenar armónicamente",
+      "positive": [
+        "Ordenar con la rueda de Camelot"
+      ],
+      "negative": [
+        "No reordenar"
+      ],
+      "ambiguous": [
+        "Quizá ordenar con la rueda de Camelot"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "Confirmar memoria a largo plazo",
+      "positive": [
+        "Recordar esta preferencia"
+      ],
+      "negative": [
+        "No guardar esta preferencia"
+      ],
+      "ambiguous": [
+        "Quizá recordar esta preferencia"
+      ]
+    }
+  },
+  "export": {
+    "text": "Sacar una playlist de texto copiable en el orden actual.",
+    "w4dj": "Crear un archivo `.w4dj` UTF-8 para W4DJ.",
+    "harmonic": "Solicitar orden según la rueda de Camelot usando las tonalidades conocidas.",
+    "feedback": "Los comentarios en lenguaje natural actualizan solo la sesión; guardar a largo plazo requiere confirmación.",
+    "memory_confirmation": "Entiendo esto como un resumen breve del cambio de gustos. ¿Guardarlo en el perfil privado a largo plazo?"
+  },
+  "status": {
+    "unknown": "Desconocido",
+    "verified": "Verificado",
+    "target_platform_missing": "Plataforma objetivo no disponible"
+  }
+}

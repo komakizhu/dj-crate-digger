@@ -1,0 +1,38 @@
+{
+  "locale": "en",
+  "stage": "trigger",
+  "ambiguous_confirmation": "Would you like me to dig for tracks or build a DJ set?",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "DJ set",
+    "build a DJ set",
+    "sequence a DJ set",
+    "dig for tracks",
+    "curate a set"
+  ],
+  "ambiguous": [
+    "playlist",
+    "find tracks",
+    "dig",
+    "digging",
+    "DJ",
+    "crate digging",
+    "sequence a set"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "DJ set",
+    "playlist",
+    "crate digging",
+    "find tracks",
+    "sequence a set"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "locale": "en",
+  "stage": "round_2",
+  "round": {
+    "title": "[Round 2: Refine the request]",
+    "rules": [
+      "1. You can copy from an example, fill freely, or leave blank"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "Specific style",
+        "example": "Examples: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "Speed / BPM",
+        "example": "Examples: `105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "Familiarity and discovery",
+        "example": "`Familiar` / `Balanced` / `Discovery`"
+      },
+      {
+        "key": "era_classic",
+        "label": "Era and classics",
+        "example": "`Contemporary` / `Light classic anchors` / `New-old bridge` / `Classics first`"
+      },
+      {
+        "key": "mood",
+        "label": "Mood",
+        "example": "Examples: `nostalgic` / `cold` / `romantic`"
+      },
+      {
+        "key": "energy",
+        "label": "SET energy level or energy curve",
+        "example": "Examples: `low` / `high`; `steady` / `roller coaster`"
+      },
+      {
+        "key": "platform",
+        "label": "Platform and link requirements",
+        "example": "Examples: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; one platform means use it only; multiple platforms follow the listed priority"
+      },
+      {
+        "key": "other",
+        "label": "Other",
+        "example": ""
+      }
+    ],
+    "prompt": "[Round 2: Refine the request]\n\nSpecific style:\n“Examples: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`”\nSpeed / BPM:\n“Examples: `105` / `128` / `140` / `150` / `170`”\nFamiliarity and discovery:\n“`Familiar` / `Balanced` / `Discovery`”\nEra and classics:\n“`Contemporary` / `Light classic anchors` / `New-old bridge` / `Classics first`”\nMood:\n“Examples: `nostalgic` / `cold` / `romantic`”\nSET energy level or energy curve:\n“Examples: `low` / `high`; `steady` / `roller coaster`”\nPlatform and link requirements:\n“Examples: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; one platform means use it only; multiple platforms follow the listed priority”\nOther:\n\n```markdown\nSpecific style:\nSpeed / BPM:\nFamiliarity and discovery:\nEra and classics:\nMood:\nSET energy level or energy curve:\nPlatform and link requirements:\nOther:\n```"
+  }
+}

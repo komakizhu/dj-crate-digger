@@ -1,0 +1,29 @@
+{
+  "locale": "de",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Fast-Modus",
+    "first_batch_title": "# Erste Fast-Auswahl",
+    "final_title": "# Fast-Modus",
+    "columns": [
+      "Track",
+      "Künstler",
+      "Link"
+    ],
+    "next_steps": [
+      {
+        "label": "Erstens | Auswahl-Feedback teilen",
+        "body": "Wenn du möchtest, beschreibe in natürlicher Sprache, wie die Auswahl funktioniert hat. Das verbessert deine privaten Auswahlpräferenzen und künftige Empfehlungen."
+      },
+      {
+        "label": "Zweitens | Playlist exportieren oder übergeben",
+        "body": "Du kannst eine Text-Playlist ausgeben oder sie an W4DJ übergeben. Antworte mit `output text playlist` oder `export to w4dj`."
+      }
+    ],
+    "digging_notes": "Digging-Notizen",
+    "mix_suggestion": "Mix-Vorschlag",
+    "unknown": "Unbekannt",
+    "verified": "Verifiziert",
+    "target_platform_missing": "Zielplattform nicht verfügbar"
+  }
+}

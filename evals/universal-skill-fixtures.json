@@ -1,0 +1,49 @@
+{
+  "schema": "dj-crate-digger-universal-skill-fixtures",
+  "required_skill_name": "dj-crate-digger",
+  "max_controller_lines": 180,
+  "required_resources": [
+    "references/language-routing.json",
+    "references/capabilities.md",
+    "references/trigger-routing.md",
+    "references/intake-routing.md",
+    "references/search-verification.md",
+    "references/ranking.md",
+    "references/deduplication.md",
+    "references/key-and-sequencing.md",
+    "references/feedback-memory.md",
+    "references/export.md",
+    "references/modes/fast.md",
+    "references/modes/brief.md",
+    "references/modes/rich.md"
+  ],
+  "required_w4dj_root_fields": ["format", "format_version", "export_id", "playlist", "tracks"],
+  "required_w4dj_format_version": 2,
+  "required_w4dj_track_fields": ["position", "title", "artist_display", "netease_track_id"],
+  "required_locale_stage_keys": ["trigger", "round_1", "round_2", "search_context", "report_fast", "report_brief", "report_rich", "post_report", "capability_errors"],
+  "required_language_capabilities": [
+    "recent_user_language_signals",
+    "identity_language_read",
+    "identity_language_write",
+    "host_locale"
+  ],
+  "supported_agent_references": [
+    "Codex",
+    "Claude Code",
+    "Gemini CLI",
+    "VS Code",
+    "GitHub Copilot",
+    "Cursor",
+    "Windsurf",
+    "OpenCode",
+    "WorkBuddy",
+    "CodeBuddy",
+    "Qoder",
+    "QoderWork",
+    "Trae"
+  ],
+  "pending_agent_references": [
+    "豆包工作",
+    "Doubao Work"
+  ]
+}

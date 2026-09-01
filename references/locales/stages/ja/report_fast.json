@@ -1,0 +1,29 @@
+{
+  "locale": "ja",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Fast モード",
+    "first_batch_title": "# Fast モード（初回分）",
+    "final_title": "# Fast モード",
+    "columns": [
+      "曲名",
+      "アーティスト",
+      "リンク"
+    ],
+    "next_steps": [
+      {
+        "label": "第一｜選曲フィードバック",
+        "body": "よければ、選曲がどう機能したかを自然な言葉で返信してください。個人の選曲傾向と次の推薦がより正確になります。"
+      },
+      {
+        "label": "第二｜playlist の出力または W4DJ への引き継ぎ",
+        "body": "テキスト playlist を出力するか、W4DJ に引き継げます。`output text playlist` または `export to w4dj` と返信してください。"
+      }
+    ],
+    "digging_notes": "Digging メモ",
+    "mix_suggestion": "ミックス提案",
+    "unknown": "不明",
+    "verified": "検証済み",
+    "target_platform_missing": "対象プラットフォームなし"
+  }
+}

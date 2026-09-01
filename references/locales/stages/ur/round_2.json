@@ -1,0 +1,53 @@
+{
+  "locale": "ur",
+  "stage": "round_2",
+  "round": {
+    "title": "[دوسرا مرحلہ: درخواست کی تفصیل]",
+    "rules": [
+      "1. آپ مثال نقل کر سکتے ہیں، آزادانہ لکھ سکتے ہیں یا خانہ خالی چھوڑ سکتے ہیں"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "مخصوص style",
+        "example": "مثال: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "رفتار / BPM",
+        "example": "مثال: `105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "واقفیت اور discovery",
+        "example": "`واقف` / `متوازن` / `دریافت`"
+      },
+      {
+        "key": "era_classic",
+        "label": "دور اور classics",
+        "example": "`عصری` / `چند classic anchors` / `نئے اور پرانے کا پل` / `classics پہلے`"
+      },
+      {
+        "key": "mood",
+        "label": "مزاج",
+        "example": "مثال: `nostalgic` / `سرد` / `رومانوی`"
+      },
+      {
+        "key": "energy",
+        "label": "SET کی energy level یا curve",
+        "example": "مثال: `کم` / `زیادہ`؛ `مستحکم` / `roller coaster`"
+      },
+      {
+        "key": "platform",
+        "label": "platform اور link کی ضروریات",
+        "example": "مثال: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`؛ ایک platform ہو تو صرف وہ، کئی ہوں تو دی گئی ترجیح"
+      },
+      {
+        "key": "other",
+        "label": "دیگر",
+        "example": ""
+      }
+    ],
+    "prompt": "[دوسرا مرحلہ: درخواست کی تفصیل]\n\nمخصوص style:\n«مثال: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`»\nرفتار / BPM:\n«مثال: `105` / `128` / `140` / `150` / `170`»\nواقفیت اور discovery:\n«`واقف` / `متوازن` / `دریافت`»\nدور اور classics:\n«`عصری` / `چند classic anchors` / `نئے اور پرانے کا پل` / `classics پہلے`»\nمزاج:\n«مثال: `nostalgic` / `سرد` / `رومانوی`»\nSET کی energy level یا curve:\n«مثال: `کم` / `زیادہ`؛ `مستحکم` / `roller coaster`»\nplatform اور link کی ضروریات:\n«مثال: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`؛ ایک platform ہو تو صرف وہ، کئی ہوں تو دی گئی ترجیح»\nدیگر:\n\n```markdown\nمخصوص style:\nرفتار / BPM:\nواقفیت اور discovery:\nدور اور classics:\nمزاج:\nSET کی energy level یا curve:\nplatform اور link کی ضروریات:\nدیگر:\n```"
+  }
+}

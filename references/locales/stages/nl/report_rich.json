@@ -1,0 +1,48 @@
+{
+  "locale": "nl",
+  "stage": "report_rich",
+  "report": {
+    "title": "# Rich-modus",
+    "first_batch_title": "# Rich-modus",
+    "final_title": "# Rich-modus",
+    "columns": [
+      "Track",
+      "Artiest",
+      "Album / EP",
+      "Stijl",
+      "BPM",
+      "Toonsoort",
+      "Duur",
+      "Energie",
+      "Releasedatum",
+      "Notities",
+      "Reden",
+      "Link"
+    ],
+    "next_steps": [
+      {
+        "label": "Eerste | Deel selectiefeedback",
+        "body": "Als je wilt, beschrijf in natuurlijke taal hoe de selectie werkte. Dit verbetert je privévoorkeuren en volgende aanbevelingen."
+      },
+      {
+        "label": "Tweede | Playlist exporteren of doorgeven",
+        "body": "Je kunt een tekstplaylist maken of die aan W4DJ doorgeven. Antwoord `output text playlist` of `export to w4dj`."
+      },
+      {
+        "label": "Derde | Harmonische setvolgorde",
+        "body": "Zal ik de set ordenen met het Camelot-wiel?"
+      }
+    ],
+    "digging_notes": "Digging-notities",
+    "mix_suggestion": "Mixsuggestie",
+    "unknown": "Onbekend",
+    "verified": "Geverifieerd",
+    "target_platform_missing": "Doelplatform niet beschikbaar",
+    "view_titles": [
+      "Stijlweergave",
+      "Contextweergave",
+      "Vertrouwdheid / ontdekking",
+      "Dynamische gecombineerde weergave"
+    ]
+  }
+}

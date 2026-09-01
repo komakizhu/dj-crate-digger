@@ -1,0 +1,29 @@
+{
+  "locale": "fa",
+  "stage": "report_fast",
+  "report": {
+    "title": "# حالت Fast",
+    "first_batch_title": "# دسته اول Fast",
+    "final_title": "# حالت Fast",
+    "columns": [
+      "قطعه",
+      "هنرمند",
+      "پیوند"
+    ],
+    "next_steps": [
+      {
+        "label": "اول | ارسال بازخورد انتخاب",
+        "body": "اگر مایلید، به زبان طبیعی بگویید انتخاب‌ها چگونه بودند. این کار ترجیحات خصوصی و پیشنهادهای بعدی را بهتر می‌کند."
+      },
+      {
+        "label": "دوم | خروجی یا تحویل playlist",
+        "body": "می‌توانید playlist متنی بگیرید یا آن را به W4DJ تحویل دهید. `output text playlist` یا `export to w4dj` را پاسخ دهید."
+      }
+    ],
+    "digging_notes": "یادداشت‌های digging",
+    "mix_suggestion": "پیشنهاد میکس",
+    "unknown": "نامشخص",
+    "verified": "تأییدشده",
+    "target_platform_missing": "پلتفرم هدف در دسترس نیست"
+  }
+}

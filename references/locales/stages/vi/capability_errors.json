@@ -1,0 +1,10 @@
+{
+  "locale": "vi",
+  "stage": "capability_errors",
+  "messages": {
+    "web_search": "Không có tìm kiếm web nên tôi không thể xác minh đề xuất.",
+    "open_page": "Không thể mở trang cụ thể nên tôi không thể xác minh đề xuất.",
+    "file_write": "Không có quyền ghi tệp nên tôi không thể tạo tệp `.w4dj`.",
+    "progress": "Không có chế độ tiếp tục tự động; tôi chỉ có thể gửi lô đầu tiên đã xác minh."
+  }
+}

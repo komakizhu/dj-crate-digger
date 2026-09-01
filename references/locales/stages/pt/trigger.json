@@ -1,0 +1,38 @@
+{
+  "locale": "pt",
+  "stage": "trigger",
+  "ambiguous_confirmation": "Quer que eu procure músicas ou monte um set de DJ?",
+  "direct": [
+    "/dj-crate-digger",
+    "/crate-digger",
+    "/迪歌",
+    "set de DJ",
+    "montar um set de DJ",
+    "procurar músicas para DJ",
+    "preparar um set",
+    "sequenciar um set"
+  ],
+  "ambiguous": [
+    "playlist",
+    "buscar faixas",
+    "lista de reprodução",
+    "buscar música",
+    "DJ",
+    "garimpar música",
+    "montar um set"
+  ],
+  "non_trigger": [
+    "song identification",
+    "programming playlist object",
+    "generic listening list",
+    "music downloading",
+    "Skill development discussion"
+  ],
+  "trigger_capsule": [
+    "set de DJ",
+    "playlist",
+    "garimpar música",
+    "buscar faixas",
+    "montar um set"
+  ]
+}

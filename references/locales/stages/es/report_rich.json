@@ -1,0 +1,48 @@
+{
+  "locale": "es",
+  "stage": "report_rich",
+  "report": {
+    "title": "# Modo Rich",
+    "first_batch_title": "# Modo Rich",
+    "final_title": "# Modo Rich",
+    "columns": [
+      "Tema",
+      "Artista",
+      "Álbum / EP",
+      "Estilo",
+      "BPM",
+      "Tonalidad",
+      "Duración",
+      "Energía",
+      "Fecha",
+      "Notas",
+      "Motivo",
+      "Enlace"
+    ],
+    "next_steps": [
+      {
+        "label": "Primero | Compartir comentarios",
+        "body": "Si quiere, responda en lenguaje natural sobre cómo funcionaron las selecciones. Esto mejora sus preferencias privadas y futuras recomendaciones."
+      },
+      {
+        "label": "Segundo | Exportar o entregar la playlist",
+        "body": "Puede sacar una playlist de texto o entregarla a W4DJ. Responda `output text playlist` o `export to w4dj`."
+      },
+      {
+        "label": "Tercero | Orden armónico",
+        "body": "¿Quiere que ordene el set usando la rueda de Camelot?"
+      }
+    ],
+    "digging_notes": "Notas de digging",
+    "mix_suggestion": "Sugerencia de mezcla",
+    "unknown": "Desconocido",
+    "verified": "Verificado",
+    "target_platform_missing": "Plataforma objetivo no disponible",
+    "view_titles": [
+      "Vista de estilo",
+      "Vista de escena",
+      "Vista de familiaridad / descubrimiento",
+      "Vista combinada dinámica"
+    ]
+  }
+}

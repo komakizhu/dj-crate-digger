@@ -1,0 +1,39 @@
+{
+  "schema": "dj-crate-digger-language-routing",
+  "priority": [
+    "explicit_current_language",
+    "current_message_language",
+    "recent_user_language_signals",
+    "identity_language_read",
+    "host_locale",
+    "language_confirmation"
+  ],
+  "slash_only_invocations": ["/dj", "/dj-crate-digger", "/crate-digger", "/迪歌"],
+  "optional_capabilities": [
+    "recent_user_language_signals",
+    "identity_language_read",
+    "identity_language_write",
+    "host_locale"
+  ],
+  "recent_history": {
+    "max_sessions": 5,
+    "weights": [5, 4, 3, 2, 1],
+    "eligible_min_user_messages": 2,
+    "ignore": ["assistant_messages", "system_messages", "tool_output", "code", "urls", "slash_commands", "standalone_track_or_artist_names"]
+  },
+  "auto_learning": {
+    "window_sessions": 5,
+    "matching_sessions": 4,
+    "minimum_confidence": "high"
+  },
+  "cold_start": {
+    "slash_only_requires_language_resolution": true,
+    "unresolved_route": "language_confirmation",
+    "default_locale_is_not_inference": true
+  },
+  "language_confirmation": {
+    "prompt": "请选择沟通语言 / Choose your language：`中文` / `English` / 直接输入其他语言"
+  },
+  "market_is_independent": true,
+  "taste_memory_is_independent": true
+}

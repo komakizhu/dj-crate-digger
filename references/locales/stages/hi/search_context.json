@@ -1,0 +1,46 @@
+{
+  "locale": "hi",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "क्षेत्र खाली हो तो इस सत्र के लिए केवल व्यापक हिंदी-भाषी बाज़ार का उपयोग करें।",
+    "explicit_region": "स्पष्ट रूप से दिया गया देश या क्षेत्र भाषा-अनुमान पर प्राथमिकता रखता है, संचार भाषा नहीं बदलता।",
+    "persistence": "लक्षित बाज़ार को दीर्घकालिक पसंद के रूप में न सहेजें।"
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "केवल",
+      "सिर्फ",
+      "केवल उपयोग"
+    ],
+    "preferred_markers": [
+      "प्राथमिकता",
+      "पसंद",
+      "अग्रता"
+    ],
+    "fallback_markers": [
+      "वैकल्पिक",
+      "बैकअप",
+      "उपलब्ध न हो तो"
+    ],
+    "forbidden_markers": [
+      "उपयोग न करें",
+      "बहिष्कृत",
+      "नहीं"
+    ]
+  },
+  "status": {
+    "unknown": "अज्ञात",
+    "verified": "सत्यापित",
+    "target_platform_missing": "लक्षित प्लेटफ़ॉर्म उपलब्ध नहीं"
+  }
+}

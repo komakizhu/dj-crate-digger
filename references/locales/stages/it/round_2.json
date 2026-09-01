@@ -1,0 +1,53 @@
+{
+  "locale": "it",
+  "stage": "round_2",
+  "round": {
+    "title": "[Secondo turno: definire la richiesta]",
+    "rules": [
+      "1. Puoi copiare un esempio, compilare liberamente o lasciare vuoto"
+    ],
+    "fields": [
+      {
+        "key": "style",
+        "label": "Stile specifico",
+        "example": "Esempi: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`"
+      },
+      {
+        "key": "bpm",
+        "label": "Velocità / BPM",
+        "example": "Esempi: `105` / `128` / `140` / `150` / `170`"
+      },
+      {
+        "key": "familiarity_era",
+        "label": "Familiarità e scoperta",
+        "example": "`Familiare` / `Bilanciato` / `Scoperta`"
+      },
+      {
+        "key": "era_classic",
+        "label": "Epoca e classici",
+        "example": "`Contemporaneo` / `Pochi ancoraggi classici` / `Ponte tra nuovo e vecchio` / `Classici prima`"
+      },
+      {
+        "key": "mood",
+        "label": "Umore",
+        "example": "Esempi: `nostalgico` / `freddo` / `romantico`"
+      },
+      {
+        "key": "energy",
+        "label": "Livello o curva energetica del SET",
+        "example": "Esempi: `basso` / `alto`; `costante` / `montagne russe`"
+      },
+      {
+        "key": "platform",
+        "label": "Piattaforma e requisiti dei link",
+        "example": "Esempi: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; una piattaforma significa solo quella, più piattaforme seguono l’ordine"
+      },
+      {
+        "key": "other",
+        "label": "Altro",
+        "example": ""
+      }
+    ],
+    "prompt": "[Secondo turno: definire la richiesta]\n\nStile specifico:\n“Esempi: `House` / `Bass` / `Garage` / `Techno` / `Breakbeat`”\nVelocità / BPM:\n“Esempi: `105` / `128` / `140` / `150` / `170`”\nFamiliarità e scoperta:\n“`Familiare` / `Bilanciato` / `Scoperta`”\nEpoca e classici:\n“`Contemporaneo` / `Pochi ancoraggi classici` / `Ponte tra nuovo e vecchio` / `Classici prima`”\nUmore:\n“Esempi: `nostalgico` / `freddo` / `romantico`”\nLivello o curva energetica del SET:\n“Esempi: `basso` / `alto`; `costante` / `montagne russe`”\nPiattaforma e requisiti dei link:\n“Esempi: `NetEase Cloud Music` / `Apple Music` / `SoundCloud` / `Bandcamp` / `Beatport` / `Spotify`; una piattaforma significa solo quella, più piattaforme seguono l’ordine”\nAltro:\n\n```markdown\nStile specifico:\nVelocità / BPM:\nFamiliarità e scoperta:\nEpoca e classici:\nUmore:\nLivello o curva energetica del SET:\nPiattaforma e requisiti dei link:\nAltro:\n```"
+  }
+}

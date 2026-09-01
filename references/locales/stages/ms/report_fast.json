@@ -1,0 +1,29 @@
+{
+  "locale": "ms",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Mod Fast",
+    "first_batch_title": "# Kumpulan Fast pertama",
+    "final_title": "# Mod Fast",
+    "columns": [
+      "Trek",
+      "Artis",
+      "Pautan"
+    ],
+    "next_steps": [
+      {
+        "label": "Pertama | Kongsi maklum balas pilihan",
+        "body": "Jika mahu, balas dalam bahasa semula jadi tentang cara pilihan itu berfungsi. Ini memperbaiki pilihan peribadi dan cadangan seterusnya."
+      },
+      {
+        "label": "Kedua | Eksport atau serahkan playlist",
+        "body": "Anda boleh keluarkan playlist teks atau menyerahkannya kepada W4DJ. Balas `output text playlist` atau `export to w4dj`."
+      }
+    ],
+    "digging_notes": "Nota digging",
+    "mix_suggestion": "Cadangan mixing",
+    "unknown": "Tidak diketahui",
+    "verified": "Disahkan",
+    "target_platform_missing": "Platform sasaran tidak tersedia"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "locale": "uk",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Режим Fast",
+    "first_batch_title": "# Перша добірка Fast",
+    "final_title": "# Режим Fast",
+    "columns": [
+      "Трек",
+      "Артист",
+      "Посилання"
+    ],
+    "next_steps": [
+      {
+        "label": "Перше | Поділитися відгуком",
+        "body": "Якщо хочете, опишіть природною мовою, як спрацював добір. Це покращить приватні вподобання та майбутні рекомендації."
+      },
+      {
+        "label": "Друге | Експортувати або передати playlist",
+        "body": "Можна вивести текстовий playlist або передати його W4DJ. Відповідайте `output text playlist` або `export to w4dj`."
+      }
+    ],
+    "digging_notes": "Нотатки digging",
+    "mix_suggestion": "Порада щодо міксу",
+    "unknown": "Невідомо",
+    "verified": "Перевірено",
+    "target_platform_missing": "Цільова платформа недоступна"
+  }
+}

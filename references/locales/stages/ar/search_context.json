@@ -1,0 +1,46 @@
+{
+  "locale": "ar",
+  "stage": "search_context",
+  "market_policy": {
+    "language_independent": true,
+    "blank_region": "إذا تُركت المنطقة فارغة، استخدم سوقًا عربيًا واسعًا لهذه الجلسة فقط.",
+    "explicit_region": "المنطقة المحددة صراحةً تتغلب على استنتاج اللغة ولا تغير لغة التواصل.",
+    "persistence": "لا تحفظ السوق المستهدف كتفضيل طويل الأمد."
+  },
+  "platform_policy": {
+    "aliases": {
+      "spotify": "Spotify",
+      "apple_music": "Apple Music",
+      "soundcloud": "SoundCloud",
+      "netease_cloud_music": "NetEase Cloud Music",
+      "bandcamp": "Bandcamp",
+      "beatport": "Beatport",
+      "beatsource": "Beatsource"
+    },
+    "exclusive_markers": [
+      "فقط",
+      "حصريًا",
+      "استخدم فقط"
+    ],
+    "preferred_markers": [
+      "أفضل",
+      "مفضلة",
+      "أولوية"
+    ],
+    "fallback_markers": [
+      "بديل",
+      "احتياطي",
+      "عند عدم التوفر"
+    ],
+    "forbidden_markers": [
+      "لا تستخدم",
+      "استبعد",
+      "بدون"
+    ]
+  },
+  "status": {
+    "unknown": "غير معروف",
+    "verified": "تم التحقق",
+    "target_platform_missing": "المنصة المستهدفة غير متاحة"
+  }
+}

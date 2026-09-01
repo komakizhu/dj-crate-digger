@@ -1,0 +1,49 @@
+{
+  "locale": "it",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "Benvenuto nell’assistente per la selezione DJ. Questa Skill di Agent ti aiuta a preparare un set DJ. Confermerai le tue esigenze in due turni e riceverai consigli sui brani. Regole di compilazione:",
+    "tutorial_label": "Guida all’importazione Set con un clic",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md"
+  },
+  "round": {
+    "title": "[Primo turno: informazioni necessarie]",
+    "rules": [
+      "1. Puoi copiare un esempio, compilare liberamente o lasciare vuoto",
+      "2. Lasciare vuoto significa che l’IA valuterà intelligentemente la risposta"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "Contesto",
+        "example": "Contesto della performance. Esempi: `bar` / `club` / `matrimonio` / `mostra d’arte`"
+      },
+      {
+        "key": "target_market",
+        "label": "Paese / regione target",
+        "example": "Esempi: `Cina continentale` / `Taiwan` / `Hong Kong` / `Giappone` / `mercato internazionale anglofono`"
+      },
+      {
+        "key": "core_sound",
+        "label": "Direzione sonora principale",
+        "example": "Artista, brano e genere di riferimento. Esempio: `Tears` di `Skrillex`, genere `UK Bass` moderno"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "Numero di brani o durata del set",
+        "example": "Esempi: `20 brani` / `60 minuti`"
+      },
+      {
+        "key": "output_mode",
+        "label": "Versione di output",
+        "example": "Scelta Fast / Brief / Rich"
+      },
+      {
+        "key": "other",
+        "label": "Altri vincoli",
+        "example": "Esempi: `evitare brani abusati`, `senza voce`, `solo Remix`; facoltativo"
+      }
+    ],
+    "prompt": "Benvenuto nell’assistente per la selezione DJ. Questa Skill di Agent ti aiuta a preparare un set DJ. Confermerai le tue esigenze in due turni e riceverai consigli sui brani. Regole di compilazione:\n\n1. Puoi copiare un esempio, compilare liberamente o lasciare vuoto\n2. Lasciare vuoto significa che l’IA valuterà intelligentemente la risposta\n\n[Primo turno: informazioni necessarie]\n\nContesto:\n“Contesto della performance. Esempi: `bar` / `club` / `matrimonio` / `mostra d’arte`”\nPaese / regione target:\n“Esempi: `Cina continentale` / `Taiwan` / `Hong Kong` / `Giappone` / `mercato internazionale anglofono`”\nDirezione sonora principale:\n“Artista, brano e genere di riferimento. Esempio: `Tears` di `Skrillex`, genere `UK Bass` moderno”\nNumero di brani o durata del set:\n“Esempi: `20 brani` / `60 minuti`”\nVersione di output:\n“`Fast`: playlist rapida; la qualità può essere inferiore”\n“`Brief`: una sola playlist combinata”\n“`Rich`: viste separate di stile, contesto e scoperta, poi playlist combinata finale”\nAltri vincoli:\n“Esempi: `evitare brani abusati`, `senza voce`, `solo Remix`; facoltativo”\n\n```markdown\nContesto:\nPaese / regione target:\nDirezione sonora principale:\nNumero di brani o durata del set:\nVersione di output:\nAltri vincoli:\n```"
+  }
+}

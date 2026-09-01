@@ -1,0 +1,78 @@
+{
+  "locale": "ms",
+  "stage": "post_report",
+  "actions": {
+    "share_feedback": {
+      "label": "Kongsi maklum balas",
+      "positive": [
+        "Saya suka trek ini"
+      ],
+      "negative": [
+        "Saya tidak suka trek ini"
+      ],
+      "ambiguous": [
+        "Saya tidak pasti tentang trek ini"
+      ]
+    },
+    "export_w4dj": {
+      "label": "Eksport ke W4DJ",
+      "positive": [
+        "Eksport ke W4DJ"
+      ],
+      "negative": [
+        "Jangan eksport ke W4DJ"
+      ],
+      "ambiguous": [
+        "Mungkin eksport ke W4DJ"
+      ]
+    },
+    "output_text_playlist": {
+      "label": "Keluarkan playlist teks",
+      "positive": [
+        "Keluarkan playlist teks"
+      ],
+      "negative": [
+        "Jangan keluarkan playlist teks"
+      ],
+      "ambiguous": [
+        "Mungkin keluarkan playlist teks"
+      ]
+    },
+    "harmonic_reorder": {
+      "label": "Susun semula secara harmonik",
+      "positive": [
+        "Susun mengikut roda Camelot"
+      ],
+      "negative": [
+        "Jangan susun semula"
+      ],
+      "ambiguous": [
+        "Mungkin susun mengikut roda Camelot"
+      ]
+    },
+    "confirm_long_term_memory": {
+      "label": "Sahkan memori jangka panjang",
+      "positive": [
+        "Ingat pilihan ini"
+      ],
+      "negative": [
+        "Jangan simpan pilihan ini"
+      ],
+      "ambiguous": [
+        "Mungkin ingat pilihan ini"
+      ]
+    }
+  },
+  "export": {
+    "text": "Keluarkan playlist teks yang boleh disalin dalam susunan semasa.",
+    "w4dj": "Cipta fail serahan UTF-8 `.w4dj` untuk W4DJ.",
+    "harmonic": "Minta susunan roda Camelot menggunakan nada yang diketahui.",
+    "feedback": "Maklum balas bahasa semula jadi hanya mengemas kini sesi; simpanan jangka panjang memerlukan pengesahan.",
+    "memory_confirmation": "Saya memahami ini sebagai ringkasan ringkas perubahan cita rasa. Simpan dalam profil peribadi jangka panjang?"
+  },
+  "status": {
+    "unknown": "Tidak diketahui",
+    "verified": "Disahkan",
+    "target_platform_missing": "Platform sasaran tidak tersedia"
+  }
+}

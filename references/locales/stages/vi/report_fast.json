@@ -1,0 +1,29 @@
+{
+  "locale": "vi",
+  "stage": "report_fast",
+  "report": {
+    "title": "# Chế độ Fast",
+    "first_batch_title": "# Lô Fast đầu tiên",
+    "final_title": "# Chế độ Fast",
+    "columns": [
+      "Track",
+      "Nghệ sĩ",
+      "Liên kết"
+    ],
+    "next_steps": [
+      {
+        "label": "Thứ nhất | Gửi phản hồi chọn nhạc",
+        "body": "Nếu muốn, hãy trả lời bằng ngôn ngữ tự nhiên về cách các lựa chọn hoạt động. Điều này giúp cải thiện sở thích riêng và gợi ý sau."
+      },
+      {
+        "label": "Thứ hai | Xuất hoặc chuyển playlist",
+        "body": "Bạn có thể xuất playlist dạng văn bản hoặc chuyển cho W4DJ. Hãy trả lời `output text playlist` hoặc `export to w4dj`."
+      }
+    ],
+    "digging_notes": "Ghi chú digging",
+    "mix_suggestion": "Gợi ý mix",
+    "unknown": "Chưa biết",
+    "verified": "Đã xác minh",
+    "target_platform_missing": "Nền tảng mục tiêu không khả dụng"
+  }
+}

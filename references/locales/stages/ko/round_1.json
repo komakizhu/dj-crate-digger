@@ -1,0 +1,49 @@
+{
+  "locale": "ko",
+  "stage": "round_1",
+  "quick_start": {
+    "intro": "DJ 선곡 도우미에 오신 것을 환영합니다. 이 Agent Skill은 DJ 세트를 구성하도록 돕습니다. 두 번의 라운드에서 요구를 확인하고 트랙을 추천합니다. 입력 규칙:",
+    "tutorial_label": "원클릭 Set 가져오기 안내",
+    "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md"
+  },
+  "round": {
+    "title": "[1라운드: 필수 정보]",
+    "rules": [
+      "1. 예시를 복사하거나 자유롭게 입력하거나 비워 둘 수 있습니다",
+      "2. 빈칸은 AI가 단서를 바탕으로 답을 지능적으로 판단한다는 뜻입니다"
+    ],
+    "fields": [
+      {
+        "key": "scene",
+        "label": "상황",
+        "example": "공연 상황. 예: `바` / `클럽` / `결혼식` / `아트 전시`"
+      },
+      {
+        "key": "target_market",
+        "label": "대상 국가 / 지역",
+        "example": "예: `중국 본토` / `대만` / `홍콩` / `일본` / `영어권 국제 시장`"
+      },
+      {
+        "key": "core_sound",
+        "label": "핵심 사운드 방향",
+        "example": "참고 아티스트, 트랙, 장르. 예: `Skrillex`의 `Tears`, 현대적인 `UK Bass` 장르"
+      },
+      {
+        "key": "track_count_or_duration",
+        "label": "곡 수 또는 세트 시간",
+        "example": "예: `20곡` / `60분`"
+      },
+      {
+        "key": "output_mode",
+        "label": "출력 버전",
+        "example": "Fast / Brief / Rich 선택"
+      },
+      {
+        "key": "other",
+        "label": "기타 제한",
+        "example": "예: `너무 많이 알려진 곡 제외`, `보컬 없음`, `Remix만`; 선택 사항"
+      }
+    ],
+    "prompt": "DJ 선곡 도우미에 오신 것을 환영합니다. 이 Agent Skill은 DJ 세트를 구성하도록 돕습니다. 두 번의 라운드에서 요구를 확인하고 트랙을 추천합니다. 입력 규칙:\n\n1. 예시를 복사하거나 자유롭게 입력하거나 비워 둘 수 있습니다\n2. 빈칸은 AI가 단서를 바탕으로 답을 지능적으로 판단한다는 뜻입니다\n\n[1라운드: 필수 정보]\n\n상황:\n“공연 상황. 예: `바` / `클럽` / `결혼식` / `아트 전시`”\n대상 국가 / 지역:\n“예: `중국 본토` / `대만` / `홍콩` / `일본` / `영어권 국제 시장`”\n핵심 사운드 방향:\n“참고 아티스트, 트랙, 장르. 예: `Skrillex`의 `Tears`, 현대적인 `UK Bass` 장르”\n곡 수 또는 세트 시간:\n“예: `20곡` / `60분`”\n출력 버전:\n“`Fast`: 빠른 playlist 출력; 품질이 낮아질 수 있습니다”\n“`Brief`: 통합 playlist 하나만 출력”\n“`Rich`: 스타일, 상황, 친숙함／발견 관점을 나누어 제시한 뒤 최종 통합 playlist 출력”\n기타 제한:\n“예: `너무 많이 알려진 곡 제외`, `보컬 없음`, `Remix만`; 선택 사항”\n\n```markdown\n상황:\n대상 국가 / 지역:\n핵심 사운드 방향:\n곡 수 또는 세트 시간:\n출력 버전:\n기타 제한:\n```"
+  }
+}

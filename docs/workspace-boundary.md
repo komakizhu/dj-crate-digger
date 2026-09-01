@@ -2,6 +2,10 @@
 
 本工作区以 `dj-crate-digger` Skill 包为唯一主体。`SKILL.md`、`references/`、`evals/`、`scripts/`、`agents/`、`docs/w4dj/` 和 `LICENSE` 均从本机已安装的老炮 DJ Skill 原样分离而来；后续对选歌流程、语言包、验证脚本和 `.w4dj` 导出行为的修改，默认只在本工作区进行。
 
+## W4DJ 测试产物隔离
+
+仓库测试、fixture 演示和手工验证生成的 `.w4dj` 文件统一放在 `test-artifacts/w4dj/`。该目录中的生成物由仓库 `.gitignore` 自动排除，不参与 commit、push、Skill 打包或远端发布；目录里的 README 是唯一应被版本管理的说明文件。用户明确要求交付的 `.w4dj` 仍按用户指定路径输出，不受这条测试隔离规则影响。
+
 ## 与 W4DJ RKB 的最小联动面
 
 老炮 DJ 只负责生成推荐报告和用户明确请求的 UTF-8 `.w4dj` 交接文件；它不下载音频、不读取 W4DJ 数据库、不处理本地音频，也不负责导出 Rekordbox 播放列表。跨项目联动只经过 `.w4dj` 文件：歌单名、曲目顺序、完整官方歌名、艺人，以及可选的字符串 `netease_track_id`。

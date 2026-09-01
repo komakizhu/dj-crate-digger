@@ -67,6 +67,8 @@ Only the post-report “next step” area offers export actions:
 
 `.w4dj` has one current contract: root fields are `format`, `format_version`, `export_id`, `playlist`, and `tracks`. The Skill always writes integer `2` to `format_version` for W4DJ compatibility; it is not a user-selectable format. `playlist` contains only `name`; each track contains `position`, `title`, `artist_display`, and optional `netease_track_id`. For the complete workflow, see [One-Click Set Import Tutorial](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md). This Skill does not download music, create local audio, or perform downstream import steps.
 
+Repository tests, fixture demos, and manual verification runs must write generated `.w4dj` files under `test-artifacts/w4dj/`; that directory is ignored and excluded from commits and releases. User-requested deliverables still use the explicitly requested destination.
+
 The baseline, rationale, and removal conditions are recorded in the [W4DJ v2 compatibility memo](docs/w4dj-v2-compatibility-memo.md).
 
 ## IV. Universal Agent compatibility

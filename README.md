@@ -67,6 +67,8 @@
 
 `.w4dj` 使用当前唯一合同：根字段为 `format`、`format_version`、`export_id`、`playlist`、`tracks`，其中 `format_version` 固定写为整数 `2`，只用于兼容 W4DJ，不是用户需要选择的版本；`playlist` 只有 `name`；每首曲目只有 `position`、`title`、`artist_display` 和可选的 `netease_track_id`。完整操作请查看[《一键导入 Set 教程》](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)。本 Skill 不下载音乐、不生成本地音频，不负责后续本地导入动作。
 
+仓库测试、fixture 演示或手工验证生成的 `.w4dj` 统一放入 `test-artifacts/w4dj/`；该目录自动忽略，不参与提交或发布。用户明确要求交付的文件仍按指定路径输出。
+
 兼容的基线、原因和未来移除条件记录在[《W4DJ v2 兼容备忘录》](docs/w4dj-v2-compatibility-memo.md)。
 
 ## 四、通用 Agent 兼容性

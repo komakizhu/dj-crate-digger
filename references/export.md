@@ -35,6 +35,10 @@ The action is independent from W4DJ. If a track has no valid allowed-platform di
 
 W4DJ carries recommendation handoff data only. It does not contain BPM, key, album, playback URLs, platform state, source records, recording keys, local audio, local paths, filenames, downloads, or import instructions. 不生成占位文件，不处理本地音频；downstream W4DJ tools own those steps.
 
+## Repository test artifacts
+
+When a repository test, fixture, or manual verification needs to materialize a `.w4dj`, write it under `test-artifacts/w4dj/`. Generated files in that directory are local-only and Git-ignored; do not stage, push, or include them in the Skill package. This isolation applies only to repository test artifacts and does not override a user-requested delivery path.
+
 ## File permission and safety
 
 Before writing, verify `file_write` in the current environment and use a safe, non-overwriting filename. If the capability is absent, refuse `export_w4dj` and say that no `.w4dj` file was created; do not return an equivalent chat manifest, pretend a download exists, or provide a local path. Do not ask for passwords or store platform tokens.

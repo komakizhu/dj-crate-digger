@@ -60,6 +60,18 @@
       ]
     },
     {
+      "id": "adaptive-intake-routing",
+      "scope": "all-locales",
+      "assertions": [
+        "a sufficiently specified one-message DJ brief skips both questionnaires",
+        "explicit delegation to decide missing details also skips both questionnaires",
+        "a partially specified brief receives one direct-versus-questionnaire choice before any fixed questionnaire",
+        "choosing direct on that one choice skips both questionnaires",
+        "every activated DJ request defaults to composite unless the user explicitly selected another mode",
+        "an underspecified request without delegation still enters the fixed two-round intake and keeps composite when the mode field is blank"
+      ]
+    },
+    {
       "id": "report-shape",
       "scope": "all-locales",
       "assertions": [
@@ -94,7 +106,7 @@
       "scope": "all-locales",
       "assertions": [
         "text playlist and .w4dj actions are offered only after the complete report",
-        ".w4dj remains UTF-8 JSON with format=w4dj and the current minimal field set",
+        ".w4dj remains UTF-8 JSON with format=w4dj, fixed integer format_version=2, and the current minimal field set",
         "Text playlists and .w4dj use the current final order after a confirmed harmonic reorder",
         "track verification, title completeness, version-safe deduplication, key evidence, and safety rules remain unchanged"
       ]
@@ -159,6 +171,7 @@
   "model_replay": {
     "required_runs": 312,
     "matrix": "26 locales × 6 cold-start flows × 2 model profiles",
+    "flows": ["complete-one-message", "delegated-one-message", "underspecified-intake", "slash-language-cold-start", "explicit-fast", "explicit-rich"],
     "model_profiles": ["medium", "xhigh"],
     "required_model_families": ["international-mainstream", "DeepSeek", "Qwen", "local-model"],
     "status": "not_run",

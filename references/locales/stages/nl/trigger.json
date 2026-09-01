@@ -2,6 +2,7 @@
   "locale": "nl",
   "stage": "trigger",
   "ambiguous_confirmation": "Wil je dat ik muziek zoek of een dj-set samenstel?",
+  "readiness_choice": "Met de huidige informatie kan ik de hoofdrichting bepalen. Wil je:\n1. meteen het resultaat (ik beslis over ontbrekende details)\n2. de vragenlijst in twee rondes doorlopen (eerst de aanvraag verfijnen)\nAntwoord met `1` of `2`.",
   "direct": [
     "/dj-crate-digger",
     "/crate-digger",

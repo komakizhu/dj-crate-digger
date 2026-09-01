@@ -8,9 +8,9 @@ This is a native, portable Agent Skill package for DJs, producers, and electroni
 
 ## I. Core capabilities
 
-### 1.1 Two-round intake and personalization
+### 1.1 Adaptive intake and personalization
 
-Round one collects scene, target country/region, core sound direction, track count or set duration, output mode, and other constraints. Round two collects specific style, BPM, familiarity/discovery, era/classics, mood, energy curve, platform/link requirements, and other details. Both rounds come from a fixed locale-pack Markdown template; there is no third ordinary requirements round.
+The composite report is the default for every activated DJ request; only an explicitly selected alternative mode changes it. When one message supplies the scene, sound direction, and track count or set duration—or simply delegates the remaining choices and asks the Skill to proceed—the Skill skips both questionnaires and runs the composite path directly. When a request contains at least two substantive brief signals but is missing a low-impact detail such as duration, the Skill asks once whether to give the result directly or use the two-round questionnaire. A direct choice lets the Skill infer low-impact omissions; a questionnaire choice enters round one. A vague or nearly empty request goes straight to round one, and an explicit “give me the result directly” can escape an already-started first round. Round one collects the scene, target country/region, core sound direction, track count or set duration, output mode, and other constraints; round two collects specific style, BPM, familiarity/discovery, era/classics, mood, energy curve, platform/link requirements, and anything else. A blank mode still produces the composite report. There is no third ordinary requirements round.
 
 Communication language and target market are separate. Language controls visible text, while the market controls only current search context, cultural context, and availability. An explicit market never changes response language; a blank market stays broad and temporary and is never written to long-term taste memory.
 
@@ -25,6 +25,8 @@ On a new chat started with a slash entry such as `/dj`, the Skill first reads re
 | Rich | Comparing selection directions | Style, scene, familiarity/discovery views plus one dynamic combined view |
 
 Brief and Rich use exactly: `title | artist | album/EP | style | BPM | key | duration | energy | release date | notes | selection reason | link`. All modes preserve complete official titles, platform policy, track-level evidence, and recording-level deduplication.
+
+The final report also has protected and dynamic regions. Mode/view titles, column labels and order, the count/order/labels/bodies of `next_steps`, action phrases, tutorial links, and Markdown shape must be copied exactly; they may not be paraphrased, shortened, merged, reordered, or omitted. Brief and Rich must retain all three next steps, including both the text-playlist and W4DJ actions in the second item; Fast must retain both of its next steps. Track data, playlist names, digging-notes content, and the creative mix suggestion are the dynamic regions.
 
 ### 1.3 Search, cultural context, and ranking
 
@@ -56,7 +58,7 @@ Natural language works too:
 Build a 60-minute UK Bass set for an underground club in Guangzhou, using Skream and Nikita, the Wicked as references.
 ```
 
-The fixed flow is: request → round one → round two → search and track-level verification → selected report mode → optional feedback, text playlist, W4DJ, or harmonic reorder.
+The flow is: request → search immediately when the brief is ready or delegated; choose direct execution or two-round refinement when the brief is partially specified; use the two fixed rounds when it is vague → track-level verification → composite report or the explicitly selected mode → optional feedback, text playlist, W4DJ, or harmonic reorder.
 
 ## III. Export and handoff
 
@@ -65,7 +67,11 @@ Only the post-report “next step” area offers export actions:
 - `output text playlist`: returns copyable text in chat in the current final order. It does not create a local text file or claim one-click import into DJ software.
 - `export to w4dj`: when the current Agent truly has file-writing capability and the user explicitly triggers it, creates a UTF-8 `.w4dj` file. It contains only playlist name, order, complete official titles, artists, and an optional string `netease_track_id`; no local audio, paths, downloads, or internal metadata.
 
-`.w4dj` has one current contract: root fields are `format`, `export_id`, `playlist`, and `tracks`; `playlist` contains only `name`; each track contains `position`, `title`, `artist_display`, and optional `netease_track_id`. For the complete workflow, see [One-Click Set Import Tutorial](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md). This Skill does not download music, create local audio, or perform downstream import steps.
+`.w4dj` has one current contract: root fields are `format`, `format_version`, `export_id`, `playlist`, and `tracks`. The Skill always writes integer `2` to `format_version` for W4DJ compatibility; it is not a user-selectable format. `playlist` contains only `name`; each track contains `position`, `title`, `artist_display`, and optional `netease_track_id`. For the complete workflow, see [One-Click Set Import Tutorial](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.en.md). This Skill does not download music, create local audio, or perform downstream import steps.
+
+Repository tests, fixture demos, and manual verification runs must write generated `.w4dj` files under `test-artifacts/w4dj/`; that directory is ignored and excluded from commits and releases. User-requested deliverables still use the explicitly requested destination.
+
+The baseline, rationale, and removal conditions are recorded in the [W4DJ v2 compatibility memo](docs/w4dj-v2-compatibility-memo.md).
 
 ## IV. Universal Agent compatibility
 

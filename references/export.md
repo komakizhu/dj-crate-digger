@@ -12,11 +12,12 @@ The action is independent from W4DJ. If a track has no valid allowed-platform di
 
 ## W4DJ file
 
-`export_w4dj` creates one UTF-8 JSON file with the `.w4dj` extension. The current contract has no revision field and no migration path. Unknown fields are rejected. Its root contains exactly:
+`export_w4dj` creates one UTF-8 JSON file with the `.w4dj` extension. The current contract includes one fixed compatibility field: `format_version` is always the integer `2`; it is not a user-facing choice and there is no migration path. Unknown fields are rejected. Its root contains exactly:
 
 ```json
 {
   "format": "w4dj",
+  "format_version": 2,
   "export_id": "unique-export-id",
   "playlist": {"name": "Playlist Name"},
   "tracks": [
@@ -33,6 +34,10 @@ The action is independent from W4DJ. If a track has no valid allowed-platform di
 `tracks[]` contains only `position`, complete official `title`, `artist_display`, and the optional string `netease_track_id`. The ID is omitted when no reliable identity is available; never write a placeholder or numeric JSON value. Remix, Edit, Live, Dub, Instrumental, Radio Edit, Extended Mix, and other official qualifiers stay embedded in `title`; there is no separate title-variant field.
 
 W4DJ carries recommendation handoff data only. It does not contain BPM, key, album, playback URLs, platform state, source records, recording keys, local audio, local paths, filenames, downloads, or import instructions. 不生成占位文件，不处理本地音频；downstream W4DJ tools own those steps.
+
+## Repository test artifacts
+
+When a repository test, fixture, or manual verification needs to materialize a `.w4dj`, write it under `test-artifacts/w4dj/`. Generated files in that directory are local-only and Git-ignored; do not stage, push, or include them in the Skill package. This isolation applies only to repository test artifacts and does not override a user-requested delivery path.
 
 ## File permission and safety
 

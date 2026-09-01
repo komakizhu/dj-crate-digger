@@ -2,6 +2,7 @@
   "locale": "ms",
   "stage": "trigger",
   "ambiguous_confirmation": "Mahukan saya mencari muzik atau menyediakan set DJ?",
+  "readiness_choice": "Maklumat semasa sudah cukup untuk menentukan arah umum. Anda mahu:\n1. terus dapatkan hasil (saya tentukan butiran yang kurang)\n2. jawab soal selidik dua pusingan (perincikan permintaan dahulu)\nBalas `1` atau `2`.",
   "direct": [
     "/dj-crate-digger",
     "/crate-digger",

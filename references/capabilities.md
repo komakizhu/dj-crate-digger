@@ -18,7 +18,7 @@ A capability is present only when the Agent can actually perform the action in t
 ## Preflight
 
 1. Resolve and lock the locale using [language-routing.json](language-routing.json) before any visible response. For slash-only input, query `recent_user_language_signals` and `identity_language_read` before `host_locale` or the bilingual confirmation.
-2. Check `web_search` and `open_page`. If either is absent, explain the limitation in the locked language before the first intake round and do not present a verified playlist.
+2. Check `web_search` and `open_page`. If either is absent, explain the limitation in the locked language before either the first intake round or a direct-ready search, and do not present a verified playlist.
 3. Check `file_write` only when `export_w4dj` is requested. If absent, refuse the file action; do not substitute a chat manifest, pretend file, download link, or local path.
 4. For Fast continuation, check whether both `progress_message` and continued execution are available. If not, deliver only the verified first batch and state that automatic continuation is unavailable.
 

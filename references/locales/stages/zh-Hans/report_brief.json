@@ -2,9 +2,9 @@
   "locale": "zh-Hans",
   "stage": "report_brief",
   "report": {
-    "title": "# 简要版",
-    "first_batch_title": "# 简要版",
-    "final_title": "# 简要版",
+    "title": "# 综合版",
+    "first_batch_title": "# 综合版",
+    "final_title": "# 综合版",
     "columns": [
       "歌名",
       "艺术家",

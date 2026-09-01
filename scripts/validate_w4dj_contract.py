@@ -13,7 +13,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = ROOT / "references" / "w4dj.schema.json"
 FIXTURES = ROOT / "evals" / "w4dj-fixtures.json"
-LEGACY_REVISION_KEY = "format_" + "version"
+FORMAT_VERSION_KEY = "format_" + "version"
 LEGACY_TRACK_KEYS = {
     "version",
     "version_" + "label",
@@ -118,13 +118,14 @@ def semantic_contract_errors(document: dict[str, Any], label: str) -> list[str]:
 def shape_errors(schema: dict[str, Any], fixtures: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     root_properties = schema.get("properties", {})
-    expected_root = {"format", "export_id", "playlist", "tracks"}
+    expected_root = {"format", FORMAT_VERSION_KEY, "export_id", "playlist", "tracks"}
     if set(root_properties) != expected_root:
         errors.append("W4DJ root properties are not minimal")
     if root_properties.get("format", {}).get("const") != "w4dj":
         errors.append("W4DJ schema format must be 'w4dj'")
-    if LEGACY_REVISION_KEY in root_properties:
-        errors.append("W4DJ must not expose a format revision field")
+    format_version_schema = root_properties.get(FORMAT_VERSION_KEY, {})
+    if format_version_schema.get("type") != "integer" or format_version_schema.get("const") != 2:
+        errors.append("W4DJ format_version must be the fixed integer 2")
     if set(schema.get("required", [])) != expected_root:
         errors.append("W4DJ root required fields are not minimal")
     playlist_schema = root_properties.get("playlist", {})
@@ -142,6 +143,8 @@ def shape_errors(schema: dict[str, Any], fixtures: dict[str, Any]) -> list[str]:
         document = item.get("document", {})
         if set(document) != expected_root:
             errors.append(f"{item['id']}: valid root is not minimal")
+        if document.get(FORMAT_VERSION_KEY) != 2:
+            errors.append(f"{item['id']}: format_version must be the fixed integer 2")
         if set(document.get("playlist", {})) != {"name"}:
             errors.append(f"{item['id']}: valid playlist is not minimal")
         for index, track in enumerate(document.get("tracks", [])):
@@ -163,6 +166,8 @@ def compatibility_errors(fixtures: dict[str, Any]) -> list[str]:
         if document is None:
             errors.append(f"compatibility case references unknown document: {case_id}")
             continue
+        if document.get(FORMAT_VERSION_KEY) != 2:
+            errors.append(f"{case_id}: compatibility format_version must be 2")
         tracks = document.get("tracks", [])
         actual_positions = [track.get("position") for track in tracks]
         if "expected_positions" in case and actual_positions != case["expected_positions"]:
@@ -196,6 +201,8 @@ def source_contract_errors() -> list[str]:
         "export_w4dj",
         ".w4dj",
         "UTF-8 JSON",
+        "format_version",
+        "integer `2`",
         "netease_track_id",
         "不生成占位文件",
         "不处理本地音频",
@@ -206,7 +213,6 @@ def source_contract_errors() -> list[str]:
         "导出" + "w4dj",
         "导出" + "歌单名",
         "." + "t" + "x" + "t",
-        LEGACY_REVISION_KEY,
         "schema " + "v2",
         "w4dj " + "v1",
         "w4dj " + "v2",

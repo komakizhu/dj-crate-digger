@@ -17,7 +17,8 @@
     "references/modes/brief.md",
     "references/modes/rich.md"
   ],
-  "required_w4dj_root_fields": ["format", "export_id", "playlist", "tracks"],
+  "required_w4dj_root_fields": ["format", "format_version", "export_id", "playlist", "tracks"],
+  "required_w4dj_format_version": 2,
   "required_w4dj_track_fields": ["position", "title", "artist_display", "netease_track_id"],
   "required_locale_stage_keys": ["trigger", "round_1", "round_2", "search_context", "report_fast", "report_brief", "report_rich", "post_report", "capability_errors"],
   "required_language_capabilities": [

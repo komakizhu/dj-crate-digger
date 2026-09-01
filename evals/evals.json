@@ -4,9 +4,9 @@
   "evals": [
     {
       "id": "01-direct-dj-trigger",
-      "prompt": "为周末地下俱乐部排一套 60 分钟 UK Bass DJ set。",
-      "expected_output": "加载 Skill 后先用当前沟通语言发送第一轮固定 Markdown 问卷。",
-      "expectations": ["触发 DJ 选歌流程", "不先搜索或推荐", "第一轮只有六个字段"]
+      "prompt": "为广州周末地下俱乐部排一套 60 分钟 UK Bass DJ set，参考 Skream，其他细节你判断，直接出结果。",
+      "expected_output": "跳过问卷，默认进入综合版搜索、逐曲核验和报告。",
+      "expectations": ["触发 DJ 选歌流程", "intake_status 为 direct_ready", "默认 output_mode 为 composite", "不显示第一轮或第二轮"]
     },
     {
       "id": "02-ambiguous-playlist-trigger",
@@ -29,8 +29,8 @@
     {
       "id": "05-fixed-two-round-intake",
       "prompt": "请开始 DJ 选歌流程。",
-      "expected_output": "严格发送第一轮，再发送第二轮；第二轮结束后直接进入搜索。",
-      "expectations": ["每轮一个可复制 Markdown 块", "第一轮六字段", "第二轮八字段", "没有第三轮普通需求收集"]
+      "expected_output": "严格发送第一轮，再发送第二轮；第二轮结束后直接进入搜索，没有明确选择模式时默认输出综合版。",
+      "expectations": ["每轮一个可复制 Markdown 块", "第一轮六字段", "第二轮八字段", "空白输出版本默认为 composite", "没有第三轮普通需求收集"]
     },
     {
       "id": "06-language-market-separation",
@@ -70,13 +70,13 @@
     },
     {
       "id": "12-brief-twelve-columns",
-      "prompt": "选择简要版，做一份带调性的 DJ 歌单。",
+      "prompt": "选择综合版，做一份带调性的 DJ 歌单。",
       "expected_output": "一张综合表，严格十二列，BPM 后紧接调性。",
       "expectations": ["不添加序号、Mix、来源或验证状态列", "逐曲核验", "未知调性显示未知而不换曲"]
     },
     {
       "id": "13-rich-shared-pool",
-      "prompt": "选择丰富版，分别看看风格、场景和熟悉度/发现感，再给综合版。",
+      "prompt": "选择完整版，分别看看风格、场景和熟悉度/发现感，再给综合版。",
       "expected_output": "共享一个候选池，输出三个专项视角和一个动态综合视角。",
       "expectations": ["每个视角严格十二列", "默认不跨视角重复录音", "导出与重排只用动态综合视角"]
     },
@@ -94,14 +94,14 @@
     },
     {
       "id": "16-key-evidence",
-      "prompt": "简要版中请可靠核验调性；如果来源冲突就显示未知。",
+      "prompt": "综合版中请可靠核验调性；如果来源冲突就显示未知。",
       "expected_output": "只使用同一完整标题的授权 DJ 商店或官方元数据；冲突不生成 Camelot。",
       "expectations": ["不使用搜索摘要或模型记忆", "不跨版本借用调性", "非 major/minor 不参加五度圈排序"]
     },
     {
       "id": "17-harmonic-positive",
-      "prompt": "简要版完成后，按五度圈原则帮我排顺序。",
-      "expected_output": "只重排简要版综合表，保留曲目集合、标题、链接、去重和艺人比例。",
+      "prompt": "综合版完成后，按五度圈原则帮我排顺序。",
+      "expected_output": "只重排综合版表，保留曲目集合、标题、链接、去重和艺人比例。",
       "expectations": ["基础 Camelot 兼容优先", "实验性 ±2 只作兜底并标明", "未知调性曲目保留在末尾"]
     },
     {
@@ -118,7 +118,7 @@
     },
     {
       "id": "20-creative-transition-fallback",
-      "prompt": "简要版必须给我一句有创意的接歌建议，但没有可靠波形资料。",
+      "prompt": "综合版必须给我一句有创意的接歌建议，但没有可靠波形资料。",
       "expected_output": "选歌碎碎念中恰好一条可尝试的行动建议，不编造精确结构。",
       "expectations": ["最多两种核心技巧", "可以使用 EQ、loop、filter、echo、reverb 或飞歌思路", "使用条件语气"]
     },
@@ -156,7 +156,7 @@
       "id": "26-w4dj-file-contract",
       "prompt": "报告完成后导出到w4dj。",
       "expected_output": "有文件写入能力时创建 UTF-8 `.w4dj`，根字段和曲目字段严格符合当前合同。",
-      "expectations": ["根字段只有 format、export_id、playlist、tracks", "playlist 只有 name", "tracks 只有 position、title、artist_display 和可选字符串 netease_track_id", "不写本地音频、路径或内部元数据"]
+      "expectations": ["根字段只有 format、format_version、export_id、playlist、tracks", "format_version 固定为整数 2 且不询问用户", "playlist 只有 name", "tracks 只有 position、title、artist_display 和可选字符串 netease_track_id", "不写本地音频、路径或内部元数据"]
     },
     {
       "id": "27-w4dj-no-file-capability",
@@ -181,6 +181,30 @@
       "prompt": "在另一个支持标准 Agent Skill 的客户端加载这个 Skill。",
       "expected_output": "使用同一 SKILL.md 和 references；按客户端实际能力映射语义能力，不切换宿主专属算法。",
       "expectations": ["不检查模型品牌或 reasoning 档位", "不要求固定 SDK/MCP/命令", "缺能力时按统一降级规则处理"]
+    },
+    {
+      "id": "31-adaptive-intake-boundary",
+      "prompt": "帮我排个俱乐部 set。",
+      "expected_output": "需求未达到直接执行门槛且没有授权补全，因此显示第一轮固定问卷；如果没有明确选其他模式，最终默认输出综合版。",
+      "expectations": ["不把一个场景词当作完整 brief", "intake_status 进入 round_1", "output_mode 默认为 composite", "问卷开始后仍完成固定两轮"]
+    },
+    {
+      "id": "32-partial-brief-route-choice",
+      "prompt": "我要拍个 set，做张三妹那种商业 House。",
+      "expected_output": "只问一次：直接出结果，还是先走两轮问卷细化；不直接展示第一轮。",
+      "expectations": ["intake_status 为 route_choice_pending", "只显示直接结果/两轮问卷两个选择", "不追问 BPM、时长或平台"]
+    },
+    {
+      "id": "33-route-choice-direct",
+      "prompt": "直接出结果，缺的细节你判断。",
+      "expected_output": "转为 direct_ready，保留已给出的商业 House 方向，跳过剩余问卷并搜索。",
+      "expectations": ["intake_status 为 direct_ready", "不再发送第二轮", "默认 output_mode 为 composite"]
+    },
+    {
+      "id": "34-round-one-direct-escape",
+      "prompt": "我刚才看到第一轮了，但不用问了，直接给我结果。",
+      "expected_output": "退出尚未完成的问卷，按目前已知信息直接搜索。",
+      "expectations": ["显式直接请求优先", "不强制完成第二轮", "保留此前已填写的信息"]
     }
   ]
 }

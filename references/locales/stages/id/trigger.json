@@ -2,6 +2,7 @@
   "locale": "id",
   "stage": "trigger",
   "ambiguous_confirmation": "Apakah Anda ingin saya mencari musik atau menyusun DJ set?",
+  "readiness_choice": "Informasi saat ini cukup untuk menentukan arah umum. Anda ingin:\n1. langsung mendapatkan hasil (detail yang kurang akan saya tentukan)\n2. mengisi kuesioner dua putaran (perjelas permintaan terlebih dahulu)\nBalas `1` atau `2`.",
   "direct": [
     "/dj-crate-digger",
     "/crate-digger",

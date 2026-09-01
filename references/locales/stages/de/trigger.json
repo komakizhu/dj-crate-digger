@@ -2,6 +2,7 @@
   "locale": "de",
   "stage": "trigger",
   "ambiguous_confirmation": "Soll ich Musik für Sie suchen oder ein DJ-Set zusammenstellen?",
+  "readiness_choice": "Die bisherigen Angaben reichen für die grobe Richtung. Möchtest du:\n1. direkt das Ergebnis erhalten (ich entscheide die fehlenden Details)\n2. zuerst den Fragebogen in zwei Runden ausfüllen (die Anfrage verfeinern)\nAntworte mit `1` oder `2`.",
   "direct": [
     "/dj-crate-digger",
     "/crate-digger",

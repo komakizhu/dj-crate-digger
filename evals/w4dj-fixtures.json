@@ -4,6 +4,7 @@
       "id": "composite-complete",
       "document": {
         "format": "w4dj",
+        "format_version": 2,
         "export_id": "demo-001",
         "playlist": {"name": "Night Bass Test"},
         "tracks": [
@@ -21,6 +22,7 @@
       "id": "fast-unknown-metadata",
       "document": {
         "format": "w4dj",
+        "format_version": 2,
         "export_id": "fast-001",
         "playlist": {"name": "Fast Test"},
         "tracks": [{"position": 1, "title": "Unknown Title (Remix)", "artist_display": "Unknown Artist"}]
@@ -30,6 +32,7 @@
       "id": "repeated-identity-is-allowed-by-wire",
       "document": {
         "format": "w4dj",
+        "format_version": 2,
         "export_id": "repeat-001",
         "playlist": {"name": "Repeated Drop Test"},
         "tracks": [
@@ -42,58 +45,66 @@
   "invalid_documents": [
     {
       "id": "missing-required-format",
-      "document": {"export_id": "invalid-001", "playlist": {"name": "Invalid"}, "tracks": []}
+      "document": {"format_version": 2, "export_id": "invalid-001", "playlist": {"name": "Invalid"}, "tracks": []}
+    },
+    {
+      "id": "missing-required-format-version",
+      "document": {"format": "w4dj", "export_id": "invalid-001b", "playlist": {"name": "Invalid"}, "tracks": []}
+    },
+    {
+      "id": "unsupported-format-version",
+      "document": {"format": "w4dj", "format_version": 1, "export_id": "invalid-001c", "playlist": {"name": "Invalid"}, "tracks": []}
     },
     {
       "id": "legacy-revision-rejected",
-      "document": {"format": "w4dj", "legacy_revision": 1, "export_id": "legacy-001", "playlist": {"name": "Legacy"}, "tracks": []}
+      "document": {"format": "w4dj", "format_version": 2, "legacy_revision": 1, "export_id": "legacy-001", "playlist": {"name": "Legacy"}, "tracks": []}
     },
     {
       "id": "local-file-fields-not-allowed",
       "document": {
-        "format": "w4dj", "export_id": "invalid-002", "playlist": {"name": "Invalid"},
+        "format": "w4dj", "format_version": 2, "export_id": "invalid-002", "playlist": {"name": "Invalid"},
         "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "local_audio_path": "/Users/example/Music/track.mp3"}]
       }
     },
     {
       "id": "legacy-track-version-field-not-allowed",
       "document": {
-        "format": "w4dj", "export_id": "invalid-003", "playlist": {"name": "Invalid"},
+        "format": "w4dj", "format_version": 2, "export_id": "invalid-003", "playlist": {"name": "Invalid"},
         "tracks": [{"position": 1, "title": "Track (Remix)", "artist_display": "Artist", "version": "Remix"}]
       }
     },
     {
       "id": "numeric-netease-id-not-allowed",
       "document": {
-        "format": "w4dj", "export_id": "invalid-004", "playlist": {"name": "Invalid"},
+        "format": "w4dj", "format_version": 2, "export_id": "invalid-004", "playlist": {"name": "Invalid"},
         "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "netease_track_id": 123456789012345678}]
       }
     },
     {
       "id": "null-netease-id-not-allowed",
       "document": {
-        "format": "w4dj", "export_id": "invalid-004b", "playlist": {"name": "Invalid"},
+        "format": "w4dj", "format_version": 2, "export_id": "invalid-004b", "playlist": {"name": "Invalid"},
         "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "netease_track_id": null}]
       }
     },
     {
       "id": "placeholder-netease-id-not-allowed",
       "document": {
-        "format": "w4dj", "export_id": "invalid-004c", "playlist": {"name": "Invalid"},
+        "format": "w4dj", "format_version": 2, "export_id": "invalid-004c", "playlist": {"name": "Invalid"},
         "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "netease_track_id": "unknown"}]
       }
     },
     {
       "id": "metadata-fields-not-allowed",
       "document": {
-        "format": "w4dj", "export_id": "invalid-005", "playlist": {"name": "Invalid"},
+        "format": "w4dj", "format_version": 2, "export_id": "invalid-005", "playlist": {"name": "Invalid"},
         "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "duration": 200}]
       }
     },
     {
       "id": "duplicate-position-not-allowed",
       "document": {
-        "format": "w4dj", "export_id": "invalid-007", "playlist": {"name": "Invalid"},
+        "format": "w4dj", "format_version": 2, "export_id": "invalid-007", "playlist": {"name": "Invalid"},
         "tracks": [
           {"position": 1, "title": "First", "artist_display": "Artist"},
           {"position": 1, "title": "Second", "artist_display": "Artist"}
@@ -102,7 +113,7 @@
     },
     {
       "id": "unsupported-playlist-fields",
-      "document": {"format": "w4dj", "export_id": "invalid-006", "playlist": {"name": "Invalid", "output_mode": "rich"}, "tracks": []}
+      "document": {"format": "w4dj", "format_version": 2, "export_id": "invalid-006", "playlist": {"name": "Invalid", "output_mode": "rich"}, "tracks": []}
     }
   ],
   "compatibility_cases": [

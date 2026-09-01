@@ -4,6 +4,8 @@
 
 `.w4dj` is a playlist handoff file shared by [老炮DJ](https://github.com/komakizhu/dj-crate-digger) and [W4DJ RKB](https://github.com/komakizhu/W4DJ-RKB). It stores the playlist name, track order, complete official titles, and artist information, but it does not contain audio files.
 
+The file always carries the fixed compatibility value `format_version: 2`. This machine field lets W4DJ RKB identify the contract; users do not select a version or fill the field manually.
+
 The complete workflow is:
 
 [老炮DJ](https://github.com/komakizhu/dj-crate-digger) generates a playlist → export `.w4dj` → import it into W4DJ RKB → create a playlist in NetEase Cloud Music and download the tracks → W4DJ RKB converts the audio and exports a playlist → import it into Rekordbox.

@@ -1,0 +1,3 @@
+# Local-only W4DJ test/demo outputs; never stage or publish generated files.
+/test-artifacts/w4dj/**
+!/test-artifacts/w4dj/README.md

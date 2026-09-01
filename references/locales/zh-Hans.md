@@ -15,7 +15,7 @@ This file is the fixed 简体中文 UI and intent contract for dj-crate-digger. 
     "persistence": "目标市场只保留在当前会话，不写入长期偏好。"
   },
   "quick_start": {
-    "intro": "欢迎来到 DJ 选歌助手。这是一个利用 Agent 帮您排 set 的 skill。您将在两轮对话中确认需求，并获得 AI 选歌建议。填写规则为：",
+    "intro": "欢迎来到 DJ 选歌助手。这是一个利用 Agent 帮您排 set 的 skill。信息明确时可以直接出结果；信息不足时，您可以选择先走两轮问卷细化需求。填写规则为：",
     "tutorial_label": "一键导入 Set 教程",
     "tutorial_url": "https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md"
   },
@@ -50,7 +50,7 @@ This file is the fixed 简体中文 UI and intent contract for dj-crate-digger. 
         {
           "key": "output_mode",
           "label": "输出版本",
-          "example": "极速版 / 简要版 / 丰富版"
+          "example": "综合版（默认） / 完整版 / 极速版"
         },
         {
           "key": "other",
@@ -58,7 +58,7 @@ This file is the fixed 简体中文 UI and intent contract for dj-crate-digger. 
           "example": "如：`不要口水歌`、`不要人声`、`只要Remix`；可以不填"
         }
       ],
-      "prompt": "欢迎来到 DJ 选歌助手。这是一个利用 Agent 帮您排 set 的 skill。您将在两轮对话中确认需求，并获得 AI 选歌建议。填写规则为：\n\n1. 可以从例子中复制，也可以自由填写或不填\n2. 不填意味着ai智能判断答案\n\n【第一轮：必要信息】\n场景：\n「表演场景。如：`酒吧` / `俱乐部` / `婚礼` / `艺术展`」\n目标国家 / 地区：\n「如：`中国大陆` / `台湾` / `香港` / `日本` / `英语国际市场`」\n核心声音方向：\n「参考艺人、参考曲目以及参考流派。如：`Skrillex` 的 `Tears`，`现代UK_Bass`流派」\n歌曲数量或 Set 时长：\n「如：`20 首` / `60 分钟`」\n输出版本：\n「`极速版`：快速输出playlist，但是质量会下降」\n「`简要版`：只给一个综合的playlist」\n「`丰富版`：根据您选择的风格、场景、熟悉度与发现感分别提供建议，并最终输出成简要版」\n其他限制：\n「如：`不要口水歌`、`不要人声`、`只要Remix`；可以不填」\n\n\u0060\u0060\u0060markdown\n场景：\n目标国家 / 地区：\n核心声音方向：\n歌曲数量或 Set 时长：\n输出版本：\n其他限制：\n\u0060\u0060\u0060"
+      "prompt": "欢迎来到 DJ 选歌助手。这是一个利用 Agent 帮您排 set 的 skill。信息明确时可以直接出结果；信息不足时，您可以选择先走两轮问卷细化需求。填写规则为：\n\n1. 可以从例子中复制，也可以自由填写或不填\n2. 不填意味着ai智能判断答案\n\n【第一轮：必要信息】\n场景：\n「表演场景。如：`酒吧` / `俱乐部` / `婚礼` / `艺术展`」\n目标国家 / 地区：\n「如：`中国大陆` / `台湾` / `香港` / `日本` / `英语国际市场`」\n核心声音方向：\n「参考艺人、参考曲目以及参考流派。如：`Skrillex` 的 `Tears`，`现代UK_Bass`流派」\n歌曲数量或 Set 时长：\n「如：`20 首` / `60 分钟`」\n输出版本：\n「`综合版`（默认）：只给一个综合的playlist」\n「`完整版`：根据您选择的风格、场景、熟悉度与发现感分别提供建议，并最终输出成综合版」\n「`极速版`：快速输出playlist，但是质量会下降」\n其他限制：\n「如：`不要口水歌`、`不要人声`、`只要Remix`；可以不填」\n\n\u0060\u0060\u0060markdown\n场景：\n目标国家 / 地区：\n核心声音方向：\n歌曲数量或 Set 时长：\n输出版本：\n其他限制：\n\u0060\u0060\u0060"
     },
     "round_2": {
       "title": "【第二轮：需求细化】",
@@ -137,9 +137,9 @@ This file is the fixed 简体中文 UI and intent contract for dj-crate-digger. 
       "target_platform_missing": "目标平台缺失"
     },
     "brief": {
-      "title": "# 简要版",
-      "first_batch_title": "# 简要版",
-      "final_title": "# 简要版",
+      "title": "# 综合版",
+      "first_batch_title": "# 综合版",
+      "final_title": "# 综合版",
       "columns": [
         "歌名",
         "艺术家",
@@ -175,9 +175,9 @@ This file is the fixed 简体中文 UI and intent contract for dj-crate-digger. 
       "target_platform_missing": "目标平台缺失"
     },
     "rich": {
-      "title": "# 丰富版",
-      "first_batch_title": "# 丰富版",
-      "final_title": "# 丰富版",
+      "title": "# 完整版",
+      "first_batch_title": "# 完整版",
+      "final_title": "# 完整版",
       "columns": [
         "歌名",
         "艺术家",

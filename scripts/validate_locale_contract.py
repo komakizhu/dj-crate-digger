@@ -265,6 +265,21 @@ def validate_report(pack: dict[str, Any]) -> list[str]:
             for step in next_steps
         ):
             errors.append(f"report.{mode}.next_steps: malformed step")
+        else:
+            handoff_body = next_steps[1]["body"]
+            if "W4DJ" not in handoff_body:
+                errors.append(
+                    f"report.{mode}.next_steps[1].body: must retain the W4DJ handoff"
+                )
+            if pack.get("locale") == "zh-Hans":
+                if "输出文字版歌单" not in handoff_body:
+                    errors.append(
+                        f"report.{mode}.next_steps[1].body: must retain the text-playlist action"
+                    )
+                if mode != "fast" and "五度圈" not in next_steps[2]["body"]:
+                    errors.append(
+                        f"report.{mode}.next_steps[2].body: must retain the harmonic-order action"
+                    )
         for label_key in (
             "digging_notes",
             "mix_suggestion",
@@ -452,6 +467,11 @@ def validate_manifest() -> tuple[dict[str, Any] | None, list[str]]:
                 if stage == "trigger":
                     if not isinstance(payload.get("ambiguous_confirmation"), str):
                         errors.append(f"{resource}: missing ambiguous confirmation")
+                    readiness_choice = payload.get("readiness_choice")
+                    if not isinstance(readiness_choice, str) or not readiness_choice.strip():
+                        errors.append(f"{resource}: missing readiness choice")
+                    elif "1" not in readiness_choice or "2" not in readiness_choice:
+                        errors.append(f"{resource}: readiness choice must expose options 1 and 2")
                     for trigger_kind in ("direct", "ambiguous", "non_trigger"):
                         require_string_list(
                             payload.get(trigger_kind),
@@ -570,6 +590,7 @@ def validate_multilingual_eval_spec() -> list[str]:
         "slash-cold-start-language",
         "language-market-separation",
         "fixed-intake-template",
+        "adaptive-intake-routing",
         "report-shape",
         "localized-action-intents",
         "localized-platform-policy",
@@ -587,6 +608,16 @@ def validate_multilingual_eval_spec() -> list[str]:
         return errors + ["multilingual eval model_replay must contain an object"]
     if replay.get("required_runs") != len(EXPECTED_LOCALES) * 6 * 2:
         errors.append("multilingual eval required_runs must equal 312")
+    expected_flows = (
+        "complete-one-message",
+        "delegated-one-message",
+        "underspecified-intake",
+        "slash-language-cold-start",
+        "explicit-fast",
+        "explicit-rich",
+    )
+    if tuple(replay.get("flows", [])) != expected_flows:
+        errors.append("multilingual eval cold-start flows do not match the adaptive intake contract")
     if tuple(replay.get("model_profiles", [])) != ("medium", "xhigh"):
         errors.append("multilingual eval model profiles must be medium and xhigh")
     required_families = {str(item) for item in replay.get("required_model_families", [])}

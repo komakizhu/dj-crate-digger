@@ -18,10 +18,8 @@ LEGACY_TOKENS = (
     "导出" + "w4dj",
     "导出" + "歌单名",
     "." + "t" + "x" + "t",
-    "format_" + "version",
     "schema " + "v2",
     "w4dj " + "v1",
-    "w4dj " + "v2",
     "." + "w4djcrate",
     "local_" + "export",
     "version_" + "label",
@@ -106,6 +104,10 @@ def main() -> int:
         expected_track = set(fixtures.get("required_w4dj_track_fields", []))
         if set(schema.get("properties", {})) != expected_root:
             errors.append("W4DJ schema root does not match universal fixture contract")
+        required_version = fixtures.get("required_w4dj_format_version")
+        version_schema = schema.get("properties", {}).get("format_version", {})
+        if version_schema.get("type") != "integer" or version_schema.get("const") != required_version:
+            errors.append("W4DJ schema does not enforce the fixed compatibility format version")
         if set(schema.get("$defs", {}).get("track", {}).get("properties", {})) != expected_track:
             errors.append("W4DJ schema track fields do not match universal fixture contract")
     except (OSError, json.JSONDecodeError, TypeError):

@@ -4,6 +4,8 @@
 
 `.w4dj` 是 [老炮DJ](https://github.com/komakizhu/dj-crate-digger) 与 [W4DJ RKB](https://github.com/komakizhu/W4DJ-RKB) 之间的歌单交接文件。它保存歌单名称、曲目顺序、完整官方歌名和艺人信息，但不包含歌曲音频。
 
+文件内部始终使用固定的 `format_version: 2` 兼容值。这是给 W4DJ RKB 识别文件用的机器字段，用户不需要选版本，也不需要手动填写。
+
 完整流程是：
 
 [老炮DJ](https://github.com/komakizhu/dj-crate-digger) 生成歌单 → 导出 `.w4dj` → 导入 W4DJ RKB → 在网易云音乐创建歌单并下载歌曲 → W4DJ RKB 转换音频并导出播放列表 → 导入 Rekordbox。

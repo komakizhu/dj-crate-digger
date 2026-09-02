@@ -329,7 +329,33 @@ This file is the fixed Kiswahili UI and intent contract for dj-crate-digger. The
     "orodha ya kucheza",
     "tafuta muziki",
     "tafuta nyimbo",
-    "panga seti"
+    "panga seti",
+    "hali ya haraka",
+    "hali fupi",
+    "hali kamili",
+    "kuunda DJ set",
+    "DJ",
+    "house",
+    "techno",
+    "drum & bass",
+    "jungle"
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "trigger_signal_families": [
+    "mode",
+    "dj_action",
+    "dj_object",
+    "dj_context",
+    "reference",
+    "set_detail",
+    "genre_context",
+    "generic_music_term",
+    "negative_context",
+    "explanatory_context",
+    "genre_families"
   ]
 }
 ```

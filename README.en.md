@@ -60,6 +60,10 @@ Build a 60-minute UK Bass set for an underground club in Guangzhou, using Skream
 
 The flow is: request → search immediately when the brief is ready or delegated; choose direct execution or two-round refinement when the brief is partially specified; use the two fixed rounds when it is vague → track-level verification → composite report or the explicitly selected mode → optional feedback, text playlist, W4DJ, or harmonic reorder.
 
+### 2.1 Trigger contract and acceptance
+
+The single cross-language semantic trigger contract is [`references/trigger-signals.json`](references/trigger-signals.json); the 26 locale packs provide localized overlays only. Run `scripts/validate_trigger_acceptance.py` for the 100-case matrix, `scripts/build_skill_package.py` for a clean package, and `scripts/sync_installed_skill.py --target /Users/mac2/.codex/skills/dj-crate-digger --apply` for the installed copy. The complete bilingual acceptance contract is [`docs/trigger-acceptance-plan.md`](docs/trigger-acceptance-plan.md). Static 100/100 does not prove real host invocation; reports must retain the host end-to-end status.
+
 ## III. Export and handoff
 
 Only the post-report “next step” area offers export actions:

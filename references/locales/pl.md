@@ -329,7 +329,33 @@ This file is the fixed Polski UI and intent contract for dj-crate-digger. The JS
     "playlista",
     "szukać muzyki",
     "znaleźć utwory",
-    "ułożyć set"
+    "ułożyć set",
+    "szybki tryb",
+    "krótki tryb",
+    "pełny tryb",
+    "stworzyć set DJ",
+    "DJ",
+    "house",
+    "techno",
+    "drum & bass",
+    "jungle"
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "trigger_signal_families": [
+    "mode",
+    "dj_action",
+    "dj_object",
+    "dj_context",
+    "reference",
+    "set_detail",
+    "genre_context",
+    "generic_music_term",
+    "negative_context",
+    "explanatory_context",
+    "genre_families"
   ]
 }
 ```

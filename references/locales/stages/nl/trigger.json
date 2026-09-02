@@ -11,16 +11,17 @@
     "een dj-set maken",
     "muziek zoeken voor dj",
     "een set voorbereiden",
-    "een set ordenen"
+    "een set ordenen",
+    "tracks zoeken",
+    "een set samenstellen",
+    "tracks selecteren"
   ],
   "ambiguous": [
     "playlist",
-    "tracks zoeken",
     "afspeellijst",
     "muziek zoeken",
     "dj",
-    "tracks vinden",
-    "een set samenstellen"
+    "tracks vinden"
   ],
   "non_trigger": [
     "song identification",
@@ -35,5 +36,125 @@
     "muziek zoeken",
     "tracks vinden",
     "een set samenstellen"
-  ]
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "semantic_signals": {
+    "mode": {
+      "fast": [
+        "snelle modus",
+        "snel",
+        "fast"
+      ],
+      "composite": [
+        "korte modus",
+        "kort",
+        "brief",
+        "composite"
+      ],
+      "four_views": [
+        "volledige modus",
+        "volledig",
+        "rich",
+        "full mode"
+      ]
+    },
+    "dj_action": [
+      "een dj-set maken",
+      "een set voorbereiden",
+      "een set ordenen",
+      "muziek zoeken voor dj",
+      "tracks zoeken",
+      "een set samenstellen",
+      "tracks selecteren"
+    ],
+    "dj_object": [
+      "dj-set",
+      "set",
+      "playlist",
+      "afspeellijst",
+      "tracklijst",
+      "setlist",
+      "mix"
+    ],
+    "dj_context": [
+      "dj",
+      "club",
+      "dansvloer",
+      "warm-up",
+      "piek",
+      "afsluiting",
+      "opening",
+      "festival",
+      "afterparty"
+    ],
+    "reference": [
+      "in de stijl van",
+      "vergelijkbaar met",
+      "referentietrack",
+      "referentieartiest"
+    ],
+    "set_detail": [
+      "tracks",
+      "nummers",
+      "minuten",
+      "BPM",
+      "stemming",
+      "energie"
+    ],
+    "genre_context": [
+      "edm",
+      "electronic",
+      "electronic music",
+      "dance music"
+    ],
+    "generic_music_term": [
+      "playlist",
+      "dj",
+      "tracks zoeken",
+      "set",
+      "afspeellijst",
+      "muziek zoeken",
+      "tracks vinden"
+    ],
+    "negative_context": [
+      "welk nummer is dit",
+      "dit nummer identificeren",
+      "api",
+      "programmeren",
+      "muziek downloaden",
+      "mp3",
+      "geschiedenis van",
+      "definitie"
+    ],
+    "explanatory_context": [
+      "wat is",
+      "verschil tussen",
+      "definitie",
+      "geschiedenis van",
+      "leg uit"
+    ],
+    "genre_families": [
+      "house",
+      "disco",
+      "techno",
+      "dubstep",
+      "bass",
+      "drum_and_bass",
+      "breakbeat",
+      "jungle",
+      "garage",
+      "trance",
+      "psytrance",
+      "progressive",
+      "electro",
+      "future_bass",
+      "big_room",
+      "hard_dance",
+      "hardcore",
+      "melodic_techno"
+    ]
+  }
 }

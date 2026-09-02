@@ -11,16 +11,18 @@
     "kuunda DJ set",
     "kutafuta muziki wa DJ",
     "kuandaa set",
-    "kupanga set"
+    "kupanga set",
+    "tafuta nyimbo",
+    "kuunda seti",
+    "kuchagua nyimbo",
+    "panga seti"
   ],
   "ambiguous": [
     "playlist",
-    "tafuta nyimbo",
     "orodha ya nyimbo",
     "tafuta muziki",
     "DJ",
-    "orodha ya kucheza",
-    "panga seti"
+    "orodha ya kucheza"
   ],
   "non_trigger": [
     "song identification",
@@ -35,5 +37,125 @@
     "tafuta muziki",
     "tafuta nyimbo",
     "panga seti"
-  ]
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "semantic_signals": {
+    "mode": {
+      "fast": [
+        "hali ya haraka",
+        "haraka",
+        "fast"
+      ],
+      "composite": [
+        "hali fupi",
+        "brief",
+        "composite"
+      ],
+      "four_views": [
+        "hali kamili",
+        "kamilifu",
+        "rich",
+        "full mode"
+      ]
+    },
+    "dj_action": [
+      "kuunda DJ set",
+      "kuandaa set",
+      "kupanga set",
+      "panga seti",
+      "kutafuta muziki wa DJ",
+      "tafuta nyimbo",
+      "kuunda seti",
+      "kuchagua nyimbo"
+    ],
+    "dj_object": [
+      "seti ya DJ",
+      "set",
+      "playlist",
+      "orodha ya nyimbo",
+      "orodha ya trek",
+      "setlist",
+      "mchanganyiko"
+    ],
+    "dj_context": [
+      "DJ",
+      "klabu",
+      "sakafu ya dansi",
+      "warm-up",
+      "kilele",
+      "kufunga",
+      "ufunguzi",
+      "tamasha",
+      "afterparty"
+    ],
+    "reference": [
+      "kwa mtindo wa",
+      "inayofanana na",
+      "wimbo wa rejea",
+      "msanii wa rejea"
+    ],
+    "set_detail": [
+      "nyimbo",
+      "trek",
+      "dakika",
+      "BPM",
+      "hisia",
+      "nguvu"
+    ],
+    "genre_context": [
+      "edm",
+      "electronic",
+      "electronic music",
+      "dance music"
+    ],
+    "generic_music_term": [
+      "playlist",
+      "DJ",
+      "tafuta nyimbo",
+      "set",
+      "orodha ya nyimbo",
+      "tafuta muziki",
+      "orodha ya kucheza"
+    ],
+    "negative_context": [
+      "wimbo huu ni upi",
+      "tambua wimbo",
+      "api",
+      "programu",
+      "pakua muziki",
+      "mp3",
+      "historia",
+      "ufafanuzi"
+    ],
+    "explanatory_context": [
+      "ni nini",
+      "tofauti kati",
+      "ufafanuzi",
+      "historia",
+      "eleza"
+    ],
+    "genre_families": [
+      "house",
+      "disco",
+      "techno",
+      "dubstep",
+      "bass",
+      "drum_and_bass",
+      "breakbeat",
+      "jungle",
+      "garage",
+      "trance",
+      "psytrance",
+      "progressive",
+      "electro",
+      "future_bass",
+      "big_room",
+      "hard_dance",
+      "hardcore",
+      "melodic_techno"
+    ]
+  }
 }

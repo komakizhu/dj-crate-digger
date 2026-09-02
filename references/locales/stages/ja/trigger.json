@@ -11,7 +11,10 @@
     "DJセットを作る",
     "DJ用の曲を探す",
     "セットを準備する",
-    "セットを構成する"
+    "セットを構成する",
+    "曲を並べる",
+    "曲をキュレーションする",
+    "セットを組む"
   ],
   "ambiguous": [
     "プレイリスト",
@@ -20,8 +23,7 @@
     "音楽を探す",
     "DJ",
     "曲探し",
-    "トラックを探す",
-    "セットを組む"
+    "トラックを探す"
   ],
   "non_trigger": [
     "song identification",
@@ -36,5 +38,126 @@
     "曲探し",
     "トラックを探す",
     "セットを組む"
-  ]
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "semantic_signals": {
+    "mode": {
+      "fast": [
+        "高速版",
+        "速いモード",
+        "fast"
+      ],
+      "composite": [
+        "簡易版",
+        "複合版",
+        "brief",
+        "composite"
+      ],
+      "four_views": [
+        "完全版",
+        "フルモード",
+        "rich",
+        "full mode"
+      ]
+    },
+    "dj_action": [
+      "DJセットを作る",
+      "DJ用の曲を探す",
+      "セットを準備する",
+      "セットを構成する",
+      "曲を並べる",
+      "曲をキュレーションする",
+      "セットを組む"
+    ],
+    "dj_object": [
+      "DJセット",
+      "セット",
+      "プレイリスト",
+      "曲目リスト",
+      "トラックリスト",
+      "セットリスト",
+      "ミックス"
+    ],
+    "dj_context": [
+      "DJ",
+      "クラブ",
+      "ダンスフロア",
+      "ウォームアップ",
+      "ピーク",
+      "クロージング",
+      "オープニング",
+      "フェス",
+      "アフターパーティー"
+    ],
+    "reference": [
+      "のスタイル",
+      "に似た",
+      "参考曲",
+      "参考アーティスト"
+    ],
+    "set_detail": [
+      "曲",
+      "分",
+      "BPM",
+      "ムード",
+      "エネルギー"
+    ],
+    "genre_context": [
+      "edm",
+      "electronic",
+      "electronic music",
+      "dance music"
+    ],
+    "generic_music_term": [
+      "プレイリスト",
+      "DJ",
+      "曲を探す",
+      "セット",
+      "曲目リスト",
+      "音楽リスト",
+      "音楽を探す",
+      "曲探し",
+      "トラックを探す"
+    ],
+    "negative_context": [
+      "この曲は何",
+      "曲を特定",
+      "api",
+      "プログラミング",
+      "音楽をダウンロード",
+      "mp3",
+      "歴史",
+      "定義"
+    ],
+    "explanatory_context": [
+      "とは",
+      "違い",
+      "定義",
+      "歴史",
+      "説明"
+    ],
+    "genre_families": [
+      "house",
+      "disco",
+      "techno",
+      "dubstep",
+      "bass",
+      "drum_and_bass",
+      "breakbeat",
+      "jungle",
+      "garage",
+      "trance",
+      "psytrance",
+      "progressive",
+      "electro",
+      "future_bass",
+      "big_room",
+      "hard_dance",
+      "hardcore",
+      "melodic_techno"
+    ]
+  }
 }

@@ -11,15 +11,16 @@
     "gumawa ng DJ set",
     "maghanap ng musika para sa DJ",
     "maghanda ng set",
-    "mag-ayos ng set"
+    "mag-ayos ng set",
+    "maghanap ng track",
+    "bumuo ng set",
+    "pumili ng track"
   ],
   "ambiguous": [
     "playlist",
-    "maghanap ng track",
     "listahan ng tugtog",
     "maghanap ng musika",
-    "DJ",
-    "bumuo ng set"
+    "DJ"
   ],
   "non_trigger": [
     "song identification",
@@ -34,5 +35,123 @@
     "maghanap ng musika",
     "maghanap ng track",
     "bumuo ng set"
-  ]
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "semantic_signals": {
+    "mode": {
+      "fast": [
+        "mabilis na mode",
+        "mabilis",
+        "fast"
+      ],
+      "composite": [
+        "maikling mode",
+        "brief",
+        "composite"
+      ],
+      "four_views": [
+        "buong mode",
+        "kumpleto",
+        "rich",
+        "full mode"
+      ]
+    },
+    "dj_action": [
+      "gumawa ng DJ set",
+      "maghanda ng set",
+      "mag-ayos ng set",
+      "maghanap ng musika para sa DJ",
+      "maghanap ng track",
+      "bumuo ng set",
+      "pumili ng track"
+    ],
+    "dj_object": [
+      "DJ set",
+      "set",
+      "playlist",
+      "listahan ng tugtog",
+      "tracklist",
+      "setlist",
+      "mix"
+    ],
+    "dj_context": [
+      "DJ",
+      "club",
+      "dance floor",
+      "warm-up",
+      "peak",
+      "closing",
+      "opening",
+      "festival",
+      "afterparty"
+    ],
+    "reference": [
+      "sa estilo ni",
+      "katulad ng",
+      "reference track",
+      "reference artist"
+    ],
+    "set_detail": [
+      "track",
+      "kanta",
+      "minuto",
+      "BPM",
+      "mood",
+      "energy"
+    ],
+    "genre_context": [
+      "edm",
+      "electronic",
+      "electronic music",
+      "dance music"
+    ],
+    "generic_music_term": [
+      "playlist",
+      "DJ",
+      "maghanap ng track",
+      "set",
+      "listahan ng tugtog",
+      "maghanap ng musika"
+    ],
+    "negative_context": [
+      "anong kanta ito",
+      "kilalanin ang kanta",
+      "api",
+      "programming",
+      "mag-download ng musika",
+      "mp3",
+      "kasaysayan",
+      "depinisyon"
+    ],
+    "explanatory_context": [
+      "ano ang",
+      "pagkakaiba",
+      "depinisyon",
+      "kasaysayan",
+      "ipaliwanag"
+    ],
+    "genre_families": [
+      "house",
+      "disco",
+      "techno",
+      "dubstep",
+      "bass",
+      "drum_and_bass",
+      "breakbeat",
+      "jungle",
+      "garage",
+      "trance",
+      "psytrance",
+      "progressive",
+      "electro",
+      "future_bass",
+      "big_room",
+      "hard_dance",
+      "hardcore",
+      "melodic_techno"
+    ]
+  }
 }

@@ -60,6 +60,10 @@
 
 完整流程是：发起需求 → 信息足够或已授权补全时直接搜索；部分明确时先选择直接结果或两轮细化；信息很少时进入两轮问卷 → 逐曲核验 → 返回综合版或用户明确选择的模式 → 可选反馈、文字歌单、W4DJ 或五度圈重排。
 
+### 2.1 触发合同与验收
+
+跨语言触发的唯一语义合同位于 [`references/trigger-signals.json`](references/trigger-signals.json)，26 个语言包只提供本地表达投影。可用 `scripts/validate_trigger_acceptance.py` 检查 100 条用例，用 `scripts/build_skill_package.py` 构建干净包，再用 `scripts/sync_installed_skill.py --target /Users/mac2/.codex/skills/dj-crate-digger --apply` 同步已安装副本；完整的中英文验收口径见 [`docs/trigger-acceptance-plan.md`](docs/trigger-acceptance-plan.md)。静态 100/100 不代表宿主真实调用已验收，报告必须保留宿主端到端状态。
+
 ## 三、导出与交接
 
 报告完成后的“下一步”才会显示两个导出动作：

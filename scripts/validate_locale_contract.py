@@ -16,6 +16,8 @@ from pathlib import Path
 from typing import Any
 
 import validate_language_routing
+import validate_trigger_acceptance
+import trigger_router
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,6 +26,8 @@ MANIFEST_PATH = LOCALES_DIR / "manifest.json"
 FIXTURE_PATH = ROOT / "evals" / "locale-contract-fixtures.json"
 MULTILINGUAL_EVAL_PATH = ROOT / "evals" / "multilingual-evals.json"
 TRIGGER_EVAL_PATH = ROOT / "evals" / "trigger-evals.json"
+LEGACY_TRIGGER_EVAL_PATH = ROOT / "evals" / "trigger-regression-legacy.json"
+TRIGGER_SIGNAL_PATH = ROOT / "references" / "trigger-signals.json"
 INTAKE_FIXTURE_PATH = ROOT / "evals" / "intake-template-fixtures.json"
 
 EXPECTED_LOCALES = (
@@ -73,6 +77,7 @@ EXPECTED_GLOBAL_MARKETS = (
 REQUIRED_PROGRESSIVE_RESOURCES = (
     "language_routing",
     "preflight",
+    "trigger_signals",
     "trigger",
     "intake",
     "search",
@@ -129,6 +134,39 @@ REQUIRED_STATUS_KEYS = (
     "verified",
     "target_platform_missing",
 )
+TRIGGER_SIGNAL_KEYS = (
+    "mode",
+    "dj_action",
+    "dj_object",
+    "dj_context",
+    "reference",
+    "set_detail",
+    "genre_context",
+    "generic_music_term",
+    "negative_context",
+    "explanatory_context",
+    "genre_families",
+)
+TRIGGER_GENRE_FAMILIES = (
+    "house",
+    "disco",
+    "techno",
+    "dubstep",
+    "bass",
+    "drum_and_bass",
+    "breakbeat",
+    "jungle",
+    "garage",
+    "trance",
+    "psytrance",
+    "progressive",
+    "electro",
+    "future_bass",
+    "big_room",
+    "hard_dance",
+    "hardcore",
+    "melodic_techno",
+)
 FIXED_CHINESE_LEAKS = (
     "场景：",
     "目标国家 / 地区：",
@@ -176,6 +214,148 @@ def require_string_list(value: Any, label: str, errors: list[str]) -> None:
         isinstance(item, str) and item.strip() for item in value
     ):
         errors.append(f"{label}: expected a non-empty string list")
+
+
+def validate_trigger_signal_contract() -> tuple[dict[str, Any] | None, list[str]]:
+    """Validate the central semantic trigger contract before its projections."""
+    errors: list[str] = []
+    if not TRIGGER_SIGNAL_PATH.exists():
+        return None, [f"missing central trigger contract: {TRIGGER_SIGNAL_PATH}"]
+    try:
+        contract = json.loads(TRIGGER_SIGNAL_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return None, [f"central trigger contract is not valid JSON: {exc}"]
+    if not isinstance(contract, dict):
+        return None, ["central trigger contract must contain an object"]
+    if contract.get("schema") != "dj-crate-digger-trigger-signals":
+        errors.append("central trigger contract has an unexpected schema")
+    if contract.get("version") != 1:
+        errors.append("central trigger contract version must be 1")
+    expected_signal_families = (
+        "mode",
+        "dj_action",
+        "dj_object",
+        "dj_context",
+        "genre",
+        "reference",
+        "set_detail",
+        "negative_context",
+    )
+    if tuple(contract.get("signal_families", ())) != expected_signal_families:
+        errors.append("central trigger contract signal_families are incomplete or out of order")
+    require_string_list(contract.get("command_aliases"), "command_aliases", errors)
+    normalization = contract.get("normalization")
+    if not isinstance(normalization, dict):
+        errors.append("central trigger contract is missing normalization")
+    else:
+        if normalization.get("unicode") != "NFKC" or normalization.get("casefold") is not True:
+            errors.append("central trigger contract normalization must use NFKC and casefold")
+        if not isinstance(normalization.get("separator_equivalences"), list):
+            errors.append("central trigger contract must declare separator equivalences")
+
+    expected_weights = {
+        "mode": 100,
+        "dj_action": 70,
+        "dj_object": 60,
+        "dj_context": 45,
+        "genre": 35,
+        "reference": 35,
+        "set_detail": 15,
+    }
+    weights = contract.get("weights")
+    if not isinstance(weights, dict):
+        errors.append("central trigger contract is missing weights")
+    else:
+        for key, expected in expected_weights.items():
+            if weights.get(key) != expected:
+                errors.append(f"central trigger contract weight {key!r} must be {expected}")
+        for key in ("repeated_genre_same_family", "repeated_genre_distinct_family", "direct_pair_bonus"):
+            if not isinstance(weights.get(key), int) or weights[key] < 0:
+                errors.append(f"central trigger contract weight {key!r} must be a non-negative integer")
+
+    bands = contract.get("confidence_bands")
+    if not isinstance(bands, dict) or tuple(bands) != ("very_high", "high", "medium", "low"):
+        errors.append("central trigger contract confidence bands are incomplete or out of order")
+    else:
+        thresholds = [bands[name].get("minimum") for name in bands if isinstance(bands[name], dict)]
+        if thresholds != sorted(thresholds, reverse=True):
+            errors.append("central trigger contract confidence bands must descend in threshold order")
+
+    route_rules = contract.get("route_rules")
+    if not isinstance(route_rules, dict):
+        errors.append("central trigger contract is missing route_rules")
+    else:
+        required_rules = {
+            "hard_negative_first",
+            "direct_score_threshold",
+            "ambiguous_score_threshold",
+            "style_only_is_non_trigger",
+            "generic_only_is_ambiguous",
+            "direct_combinations",
+        }
+        if not required_rules <= set(route_rules):
+            errors.append("central trigger contract route_rules are incomplete")
+        if route_rules.get("hard_negative_first") is not True:
+            errors.append("central trigger contract must enable hard negative precedence")
+
+    mode_map = contract.get("mode_map")
+    if not isinstance(mode_map, dict) or set(mode_map) != {"fast", "composite", "four_views"}:
+        errors.append("central trigger contract mode_map must define fast, composite, and four_views")
+    else:
+        for mode, labels in mode_map.items():
+            if not isinstance(labels, dict) or not isinstance(labels.get("all"), list):
+                errors.append(f"central trigger contract mode_map.{mode} must include an all list")
+            elif not labels["all"]:
+                errors.append(f"central trigger contract mode_map.{mode}.all must not be empty")
+
+    genre_families = contract.get("genre_families")
+    if not isinstance(genre_families, dict) or tuple(genre_families) != TRIGGER_GENRE_FAMILIES:
+        errors.append("central trigger contract genre families do not match the supported electronic family set")
+    else:
+        for family, aliases in genre_families.items():
+            require_string_list(aliases, f"genre_families.{family}", errors)
+
+    shared = contract.get("shared_signal_terms")
+    if not isinstance(shared, dict):
+        errors.append("central trigger contract is missing shared signal terms")
+    else:
+        for family in ("dj_context", "reference", "set_detail", "genre_context"):
+            require_string_list(shared.get(family), f"shared_signal_terms.{family}", errors)
+    require_string_list(contract.get("global_negative_contexts"), "global_negative_contexts", errors)
+
+    overlays = contract.get("locale_overlays")
+    if not isinstance(overlays, dict) or tuple(overlays) != EXPECTED_LOCALES:
+        errors.append("central trigger contract locale overlays do not match the 26-locale manifest")
+    else:
+        for locale, overlay in overlays.items():
+            if not isinstance(overlay, dict):
+                errors.append(f"central trigger contract overlay {locale} must be an object")
+                continue
+            for family in ("dj_action", "dj_object", "dj_context", "reference", "set_detail", "generic_music_term", "negative_context", "explanatory_context"):
+                require_string_list(overlay.get(family), f"locale_overlays.{locale}.{family}", errors)
+            modes = overlay.get("mode")
+            if not isinstance(modes, dict) or set(modes) != {"fast", "composite", "four_views"}:
+                errors.append(f"locale_overlays.{locale}.mode must define all three modes")
+            else:
+                for mode in ("fast", "composite", "four_views"):
+                    require_string_list(modes.get(mode), f"locale_overlays.{locale}.mode.{mode}", errors)
+    return contract, errors
+
+
+def expected_semantic_projection(contract: dict[str, Any], locale: str) -> dict[str, Any]:
+    overlay = contract["locale_overlays"][locale]
+    shared = contract["shared_signal_terms"]
+    projected: dict[str, Any] = {}
+    for key in TRIGGER_SIGNAL_KEYS:
+        if key == "genre_families":
+            projected[key] = list(contract["genre_families"])
+        elif key in overlay:
+            projected[key] = overlay[key]
+        elif key == "genre_context":
+            projected[key] = shared.get(key, [])
+        else:
+            projected[key] = []
+    return projected
 
 
 def validate_round(
@@ -483,6 +663,12 @@ def validate_manifest() -> tuple[dict[str, Any] | None, list[str]]:
                     overlap = sorted(direct & ambiguous)
                     if overlap:
                         errors.append(f"{resource}: direct and ambiguous triggers overlap: {overlap!r}")
+                    for cue in direct:
+                        if trigger_router.classify(cue, locale).get("skill_route") != "direct":
+                            errors.append(f"{resource}: direct cue does not resolve to direct: {cue!r}")
+                    for cue in ambiguous:
+                        if trigger_router.classify(cue, locale).get("skill_route") != "ambiguous_confirmation":
+                            errors.append(f"{resource}: ambiguous cue does not resolve to ambiguous_confirmation: {cue!r}")
                 if stage == "search_context" and not isinstance(payload.get("platform_policy"), dict):
                     errors.append(f"{resource}: missing platform policy")
                 if stage == "post_report" and not isinstance(payload.get("actions"), dict):
@@ -508,6 +694,45 @@ def validate_manifest() -> tuple[dict[str, Any] | None, list[str]]:
         elif not (LOCALES_DIR / filename).exists():
             errors.append(f"manifest {locale!r}: missing file {filename}")
     return manifest, errors
+
+
+def validate_trigger_projections(
+    contract: dict[str, Any] | None, manifest: dict[str, Any] | None
+) -> list[str]:
+    """Ensure stage JSON and full locale packs are projections of one source."""
+    if contract is None or manifest is None:
+        return []
+    errors: list[str] = []
+    expected_contract_ref = {"path": "references/trigger-signals.json", "version": contract.get("version")}
+    expected_families = list(TRIGGER_SIGNAL_KEYS)
+    for entry in manifest.get("locales", []):
+        if not isinstance(entry, dict):
+            continue
+        locale = entry.get("id")
+        if locale not in EXPECTED_LOCALES:
+            continue
+        stage_path = ROOT / manifest["locale_progressive_resources"][locale]["trigger"]
+        try:
+            stage = json.loads(stage_path.read_text(encoding="utf-8"))
+        except (OSError, KeyError, json.JSONDecodeError) as exc:
+            errors.append(f"{locale}: cannot load trigger projection: {exc}")
+            continue
+        if stage.get("trigger_contract") != expected_contract_ref:
+            errors.append(f"{stage_path}: trigger_contract does not reference the central contract")
+        if stage.get("semantic_signals") != expected_semantic_projection(contract, locale):
+            errors.append(f"{stage_path}: semantic_signals drifted from the central locale overlay")
+
+        locale_path = LOCALES_DIR / entry["file"]
+        try:
+            pack = load_pack(locale_path)
+        except (OSError, ValueError) as exc:
+            errors.append(f"{locale_path}: cannot load trigger projection: {exc}")
+            continue
+        if pack.get("trigger_contract") != expected_contract_ref:
+            errors.append(f"{locale_path}: trigger_contract does not reference the central contract")
+        if pack.get("trigger_signal_families") != expected_families:
+            errors.append(f"{locale_path}: trigger_signal_families drifted from the stage contract")
+    return errors
 
 
 def validate_fixtures() -> list[str]:
@@ -656,11 +881,25 @@ def validate_existing_eval_coverage() -> list[str]:
         return [f"trigger evals cannot be read: {exc}"]
     localized_triggers = [
         case for case in trigger_cases
-        if isinstance(case, dict) and "locale" in case
+        if isinstance(case, dict)
+        and case.get("case_type") == "baseline_direct"
+        and "locale" in case
     ] if isinstance(trigger_cases, list) else []
     trigger_locales = [case.get("locale") for case in localized_triggers]
-    if tuple(trigger_locales) != EXPECTED_LOCALES:
-        errors.append("trigger evals must contain one positive localized trigger per locale")
+    if tuple(trigger_locales) != EXPECTED_LOCALES or len(set(trigger_locales)) != len(EXPECTED_LOCALES):
+        errors.append("trigger evals must contain one baseline direct trigger per locale")
+
+    try:
+        legacy_cases = json.loads(LEGACY_TRIGGER_EVAL_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return errors + [f"legacy trigger evals cannot be read: {exc}"]
+    if not isinstance(legacy_cases, list) or len(legacy_cases) < 61:
+        errors.append("legacy trigger evals must retain the pre-semantic regression corpus")
+    else:
+        for index, case in enumerate(legacy_cases):
+            if not isinstance(case, dict) or not isinstance(case.get("query"), str) or not isinstance(case.get("should_trigger"), bool):
+                errors.append(f"legacy trigger eval case[{index}] must retain query and should_trigger fields")
+                break
 
     try:
         intake_fixtures = json.loads(INTAKE_FIXTURE_PATH.read_text(encoding="utf-8"))
@@ -681,26 +920,54 @@ def validate_trigger_routing_cases() -> list[str]:
         "/DJ": "ambiguous_confirmation",
         "DJ": "ambiguous_confirmation",
         "挖歌": "direct",
+        "帮我排一个set 张三妹john summit风格的 edm house 综合版 8首歌": "direct",
     }
     try:
         cases = json.loads(TRIGGER_EVAL_PATH.read_text(encoding="utf-8"))
+        legacy_cases = json.loads(LEGACY_TRIGGER_EVAL_PATH.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         return [f"trigger routing cases cannot be read: {exc}"]
+    if not isinstance(cases, list):
+        cases = []
+    if isinstance(legacy_cases, list):
+        cases = cases + legacy_cases
     indexed = {
         case.get("query"): case
         for case in cases
         if isinstance(case, dict) and "query" in case
     } if isinstance(cases, list) else {}
     errors: list[str] = []
+    trigger_path = ROOT / "references" / "locales" / "stages" / "zh-Hans" / "trigger.json"
+    try:
+        trigger = json.loads(trigger_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return [f"zh-Hans trigger resource cannot be read: {exc}"]
+    direct_cues = trigger.get("direct", [])
+    if not isinstance(direct_cues, list):
+        return ["zh-Hans trigger resource direct cues must be a list"]
+    skill_text = (ROOT / "SKILL.md").read_text(encoding="utf-8")
     for query, route in expected_routes.items():
         case = indexed.get(query)
         if case is None or case.get("expected_route") != route:
             errors.append(f"trigger routing case {query!r} must declare {route}")
+        if route == "direct" and not any(
+            isinstance(cue, str) and cue and cue in query for cue in direct_cues
+        ):
+            errors.append(
+                f"direct trigger case {query!r} has no matching zh-Hans direct cue"
+            )
+        if query.startswith("帮我排一个set") and "排一个set" not in skill_text:
+            errors.append(
+                "SKILL.md frontmatter capsule is missing the reported zh-Hans trigger variant"
+            )
     return errors
 
 
 def main() -> int:
-    _, failures = validate_manifest()
+    trigger_contract, trigger_contract_failures = validate_trigger_signal_contract()
+    manifest, failures = validate_manifest()
+    failures.extend(trigger_contract_failures)
+    failures.extend(validate_trigger_projections(trigger_contract, manifest))
     if MANIFEST_PATH.exists():
         entries = json.loads(MANIFEST_PATH.read_text(encoding="utf-8")).get("locales", [])
         for entry in entries:
@@ -720,6 +987,7 @@ def main() -> int:
     failures.extend(validate_multilingual_eval_spec())
     failures.extend(validate_existing_eval_coverage())
     failures.extend(validate_trigger_routing_cases())
+    failures.extend(validate_trigger_acceptance.validate_file())
     failures.extend(validate_language_routing.validate_contract())
     if failures:
         print("\n".join(failures), file=sys.stderr)

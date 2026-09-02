@@ -30,10 +30,26 @@ LEGACY_TOKENS = (
 
 
 def tracked_files() -> list[Path]:
-    result = subprocess.run(
-        ["git", "ls-files", "-co", "--exclude-standard"], cwd=ROOT, check=True, capture_output=True, text=True
-    )
-    return [ROOT / line for line in result.stdout.splitlines() if line]
+    if (ROOT / ".git").exists():
+        result = subprocess.run(
+            ["git", "ls-files", "-co", "--exclude-standard"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        return [ROOT / line for line in result.stdout.splitlines() if line]
+    # A clean installed package intentionally has no .git directory.  Keep
+    # this validator usable at that seam instead of making package validation
+    # depend on the source checkout.
+    return [
+        path
+        for path in ROOT.rglob("*")
+        if path.is_file()
+        and ".git" not in path.relative_to(ROOT).parts
+        and "test-artifacts" not in path.relative_to(ROOT).parts
+        and "__pycache__" not in path.relative_to(ROOT).parts
+    ]
 
 
 def locale_pack(path: Path) -> dict:

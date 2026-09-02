@@ -329,7 +329,33 @@ This file is the fixed 日本語 UI and intent contract for dj-crate-digger. The
     "プレイリスト",
     "曲探し",
     "トラックを探す",
-    "セットを組む"
+    "セットを組む",
+    "高速版",
+    "簡易版",
+    "完全版",
+    "DJセットを作る",
+    "DJ",
+    "house",
+    "techno",
+    "drum & bass",
+    "jungle"
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "trigger_signal_families": [
+    "mode",
+    "dj_action",
+    "dj_object",
+    "dj_context",
+    "reference",
+    "set_detail",
+    "genre_context",
+    "generic_music_term",
+    "negative_context",
+    "explanatory_context",
+    "genre_families"
   ]
 }
 ```

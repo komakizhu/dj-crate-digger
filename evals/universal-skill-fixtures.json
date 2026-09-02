@@ -5,6 +5,7 @@
   "required_resources": [
     "references/language-routing.json",
     "references/capabilities.md",
+    "references/trigger-signals.json",
     "references/trigger-routing.md",
     "references/intake-routing.md",
     "references/search-verification.md",

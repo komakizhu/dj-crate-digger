@@ -329,7 +329,33 @@ This file is the fixed Português UI and intent contract for dj-crate-digger. Th
     "playlist",
     "garimpar música",
     "buscar faixas",
-    "montar um set"
+    "montar um set",
+    "rápido",
+    "breve",
+    "completo",
+    "montar um set de DJ",
+    "DJ",
+    "house",
+    "techno",
+    "drum & bass",
+    "jungle"
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "trigger_signal_families": [
+    "mode",
+    "dj_action",
+    "dj_object",
+    "dj_context",
+    "reference",
+    "set_detail",
+    "genre_context",
+    "generic_music_term",
+    "negative_context",
+    "explanatory_context",
+    "genre_families"
   ]
 }
 ```

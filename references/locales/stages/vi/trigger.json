@@ -11,11 +11,13 @@
     "tạo DJ set",
     "tìm nhạc cho DJ",
     "chuẩn bị set",
-    "xếp thứ tự set"
+    "xếp thứ tự set",
+    "tìm track",
+    "xây dựng set",
+    "chọn track"
   ],
   "ambiguous": [
     "playlist",
-    "tìm track",
     "danh sách phát",
     "tìm nhạc",
     "DJ",
@@ -34,5 +36,124 @@
     "tìm nhạc",
     "tìm track",
     "xếp set"
-  ]
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "semantic_signals": {
+    "mode": {
+      "fast": [
+        "chế độ nhanh",
+        "nhanh",
+        "fast"
+      ],
+      "composite": [
+        "chế độ tóm tắt",
+        "tóm tắt",
+        "brief",
+        "composite"
+      ],
+      "four_views": [
+        "chế độ đầy đủ",
+        "đầy đủ",
+        "rich",
+        "full mode"
+      ]
+    },
+    "dj_action": [
+      "tạo DJ set",
+      "chuẩn bị set",
+      "xếp thứ tự set",
+      "tìm nhạc cho DJ",
+      "tìm track",
+      "xây dựng set",
+      "chọn track"
+    ],
+    "dj_object": [
+      "DJ set",
+      "set",
+      "playlist",
+      "danh sách phát",
+      "danh sách track",
+      "setlist",
+      "mix"
+    ],
+    "dj_context": [
+      "DJ",
+      "club",
+      "sàn nhảy",
+      "warm-up",
+      "cao trào",
+      "closing",
+      "mở màn",
+      "festival",
+      "afterparty"
+    ],
+    "reference": [
+      "theo phong cách",
+      "tương tự",
+      "track tham khảo",
+      "nghệ sĩ tham khảo"
+    ],
+    "set_detail": [
+      "track",
+      "bài",
+      "phút",
+      "BPM",
+      "tâm trạng",
+      "năng lượng"
+    ],
+    "genre_context": [
+      "edm",
+      "electronic",
+      "electronic music",
+      "dance music"
+    ],
+    "generic_music_term": [
+      "playlist",
+      "DJ",
+      "tìm track",
+      "set",
+      "danh sách phát",
+      "tìm nhạc"
+    ],
+    "negative_context": [
+      "bài này là bài gì",
+      "nhận diện bài hát",
+      "api",
+      "lập trình",
+      "tải nhạc",
+      "mp3",
+      "lịch sử",
+      "định nghĩa"
+    ],
+    "explanatory_context": [
+      "là gì",
+      "khác nhau",
+      "định nghĩa",
+      "lịch sử",
+      "giải thích"
+    ],
+    "genre_families": [
+      "house",
+      "disco",
+      "techno",
+      "dubstep",
+      "bass",
+      "drum_and_bass",
+      "breakbeat",
+      "jungle",
+      "garage",
+      "trance",
+      "psytrance",
+      "progressive",
+      "electro",
+      "future_bass",
+      "big_room",
+      "hard_dance",
+      "hardcore",
+      "melodic_techno"
+    ]
+  }
 }

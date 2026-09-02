@@ -11,7 +11,10 @@
     "DJ 세트 만들기",
     "DJ용 음악 찾기",
     "세트 준비하기",
-    "세트 구성하기"
+    "세트 구성하기",
+    "곡을 배열하기",
+    "세트를 큐레이션하기",
+    "세트 구성"
   ],
   "ambiguous": [
     "플레이리스트",
@@ -19,8 +22,7 @@
     "음악 목록",
     "음악 찾기",
     "DJ",
-    "트랙 찾기",
-    "세트 구성"
+    "트랙 찾기"
   ],
   "non_trigger": [
     "song identification",
@@ -35,5 +37,124 @@
     "곡 찾기",
     "트랙 찾기",
     "세트 구성"
-  ]
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "semantic_signals": {
+    "mode": {
+      "fast": [
+        "빠른 모드",
+        "간편 모드",
+        "fast"
+      ],
+      "composite": [
+        "종합 모드",
+        "brief",
+        "composite"
+      ],
+      "four_views": [
+        "전체 모드",
+        "풍부한 모드",
+        "rich",
+        "full mode"
+      ]
+    },
+    "dj_action": [
+      "DJ 세트 만들기",
+      "DJ용 음악 찾기",
+      "세트 준비하기",
+      "세트 구성하기",
+      "곡을 배열하기",
+      "세트를 큐레이션하기",
+      "세트 구성"
+    ],
+    "dj_object": [
+      "DJ 세트",
+      "세트",
+      "플레이리스트",
+      "곡 목록",
+      "트랙리스트",
+      "셋리스트",
+      "믹스"
+    ],
+    "dj_context": [
+      "DJ",
+      "클럽",
+      "댄스플로어",
+      "워밍업",
+      "피크타임",
+      "클로징",
+      "오프닝",
+      "페스티벌",
+      "애프터파티"
+    ],
+    "reference": [
+      "스타일",
+      "비슷한",
+      "참고 트랙",
+      "참고 아티스트"
+    ],
+    "set_detail": [
+      "곡",
+      "분",
+      "BPM",
+      "분위기",
+      "에너지"
+    ],
+    "genre_context": [
+      "edm",
+      "electronic",
+      "electronic music",
+      "dance music"
+    ],
+    "generic_music_term": [
+      "플레이리스트",
+      "DJ",
+      "곡 찾기",
+      "세트",
+      "곡 목록",
+      "음악 목록",
+      "음악 찾기",
+      "트랙 찾기"
+    ],
+    "negative_context": [
+      "이 노래는 뭐야",
+      "노래 식별",
+      "api",
+      "프로그래밍",
+      "음악 다운로드",
+      "mp3",
+      "역사",
+      "정의"
+    ],
+    "explanatory_context": [
+      "무엇인가",
+      "차이",
+      "정의",
+      "역사",
+      "설명"
+    ],
+    "genre_families": [
+      "house",
+      "disco",
+      "techno",
+      "dubstep",
+      "bass",
+      "drum_and_bass",
+      "breakbeat",
+      "jungle",
+      "garage",
+      "trance",
+      "psytrance",
+      "progressive",
+      "electro",
+      "future_bass",
+      "big_room",
+      "hard_dance",
+      "hardcore",
+      "melodic_techno"
+    ]
+  }
 }

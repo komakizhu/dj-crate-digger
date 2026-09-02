@@ -11,16 +11,19 @@
     "crear un set de DJ",
     "buscar música para DJ",
     "preparar un set",
-    "secuenciar un set"
+    "secuenciar un set",
+    "ordenar un set",
+    "buscar pistas",
+    "garimpar música",
+    "montar un set",
+    "curar un set"
   ],
   "ambiguous": [
     "playlist",
     "buscar canciones",
     "lista de reproducción",
     "buscar música",
-    "DJ",
-    "buscar pistas",
-    "ordenar un set"
+    "DJ"
   ],
   "non_trigger": [
     "song identification",
@@ -35,5 +38,129 @@
     "buscar música",
     "buscar pistas",
     "ordenar un set"
-  ]
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "semantic_signals": {
+    "mode": {
+      "fast": [
+        "rápido",
+        "modo rápido",
+        "fast"
+      ],
+      "composite": [
+        "breve",
+        "modo breve",
+        "composite",
+        "brief"
+      ],
+      "four_views": [
+        "completo",
+        "modo completo",
+        "rich",
+        "full mode"
+      ]
+    },
+    "dj_action": [
+      "crear un set de DJ",
+      "preparar un set",
+      "secuenciar un set",
+      "ordenar un set",
+      "buscar música para DJ",
+      "buscar pistas",
+      "garimpar música",
+      "montar un set",
+      "curar un set"
+    ],
+    "dj_object": [
+      "set de DJ",
+      "set",
+      "playlist",
+      "lista de reproducción",
+      "lista de pistas",
+      "setlist",
+      "mezcla"
+    ],
+    "dj_context": [
+      "DJ",
+      "club",
+      "sala",
+      "pista de baile",
+      "calentamiento",
+      "warm-up",
+      "peak",
+      "cierre",
+      "apertura",
+      "festival",
+      "afterparty"
+    ],
+    "reference": [
+      "al estilo de",
+      "parecido a",
+      "pista de referencia",
+      "artista de referencia"
+    ],
+    "set_detail": [
+      "temas",
+      "pistas",
+      "canciones",
+      "minutos",
+      "bpm",
+      "ánimo",
+      "energía"
+    ],
+    "genre_context": [
+      "edm",
+      "electronic",
+      "electronic music",
+      "dance music"
+    ],
+    "generic_music_term": [
+      "playlist",
+      "DJ",
+      "buscar canciones",
+      "buscar música",
+      "set",
+      "lista de reproducción"
+    ],
+    "negative_context": [
+      "qué canción es",
+      "identificar esta canción",
+      "api",
+      "programación",
+      "descargar música",
+      "mp3",
+      "historia de",
+      "definición"
+    ],
+    "explanatory_context": [
+      "qué es",
+      "diferencia entre",
+      "definición",
+      "historia de",
+      "explica"
+    ],
+    "genre_families": [
+      "house",
+      "disco",
+      "techno",
+      "dubstep",
+      "bass",
+      "drum_and_bass",
+      "breakbeat",
+      "jungle",
+      "garage",
+      "trance",
+      "psytrance",
+      "progressive",
+      "electro",
+      "future_bass",
+      "big_room",
+      "hard_dance",
+      "hardcore",
+      "melodic_techno"
+    ]
+  }
 }

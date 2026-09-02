@@ -156,7 +156,7 @@
       "id": "26-w4dj-file-contract",
       "prompt": "报告完成后导出到w4dj。",
       "expected_output": "有文件写入能力时创建 UTF-8 `.w4dj`，根字段和曲目字段严格符合当前合同。",
-      "expectations": ["根字段只有 format、format_version、export_id、playlist、tracks", "format_version 固定为整数 2 且不询问用户", "playlist 只有 name", "tracks 只有 position、title、artist_display 和可选字符串 netease_track_id", "不写本地音频、路径或内部元数据"]
+      "expectations": ["根字段只有 format、format_version、export_id、playlist、tracks", "format_version 固定为整数 2 且不询问用户", "playlist 只有 name", "每个 tracks 对象必须有 position、title、artist_display、netease_track_id，且 netease_track_id 严格为 JSON null", "不搜索、推断或输出网易云歌曲 ID", "不写本地音频、路径或内部元数据"]
     },
     {
       "id": "27-w4dj-no-file-capability",

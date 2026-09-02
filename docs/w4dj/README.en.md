@@ -34,7 +34,7 @@ In the “DJ 歌单” (DJ Playlist) window that appears, click “导入 .w4dj�
 
 ![Select the `.w4dj` file](./images/02-import-button.png)
 
-After the import succeeds, W4DJ RKB reads the playlist name, track order, and track information.
+After the import succeeds, W4DJ RKB reads the playlist name, track order, and track information. The `.w4dj` file contains no NetEase song IDs; it provides complete titles, all known artists, version qualifiers, and playlist order for the later text-matching workflow.
 
 ## Step 3: Import the Playlist into NetEase Cloud Music
 
@@ -49,6 +49,8 @@ After importing `.w4dj`, follow the instructions in W4DJ RKB:
 3. Copy the text playlist generated on the page.
 
 The text playlist generally contains track titles and artist names for automatic matching in NetEase Cloud Music.
+
+> W4DJ RKB hands off titles, all known artists, and version information as text. The DJ Skill does not search for or guess NetEase song IDs; the user-selected NetEase records and actual output files are registered by the downstream workflow.
 
 ### 2. Open “我的” (My Music) in NetEase Cloud Music
 
@@ -108,7 +110,7 @@ After the tracks finish downloading, return to W4DJ RKB:
 4. Start scanning and conversion;
 5. Wait for the task to finish and confirm that every track in the playlist was found.
 
-If some tracks were not found, first check whether NetEase Cloud Music has finished downloading them and whether the downloaded versions match the complete official titles in the playlist.
+If some tracks were not found, first check whether NetEase Cloud Music has finished downloading them and whether the downloaded versions match the complete official titles in the playlist. At this stage W4DJ RKB uses complete titles, all known artists, version information, and operation context to bind playlist positions to actual output files; the DJ Skill does not participate in that process or hide a wrong match by guessing a song ID.
 
 ## Step 5: Export the Playlist
 

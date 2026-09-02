@@ -25,13 +25,15 @@ The action is independent from W4DJ. If a track has no valid allowed-platform di
       "position": 1,
       "title": "Complete Official Title (Extended Mix)",
       "artist_display": "Official Artist",
-      "netease_track_id": "123456"
+      "netease_track_id": null
     }
   ]
 }
 ```
 
-`tracks[]` contains only `position`, complete official `title`, `artist_display`, and the optional string `netease_track_id`. The ID is omitted when no reliable identity is available; never write a placeholder or numeric JSON value. Remix, Edit, Live, Dub, Instrumental, Radio Edit, Extended Mix, and other official qualifiers stay embedded in `title`; there is no separate title-variant field.
+`tracks[]` contains exactly `position`, complete official `title`, `artist_display`, and required `netease_track_id`. The last field is always JSON `null`: it is a v2 compatibility field, not a song identity. Never write an empty string, the string `"null"`, a number, a candidate ID, a search-result ID, or any other identity value. Remix, Edit, Live, Dub, Instrumental, Radio Edit, Extended Mix, and other official qualifiers stay embedded in `title`; there is no separate title-variant field.
+
+At the serialization boundary, project each selected track only from its final position, complete title, and complete artist display. Discard any internal NetEase ID, third-party platform ID or URL, local path, filename, hash, download state, or other source metadata, then write `netease_track_id: null`. Do not search, infer, map, complete, or validate a NetEase song ID for this export. A missing candidate ID is expected and must not create a warning, downgrade the playlist, block export, or trigger a request for user input. Preserve every selected position, including repeated appearances, and keep all known artists in `artist_display`.
 
 W4DJ carries recommendation handoff data only. It does not contain BPM, key, album, playback URLs, platform state, source records, recording keys, local audio, local paths, filenames, downloads, or import instructions. 不生成占位文件，不处理本地音频；downstream W4DJ tools own those steps.
 

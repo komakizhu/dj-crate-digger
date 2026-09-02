@@ -10,11 +10,11 @@
         "tracks": [
           {
             "position": 1,
-            "title": "LIKE ME",
-            "artist_display": "Nikita, the Wicked",
-            "netease_track_id": "123456789012345678"
+            "title": "Where You Are (Extended Mix)",
+            "artist_display": "John Summit, HAYLA",
+            "netease_track_id": null
           },
-          {"position": 2, "title": "Qawwali (Extended Mix)", "artist_display": "Pinch"}
+          {"position": 2, "title": "Qawwali (Extended Mix)", "artist_display": "Pinch", "netease_track_id": null}
         ]
       }
     },
@@ -25,19 +25,19 @@
         "format_version": 2,
         "export_id": "fast-001",
         "playlist": {"name": "Fast Test"},
-        "tracks": [{"position": 1, "title": "Unknown Title (Remix)", "artist_display": "Unknown Artist"}]
+        "tracks": [{"position": 1, "title": "Unknown Title (Remix)", "artist_display": "Unknown Artist", "netease_track_id": null}]
       }
     },
     {
-      "id": "repeated-identity-is-allowed-by-wire",
+      "id": "repeated-track-positions-are-preserved",
       "document": {
         "format": "w4dj",
         "format_version": 2,
         "export_id": "repeat-001",
         "playlist": {"name": "Repeated Drop Test"},
         "tracks": [
-          {"position": 1, "title": "First Appearance", "artist_display": "Artist", "netease_track_id": "987654321012345678"},
-          {"position": 2, "title": "Second Appearance", "artist_display": "Artist", "netease_track_id": "987654321012345678"}
+          {"position": 1, "title": "Where You Are (Extended Mix)", "artist_display": "John Summit, HAYLA", "netease_track_id": null},
+          {"position": 2, "title": "Where You Are (Extended Mix)", "artist_display": "John Summit, HAYLA", "netease_track_id": null}
         ]
       }
     }
@@ -74,6 +74,13 @@
       }
     },
     {
+      "id": "missing-netease-id-not-allowed",
+      "document": {
+        "format": "w4dj", "format_version": 2, "export_id": "invalid-003b", "playlist": {"name": "Invalid"},
+        "tracks": [{"position": 1, "title": "Track (Extended Mix)", "artist_display": "Artist"}]
+      }
+    },
+    {
       "id": "numeric-netease-id-not-allowed",
       "document": {
         "format": "w4dj", "format_version": 2, "export_id": "invalid-004", "playlist": {"name": "Invalid"},
@@ -81,17 +88,38 @@
       }
     },
     {
-      "id": "null-netease-id-not-allowed",
+      "id": "string-netease-id-not-allowed",
       "document": {
         "format": "w4dj", "format_version": 2, "export_id": "invalid-004b", "playlist": {"name": "Invalid"},
-        "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "netease_track_id": null}]
+        "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "netease_track_id": "123456789012345678"}]
+      }
+    },
+    {
+      "id": "literal-null-string-netease-id-not-allowed",
+      "document": {
+        "format": "w4dj", "format_version": 2, "export_id": "invalid-004c", "playlist": {"name": "Invalid"},
+        "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "netease_track_id": "null"}]
       }
     },
     {
       "id": "placeholder-netease-id-not-allowed",
       "document": {
-        "format": "w4dj", "format_version": 2, "export_id": "invalid-004c", "playlist": {"name": "Invalid"},
+        "format": "w4dj", "format_version": 2, "export_id": "invalid-004d", "playlist": {"name": "Invalid"},
         "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "netease_track_id": "unknown"}]
+      }
+    },
+    {
+      "id": "empty-string-netease-id-not-allowed",
+      "document": {
+        "format": "w4dj", "format_version": 2, "export_id": "invalid-004e", "playlist": {"name": "Invalid"},
+        "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "netease_track_id": ""}]
+      }
+    },
+    {
+      "id": "zero-netease-id-not-allowed",
+      "document": {
+        "format": "w4dj", "format_version": 2, "export_id": "invalid-004f", "playlist": {"name": "Invalid"},
+        "tracks": [{"position": 1, "title": "Track", "artist_display": "Artist", "netease_track_id": 0}]
       }
     },
     {
@@ -117,8 +145,61 @@
     }
   ],
   "compatibility_cases": [
-    {"document_id": "composite-complete", "expected_positions": [1, 2], "expected_titles": ["LIKE ME", "Qawwali (Extended Mix)"], "expected_netease_ids": ["123456789012345678", null]},
+    {"document_id": "composite-complete", "expected_positions": [1, 2], "expected_titles": ["Where You Are (Extended Mix)", "Qawwali (Extended Mix)"], "expected_netease_ids": [null, null]},
     {"document_id": "fast-unknown-metadata", "expected_positions": [1], "expected_netease_ids": [null]},
-    {"document_id": "repeated-identity-is-allowed-by-wire", "expected_positions": [1, 2], "expected_netease_ids": ["987654321012345678", "987654321012345678"]}
+    {"document_id": "repeated-track-positions-are-preserved", "expected_positions": [1, 2], "expected_titles": ["Where You Are (Extended Mix)", "Where You Are (Extended Mix)"], "expected_netease_ids": [null, null]}
+  ],
+  "serialization_cases": [
+    {
+      "id": "candidate-identifiers-are-discarded-at-export",
+      "export_id": "serialization-001",
+      "playlist_name": "Serialization Boundary Test",
+      "candidate_tracks": [
+        {
+          "position": 1,
+          "title": "Where You Are (Extended Mix)",
+          "artist_display": "John Summit, HAYLA",
+          "netease_track_id": "123456789012345678",
+          "netease_url": "https://music.163.com/#/song?id=123456789012345678",
+          "local_audio_path": "/Users/example/Music/where-you-are.flac",
+          "filename": "where-you-are.flac",
+          "sha256": "deadbeef"
+        },
+        {
+          "position": 2,
+          "title": "Where You Are (Extended Mix)",
+          "artist_display": "John Summit, HAYLA"
+        }
+      ],
+      "expected_warnings": [],
+      "expected_document": {
+        "format": "w4dj",
+        "format_version": 2,
+        "export_id": "serialization-001",
+        "playlist": {"name": "Serialization Boundary Test"},
+        "tracks": [
+          {"position": 1, "title": "Where You Are (Extended Mix)", "artist_display": "John Summit, HAYLA", "netease_track_id": null},
+          {"position": 2, "title": "Where You Are (Extended Mix)", "artist_display": "John Summit, HAYLA", "netease_track_id": null}
+        ]
+      }
+    },
+    {
+      "id": "missing-candidate-id-does-not-warn-or-block-export",
+      "export_id": "serialization-002",
+      "playlist_name": "Missing Identity Test",
+      "candidate_tracks": [
+        {"position": 1, "title": "Qawwali (Extended Mix)", "artist_display": "Pinch"}
+      ],
+      "expected_warnings": [],
+      "expected_document": {
+        "format": "w4dj",
+        "format_version": 2,
+        "export_id": "serialization-002",
+        "playlist": {"name": "Missing Identity Test"},
+        "tracks": [
+          {"position": 1, "title": "Qawwali (Extended Mix)", "artist_display": "Pinch", "netease_track_id": null}
+        ]
+      }
+    }
   ]
 }

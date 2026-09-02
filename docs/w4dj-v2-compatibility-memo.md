@@ -16,8 +16,9 @@
 
 1. Skill 生成的 `.w4dj` 根对象固定写入 `"format_version": 2`。
 2. 用户只需说“导出到 w4dj”，不需要知道、选择或手动填写版本。
-3. 无版本、非 `2`、未知根字段和未知曲目字段均不自动迁移；这类文件应重新导出。
-4. 本次只改老炮 DJ Skill 的导出边界，不改 RKB 解析器、不复制 RKB 代码，也不接入 RKB 内部数据库。
+3. 每首曲目固定保留 `netease_track_id` 键，值严格为 JSON `null`；Skill 不向 W4DJ 提供网易云歌曲 ID。
+4. 无版本、非 `2`、未知根字段和未知曲目字段均不自动迁移；这类文件应重新导出。
+5. 本次只改老炮 DJ Skill 的导出边界，不改 RKB 解析器、不复制 RKB 代码，也不接入 RKB 内部数据库。
 
 ## 固定线上形状
 
@@ -32,17 +33,18 @@
       "position": 1,
       "title": "Complete Official Title (Extended Mix)",
       "artist_display": "Official Artist",
-      "netease_track_id": "123456"
+      "netease_track_id": null
     }
   ]
 }
 ```
 
-`playlist` 只能有 `name`。每首曲目只能有 `position`、`title`、`artist_display` 和可选的字符串 `netease_track_id`。不写 BPM、调性、本地路径、音频、下载任务或 RKB 内部字段。
+`playlist` 只能有 `name`。每首曲目必须有 `position`、`title`、`artist_display` 和 `netease_track_id`，且 `netease_track_id` 严格为 JSON `null`。Skill 不搜索、推断、补全、映射或验证网易云歌曲 ID；歌单级 `export_id` 仍保留，它只是交接文档 ID。完整标题中的 Remix、Edit、Live、Dub、Instrumental、Radio Edit 和 Extended Mix 等版本信息，以及完整歌手展示，必须保留。不写 BPM、调性、本地路径、文件名、哈希、音频、下载任务或 RKB 内部字段。
 
 ## 不在本次范围内
 
 - 不维护 RKB 的采集、转换、库存或 UI 逻辑。
+- 不在 `.w4dj` 中写入、猜测或回填歌曲级网易云身份；网易云的实际选择和本地输出绑定属于下游 W4DJ 流程。
 - 不为旧文件增加自动迁移、多版本回退或两套导出模式。
 - 不把这个机器字段暴露成用户的选项。
 

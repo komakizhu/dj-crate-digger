@@ -135,10 +135,15 @@ def shape_errors(schema: dict[str, Any], fixtures: dict[str, Any]) -> list[str]:
     expected_track = {"position", "title", "artist_display", "netease_track_id"}
     if set(track_schema.get("properties", {})) != expected_track:
         errors.append("W4DJ track fields are not minimal")
-    if set(track_schema.get("required", [])) != {"position", "title", "artist_display"}:
+    if set(track_schema.get("required", [])) != expected_track:
         errors.append("W4DJ track required fields are incorrect")
-    if track_schema.get("properties", {}).get("netease_track_id", {}).get("type") != "string":
-        errors.append("netease_track_id must be a JSON string")
+    track_id_schema = track_schema.get("properties", {}).get("netease_track_id", {})
+    if (
+        track_id_schema.get("type") != "null"
+        or "const" not in track_id_schema
+        or track_id_schema["const"] is not None
+    ):
+        errors.append("netease_track_id must be the JSON null type")
     for item in fixtures.get("valid_documents", []):
         document = item.get("document", {})
         if set(document) != expected_root:
@@ -148,10 +153,10 @@ def shape_errors(schema: dict[str, Any], fixtures: dict[str, Any]) -> list[str]:
         if set(document.get("playlist", {})) != {"name"}:
             errors.append(f"{item['id']}: valid playlist is not minimal")
         for index, track in enumerate(document.get("tracks", [])):
-            if set(track) - expected_track:
-                errors.append(f"{item['id']}.tracks[{index}]: contains a legacy or unknown field")
-            if "netease_track_id" in track and not isinstance(track["netease_track_id"], str):
-                errors.append(f"{item['id']}.tracks[{index}]: netease_track_id is not a string")
+            if set(track) != expected_track:
+                errors.append(f"{item['id']}.tracks[{index}]: track fields are not the exact v2 shape")
+            if track.get("netease_track_id") is not None:
+                errors.append(f"{item['id']}.tracks[{index}]: netease_track_id must be JSON null")
     return errors
 
 
@@ -183,13 +188,72 @@ def compatibility_errors(fixtures: dict[str, Any]) -> list[str]:
     return errors
 
 
+def serialize_w4dj(
+    export_id: str,
+    playlist_name: str,
+    candidate_tracks: list[dict[str, Any]],
+) -> tuple[dict[str, Any], list[str]]:
+    """Model the export boundary: identity and local metadata never cross it."""
+    document = {
+        "format": "w4dj",
+        FORMAT_VERSION_KEY: 2,
+        "export_id": export_id,
+        "playlist": {"name": playlist_name},
+        "tracks": [
+            {
+                "position": track["position"],
+                "title": track["title"],
+                "artist_display": track["artist_display"],
+                "netease_track_id": None,
+            }
+            for track in candidate_tracks
+        ],
+    }
+    return document, []
+
+
+def serialization_errors(schema: dict[str, Any], fixtures: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    for case in fixtures.get("serialization_cases", []):
+        case_id = case.get("id", "<missing-id>")
+        try:
+            actual, warnings = serialize_w4dj(
+                case["export_id"],
+                case["playlist_name"],
+                case["candidate_tracks"],
+            )
+        except (KeyError, TypeError) as exc:
+            errors.append(f"{case_id}: serialization failed: {exc}")
+            continue
+        if actual != case.get("expected_document"):
+            errors.append(f"{case_id}: serialization output does not match expected v2 document")
+        if warnings != case.get("expected_warnings", []):
+            errors.append(f"{case_id}: unexpected export warnings: {warnings!r}")
+        errors.extend(validate(actual, schema, f"serialization.{case_id}", schema))
+        errors.extend(semantic_contract_errors(actual, f"serialization.{case_id}"))
+        for index, track in enumerate(actual.get("tracks", [])):
+            if track.get("netease_track_id") is not None:
+                errors.append(f"{case_id}.tracks[{index}]: export identity must be JSON null")
+            forbidden = set(track) - {"position", "title", "artist_display", "netease_track_id"}
+            if forbidden:
+                errors.append(
+                    f"{case_id}.tracks[{index}]: exported internal fields are forbidden: {sorted(forbidden)}"
+                )
+    return errors
+
+
 def source_contract_errors() -> list[str]:
     source_paths = (
         ROOT / "SKILL.md",
         ROOT / "README.md",
+        ROOT / "README.en.md",
         ROOT / "references" / "export.md",
         ROOT / "references" / "report-template.md",
         ROOT / "references" / "search-verification.md",
+        ROOT / "docs" / "w4dj-v2-compatibility-memo.md",
+        ROOT / "docs" / "workspace-boundary.md",
+        ROOT / "docs" / "w4dj" / "README.md",
+        ROOT / "docs" / "w4dj" / "README.en.md",
     )
     source = "\n".join(path.read_text(encoding="utf-8") for path in source_paths)
     required = (
@@ -204,6 +268,9 @@ def source_contract_errors() -> list[str]:
         "format_version",
         "integer `2`",
         "netease_track_id",
+        '"netease_track_id": null',
+        "handoff document",
+        "Do not search, infer, complete, or validate NetEase Cloud Music song IDs",
         "不生成占位文件",
         "不处理本地音频",
     )
@@ -218,6 +285,10 @@ def source_contract_errors() -> list[str]:
         "w4dj " + "v2",
         "." + "w4djcrate",
         "local_" + "export",
+        "optional string",
+        "The ID is omitted when no reliable identity is available",
+        "可选字符串",
+        "可选的字符串",
     )
     for token in retired:
         if token in source:
@@ -243,6 +314,7 @@ def main() -> int:
                 errors.append(f"invalid fixture unexpectedly passed: {item['id']}")
         errors.extend(shape_errors(schema, fixtures))
         errors.extend(compatibility_errors(fixtures))
+        errors.extend(serialization_errors(schema, fixtures))
         errors.extend(source_contract_errors())
     except (OSError, json.JSONDecodeError, KeyError, TypeError) as exc:
         errors.append(str(exc))

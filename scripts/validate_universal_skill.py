@@ -124,8 +124,19 @@ def main() -> int:
         version_schema = schema.get("properties", {}).get("format_version", {})
         if version_schema.get("type") != "integer" or version_schema.get("const") != required_version:
             errors.append("W4DJ schema does not enforce the fixed compatibility format version")
-        if set(schema.get("$defs", {}).get("track", {}).get("properties", {})) != expected_track:
+        track_schema = schema.get("$defs", {}).get("track", {})
+        required_track_id_value = fixtures.get("required_w4dj_track_id_value")
+        if set(track_schema.get("properties", {})) != expected_track:
             errors.append("W4DJ schema track fields do not match universal fixture contract")
+        if set(track_schema.get("required", [])) != expected_track:
+            errors.append("W4DJ schema does not require every v2 track field")
+        track_id_schema = track_schema.get("properties", {}).get("netease_track_id", {})
+        if (
+            track_id_schema.get("type") != "null"
+            or "const" not in track_id_schema
+            or track_id_schema["const"] != required_track_id_value
+        ):
+            errors.append("W4DJ schema does not force netease_track_id to JSON null")
     except (OSError, json.JSONDecodeError, TypeError):
         errors.append("W4DJ schema cannot be loaded for universal contract checks")
 

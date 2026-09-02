@@ -69,9 +69,9 @@
 报告完成后的“下一步”才会显示两个导出动作：
 
 - `输出文字版歌单`：只在聊天中返回按当前最终顺序排列的可复制文本，不创建文本文件，也不声称一键写入 DJ 软件。
-- `导出到w4dj`：在当前 Agent 确实有文件写入能力且用户明确触发后，创建 UTF-8 `.w4dj` 文件。它只交接歌单名、顺序、完整官方歌名、艺人和可选字符串 `netease_track_id`；不包含本地音频、路径、下载任务或内部元数据。
+- `导出到w4dj`：在当前 Agent 确实有文件写入能力且用户明确触发后，创建 UTF-8 `.w4dj` 文件。它只交接歌单名、顺序、完整官方歌名和艺人；每首曲目保留 v2 必需的 `netease_track_id: null` 兼容字段，不提供任何网易云歌曲 ID，也不包含本地音频、路径、下载任务或内部元数据。
 
-`.w4dj` 使用当前唯一合同：根字段为 `format`、`format_version`、`export_id`、`playlist`、`tracks`，其中 `format_version` 固定写为整数 `2`，只用于兼容 W4DJ，不是用户需要选择的版本；`playlist` 只有 `name`；每首曲目只有 `position`、`title`、`artist_display` 和可选的 `netease_track_id`。完整操作请查看[《一键导入 Set 教程》](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)。本 Skill 不下载音乐、不生成本地音频，不负责后续本地导入动作。
+`.w4dj` 使用当前唯一合同：根字段为 `format`、`format_version`、`export_id`、`playlist`、`tracks`，其中 `format_version` 固定写为整数 `2`，只用于兼容 W4DJ，不是用户需要选择的版本；`playlist` 只有 `name`；每首曲目必须有 `position`、`title`、`artist_display` 和 `netease_track_id`，且最后一项严格为 JSON `null`。技能不搜索、推断、补全或验证网易云歌曲 ID；歌单级 `export_id` 仍正常生成，但它只是交接文档 ID。完整操作请查看[《一键导入 Set 教程》](https://github.com/komakizhu/dj-crate-digger/blob/main/docs/w4dj/README.md)。本 Skill 不下载音乐、不生成本地音频，不负责后续本地导入动作。
 
 仓库测试、fixture 演示或手工验证生成的 `.w4dj` 统一放入 `test-artifacts/w4dj/`；该目录自动忽略，不参与提交或发布。用户明确要求交付的文件仍按指定路径输出。
 

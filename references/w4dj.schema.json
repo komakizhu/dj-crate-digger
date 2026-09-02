@@ -51,7 +51,8 @@
       "required": [
         "position",
         "title",
-        "artist_display"
+        "artist_display",
+        "netease_track_id"
       ],
       "properties": {
         "position": {
@@ -68,17 +69,9 @@
           "minLength": 1
         },
         "netease_track_id": {
-          "type": "string",
-          "minLength": 1,
-          "not": {
-            "enum": [
-              "unknown",
-              "null",
-              "none",
-              "undefined"
-            ]
-          },
-          "description": "Optional NetEase Cloud Music identity; it remains a JSON string."
+          "type": "null",
+          "const": null,
+          "description": "Required v2 compatibility field; the DJ Skill never supplies a NetEase Cloud Music song identity."
         }
       }
     }

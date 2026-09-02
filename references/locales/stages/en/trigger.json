@@ -11,16 +11,22 @@
     "build a DJ set",
     "sequence a DJ set",
     "dig for tracks",
-    "curate a set"
+    "curate a set",
+    "build",
+    "prepare",
+    "curate",
+    "sequence",
+    "plan",
+    "arrange",
+    "put together",
+    "create"
   ],
   "ambiguous": [
     "playlist",
     "find tracks",
     "dig",
     "digging",
-    "DJ",
-    "crate digging",
-    "sequence a set"
+    "DJ"
   ],
   "non_trigger": [
     "song identification",
@@ -35,5 +41,147 @@
     "crate digging",
     "find tracks",
     "sequence a set"
-  ]
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "semantic_signals": {
+    "mode": {
+      "fast": [
+        "fast",
+        "fast mode",
+        "quick mode"
+      ],
+      "composite": [
+        "brief",
+        "brief mode",
+        "composite",
+        "composite mode"
+      ],
+      "four_views": [
+        "rich",
+        "rich mode",
+        "full mode",
+        "four views",
+        "four-view"
+      ]
+    },
+    "dj_action": [
+      "build",
+      "prepare",
+      "curate",
+      "sequence",
+      "plan",
+      "arrange",
+      "put together",
+      "create",
+      "find",
+      "dig for tracks",
+      "dig",
+      "digging"
+    ],
+    "dj_object": [
+      "dj set",
+      "set",
+      "playlist",
+      "tracklist",
+      "track list",
+      "setlist",
+      "crate",
+      "mix"
+    ],
+    "dj_context": [
+      "dj",
+      "club",
+      "venue",
+      "dancefloor",
+      "dance floor",
+      "warm-up",
+      "warmup",
+      "peak-time",
+      "peak time",
+      "closing",
+      "opening",
+      "afterparty",
+      "performance",
+      "festival"
+    ],
+    "reference": [
+      "in the style of",
+      "inspired by",
+      "similar to",
+      "like",
+      "reference track",
+      "reference artist"
+    ],
+    "set_detail": [
+      "tracks",
+      "songs",
+      "minutes",
+      "minute",
+      "bpm",
+      "mood",
+      "energy",
+      "set duration"
+    ],
+    "genre_context": [
+      "edm",
+      "electronic",
+      "electronic music",
+      "dance music"
+    ],
+    "generic_music_term": [
+      "playlist",
+      "dj",
+      "find tracks",
+      "dig",
+      "digging",
+      "set"
+    ],
+    "negative_context": [
+      "what song is this",
+      "which song is this",
+      "identify this song",
+      "api",
+      "programming",
+      "coding",
+      "download music",
+      "download songs",
+      "mp3",
+      "skill development",
+      "what is the difference",
+      "define",
+      "history of"
+    ],
+    "explanatory_context": [
+      "what is",
+      "what does",
+      "what is the difference",
+      "define",
+      "definition",
+      "history of",
+      "explain"
+    ],
+    "genre_families": [
+      "house",
+      "disco",
+      "techno",
+      "dubstep",
+      "bass",
+      "drum_and_bass",
+      "breakbeat",
+      "jungle",
+      "garage",
+      "trance",
+      "psytrance",
+      "progressive",
+      "electro",
+      "future_bass",
+      "big_room",
+      "hard_dance",
+      "hardcore",
+      "melodic_techno"
+    ]
+  }
 }

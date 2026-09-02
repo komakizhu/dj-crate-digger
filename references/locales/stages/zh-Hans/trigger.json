@@ -10,17 +10,31 @@
     "挖歌",
     "排个 set",
     "排个 DJ set",
-    "排一套 set"
+    "排一个set",
+    "排一个 set",
+    "排一个 DJ set",
+    "排一套set",
+    "排一套 set",
+    "排歌",
+    "排歌单",
+    "编歌单",
+    "整理歌单",
+    "排set",
+    "排一套歌",
+    "做个歌单",
+    "做一个歌单",
+    "做一个播放列表",
+    "找一套歌",
+    "找一套set",
+    "编排歌路",
+    "整理歌路"
   ],
   "ambiguous": [
     "找歌",
     "歌单",
-    "排歌",
     "做个 playlist",
     "DJ",
-    "找歌单",
-    "排set",
-    "排一套set"
+    "找歌单"
   ],
   "non_trigger": [
     "song identification",
@@ -32,8 +46,162 @@
   "trigger_capsule": [
     "挖歌",
     "排set",
+    "排一个set",
+    "排一个 set",
     "排一套set",
     "找歌单",
     "排歌"
-  ]
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "semantic_signals": {
+    "mode": {
+      "fast": [
+        "极速版",
+        "快速版",
+        "fast"
+      ],
+      "composite": [
+        "综合版",
+        "简要版",
+        "brief",
+        "composite"
+      ],
+      "four_views": [
+        "完整版",
+        "丰富版",
+        "rich",
+        "full mode"
+      ]
+    },
+    "dj_action": [
+      "挖歌",
+      "排歌",
+      "排歌单",
+      "编歌单",
+      "整理歌单",
+      "排set",
+      "排个 set",
+      "排个 DJ set",
+      "排一个set",
+      "排一个 set",
+      "排一个 DJ set",
+      "排一套歌",
+      "排一套set",
+      "排一套 set",
+      "做个歌单",
+      "做一个歌单",
+      "做一个播放列表",
+      "找一套歌",
+      "找一套set",
+      "编排歌路",
+      "整理歌路"
+    ],
+    "dj_object": [
+      "dj set",
+      "set",
+      "歌单",
+      "播放列表",
+      "playlist",
+      "tracklist",
+      "setlist",
+      "歌路",
+      "曲目列表"
+    ],
+    "dj_context": [
+      "DJ",
+      "打碟",
+      "俱乐部",
+      "club",
+      "舞池",
+      "暖场",
+      "开场",
+      "峰值",
+      "peak",
+      "closing",
+      "收尾",
+      "演出",
+      "现场",
+      "afterparty",
+      "音乐节"
+    ],
+    "reference": [
+      "风格",
+      "像",
+      "类似",
+      "参考曲",
+      "参考艺人",
+      "仿照"
+    ],
+    "set_detail": [
+      "首歌",
+      "首",
+      "分钟",
+      "BPM",
+      "情绪",
+      "能量",
+      "时长"
+    ],
+    "genre_context": [
+      "edm",
+      "electronic",
+      "electronic music",
+      "dance music"
+    ],
+    "generic_music_term": [
+      "歌单",
+      "播放列表",
+      "playlist",
+      "DJ",
+      "找歌",
+      "排歌",
+      "排set",
+      "set"
+    ],
+    "negative_context": [
+      "这是什么歌",
+      "哪首歌",
+      "歌曲识别",
+      "下载歌曲",
+      "批量下载",
+      "API",
+      "编程",
+      "开发 Skill",
+      "开发skill",
+      "普通听歌列表",
+      "什么区别",
+      "历史",
+      "定义"
+    ],
+    "explanatory_context": [
+      "是什么意思",
+      "什么区别",
+      "怎么定义",
+      "介绍",
+      "历史",
+      "解释"
+    ],
+    "genre_families": [
+      "house",
+      "disco",
+      "techno",
+      "dubstep",
+      "bass",
+      "drum_and_bass",
+      "breakbeat",
+      "jungle",
+      "garage",
+      "trance",
+      "psytrance",
+      "progressive",
+      "electro",
+      "future_bass",
+      "big_room",
+      "hard_dance",
+      "hardcore",
+      "melodic_techno"
+    ]
+  }
 }

@@ -1,3 +1,8 @@
 # Local-only W4DJ test/demo outputs; never stage or publish generated files.
 /test-artifacts/w4dj/**
 !/test-artifacts/w4dj/README.md
+/test-artifacts/skill-package/**
+/test-artifacts/installed-backups/**
+/test-artifacts/trigger-acceptance/**
+__pycache__/
+*.pyc

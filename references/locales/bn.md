@@ -329,7 +329,34 @@ This file is the fixed বাংলা UI and intent contract for dj-crate-digge
     "প্লেলিস্ট",
     "গান খোঁজা",
     "ট্র্যাক খোঁজা",
-    "সেট সাজানো"
+    "সেট সাজানো",
+    "দ্রুত মোড",
+    "সংক্ষিপ্ত মোড",
+    "সম্পূর্ণ মোড",
+    "DJ সেট তৈরি করা",
+    "DJ সেট",
+    "DJ",
+    "house",
+    "techno",
+    "drum & bass",
+    "jungle"
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "trigger_signal_families": [
+    "mode",
+    "dj_action",
+    "dj_object",
+    "dj_context",
+    "reference",
+    "set_detail",
+    "genre_context",
+    "generic_music_term",
+    "negative_context",
+    "explanatory_context",
+    "genre_families"
   ]
 }
 ```

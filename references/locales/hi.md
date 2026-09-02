@@ -329,7 +329,33 @@ This file is the fixed हिन्दी UI and intent contract for dj-crate-di
     "प्लेलिस्ट",
     "संगीत खोजना",
     "ट्रैक ढूँढना",
-    "सेट बनाना"
+    "सेट बनाना",
+    "तेज़ मोड",
+    "संयुक्त मोड",
+    "पूर्ण मोड",
+    "DJ सेट बनाना",
+    "DJ",
+    "house",
+    "techno",
+    "drum & bass",
+    "jungle"
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "trigger_signal_families": [
+    "mode",
+    "dj_action",
+    "dj_object",
+    "dj_context",
+    "reference",
+    "set_detail",
+    "genre_context",
+    "generic_music_term",
+    "negative_context",
+    "explanatory_context",
+    "genre_families"
   ]
 }
 ```

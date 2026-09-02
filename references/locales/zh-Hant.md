@@ -332,7 +332,33 @@ This file is the fixed 繁體中文 UI and intent contract for dj-crate-digger. 
     "排set",
     "排一套set",
     "找歌單",
-    "排歌"
+    "排歌",
+    "極速版",
+    "綜合版",
+    "完整版本",
+    "dj set",
+    "DJ",
+    "house",
+    "techno",
+    "drum & bass",
+    "jungle"
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "trigger_signal_families": [
+    "mode",
+    "dj_action",
+    "dj_object",
+    "dj_context",
+    "reference",
+    "set_detail",
+    "genre_context",
+    "generic_music_term",
+    "negative_context",
+    "explanatory_context",
+    "genre_families"
   ]
 }
 ```

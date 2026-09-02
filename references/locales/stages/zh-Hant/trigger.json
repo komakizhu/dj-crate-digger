@@ -10,17 +10,27 @@
     "挖歌",
     "排個 set",
     "排個 DJ set",
-    "排一套 set"
+    "排一套 set",
+    "排歌",
+    "排歌單",
+    "編歌單",
+    "整理歌單",
+    "排set",
+    "排一套歌",
+    "做個歌單",
+    "做一個播放列表",
+    "找一套歌",
+    "找一套set",
+    "編排歌路",
+    "整理歌路",
+    "排一套set"
   ],
   "ambiguous": [
     "找歌",
     "歌單",
-    "排歌",
     "做個 playlist",
     "DJ",
-    "找歌單",
-    "排set",
-    "排一套set"
+    "找歌單"
   ],
   "non_trigger": [
     "song identification",
@@ -35,5 +45,152 @@
     "排一套set",
     "找歌單",
     "排歌"
-  ]
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "semantic_signals": {
+    "mode": {
+      "fast": [
+        "極速版",
+        "快速版",
+        "fast"
+      ],
+      "composite": [
+        "綜合版",
+        "簡要版",
+        "brief",
+        "composite"
+      ],
+      "four_views": [
+        "完整版本",
+        "豐富版",
+        "rich",
+        "full mode"
+      ]
+    },
+    "dj_action": [
+      "挖歌",
+      "排歌",
+      "排歌單",
+      "編歌單",
+      "整理歌單",
+      "排set",
+      "排個 set",
+      "排個 DJ set",
+      "排一套歌",
+      "排一套set",
+      "排一套 set",
+      "做個歌單",
+      "做一個播放列表",
+      "找一套歌",
+      "找一套set",
+      "編排歌路",
+      "整理歌路"
+    ],
+    "dj_object": [
+      "dj set",
+      "set",
+      "歌單",
+      "播放列表",
+      "playlist",
+      "tracklist",
+      "setlist",
+      "歌路",
+      "曲目列表"
+    ],
+    "dj_context": [
+      "DJ",
+      "打碟",
+      "俱樂部",
+      "club",
+      "舞池",
+      "暖場",
+      "開場",
+      "峰值",
+      "peak",
+      "closing",
+      "收尾",
+      "演出",
+      "現場",
+      "afterparty",
+      "音樂節"
+    ],
+    "reference": [
+      "風格",
+      "像",
+      "類似",
+      "參考曲",
+      "參考藝人",
+      "仿照"
+    ],
+    "set_detail": [
+      "首歌",
+      "首",
+      "分鐘",
+      "BPM",
+      "情緒",
+      "能量",
+      "時長"
+    ],
+    "genre_context": [
+      "edm",
+      "electronic",
+      "electronic music",
+      "dance music"
+    ],
+    "generic_music_term": [
+      "歌單",
+      "播放列表",
+      "playlist",
+      "DJ",
+      "找歌",
+      "排歌",
+      "排set",
+      "set"
+    ],
+    "negative_context": [
+      "這是什麼歌",
+      "哪首歌",
+      "歌曲識別",
+      "下載歌曲",
+      "批量下載",
+      "API",
+      "編程",
+      "開發 Skill",
+      "普通聽歌列表",
+      "什麼區別",
+      "歷史",
+      "定義"
+    ],
+    "explanatory_context": [
+      "是什麼意思",
+      "什麼區別",
+      "怎麼定義",
+      "介紹",
+      "歷史",
+      "解釋"
+    ],
+    "genre_families": [
+      "house",
+      "disco",
+      "techno",
+      "dubstep",
+      "bass",
+      "drum_and_bass",
+      "breakbeat",
+      "jungle",
+      "garage",
+      "trance",
+      "psytrance",
+      "progressive",
+      "electro",
+      "future_bass",
+      "big_room",
+      "hard_dance",
+      "hardcore",
+      "melodic_techno"
+    ]
+  }
 }

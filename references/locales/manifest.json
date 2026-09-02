@@ -22,6 +22,7 @@
   "progressive_resources": {
     "language_routing": "references/language-routing.json",
     "preflight": "references/capabilities.md",
+    "trigger_signals": "references/trigger-signals.json",
     "trigger": "references/trigger-routing.md",
     "intake": "references/intake-routing.md",
     "search": "references/search-verification.md",

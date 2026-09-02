@@ -1,6 +1,6 @@
 ---
 name: dj-crate-digger
-description: "Use when a user asks in any supported language to discover, curate, rank, sequence, or hand off music for a DJ set with clear DJ context; trigger capsule: en set/playlist/crate digging, zh 挖歌/排set/歌单, zh-Hant 挖歌/排set/歌單, es buscar música/set, pt garimpar música/set, fr chercher des morceaux/set, de Musik suchen/DJ-Set, ja 曲探し/DJセット, ko 곡 찾기/DJ 세트, ar البحث عن موسيقى, ru искать музыку/DJ-сет, tr müzik keşfi, hi संगीत खोजना, id mencari musik, vi tìm nhạc, th ค้นหาเพลง, it cercare musica, nl muziek zoeken, pl szukać muzyki, uk шукати музику, fa جست‌وجوی موسیقی, bn গান খোঁজা, ur موسیقی تلاش, ms cari muzik, fil maghanap ng musika, sw tafuta muziki; use only with DJ planning context."
+description: "Use when a user in any supported language asks to discover, curate, rank, sequence, or hand off music for a DJ set, playlist, tracklist, crate, or electronic-music style such as House, Disco, Techno, Dubstep, Bass, DnB, Breakbeat, Jungle, Garage, Trance, Electro, or related families; include localized actions such as 排set/排个set/排一个set/挖歌 and output-mode requests such as 综合版/完整版/极速版/简要版/丰富版 or Fast/Brief/Rich when combined with a DJ, set, playlist, or electronic-style signal. Apply the semantic trigger contract and preserve hard negative boundaries."
 ---
 
 # 老炮DJ
@@ -11,7 +11,7 @@ description: "Use when a user asks in any supported language to discover, curate
 
 1. Read [language-routing.json](references/language-routing.json) and resolve `communication_language` before producing any visible text; for a slash-only invocation, query recent user-language signals and identity language memory first.
 2. Read [capabilities.md](references/capabilities.md) and perform the silent capability preflight before showing the first question.
-3. Read [trigger-routing.md](references/trigger-routing.md) and the selected locale's `trigger` resource to decide whether the request is a direct DJ trigger, an ambiguous music trigger, or unrelated.
+3. Read [trigger-signals.json](references/trigger-signals.json), [trigger-routing.md](references/trigger-routing.md), and the selected locale's `trigger` resource to decide whether the request is a direct DJ trigger, an ambiguous music trigger, or unrelated.
 4. Read [locales/manifest.json](references/locales/manifest.json) and load only that locale's `trigger`, `round_1`, `round_2`, `search_context`, `report_*`, `post_report`, or `capability_errors` resource required by the current stage. The selected `trigger` resource also supplies the one-time readiness-choice text when that route is needed.
 5. Apply the readiness route in [intake-routing.md](references/intake-routing.md). A sufficiently specified one-message request, or a clear instruction to decide the remaining details and proceed, sets `intake_status: direct_ready` and skips both questionnaires. A partially specified but meaningful brief gets one choice between direct execution and the two-round intake; only a vague brief goes straight to the fixed Markdown rounds.
 6. After `intake_status` becomes `direct_ready` or `ready`, read [search-verification.md](references/search-verification.md) and [ranking.md](references/ranking.md); then load only that locale's `search_context` and the selected mode resource under [modes](references/modes/), followed by its corresponding `report_*` resource.
@@ -37,7 +37,7 @@ Track internal state with the semantic fields `communication_language`, `locale_
 
 ## Fixed interaction
 
-The trigger aliases `/dj-crate-digger`, `/crate-digger`, `/迪歌`, and their natural-language equivalents are supported. A slash-only invocation first completes language resolution, then routes the trigger. A bare “playlist”, “DJ”, “找歌”, or “歌单” is ambiguous unless the surrounding message contains DJ planning context; ask the selected locale's one-line confirmation at most once, and do not trigger for song identification, programming objects, or Skill-development discussion.
+The trigger aliases `/dj-crate-digger`, `/crate-digger`, `/迪歌`, and their natural-language equivalents are supported. A slash-only invocation first completes language resolution, then routes the trigger. A bare “playlist”, “DJ”, “找歌”, or “歌单” is ambiguous unless the surrounding message contains DJ planning context; ask the selected locale's one-line confirmation at most once. A mode word plus a DJ, set, playlist, tracklist, or electronic-genre signal is a direct trigger, while a mode-only explanation or style definition is not. Do not trigger for song identification, programming objects, or Skill-development discussion.
 
 Set `output_mode: composite` as soon as a DJ request is activated. This is the default on every path; only an explicit `fast`, `composite`, or `four_views` request overrides it. Route an initial message in this order:
 

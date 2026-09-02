@@ -11,7 +11,10 @@
     "membuat DJ set",
     "mencari musik untuk DJ",
     "menyiapkan set",
-    "menyusun set"
+    "menyusun set",
+    "mencari track",
+    "merangkai set",
+    "memilih track"
   ],
   "ambiguous": [
     "playlist",
@@ -19,8 +22,7 @@
     "daftar putar",
     "cari musik",
     "DJ",
-    "mencari musik",
-    "mencari track"
+    "mencari musik"
   ],
   "non_trigger": [
     "song identification",
@@ -35,5 +37,125 @@
     "mencari musik",
     "mencari track",
     "menyusun set"
-  ]
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "semantic_signals": {
+    "mode": {
+      "fast": [
+        "mode cepat",
+        "cepat",
+        "fast"
+      ],
+      "composite": [
+        "mode ringkas",
+        "ringkas",
+        "brief",
+        "composite"
+      ],
+      "four_views": [
+        "mode lengkap",
+        "lengkap",
+        "rich",
+        "full mode"
+      ]
+    },
+    "dj_action": [
+      "membuat DJ set",
+      "menyiapkan set",
+      "menyusun set",
+      "mencari musik untuk DJ",
+      "mencari track",
+      "merangkai set",
+      "memilih track"
+    ],
+    "dj_object": [
+      "DJ set",
+      "set",
+      "playlist",
+      "daftar putar",
+      "daftar track",
+      "setlist",
+      "mix"
+    ],
+    "dj_context": [
+      "DJ",
+      "klub",
+      "lantai dansa",
+      "pemanasan",
+      "peak",
+      "penutupan",
+      "pembukaan",
+      "festival",
+      "afterparty"
+    ],
+    "reference": [
+      "bergaya",
+      "mirip dengan",
+      "track referensi",
+      "artis referensi"
+    ],
+    "set_detail": [
+      "track",
+      "lagu",
+      "menit",
+      "BPM",
+      "suasana",
+      "energi"
+    ],
+    "genre_context": [
+      "edm",
+      "electronic",
+      "electronic music",
+      "dance music"
+    ],
+    "generic_music_term": [
+      "playlist",
+      "DJ",
+      "cari track",
+      "set",
+      "daftar putar",
+      "cari musik",
+      "mencari musik"
+    ],
+    "negative_context": [
+      "lagu apa ini",
+      "identifikasi lagu",
+      "api",
+      "pemrograman",
+      "unduh musik",
+      "mp3",
+      "sejarah",
+      "definisi"
+    ],
+    "explanatory_context": [
+      "apa itu",
+      "perbedaan antara",
+      "definisi",
+      "sejarah",
+      "jelaskan"
+    ],
+    "genre_families": [
+      "house",
+      "disco",
+      "techno",
+      "dubstep",
+      "bass",
+      "drum_and_bass",
+      "breakbeat",
+      "jungle",
+      "garage",
+      "trance",
+      "psytrance",
+      "progressive",
+      "electro",
+      "future_bass",
+      "big_room",
+      "hard_dance",
+      "hardcore",
+      "melodic_techno"
+    ]
+  }
 }

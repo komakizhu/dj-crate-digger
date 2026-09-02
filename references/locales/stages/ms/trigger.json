@@ -11,11 +11,13 @@
     "membina set DJ",
     "mencari muzik untuk DJ",
     "menyediakan set",
-    "menyusun set"
+    "menyusun set",
+    "cari trek",
+    "membuat set",
+    "memilih trek"
   ],
   "ambiguous": [
     "playlist",
-    "cari trek",
     "senarai main",
     "cari muzik",
     "DJ",
@@ -34,5 +36,123 @@
     "cari muzik",
     "cari trek",
     "susun set"
-  ]
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "semantic_signals": {
+    "mode": {
+      "fast": [
+        "mod pantas",
+        "pantas",
+        "fast"
+      ],
+      "composite": [
+        "mod ringkas",
+        "ringkas",
+        "brief",
+        "composite"
+      ],
+      "four_views": [
+        "mod penuh",
+        "lengkap",
+        "rich",
+        "full mode"
+      ]
+    },
+    "dj_action": [
+      "membina set DJ",
+      "menyediakan set",
+      "menyusun set",
+      "mencari muzik untuk DJ",
+      "cari trek",
+      "membuat set",
+      "memilih trek"
+    ],
+    "dj_object": [
+      "set DJ",
+      "set",
+      "playlist",
+      "senarai main",
+      "senarai trek",
+      "setlist",
+      "campuran"
+    ],
+    "dj_context": [
+      "DJ",
+      "kelab",
+      "lantai tarian",
+      "pemanasan",
+      "kemuncak",
+      "penutup",
+      "pembukaan",
+      "festival",
+      "afterparty"
+    ],
+    "reference": [
+      "dalam gaya",
+      "serupa dengan",
+      "trek rujukan",
+      "artis rujukan"
+    ],
+    "set_detail": [
+      "trek",
+      "lagu",
+      "minit",
+      "BPM",
+      "mood",
+      "tenaga"
+    ],
+    "genre_context": [
+      "edm",
+      "electronic",
+      "electronic music",
+      "dance music"
+    ],
+    "generic_music_term": [
+      "playlist",
+      "DJ",
+      "cari muzik",
+      "set",
+      "senarai main"
+    ],
+    "negative_context": [
+      "lagu apa ini",
+      "kenal pasti lagu",
+      "api",
+      "pengaturcaraan",
+      "muat turun muzik",
+      "mp3",
+      "sejarah",
+      "definisi"
+    ],
+    "explanatory_context": [
+      "apa itu",
+      "perbezaan antara",
+      "definisi",
+      "sejarah",
+      "terangkan"
+    ],
+    "genre_families": [
+      "house",
+      "disco",
+      "techno",
+      "dubstep",
+      "bass",
+      "drum_and_bass",
+      "breakbeat",
+      "jungle",
+      "garage",
+      "trance",
+      "psytrance",
+      "progressive",
+      "electro",
+      "future_bass",
+      "big_room",
+      "hard_dance",
+      "hardcore",
+      "melodic_techno"
+    ]
+  }
 }

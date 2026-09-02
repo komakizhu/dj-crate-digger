@@ -11,16 +11,17 @@
     "DJ seti oluştur",
     "DJ için müzik ara",
     "bir set hazırla",
-    "seti sırala"
+    "seti sırala",
+    "parça bul",
+    "set oluştur",
+    "parçaları seç"
   ],
   "ambiguous": [
     "playlist",
-    "parça bul",
     "çalma listesi",
     "müzik ara",
     "DJ",
-    "müzik keşfi",
-    "set oluştur"
+    "müzik keşfi"
   ],
   "non_trigger": [
     "song identification",
@@ -35,5 +36,124 @@
     "müzik keşfi",
     "parça bul",
     "set oluştur"
-  ]
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "semantic_signals": {
+    "mode": {
+      "fast": [
+        "hızlı mod",
+        "hızlı",
+        "fast"
+      ],
+      "composite": [
+        "kısa mod",
+        "brief",
+        "composite"
+      ],
+      "four_views": [
+        "tam mod",
+        "zengin mod",
+        "rich",
+        "full mode"
+      ]
+    },
+    "dj_action": [
+      "DJ seti oluştur",
+      "bir set hazırla",
+      "seti sırala",
+      "DJ için müzik ara",
+      "parça bul",
+      "set oluştur",
+      "parçaları seç"
+    ],
+    "dj_object": [
+      "DJ seti",
+      "set",
+      "playlist",
+      "çalma listesi",
+      "parça listesi",
+      "setlist",
+      "mix"
+    ],
+    "dj_context": [
+      "DJ",
+      "kulüp",
+      "dans pisti",
+      "ısınma",
+      "peak",
+      "kapanış",
+      "açılış",
+      "festival",
+      "afterparty"
+    ],
+    "reference": [
+      "tarzında",
+      "benzer",
+      "referans parça",
+      "referans sanatçı"
+    ],
+    "set_detail": [
+      "parça",
+      "şarkı",
+      "dakika",
+      "BPM",
+      "ruh hali",
+      "enerji"
+    ],
+    "genre_context": [
+      "edm",
+      "electronic",
+      "electronic music",
+      "dance music"
+    ],
+    "generic_music_term": [
+      "playlist",
+      "DJ",
+      "parça bul",
+      "set",
+      "çalma listesi",
+      "müzik ara",
+      "müzik keşfi"
+    ],
+    "negative_context": [
+      "bu şarkı ne",
+      "şarkıyı tanı",
+      "api",
+      "programlama",
+      "müzik indir",
+      "mp3",
+      "tarihi",
+      "tanım"
+    ],
+    "explanatory_context": [
+      "nedir",
+      "arasındaki fark",
+      "tanım",
+      "tarih",
+      "açıkla"
+    ],
+    "genre_families": [
+      "house",
+      "disco",
+      "techno",
+      "dubstep",
+      "bass",
+      "drum_and_bass",
+      "breakbeat",
+      "jungle",
+      "garage",
+      "trance",
+      "psytrance",
+      "progressive",
+      "electro",
+      "future_bass",
+      "big_room",
+      "hard_dance",
+      "hardcore",
+      "melodic_techno"
+    ]
+  }
 }

@@ -329,7 +329,33 @@ This file is the fixed Українська UI and intent contract for dj-crate-
     "плейлист",
     "шукати музику",
     "знайти треки",
-    "скласти сет"
+    "скласти сет",
+    "швидкий режим",
+    "стислий режим",
+    "повний режим",
+    "зібрати DJ-сет",
+    "DJ",
+    "house",
+    "techno",
+    "drum & bass",
+    "jungle"
+  ],
+  "trigger_contract": {
+    "path": "references/trigger-signals.json",
+    "version": 1
+  },
+  "trigger_signal_families": [
+    "mode",
+    "dj_action",
+    "dj_object",
+    "dj_context",
+    "reference",
+    "set_detail",
+    "genre_context",
+    "generic_music_term",
+    "negative_context",
+    "explanatory_context",
+    "genre_families"
   ]
 }
 ```
